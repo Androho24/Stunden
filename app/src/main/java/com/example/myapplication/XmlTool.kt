@@ -43,7 +43,7 @@ class XmlTool {
         try {
             val xStream = XStream()
             xStream.allowTypes(arrayOf<Class<*>>(Customer::class.java))
-            xStream.alias("savedcustomers", Customer::class.java)
+            xStream.alias("savedCustomers", Customer::class.java)
             val asdfd = xStream.toXML(customers)
             val fos = FileOutputStream(context.cacheDir.toString() + "/" + "savedcustomers.xml")
             //FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");

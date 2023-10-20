@@ -24,18 +24,19 @@ import java.util.Objects
 
 class PreviewPdfActivity : AppCompatActivity() {
 
-    var pdfView : TouchImageView? = null
-    var buttonSend : Button? = null
-    var path =""
+    var pdfView: TouchImageView? = null
+    var buttonSend: Button? = null
+    var path = ""
     var pathToSave = ""
     var customerPrename = ""
     var customerName = ""
+    var buttonSign: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.preview_pdf_activity)
         buttonSend = findViewById(R.id.buttonSendPreview)
         pdfView = findViewById(R.id.pdf_image)
-
+        buttonSign = findViewById(R.id.buttonSignPreview)
         val bundle = intent.extras
         path = bundle!!.getString("path").toString()
         pathToSave = bundle!!.getString("pathToSave").toString()
@@ -56,12 +57,12 @@ class PreviewPdfActivity : AppCompatActivity() {
             asset.close()
             output.close()
         }
-        var parcelFileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
+        var parcelFileDescriptor =
+            ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
         // This is the PdfRenderer we use to render the PDF.
         // This is the PdfRenderer we use to render the PDF.
 
-            var pdfRenderer = PdfRenderer(parcelFileDescriptor)
-
+        var pdfRenderer = PdfRenderer(parcelFileDescriptor)
 
 
         // Make sure to close the current page before opening another one.
@@ -69,11 +70,11 @@ class PreviewPdfActivity : AppCompatActivity() {
 
         // Use `openPage` to open a specific page in PDF.
         // Use `openPage` to open a specific page in PDF.
-       var currentPage = pdfRenderer.openPage(0)
+        var currentPage = pdfRenderer.openPage(0)
         // Important: the destination bitmap must be ARGB (not RGB).
         // Important: the destination bitmap must be ARGB (not RGB).
         val bitmap = Bitmap.createBitmap(
-            2048,2896,
+            2048, 2896,
             Bitmap.Config.ARGB_8888
         )
         // Here, we render the page onto the Bitmap.
@@ -88,36 +89,35 @@ class PreviewPdfActivity : AppCompatActivity() {
         // We are ready to show the Bitmap to user.
         // We are ready to show the Bitmap to user.
         pdfView!!.setImageBitmap(bitmap)
-       // updateUi()
+        // updateUi()
     }
 
     private fun buttonOnClickListeners() {
         buttonSend!!.setOnClickListener {
 
-            var count = 0
-
-            var pathlist = pathToSave.split("a##5")
-
-            var newPath = pathlist[0]+count+pathlist[1]
 
             val reader = PdfReader(path)
-            val writer = PdfWriter(newPath)
+            val writer = PdfWriter(pathToSave)
             val pdfDocument = PdfDocument(reader, writer)
 
 
             pdfDocument.close()
 
-            var uri = File(newPath)
+            var uri = File(pathToSave)
 
             var adress = arrayOf<String>("matthias.hoepfler@gmail.com")
 
             var photoURI = FileProvider.getUriForFile(
                 Objects.requireNonNull(getApplicationContext()),
-                BuildConfig.APPLICATION_ID + ".provider", uri);
+                BuildConfig.APPLICATION_ID + ".provider", uri
+            );
             val intent = Intent(Intent.ACTION_SEND)
             intent.putExtra(Intent.EXTRA_EMAIL, adress)
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Stundenf")
-            intent.putExtra(Intent.EXTRA_TEXT, "Pdf")
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Arbeitsnacheis")
+            intent.putExtra(
+                Intent.EXTRA_TEXT,
+                "Sehr geehrte Frau Mayer,\n\n anbei übersende ich Ihnen meinen Arbeitsnachweis.\n\n Mit freundlichen Grüßen\n\nIhr Arbeitnehmer"
+            )
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
             intent.type = "message/rfc822"
@@ -126,6 +126,9 @@ class PreviewPdfActivity : AppCompatActivity() {
             if (intent.resolveActivity(packageManager) != null) {
                 startActivity(intent)
             }
+        }
+        buttonSign!!.setOnClickListener {
+
         }
     }
 }

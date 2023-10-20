@@ -20,7 +20,7 @@ import java.io.ByteArrayOutputStream
 
 class PDFCreator {
 
-    fun returnCreatedDocument(drawable: Drawable?, customer: Customer,date : String,arbeitsbeschreibung: String,worktimes: ArrayList<WorktimeMain>,path : String,count : Int) : Document{
+    fun returnCreatedDocument(drawable: Drawable?, customer: Customer,date : String,arbeitsbeschreibung: String,worktimes: ArrayList<WorktimeMain>,path : String,count : Int,location:String) : Document{
 
         var doc : Document? = null
         // Creating a workbook object from the XSSFWorkbook() class
@@ -106,13 +106,13 @@ class PDFCreator {
         doc!!.add(tableAuftrag)
         doc!!.add(tableZeiten(worktimes,date,arbeitsbeschreibung))
         doc!!.add(tableMaterial())
-        doc!!.add(tableSigning(date))
+        doc!!.add(tableSigning(date,location))
 
 
      return doc
     }
 
-    private fun tableSigning(date: String): Table {
+    private fun tableSigning(date: String,location: String): Table {
         val pointColumnWidths1 = floatArrayOf(250f,50f,250f)
         val table = Table(pointColumnWidths1)
         val cell11 = Cell()
@@ -183,7 +183,7 @@ class PDFCreator {
         cell131.setBorderLeft(Border.NO_BORDER)
         cell131.setBorderBottom(Border.NO_BORDER)
         cell131.setFontSize(10f)
-        cell131.add("Moosthenning, "+date)
+        cell131.add(location+", "+date)
         table.addCell(cell131)
 
         val cell231 = Cell()
@@ -202,7 +202,7 @@ class PDFCreator {
         cell331.setBorderLeft(Border.NO_BORDER)
         cell331.setBorderBottom(Border.NO_BORDER)
         cell331.setFontSize(10f)
-        cell331.add("Moosthenning, "+date)
+        cell331.add(location+", "+date)
         table.addCell(cell331)
 
 
@@ -296,27 +296,27 @@ class PDFCreator {
         cell1.add("Pos.")
         cell1.setHeight(10f)
         cell1.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
-        cell1.setFontSize(8f)
+        cell1.setFontSize(7f)
         table.addCell(cell1)
 
         val cell2 = Cell()
         cell2.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
         cell2.add("Anzahl")
         cell2.setHeight(10f)
-        cell2.setFontSize(8f)
+        cell2.setFontSize(7f)
         table.addCell(cell2)
 
         val cell3 = Cell()
         cell3.setHeight(10f)
         cell3.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
         cell3.add("Material/Geräte")
-        cell3.setFontSize(8f)
+        cell3.setFontSize(7f)
         table.addCell(cell3)
 
         val cell4 = Cell()
         cell4.setBorderTop(Border.NO_BORDER)
         cell4.setHeight(10f)
-        cell4.setFontSize(8f)
+        cell4.setFontSize(7f)
         table.addCell(cell4)
 
 
@@ -325,25 +325,25 @@ class PDFCreator {
             var cell11 = Cell()
             cell11.add("")
             cell11.setHeight(10f)
-            cell11.setFontSize(8f)
+            cell11.setFontSize(7f)
             table.addCell(cell11)
 
             var cell12 = Cell()
             cell12.setHeight(10f)
             cell12.add("")
-            cell12.setFontSize(8f)
+            cell12.setFontSize(7f)
             table.addCell(cell12)
 
             var cell13 = Cell()
             cell13.setHeight(10f)
             cell13.add("")
-            cell13.setFontSize(8f)
+            cell13.setFontSize(7f)
             table.addCell(cell13)
 
             var cell14 = Cell()
             cell14.add("")
             cell14.setHeight(10f)
-            cell14.setFontSize(8f)
+            cell14.setFontSize(7f)
             table.addCell(cell14)
         }
 
@@ -366,62 +366,62 @@ class PDFCreator {
         var readyDescription = ArrayList<String>()
 
         for (item in workDescription){
-            var itemList = item.chunked(10)
+            var itemList = item.chunked(50)
             for (chunkedItem in itemList){
                 readyDescription.add(chunkedItem)
             }
         }
 
-        var workDescriptionList = arbeitsbeschreibung.chunked(10)
 
-        val pointColumnWidths1 = floatArrayOf(40f,40f,40f,40f,40f,40f,70f,190f)
+
+        val pointColumnWidths1 = floatArrayOf(48f,35f,35f,35f,30f,40f,87f,190f)
         val table = Table(pointColumnWidths1)
         val cell1 = Cell()
         cell1.add("Arbeits-\n tag")
         cell1.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
-        cell1.setFontSize(8f)
+        cell1.setFontSize(7f)
         table.addCell(cell1)
 
         val cell2 = Cell()
         cell2.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
         cell2.add("Arbeits-\n beginn")
-        cell2.setFontSize(8f)
+        cell2.setFontSize(7f)
         table.addCell(cell2)
 
         val cell3 = Cell()
         cell3.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
         cell3.add("Arbeits-\n ende")
-        cell3.setFontSize(8f)
+        cell3.setFontSize(7f)
         table.addCell(cell3)
 
         val cell4 = Cell()
         cell4.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
         cell4.add("Arbeits-\n zeit in h")
-        cell4.setFontSize(8f)
+        cell4.setFontSize(7f)
         table.addCell(cell4)
 
         val cell5 = Cell()
         cell5.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
         cell5.add("Wege-\n zeit in h")
-        cell5.setFontSize(8f)
+        cell5.setFontSize(7f)
         table.addCell(cell5)
 
         val cell6 = Cell()
         cell6.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
         cell6.add("gef. km")
-        cell6.setFontSize(8f)
+        cell6.setFontSize(7f)
         table.addCell(cell6)
 
         val cell7 = Cell()
         cell7.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
         cell7.add("Monteure")
-        cell7.setFontSize(8f)
+        cell7.setFontSize(7f)
         table.addCell(cell7)
 
         val cell8 = Cell()
         cell8.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
         cell8.add("Ausgeführte Arbeiten")
-        cell8.setFontSize(8f)
+        cell8.setFontSize(7f)
         table.addCell(cell8)
 
         var positions : Int= 1
@@ -430,54 +430,54 @@ class PDFCreator {
             var cell11 = Cell()
             cell11.add("")
             cell11.setHeight(10f)
-            cell11.setFontSize(8f)
+            cell11.setFontSize(7f)
             cell11.add(date)
             table.addCell(cell11)
 
             var cell12 = Cell()
             cell12.add("")
             cell12.setHeight(10f)
-            cell12.setFontSize(8f)
+            cell12.setFontSize(7f)
             cell12.add(worktime.beginWorktime)
             table.addCell(cell12)
 
             var cell13 = Cell()
             cell13.add("")
             cell13.setHeight(10f)
-            cell13.setFontSize(8f)
+            cell13.setFontSize(7f)
             cell13.add(worktime.endWorktime)
             table.addCell(cell13)
 
             var cell14 = Cell()
             cell14.add("")
             cell14.setHeight(10f)
-            cell14.setFontSize(8f)
+            cell14.setFontSize(7f)
             cell14.add(worktime.workTime)
             table.addCell(cell14)
 
             var cell15 = Cell()
             cell15.add("")
             cell15.setHeight(10f)
-            cell15.setFontSize(8f)
+            cell15.setFontSize(7f)
             cell15.add(worktime.wegeRuest)
             table.addCell(cell15)
 
             var cell16 = Cell()
             cell16.add("")
             cell16.setHeight(10f)
-            cell16.setFontSize(8f)
+            cell16.setFontSize(7f)
             table.addCell(cell16)
 
             var cell17 = Cell()
             cell17.setHeight(10f)
-            cell17.setFontSize(8f)
+            cell17.setFontSize(7f)
             cell17.add(worktime.workerName)
             table.addCell(cell17)
 
             if (positions-1 <= readyDescription.lastIndex ) {
                 var cell18 = Cell()
                 cell18.setHeight(10f)
-                cell18.setFontSize(8f)
+                cell18.setFontSize(7f)
                 cell18.add(readyDescription[positions-1])
                 table.addCell(cell18)
             }
@@ -488,43 +488,43 @@ class PDFCreator {
             var cell11 = Cell()
             cell11.add("")
             cell11.setHeight(10f)
-            cell11.setFontSize(8f)
+            cell11.setFontSize(7f)
             table.addCell(cell11)
 
             var cell12 = Cell()
             cell12.add("")
             cell12.setHeight(10f)
-            cell12.setFontSize(8f)
+            cell12.setFontSize(7f)
             table.addCell(cell12)
 
             var cell13 = Cell()
             cell13.add("")
             cell13.setHeight(10f)
-            cell13.setFontSize(8f)
+            cell13.setFontSize(7f)
             table.addCell(cell13)
 
             var cell14 = Cell()
             cell14.add("")
             cell14.setHeight(10f)
-            cell14.setFontSize(8f)
+            cell14.setFontSize(7f)
             table.addCell(cell14)
 
             var cell15 = Cell()
             cell15.add("")
             cell15.setHeight(10f)
-            cell15.setFontSize(8f)
+            cell15.setFontSize(7f)
             table.addCell(cell15)
 
             var cell16 = Cell()
             cell16.add("")
             cell16.setHeight(10f)
-            cell16.setFontSize(8f)
+            cell16.setFontSize(7f)
             table.addCell(cell16)
 
             var cell17 = Cell()
             cell17.add("")
             cell17.setHeight(10f)
-            cell17.setFontSize(8f)
+            cell17.setFontSize(7f)
             table.addCell(cell17)
 
 
@@ -536,7 +536,7 @@ class PDFCreator {
                 cell18.add("")
             }
             cell18.setHeight(10f)
-            cell18.setFontSize(8f)
+            cell18.setFontSize(7f)
             table.addCell(cell18)
 
 

@@ -71,6 +71,8 @@ dependencies {
     implementation ("com.itextpdf:io:7.0.2")
     implementation ("com.itextpdf:layout:7.0.2")
     implementation ("com.github.MikeOrtiz:TouchImageView:1.4.1")
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+    implementation ("com.github.gcacace:signature-pad:1.3.1")
 
 
 

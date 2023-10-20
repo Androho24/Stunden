@@ -148,6 +148,7 @@ class CustomerFragment : DialogFragment() {
             customerList.add(customer.name+", "+customer.preName+", "+customer.streetName)
         }
         val dataAdapter =  ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, customerList!!)
+        dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         spinnerCustomers!!.adapter = dataAdapter
     }
 

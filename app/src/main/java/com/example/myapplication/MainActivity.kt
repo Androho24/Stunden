@@ -1,15 +1,21 @@
 package com.example.myapplication
 
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.pdf.PdfRenderer
 import android.icu.util.Calendar
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -27,6 +33,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.view.get
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.WorktimeMain
@@ -38,6 +46,7 @@ import java.io.File
 import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -48,7 +57,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var buttonSetDate: Button? = null
     var buttonPreview: Button? = null
     var date: TextView? = null
-    var buttonSaveAll: Button? = null
+    var buttonClearAll: Button? = null
     var buttonEditCustomer: Button? = null
     var buttonAddWorkTime: Button? = null
     var tableWorkTimes: TableLayout? = null
@@ -64,6 +73,10 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var doc: Document? = null
     var myIcon: Drawable? = null
     var pdfCreator: PDFCreator? = null
+    var fusedLocationClient : LocationManager? = null
+//    var locationByGPS
+//    var locationByNetwork
+    var location = "Moosthenning"
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,25 +85,64 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         buttonSetDate = findViewById<Button>(R.id.buttonAddDate)
         buttonPreview = findViewById(R.id.buttonPreview)
         date = findViewById<TextView>(R.id.textViewDate)
-        buttonSaveAll = findViewById<Button>(R.id.buttonClearMain)
+        buttonClearAll = findViewById<Button>(R.id.buttonClearMain)
         buttonEditCustomer = findViewById<Button>(R.id.buttonEditCustomerMain)
         buttonAddWorkTime = findViewById(R.id.buttonAddWorkTimeMain)
         tableWorkTimes = findViewById(R.id.tableWorktimes)
         spinnerCustomer = findViewById(R.id.spinnerCustomerMain)
         workDescriptionInput = findViewById(R.id.textInputWorkDescription)
         date!!.text = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
-        System.setProperty(
-            "org.apache.poi.javax.xml.stream.XMLInputFactory",
-            "com.fasterxml.aalto.stax.InputFactoryImpl"
-        )
-        System.setProperty(
-            "org.apache.poi.javax.xml.stream.XMLOutputFactory",
-            "com.fasterxml.aalto.stax.OutputFactoryImpl"
-        )
-        System.setProperty(
-            "org.apache.poi.javax.xml.stream.XMLEventFactory",
-            "com.fasterxml.aalto.stax.EventFactoryImpl"
-        )
+        fusedLocationClient = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                return)
+                        Toast.makeText(this,"Bitte Lokalisierung erlauben",Toast.LENGTH_SHORT).show()
+            return
+        }
+        var locationByGPS = fusedLocationClient!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        var locationByNetwork = fusedLocationClient!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+        locationByNetwork?.let {
+            locationByNetwork = locationByGPS
+        }
+        var latitude : Double = 0.0
+        var longitude : Double = 0.0
+        var locationCoordinates : Location? = null
+        if (locationByGPS != null && locationByNetwork != null) {
+            if (locationByGPS.accuracy > locationByNetwork!!.accuracy) {
+                locationCoordinates = locationByGPS
+                latitude = locationCoordinates!!.latitude
+                longitude = locationCoordinates!!.longitude
+                // use latitude and longitude as per your need
+            } else {
+                locationCoordinates = locationByNetwork
+                latitude = locationCoordinates!!.latitude
+                longitude = locationCoordinates!!.longitude
+                // use latitude and longitude as per your need
+            }
+        }
+
+
+        var geocoder : Geocoder
+        var addresses: List<Address>
+        geocoder =  Geocoder(this, Locale.getDefault());
+
+        addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
+        location = addresses.get(0).locality
+
         var asdf: PdfRenderer
         var xmlTool = XmlTool()
         var input = File("/storage/emulated/0/documents/test/Arbeitsnachweis.xlsx")
@@ -135,6 +187,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         }
         val dataAdapter =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, customerList!!)
+        dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         spinnerCustomer!!.adapter = dataAdapter
     }
 
@@ -178,8 +231,43 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             datePickerDialog.show()
         }
 
-        buttonSaveAll!!.setOnClickListener {
+        buttonClearAll!!.setOnClickListener {
+            tableWorkTimes!!.removeAllViews()
+            WorktimeMain.staticWorkTimeArrayList.clear()
+            workDescriptionInput!!.editText!!.setText("")
+            var row0 = TableRow(this)
+            val tv1 = TextView(this)
+            tv1.text = " Beginn"
+            tv1.setTextColor(Color.WHITE)
+            tv1.minimumWidth = 150
+            row0.minimumHeight = 30
+            row0.addView(tv1)
 
+            val tv2 = TextView(this)
+            tv2.text = " Ende"
+            tv2.minimumWidth = 150
+            tv2.setTextColor(Color.WHITE)
+            row0.addView(tv2)
+
+            val tv5 = TextView(this)
+            tv5.text = "in h"
+            tv5.minimumWidth = 100
+            tv5.setTextColor(Color.WHITE)
+            row0.addView(tv5)
+
+            val tv3 = TextView(this)
+            tv3.minimumWidth = 100
+            tv3.text = " W/R"
+            tv3.setTextColor(Color.WHITE)
+            row0.addView(tv3)
+
+            val tv4 = TextView(this)
+            tv4.text = "Name"
+            tv4.left = 200
+            tv3.setTextColor(Color.WHITE)
+            row0.addView(tv4)
+
+            tableWorkTimes!!.addView(row0)
         }
 
         buttonPreview!!.setOnClickListener {
@@ -242,7 +330,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 workDescriptionInput!!.editText!!.text.toString(),
                 WorktimeMain.staticWorkTimeArrayList,
                 path,
-                customerCount
+                customerCount,
+                location
             )
             document.close()
 

@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:text="Datum"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,8 +52,7 @@
     <Spinner
         android:id="@+id/spinnerCustomerMain"
         android:layout_width="162dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="4dp"
+        android:layout_height="40dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
@@ -64,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Arbeitszeit"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/spinnerCustomerMain"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCustomerMain" />
 
@@ -78,42 +78,52 @@
         app:layout_constraintStart_toStartOf="@+id/buttonEditCustomerMain"
         app:layout_constraintTop_toTopOf="@+id/textViewWorkTime" />
 
-    <TableLayout
-        android:id="@+id/tableWorktimes"
-        android:layout_width="410dp"
-        android:layout_height="191dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddWorkTimeMain">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputWorkDescription"
-        android:layout_width="416dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="28dp"
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableWorktimes">
+        app:layout_constraintTop_toBottomOf="@+id/textViewMaterial">
+
+        <TableLayout
+            android:id="@+id/tableWorktimes"
+            android:layout_width="410dp"
+            android:layout_height="191dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAddWorkTimeMain">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
+    </ScrollView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputWorkDescription"
+        android:layout_width="412dp"
+        android:layout_height="99dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="401dp"
@@ -131,5 +141,24 @@
         app:layout_constraintEnd_toEndOf="@+id/textInputWorkDescription"
         app:layout_constraintTop_toTopOf="@+id/buttonClearMain"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewMaterial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Material"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewWorkTime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWorkTime" />
+
+    <Button
+        android:id="@+id/buttonAddMaterialMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hinzufügen"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMaterial"
+        app:layout_constraintStart_toStartOf="@+id/buttonAddWorkTimeMain"
+        app:layout_constraintTop_toTopOf="@+id/textViewMaterial" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
