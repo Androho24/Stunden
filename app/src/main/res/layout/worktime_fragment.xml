@@ -1,0 +1,106 @@
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/worktimeFragment"
+    android:layout_width="match_parent" android:layout_height="700dp"
+    android:layout_gravity="center" android:orientation="vertical"  >
+
+    <TextView
+        android:id="@+id/textViewArbeitszeitHEaderWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Arbeitszeit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewBeginWorktime"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="48dp"
+        android:text="Anfang"
+        app:layout_constraintStart_toStartOf="@+id/textViewArbeitszeitHEaderWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewArbeitszeitHEaderWorktime">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/textViewEndWorktime"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="36dp"
+        android:text="Ende"
+        app:layout_constraintStart_toStartOf="@+id/textViewArbeitszeitHEaderWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBeginWorktime">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/buttonEditBeginWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="Bearbeiten"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewBeginWorktime"
+        app:layout_constraintStart_toEndOf="@+id/textViewBeginWorktime"
+        app:layout_constraintTop_toTopOf="@+id/textViewBeginWorktime"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Button
+        android:id="@+id/buttonEditEndWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bearbeiten"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEndWorktime"
+        app:layout_constraintStart_toStartOf="@+id/buttonEditBeginWorktime"
+        app:layout_constraintTop_toTopOf="@+id/textViewEndWorktime"
+        app:layout_constraintVertical_bias="0.555" />
+
+    <Button
+        android:id="@+id/buttonEditEegeRuestWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bearbeiten"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextWegeRuestWorktime"
+        app:layout_constraintStart_toStartOf="@+id/buttonEditEndWorktime"
+        app:layout_constraintTop_toTopOf="@+id/editTextWegeRuestWorktime" />
+
+    <Button
+        android:id="@+id/buttonSaveWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speichern"
+        tools:layout_editor_absoluteX="266dp"
+        tools:layout_editor_absoluteY="616dp" />
+
+    <EditText
+        android:id="@+id/editTextWegeRuestWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/textViewEndWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEndWorktime" />
+
+    <CheckBox
+        android:id="@+id/checkBoxWorker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Matthias Höpfler"
+        app:layout_constraintStart_toStartOf="@+id/editTextWegeRuestWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWegeRuestWorktime" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tägliche Pausenzeit"
+        app:layout_constraintStart_toStartOf="@+id/checkBoxWorker1"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxWorker1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
