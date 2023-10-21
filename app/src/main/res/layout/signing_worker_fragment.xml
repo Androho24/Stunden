@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,72 +8,47 @@
     android:orientation="vertical"
     tools:context=".PreviewPdfActivity">
 
-    <TextView
-        android:id="@+id/tvBSign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign your name below"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
 
     <com.github.gcacace.signaturepad.views.SignaturePad
         android:id="@+id/signaturePad"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_margin="24dp"
+        android:layout_margin="5dp"
+        android:background="#D8D8D8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
+        app:layout_constraintTop_toTopOf="parent"
         app:penColor="@color/black" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:gravity="center"
-        android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnClear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:background="#C4C4C4"
-            android:gravity="center"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="8dp"
-            android:text="Clear"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnComplete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:background="#7FFFD4"
-            android:gravity="center"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="8dp"
-            android:text="Complete"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvASign"
+    <Button
+        android:id="@+id/buttonCompleteWorkerSigning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Your Signature"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="8dp"
+        android:text="Speichern"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonClearWorkerSigning"
+        app:layout_constraintEnd_toEndOf="@+id/signaturePad"
+        app:layout_constraintTop_toTopOf="@+id/buttonClearWorkerSigning" />
 
-    <ImageView
-        android:id="@+id/ivSignature"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_margin="24dp" />
+    <Button
+        android:id="@+id/buttonClearWorkerSigning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:layout_weight="1"
+        android:gravity="center"
 
-</LinearLayout>
+        android:text="Abbrechen"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/signaturePad"
+        app:layout_constraintTop_toBottomOf="@+id/signaturePad" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

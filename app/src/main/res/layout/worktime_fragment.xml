@@ -76,8 +76,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="204dp"
         android:text="Speichern"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxPause"
-        tools:layout_editor_absoluteX="268dp" />
+        app:layout_constraintStart_toStartOf="@+id/buttonEditEegeRuestWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxPause" />
 
     <EditText
         android:id="@+id/editTextWegeRuestWorktime"
@@ -105,5 +105,14 @@
         android:text="Tägliche Pausenzeit"
         app:layout_constraintStart_toStartOf="@+id/checkBoxWorker1"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxWorker1" />
+
+    <Button
+        android:id="@+id/buttonCancelWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abbrechen"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonSaveWorktime"
+        app:layout_constraintStart_toStartOf="@+id/editTextWegeRuestWorktime"
+        app:layout_constraintTop_toTopOf="@+id/buttonSaveWorktime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

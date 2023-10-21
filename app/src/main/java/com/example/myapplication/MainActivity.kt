@@ -8,6 +8,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.pdf.PdfRenderer
@@ -34,7 +35,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.view.get
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.WorktimeMain
@@ -74,10 +74,11 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var myIcon: Drawable? = null
     var pdfCreator: PDFCreator? = null
     var fusedLocationClient : LocationManager? = null
+    var isNightModeOn : Boolean = false
 //    var locationByGPS
 //    var locationByNetwork
     var location = "Moosthenning"
-
+    var tableTextColor = Color.BLACK
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +94,18 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         workDescriptionInput = findViewById(R.id.textInputWorkDescription)
         date!!.text = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
         fusedLocationClient = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
+        val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        when (mode) {
+            Configuration.UI_MODE_NIGHT_NO -> {isNightModeOn = false}
+            Configuration.UI_MODE_NIGHT_YES -> {isNightModeOn = true}
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> {isNightModeOn = false }
+        }
+        if (isNightModeOn){
+            tableTextColor = Color.WHITE
+        }
+        else{
+            tableTextColor = Color.BLACK
+        }
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -141,8 +153,24 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         geocoder =  Geocoder(this, Locale.getDefault());
 
         addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
-        location = addresses.get(0).locality
-
+        if (!addresses.isEmpty()) {
+            location = addresses[0].locality
+        }
+        else{
+            location = "Moosthenning"
+        }
+        System.setProperty(
+            "org.apache.poi.javax.xml.stream.XMLInputFactory",
+            "com.fasterxml.aalto.stax.InputFactoryImpl"
+        )
+        System.setProperty(
+            "org.apache.poi.javax.xml.stream.XMLOutputFactory",
+            "com.fasterxml.aalto.stax.OutputFactoryImpl"
+        )
+        System.setProperty(
+            "org.apache.poi.javax.xml.stream.XMLEventFactory",
+            "com.fasterxml.aalto.stax.EventFactoryImpl"
+        )
         var asdf: PdfRenderer
         var xmlTool = XmlTool()
         var input = File("/storage/emulated/0/documents/test/Arbeitsnachweis.xlsx")
@@ -235,10 +263,12 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             tableWorkTimes!!.removeAllViews()
             WorktimeMain.staticWorkTimeArrayList.clear()
             workDescriptionInput!!.editText!!.setText("")
+            var textColor = Color.BLACK
+
             var row0 = TableRow(this)
             val tv1 = TextView(this)
             tv1.text = " Beginn"
-            tv1.setTextColor(Color.WHITE)
+            tv1.setTextColor(textColor)
             tv1.minimumWidth = 150
             row0.minimumHeight = 30
             row0.addView(tv1)
@@ -246,25 +276,25 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             val tv2 = TextView(this)
             tv2.text = " Ende"
             tv2.minimumWidth = 150
-            tv2.setTextColor(Color.WHITE)
+            tv2.setTextColor(textColor)
             row0.addView(tv2)
 
             val tv5 = TextView(this)
             tv5.text = "in h"
             tv5.minimumWidth = 100
-            tv5.setTextColor(Color.WHITE)
+            tv5.setTextColor(textColor)
             row0.addView(tv5)
 
             val tv3 = TextView(this)
             tv3.minimumWidth = 100
             tv3.text = " W/R"
-            tv3.setTextColor(Color.WHITE)
+            tv3.setTextColor(textColor)
             row0.addView(tv3)
 
             val tv4 = TextView(this)
             tv4.text = "Name"
             tv4.left = 200
-            tv3.setTextColor(Color.WHITE)
+            tv3.setTextColor(textColor)
             row0.addView(tv4)
 
             tableWorkTimes!!.addView(row0)
@@ -464,40 +494,40 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
                 text = TextView(this)
                 text.text = worktime.beginWorktime
-                text.setTextColor(Color.WHITE)
+                text.setTextColor(tableTextColor)
                 row.addView(text)
 
                 text = TextView(this)
                 text.text = worktime.endWorktime
-                text.setTextColor(Color.WHITE)
+                text.setTextColor(tableTextColor)
                 row.addView(text)
 
                 text = TextView(this)
                 text.text = worktime.workTime
-                text.setTextColor(Color.WHITE)
+                text.setTextColor(tableTextColor)
                 row.addView(text)
 
                 text = TextView(this)
                 text.text = worktime.wegeRuest
-                text.setTextColor(Color.WHITE)
+                text.setTextColor(tableTextColor)
                 row.addView(text)
 
                 text = TextView(this)
                 text.text = worktime.workerName
-                text.setTextColor(Color.WHITE)
+                text.setTextColor(tableTextColor)
                 row.addView(text)
 
-                /* var newImage = ImageView(this)
+                 var newImage = ImageView(this)
                  newImage.id = id
-                 newImage.setImageResource(R.drawable.mulleimer)
-                 newImage.setBackgroundColor(Color.WHITE)
+                 newImage.setImageResource(R.drawable.garbage)
+              //   newImage.setBackgroundColor(Color.WHITE)
                  row.addView(newImage)
 
                  newImage.setOnClickListener {
                      var row = newImage.id
                      var countMats = 0
-                     var newMaterialsForMain: ArrayList<MaterialForMain> = ArrayList()
-                     for (mat in StaticMaterialForMain.materialMainArray) {
+                     var newMaterialsForMain: ArrayList<WorktimeMain> = ArrayList()
+                     for (mat in WorktimeMain.staticWorkTimeArrayList) {
                          if (row == countMats) {
 
                          } else {
@@ -505,37 +535,49 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                          }
                          countMats++
                      }
-                     tableMaterial!!.removeAllViews()
+
+
+                     tableWorkTimes!!.removeAllViews()
 
 
                      var row0 = TableRow(this)
                      val tv1 = TextView(this)
-                     tv1.text = " Anzahl "
-                     tv1.setTextColor(Color.WHITE)
-                     tv1.minimumWidth = 200
-                     row0.minimumHeight = 100
-
+                     tv1.text = " Beginn"
+                     tv1.setTextColor(tableTextColor)
+                     tv1.minimumWidth = 150
+                     row0.minimumHeight = 30
                      row0.addView(tv1)
-                     val tv2 = TextView(this)
-                     tv2.text = " Menge "
-                     tv2.minimumWidth = 200
-                     tv2.setTextColor(Color.WHITE)
-                     row0.addView(tv2)
-                     val tv3 = TextView(this)
-                     tv3.offsetLeftAndRight(100)
-                     tv3.text = " Name"
-                     tv3.minimumWidth= 500
-                     tv3.setTextColor(Color.WHITE)
-                     row0.addView(tv3)
-                     val tv4 = TextView(this)
-                     tv4.text = "Löschen"
-                     tv4.left = 100
-                     row0.addView(tv4)
-                     tableMaterial!!.addView(row0)
-                     StaticMaterialForMain.materialMainArray = newMaterialsForMain
-                     addMaterialsToTable()
 
-                 }*/
+                     val tv2 = TextView(this)
+                     tv2.text = " Ende"
+                     tv2.minimumWidth = 150
+                     tv2.setTextColor(tableTextColor)
+                     row0.addView(tv2)
+
+                     val tv5 = TextView(this)
+                     tv5.text = "in h"
+                     tv5.minimumWidth = 100
+                     tv5.setTextColor(tableTextColor)
+                     row0.addView(tv5)
+
+                     val tv3 = TextView(this)
+                     tv3.minimumWidth = 100
+                     tv3.text = " W/R"
+                     tv3.setTextColor(tableTextColor)
+                     row0.addView(tv3)
+
+                     val tv4 = TextView(this)
+                     tv4.text = "Name"
+                     tv4.left = 200
+                     tv3.setTextColor(tableTextColor)
+                     row0.addView(tv4)
+
+                     tableWorkTimes!!.addView(row0)
+
+                     WorktimeMain.staticWorkTimeArrayList = newMaterialsForMain
+                     actualiseWorktimesToTable()
+
+                 }
                 tableWorkTimes!!.addView(row)
                 id++
                 textId++
@@ -564,7 +606,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         var row0 = TableRow(this)
         val tv1 = TextView(this)
         tv1.text = " Beginn"
-        tv1.setTextColor(Color.WHITE)
+        tv1.setTextColor(tableTextColor)
         tv1.minimumWidth = 150
         row0.minimumHeight = 30
         row0.addView(tv1)
@@ -572,25 +614,25 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         val tv2 = TextView(this)
         tv2.text = " Ende"
         tv2.minimumWidth = 150
-        tv2.setTextColor(Color.WHITE)
+        tv2.setTextColor(tableTextColor)
         row0.addView(tv2)
 
         val tv5 = TextView(this)
         tv5.text = "in h"
         tv5.minimumWidth = 100
-        tv5.setTextColor(Color.WHITE)
+        tv5.setTextColor(tableTextColor)
         row0.addView(tv5)
 
         val tv3 = TextView(this)
         tv3.minimumWidth = 100
         tv3.text = " W/R"
-        tv3.setTextColor(Color.WHITE)
+        tv3.setTextColor(tableTextColor)
         row0.addView(tv3)
 
         val tv4 = TextView(this)
         tv4.text = "Name"
         tv4.left = 200
-        tv3.setTextColor(Color.WHITE)
+        tv3.setTextColor(tableTextColor)
         row0.addView(tv4)
 
         tableWorkTimes!!.addView(row0)

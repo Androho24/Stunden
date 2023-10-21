@@ -28,6 +28,7 @@ class WorkTimeFragment : DialogFragment() {
     var buttonEditEndWorktime: Button? = null
     var buttonEditWegeRuest : Button? = null
    var buttonSave : Button? = null
+    var buttonCancel : Button? = null
 
 
     interface onWorktimeEventLisnter {
@@ -108,6 +109,9 @@ class WorkTimeFragment : DialogFragment() {
             textWegeRuest!!.inputType = InputType.TYPE_CLASS_NUMBER
             textWegeRuest!!.requestFocus()
         }
+        buttonCancel!!.setOnClickListener {
+            this.dismiss()
+        }
     }
 
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
@@ -119,7 +123,7 @@ class WorkTimeFragment : DialogFragment() {
         buttonEditWegeRuest = view.findViewById(R.id.buttonEditEegeRuestWorktime)
         checkBoxWorker1 = view.findViewById(R.id.checkBoxWorker1)
         checkBoxPause = view.findViewById(R.id.checkBoxPause)
-
+buttonCancel = view.findViewById(R.id.buttonCancelWorktime/**/)
         textBeginWorktime = view.findViewById(R.id.textViewBeginWorktime)
         textEndWorktime = view.findViewById(R.id.textViewEndWorktime)
         textWegeRuest = view.findViewById(R.id.editTextWegeRuestWorktime)
