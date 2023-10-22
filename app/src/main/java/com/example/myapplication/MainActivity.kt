@@ -37,6 +37,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.Objects.Customer
+import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.WorktimeMain
 import com.example.myapplication.Pdf.PDFCreator
 import com.google.android.material.textfield.TextInputLayout
@@ -51,7 +52,7 @@ import java.util.Locale
 
 @SuppressLint("SetJavaScriptEnabled")
 class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnter,
-    CustomerFragment.onNewCustomerEventListener {
+    CustomerFragment.onNewCustomerEventListener,CustomerClientFragment.onClientEventListener {
     // var ourWorkbook: Workbook? = null
     //var sheet: Sheet? = null
     var buttonSetDate: Button? = null
@@ -301,7 +302,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         }
 
         buttonPreview!!.setOnClickListener {
-            var selectedCustomer = Customer("", "", "", "", "", "", "", "")
+            var customExpand = CustomerExpanded("","","","","","")
+            var selectedCustomer = Customer("", "", "", "", "", "", "", "",customExpand)
             var spinnerStringCustomer = spinnerCustomer!!.selectedItem.toString()
 
             var name = spinnerStringCustomer.split(", ")
@@ -674,6 +676,10 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     override fun onNewCustomerListener() {
         xmlTool!!.saveProfilesToXml(Customer.arrayCustomers, applicationContext)
         setSpinnerCustomer()
+    }
+
+    override fun onClientEventlistener(customerID: String) {
+      var asdf = customerID
     }
 
 

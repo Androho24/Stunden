@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CustomerFragment"
+    android:layout_width="match_parent" android:layout_height="700dp"
+    android:layout_gravity="center" android:orientation="vertical"  >
+
+    <EditText
+        android:id="@+id/editTextNachnameCustomerClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.693"
+        app:layout_constraintStart_toEndOf="@+id/textViewNachnameClient"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextVornameCustomerClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/editTextNachnameCustomerClient"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNachnameCustomerClient" />
+
+    <EditText
+        android:id="@+id/editTextStreetCustomerClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/editTextNachnameCustomerClient"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNachnameCustomerClient" />
+
+    <EditText
+        android:id="@+id/editTextStreetNumberCustomerClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/editTextNachnameCustomerClient"
+        app:layout_constraintTop_toBottomOf="@+id/editTextStreetCustomerClient" />
+
+    <EditText
+        android:id="@+id/editTextPlzCustomerClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/editTextNachnameCustomerClient"
+        app:layout_constraintTop_toBottomOf="@+id/editTextStreetNumberCustomerClient" />
+
+    <EditText
+        android:id="@+id/editTextLocationCustomerClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/editTextNachnameCustomerClient"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPlzCustomerClient" />
+
+    <Button
+        android:id="@+id/buttonSaveClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speichern"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonClearClient"
+        app:layout_constraintEnd_toEndOf="@+id/editTextLocationCustomerClient"
+        app:layout_constraintTop_toTopOf="@+id/buttonClearClient"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonClearClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="Leeren"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocationClient"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLocationCustomerClient" />
+
+    <TextView
+        android:id="@+id/textViewNachnameClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:text="Nachname"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNachnameCustomerClient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextNachnameCustomerClient" />
+
+    <TextView
+        android:id="@+id/textViewVornameClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vorname"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextVornameCustomerClient"
+        app:layout_constraintStart_toStartOf="@+id/textViewNachnameClient"
+        app:layout_constraintTop_toTopOf="@+id/editTextVornameCustomerClient" />
+
+    <TextView
+        android:id="@+id/textViewStreetClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Straße"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextStreetCustomerClient"
+        app:layout_constraintStart_toStartOf="@+id/textViewVornameClient"
+        app:layout_constraintTop_toTopOf="@+id/editTextStreetCustomerClient" />
+
+    <TextView
+        android:id="@+id/textViewStreetNumberClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hausnummer"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextStreetNumberCustomerClient"
+        app:layout_constraintStart_toStartOf="@+id/textViewStreetClient"
+        app:layout_constraintTop_toTopOf="@+id/editTextStreetNumberCustomerClient" />
+
+    <TextView
+        android:id="@+id/textViewPlzClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Postleitzahl"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPlzCustomerClient"
+        app:layout_constraintStart_toStartOf="@+id/textViewStreetNumberClient"
+        app:layout_constraintTop_toTopOf="@+id/editTextPlzCustomerClient" />
+
+    <TextView
+        android:id="@+id/textViewLocationClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ort"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextLocationCustomerClient"
+        app:layout_constraintStart_toStartOf="@+id/textViewPlzClient"
+        app:layout_constraintTop_toTopOf="@+id/editTextLocationCustomerClient" />
+
+    <Button
+        android:id="@+id/buttonCancelClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Abbrechen"
+        app:layout_constraintStart_toStartOf="@+id/buttonClearClient"
+        app:layout_constraintTop_toBottomOf="@+id/buttonClearClient" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

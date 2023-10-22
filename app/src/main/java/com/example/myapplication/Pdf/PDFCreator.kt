@@ -73,10 +73,18 @@ class PDFCreator {
         cell2Auftrag.add("Bauvorhaben:")
         tableAuftrag.addCell(cell2Auftrag)
 
+        if(customer.customerExpanded.clientName != ""){
+            val cell3Auftrag = Cell()
+            cell3Auftrag.setFontSize(11f)
+            cell3Auftrag.add(customer.customerExpanded.clientName+" "+customer.customerExpanded.clientPreName+"\n"+customer.customerExpanded.clientStreetName+" "+customer.customerExpanded.clientStreetNumber+" \n"+customer.customerExpanded.clientPlz+" "+customer.customerExpanded.clientLocation)
+            tableAuftrag.addCell(cell3Auftrag)
+        }
+        else{
         val cell3Auftrag = Cell()
         cell3Auftrag.setFontSize(11f)
         cell3Auftrag.add(customer.name+" "+customer.preName+"\n"+customer.streetName+" "+customer.streetNumber+" \n"+customer.plz+" "+customer.location)
         tableAuftrag.addCell(cell3Auftrag)
+        }
 
         val cell4Auftrag = Cell()
         cell4Auftrag.setFontSize(11f)
@@ -370,6 +378,10 @@ class PDFCreator {
             for (chunkedItem in itemList){
                 readyDescription.add(chunkedItem)
             }
+        }
+
+        if (readyDescription.size==0){
+            readyDescription.add("")
         }
 
 

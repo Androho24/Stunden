@@ -94,7 +94,7 @@
         android:id="@+id/buttonNewClearCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="136dp"
         android:text="Leeren"
         app:layout_constraintStart_toStartOf="@+id/textViewProjrctNumber"
         app:layout_constraintTop_toBottomOf="@+id/editTextProjectNumber" />
@@ -172,5 +172,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/editTextProjectNumber"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation"
         app:layout_constraintTop_toTopOf="@+id/editTextProjectNumber" />
+
+    <Button
+        android:id="@+id/buttonAddExpandedCustomerCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Auftraggeber"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNewCustomerCustomer"
+        app:layout_constraintEnd_toEndOf="@+id/buttonNewCustomerCustomer"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProjectNumber" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

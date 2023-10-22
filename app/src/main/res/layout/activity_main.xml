@@ -13,6 +13,7 @@
         android:layout_marginStart="132dp"
         android:text="Bearbeiten"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDate"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewDate"
         app:layout_constraintTop_toTopOf="@+id/textViewDate"
         app:layout_constraintVertical_bias="0.0" />
@@ -21,11 +22,10 @@
         android:id="@+id/buttonClearMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
         android:layout_marginBottom="16dp"
         android:text="Leeren"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewMaterial"
         app:layout_constraintTop_toBottomOf="@+id/textInputWorkDescription"
         app:layout_constraintVertical_bias="0.742" />
 
@@ -44,7 +44,7 @@
         android:id="@+id/buttonEditCustomerMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Neu"
+        android:text="Bearbeiten"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerCustomerMain"
         app:layout_constraintStart_toStartOf="@+id/buttonAddDate"
         app:layout_constraintTop_toTopOf="@+id/spinnerCustomerMain" />
@@ -83,8 +83,9 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="28dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWorkTime"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWorkTime">
 
         <TableLayout
             android:id="@+id/tableWorktimes"

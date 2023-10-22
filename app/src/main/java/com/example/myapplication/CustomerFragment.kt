@@ -1,7 +1,6 @@
 package com.example.myapplication
 
 import android.app.Activity
-import android.database.CursorJoiner
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +12,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.annotation.ContentView
 import androidx.annotation.Nullable
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.example.myapplication.Objects.Customer
+import com.example.myapplication.Objects.CustomerExpanded
 import java.util.UUID
 
-class CustomerFragment : DialogFragment() {
+class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventListener {
 
     var editPrename: EditText? = null
     var editName: EditText? = null
@@ -32,11 +32,16 @@ class CustomerFragment : DialogFragment() {
     var spinnerCustomers: Spinner? = null
     var customerSelected = false
     var customerIdForEdit = ""
-    var buttonClearText : Button? = null
+    var buttonClearText: Button? = null
+    var buttonAddClient : Button? = null
 
 
     interface onNewCustomerEventListener {
         fun onNewCustomerListener()
+    }
+
+    override fun onCreate(SavedInstanceState: Bundle?) {
+        super.onCreate(SavedInstanceState)
     }
 
     var newCustomerListener: onNewCustomerEventListener? = null
@@ -73,6 +78,7 @@ class CustomerFragment : DialogFragment() {
         buttonSaveCustomer = view.findViewById(R.id.buttonNewCustomerCustomer)
         spinnerCustomers = view.findViewById(R.id.spinnerCustomerCustomer)
         buttonClearText = view.findViewById(R.id.buttonNewClearCustomer)
+        buttonAddClient = view.findViewById(R.id.buttonAddExpandedCustomerCustomer)
 
         val title = requireArguments().getString("title", "Enter Name")
         dialog!!.setTitle(title)
@@ -86,73 +92,121 @@ class CustomerFragment : DialogFragment() {
     }
 
     private fun setSpinnerOnClickListener() {
-        spinnerCustomers!!.onItemSelectedListener= object : AdapterView.OnItemSelectedListener {
+        spinnerCustomers!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 im: Int,
                 l: Long
-            ) { if(im>=0) {
+            ) {
+                if (im >= 0) {
+                    if (spinnerCustomers!!.selectedItem.toString() != "Bauvorhaben") {
+                        var expanedCustome = CustomerExpanded("", "", "", "", "", "")
+                        var selectedCustomer =
+                            Customer("", "", "", "", "", "", "", "", expanedCustome)
+                        var spinnerStringCustomer = spinnerCustomers!!.selectedItem.toString()
+                        var name = spinnerStringCustomer.split(", ")
+                        if (name.lastIndex == 2) {
+                            for (customer in Customer.arrayCustomers) {
+                                if (customer.name == name[0] && customer.preName == name[1] && customer.streetName == name[2]) {
+                                    selectedCustomer = customer
+                                }
+                            }
+                        } else if (name.lastIndex == 1) {
+                            for (customer in Customer.arrayCustomers) {
+                                if (customer.name == name[0] && customer.preName == name[1]) {
+                                    selectedCustomer = customer
+                                }
+                            }
+                            for (customer in Customer.arrayCustomers) {
+                                if (customer.name == name[0] && customer.streetName == name[1]) {
+                                    selectedCustomer = customer
+                                }
+                            }
+                        } else if (name.lastIndex == 0) {
+                            for (customer in Customer.arrayCustomers) {
+                                if (customer.name == name[0]) {
+                                    selectedCustomer = customer
+                                }
+                            }
+                        }
 
-                  var selectedCustomer = Customer("","","","","","","","")
-                  var spinnerStringCustomer = spinnerCustomers!!.selectedItem.toString()
-                  var name = spinnerStringCustomer.split(", ")
-                  if (name.lastIndex == 2) {
-                      for (customer in Customer.arrayCustomers) {
-                          if (customer.name == name[0] && customer.preName == name[1] && customer.streetName == name[2]) {
-                              selectedCustomer = customer
-                          }
-                      }
-                  }
-                  else if (name.lastIndex == 1){
-                      for (customer in Customer.arrayCustomers){
-                          if (customer.name == name[0] && customer.preName == name[1]){
-                              selectedCustomer = customer
-                          }
-                      }
-                      for (customer in Customer.arrayCustomers){
-                          if (customer.name == name[0] && customer.streetName == name[1]){
-                              selectedCustomer = customer
-                          }
-                      }
-                  }
-                  else if (name.lastIndex == 0){
-                      for(customer in Customer.arrayCustomers){
-                          if (customer.name == name[0]){
-                              selectedCustomer = customer
-                          }
-                      }
-                  }
+                        if (selectedCustomer.name != "") {
+                            editProjectNumber!!.setText(selectedCustomer.projectNumber)
+                            editPlz!!.setText(selectedCustomer.plz)
+                            editPrename!!.setText(selectedCustomer.preName)
+                            editName!!.setText(selectedCustomer.name)
+                            editStreetNumber!!.setText(selectedCustomer.streetNumber)
+                            editStreetName!!.setText(selectedCustomer.streetName)
+                            editLocation!!.setText(selectedCustomer.location)
+                            customerIdForEdit = selectedCustomer.customerId
+                        }
 
-                 if(selectedCustomer.name != ""){
-                     editProjectNumber!!.setText(selectedCustomer.projectNumber)
-                     editPlz!!.setText(selectedCustomer.plz)
-                     editPrename!!.setText(selectedCustomer.preName)
-                     editName!!.setText(selectedCustomer.name)
-                     editStreetNumber!!.setText(selectedCustomer.streetNumber)
-                     editStreetName!!.setText(selectedCustomer.streetName)
-                     editLocation!!.setText(selectedCustomer.location)
-                     customerIdForEdit = selectedCustomer.customerId
-                 }
-
+                    }
+                }
             }
-            }
-
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
     }
 
     private fun setSpinnerCustomerContent() {
         var customerList = ArrayList<String>()
-        for (customer in Customer.arrayCustomers){
-            customerList.add(customer.name+", "+customer.preName+", "+customer.streetName)
+        customerList.add("Bauvorhaben")
+        for (customer in Customer.arrayCustomers) {
+            customerList.add(customer.name + ", " + customer.preName + ", " + customer.streetName)
         }
-        val dataAdapter =  ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, customerList!!)
+        val dataAdapter = ArrayAdapter<String>(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            customerList!!
+        )
         dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         spinnerCustomers!!.adapter = dataAdapter
     }
 
     private fun onButtonClickListeners() {
+
+        buttonAddClient!!.setOnClickListener {
+            if (customerIdForEdit != "") {
+                for (customer in Customer.arrayCustomers) {
+                    if (customer.customerId == customerIdForEdit) {
+
+
+
+
+
+
+                        val bundle = Bundle()
+                        bundle.putString("customerid", customer.customerId)
+
+                        val fm: FragmentManager = requireActivity().supportFragmentManager
+                        val customerFragmentDialog: CustomerClientFragment =
+                            CustomerClientFragment.newInstance("Some Title")
+                        customerFragmentDialog.arguments = bundle
+                        fm.beginTransaction().add(customerFragmentDialog,"some Dialog").commit()
+
+
+                    }
+                }
+
+            }else{
+                var uudi = UUID.randomUUID()
+                var customerExpanded = CustomerExpanded("", "", "", "", "", "")
+                var newCustomer = Customer(
+                    uudi.toString(),
+                    editName!!.text.toString(),
+                    editPrename!!.text.toString(),
+                    editStreetName!!.text.toString(),
+                    editStreetNumber!!.text.toString(),
+                    editPlz!!.text.toString(),
+                    editLocation!!.text.toString(),
+                    editProjectNumber!!.text.toString(),
+                    customerExpanded
+                )
+                Customer.arrayCustomers.add(newCustomer)
+                Customer.arrayCustomers.sortBy { list -> list.name }
+            }
+        }
 
         buttonClearText!!.setOnClickListener {
             editLocation!!.setText("")
@@ -178,7 +232,8 @@ class CustomerFragment : DialogFragment() {
                             customer.plz = editPlz!!.text.toString()
                             customer.location = editLocation!!.text.toString()
                             customer.projectNumber = editProjectNumber!!.text.toString()
-                          //  Customer.arrayCustomers.add(customer)
+                            //  Customer.arrayCustomers.add(customer)
+
                             Customer.arrayCustomers.sortBy { list -> list.name }
                             customerIdForEdit = ""
                             newCustomerListener!!.onNewCustomerListener()
@@ -186,6 +241,7 @@ class CustomerFragment : DialogFragment() {
                     }
                 } else {
                     var uudi = UUID.randomUUID()
+                    var customerExpanded = CustomerExpanded("", "", "", "", "", "")
                     var newCustomer = Customer(
                         uudi.toString(),
                         editName!!.text.toString(),
@@ -194,7 +250,8 @@ class CustomerFragment : DialogFragment() {
                         editStreetNumber!!.text.toString(),
                         editPlz!!.text.toString(),
                         editLocation!!.text.toString(),
-                        editProjectNumber!!.text.toString()
+                        editProjectNumber!!.text.toString(),
+                        customerExpanded
                     )
                     Customer.arrayCustomers.add(newCustomer)
                     Customer.arrayCustomers.sortBy { list -> list.name }
@@ -202,8 +259,7 @@ class CustomerFragment : DialogFragment() {
 
                 }
                 this.dismiss()
-            }
-            else {
+            } else {
                 Toast.makeText(requireContext(), "Bitte Nachnamen hinzufügen", Toast.LENGTH_SHORT)
                     .show()
             }
@@ -219,5 +275,10 @@ class CustomerFragment : DialogFragment() {
             return frag
         }
     }
+
+    override fun onClientEventlistener(customerID: String) {
+        customerIdForEdit = customerID
+    }
+
 
 }
