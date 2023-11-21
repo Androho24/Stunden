@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.example.myapplication.Objects.Customer
+import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.Objects.WorktimeMain
 import com.example.myapplication.R
 import com.itextpdf.io.image.ImageDataFactory
@@ -297,7 +298,7 @@ class PDFCreator {
     }
 
     private fun tableMaterial(): Table {
-        val pointColumnWidths1 = floatArrayOf(30f,40f,240f,190f)
+        val pointColumnWidths1 = floatArrayOf(50f,50f,50f,350f)
         val table = Table(pointColumnWidths1)
 
         val cell1 = Cell()
@@ -314,22 +315,56 @@ class PDFCreator {
         cell2.setFontSize(7f)
         table.addCell(cell2)
 
-        val cell3 = Cell()
-        cell3.setHeight(10f)
-        cell3.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
-        cell3.add("Material/Geräte")
-        cell3.setFontSize(7f)
-        table.addCell(cell3)
-
         val cell4 = Cell()
-        cell4.setBorderTop(Border.NO_BORDER)
+        cell4.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
+        cell4.add("Einheit")
         cell4.setHeight(10f)
         cell4.setFontSize(7f)
         table.addCell(cell4)
 
+        val cell3 = Cell()
+        cell3.setHeight(10f)
+        cell3.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
+        cell3.add("Material")
+        cell3.setFontSize(7f)
+        table.addCell(cell3)
+
+   /*     val cell4 = Cell()
+        cell4.setBorderTop(Border.NO_BORDER)
+        cell4.setHeight(10f)
+        cell4.setFontSize(7f)
+        table.addCell(cell4)*/
+
+        var count = 1
+        for (mat in CustomerMaterial.customerMaterials){
+            var cell11 = Cell()
+            cell11.add(count.toString())
+            cell11.setHeight(10f)
+            cell11.setFontSize(7f)
+            table.addCell(cell11)
+
+            var cell12 = Cell()
+            cell12.setHeight(10f)
+            cell12.add(mat.materialAmount)
+            cell12.setFontSize(7f)
+            table.addCell(cell12)
+
+            var cell13 = Cell()
+            cell13.setHeight(10f)
+            cell13.add(mat.materialUnit)
+            cell13.setFontSize(7f)
+            table.addCell(cell13)
+
+            var cell14 = Cell()
+            cell14.add(mat.materialName)
+            cell14.setHeight(10f)
+            cell14.setFontSize(7f)
+            table.addCell(cell14)
+            count++
+        }
 
 
-        for (i in 1..13){
+        for (i in count..13){
             var cell11 = Cell()
             cell11.add("")
             cell11.setHeight(10f)
@@ -491,6 +526,13 @@ class PDFCreator {
                 cell18.setHeight(10f)
                 cell18.setFontSize(7f)
                 cell18.add(readyDescription[positions-1])
+                table.addCell(cell18)
+            }
+            else{
+                var cell18 =  Cell()
+                cell18.setHeight(10f)
+                cell18.setFontSize(7f)
+                cell18.add("")
                 table.addCell(cell18)
             }
             positions++

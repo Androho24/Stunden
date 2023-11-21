@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Context
 import android.content.res.Resources
 import com.example.myapplication.Objects.Customer
+import com.example.myapplication.Objects.Material
 import com.thoughtworks.xstream.XStream
 import java.io.File
 import java.io.FileInputStream
@@ -31,6 +32,29 @@ class XmlTool {
             }
             val item = xStream.fromXML(fos1) as ArrayList<Customer>
             Customer.arrayCustomers= item
+        } catch (e: Resources.NotFoundException) {
+            e.printStackTrace()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+    }
+    @Synchronized
+    fun loadMaterialsFromXml(context:Context){
+        try {
+            val xStream = XStream()
+            xStream.allowTypes(arrayOf<Class<*>>(Material::class.java))
+            xStream.alias("Material", Material::class.java)
+            val pixelExistFile = File(context.cacheDir.toString() + "/" + "materials.xml")
+            //File pixelExistFile = new File(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+            val fos1: InputStream
+            fos1 = if (pixelExistFile.exists()) {
+                FileInputStream(context.cacheDir.toString() + "/" + "materials.xml")
+                // fos1 = new FileInputStream(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+            } else {
+                context.resources.openRawResource(R.raw.materials)
+            }
+            val item = xStream.fromXML(fos1) as ArrayList<Material>
+            Material.materials= item
         } catch (e: Resources.NotFoundException) {
             e.printStackTrace()
         } catch (e: FileNotFoundException) {

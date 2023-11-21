@@ -1,0 +1,5601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<list>
+<Material>
+    <material>Hager UP-Verteiler 4-reihig
+        VU48NC</material>
+    <unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Komplettschrank ZB32NW</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager UP-Multimediaverteiler 4-reihig
+    VU48NW</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Alphatec Automatenverteiler
+    AVK2-7-210-M2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Alphatec AZ62HS2A-210</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Striebel Kleinverteiler 3x12
+    2CPX031271R9999</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Striebel Kleinverteiler 4x12TE
+    2CPX031372R9999</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Striebel Multimediaverteiler 4x12
+    CPX031385R9999</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Striebel Zählergehäuse AP/UP IP44
+    800x1400x215mm, ET190,1mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABB Zählerschrank</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HARL SH N Klemme 2x25 mm² 14x4 mm²
+    ECB Klemme blau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELSO SD Bewegungsmelder 0-120
+    AP cws glz IP55 1000W CCT56P004</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MANTELLTG. NYM-J 5x2,5         &gt;100&lt;
+    Mantelleitung Eca 1020521</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>MANTELLTG. NYM-J 5x16           &gt;50&lt;
+    Mantelleitung Eca 1020580</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>ST.LTG.VDE H05VV-F 3G1,5 ws     &gt;50&lt;
+    PVC-Schlauchleitung Eca 1053710</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>ST.LTG.VDE H05VV-F 5G2,5 ws     &gt;50&lt;
+    PVC-Schlauchleitung Eca 1053920</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Panzerrohr gewellt
+    FFKuS-EM-F  16mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Isolierrohr TOP EN63 Beton</material>
+<unit>cm</unit>
+</Material>
+<Material>
+<material>Isolierrohr Top EN 25 Beton, grau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Isolierrohr Top EN 25 Beton,
+    farblich sortiert</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Isolierrohr Top EN 20 Beton, grau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Panzerrohr gewellt
+    FFKuS-EM-F  25mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Panzerrohr gewellt
+    FFKuS-EM-F  63mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Isolierrohr TOP EN40</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Isolierrohr TOP EN 32 Beton</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Isolierrohr Beton EN50</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Spelsberg Abox 700L</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Tipprohr M50</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Isolierrohr gewellt
+    FBY-EL-F  16mm schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Isolierrohr gewellt
+    FBY-EL-F  40mm schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Isolierrohr gewellt
+    FBY-EL-F  20mm schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Isolierrohr gewellt
+    FBY-EL-F  25mm schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Isolierrohr gewellt
+    FBY-EL-F  32mm schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Montagehilfsrohr starr
+    isofix-EL-F 16mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Panzerrohr starr
+    FPKu-EM-F 63mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Isolierrohr gewellt
+    FBY-EL-F  50mm schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Isolierrohr gewellt
+    FBY-EL-F  63mm schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Montagehilfsrohr starr
+    isofix-EL-F 20mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Montagehilfsrohr starr
+    isofix-EL-F 25mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Panzerrohr starr
+    FPKu-EM-F 32mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kunststoff - Panzerrohr starr
+    FPKu-EM-F 40mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Schalterdose
+    Kaiser 1555-21 Econ 15</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Volta Verteiler IP30 Schutzkl. II
+    VA12CN auf Putz einreihig 12PLE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Hohlwandverteiler Typ
+    VH24NC  zweireihig 24PLE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Hohlwandverteiler Typ
+    VH48NC  vierreihig 48PLE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager UP-Verteiler 36PLE
+    3-reihig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager UP-Verteiler 12PLE
+    1-reihig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager UP-Verteiler 24PLE
+    2-reihig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager HW-Verteiler mit Tür 36PLE
+    3-reihig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser HW-Dose für Holz
+    9066-12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Tür für APV
+    1-reihig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Tür für APV 2-reihig
+    Stahlblech mit versenktem Griff</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser Teleskop-Geräteträger 68x70x50
+    1159-61</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Brandschutzdose BS115</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Brandschutzdose BS117</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser HW-Dose
+    9064-02</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser HW-Dose, flach, luftdicht
+    9263-22</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser HW-Verbindungsdose, luftdicht
+    9264-22</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Primo Thermodose THD-70/P721</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Volta Verteiler IP30 Schutzkl. II
+    VU48NC unter Putz vierreihig 48PLE 90mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Volta Multimedia-Verteiler IP30
+    VU48NW unter Putz vierreihig 48PLE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Abzweigkasten
+    Kaiser 1097-92 VDE 238x208x68mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Abzweigkasten
+    Deckel 1097-93 zu 238x208mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Federdeckel
+    1159-25  55 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Federdeckel
+    1174-25  70 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schalterdose
+    Kaiser 1069-02 (Abzweig)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hohlwand Putzausgleichring
+    Kaiser 9155-71 70/12mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Abzweigkasten
+    Deckel 1094-13 zu 80mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Abzweigkasten
+    Kaiser 1095-91 VDE 107x107x57mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Abzweigkasten</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Abzweigkasten
+    Deckel 1096-13 zu 150mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Electronic-Dose
+    Kaiser 1068-02</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hohlwanddose
+    Kaiser 9148-00 Auslaßd.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wandauslaßdose unter Putz
+    Kaiser 1048-00</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KAISER 9268-94
+    Hohlwand Electronic-Dose ECON  Flex luft</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Geräte - Verbindungsdose
+    Kaiser 1555-51 ECON Styro55 68mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schalterdose
+    Kaiser 1055-04</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hohlwanddose
+    Kaiser 9063-01</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hohlwanddose
+    Kaiser 9064-01</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hohlwanddose
+    Kaiser 9062-02 2fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hohlwanddose
+    Kaiser 9264-21  ECON 64</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KAISER     1555-41
+    Geräte-Verbindungsdose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KAISER 1068-21
+    Unterputz Electronic-Dose ECON , mit Tre</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KAISER 1656-21
+    Unterputz Doppel-Geräte-Verbindungsdose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KAISER 160 Leuchteneinbaugehäuse
+    ThermoX f.HV f.NV 35W 930022</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Putzausgleich - Ring
+    Kaiser 1155-61 60/12mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Putzausgleich - Ring
+    Kaiser 1155-62  60/24mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wandauslaßdose unter Putz
+    Abschlussdeckel 1148-90</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Rahmen 1-fach TX_44</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Abdeckung RTH pws-glänzend
+    16708989</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Jalousieschalter-Einsatz
+    303520</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Steckdose System 55 anthrazit
+    018828</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser Nienhaus Grenzwertschalter Wind
+    REG inkl. Windsensor</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Rahmen 1-fach Standard 55
+    reinweiß-matt, 021104</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira System 55, Rahmen 4-fach
+    reinweiß-matt, 021404</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Wippe für Jalousie pws-matt
+    16251909</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Steckdose S1 pws-matt
+    47431909</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schalk UP-Tastdimmer ETD U2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELCOM Tastenexpander 16WE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Rahmen 3-fach E2 reinweiß
+    021329</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Rhamen 4-fach E2 reinweiß
+    021429</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira E2 reinweiß, Rahmen 5-fach
+    021529</material>
+<unit>cm</unit>
+</Material>
+<Material>
+<material>Berker S1 pws glänzend Rahmen 5-fach
+    10158989</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Wippenset 6-fach beschriftbar
+    System 55, klar-reinweiß 213603</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ALRE Fußbodenheizungsregler, reinweiß
+    FETR 101.715#21</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HERA LED-Orientierungsleuchte
+    Treppenspot</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BUSCH-J.19 UP-Lautsprecher
+    AudioWorld 6W gr 16Ohm 8224EB</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira E3 Rahmen 2-fach, rws</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser Nienhaus Mehrfachsteuergerät 230V
+    UP-Ausführung</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Geräteeinsatz unter Putz
+    289110 Potentiometer elektronisch 1-10V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Dimmer Einsatz unter Putz
+    2875 für Glühlampen 60-600W</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker BLC Tast-Dimmer Einsatz
+    2904  20-500W/VA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker BLC Relais Schalteinsatz
+    2906  2300W/VA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Zentralstück polarw. glänzend
+    11378989 für Dimmer mit Drehknopf</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Zentralstück polarw. glänzend
+    17608989 BLC-Funk-Taste</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Zentralstück polarw. glänzend
+    17708989  RolloTec Taste</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Standardprogramm S.1 polarw. gl.
+    10118989 Abdeckrahmen einfach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Standardprogramm S.1 polarw. gl.
+    10128989 Abdeckrahmen zweifach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Standardprogramm S.1 polarw. gl.
+    10138989 Abdeckrahmen dreifach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Standardprogramm S.1 polarw. gl.
+    10148989 Abdeckrahmen vierfach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Wächteraufsatz polarw. glänze
+    17848989 BLZ mit Umschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira System 55 Zentralplatte reinweiß gl
+    086903 für Antennensteckd. m. SAT</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira System 55 Zentralplatte reinweiß gl
+    27003 für UAE/IAE-Anschlußdosen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira System 55 Schukosteckdose u. Putz
+    18803 reinweiß glänzend</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Abdeckrahmen E2-Programm
+    21529 fünffach reinweiß glänzend</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ALRE FTR 101.000#00
+    Raumtemperaturregler, mechanisch, UP, 5.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ALRE JZ-001.100
+    Deckelset 55 x 55 mm, reinweiß (ähnlich</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ALRE HTRRUu-210.021#07
+    Raum- bzw. Fußbodentemperaturregler, ele</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelmanschette K1 8-11 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hohlwand-Leitungsträger
+    Primo // 099 62 08</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser Signaldeckel
+    1181-48  für Wandauslaßdose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser - Geräteschrauben
+    2471-15  Länge 15mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser - Geräteschrauben
+    2471-25  Länge 25mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser - Geräteschrauben
+    2471-40  Länge 40mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Geräteeinsatz unter Putz
+    2925 RolloTec Standard</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Geräteeinsatz unter Putz
+    85221100 Jalousie Komfort</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Wippe polarweiß glänzend
+    16208989 geschlosssen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Wippe polarweiß glänzend
+    16238989 zweifach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Wippe polarweiß glänzend
+    16218989 mit Linsen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Zentralstück polarw. glänzend
+    12038989 für Antennensteckdosen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S1/B..Zentralstück polarw. glänz.
+    85241189 Jalousietaste</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser Signaldeckel
+    1181-60   60mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Geräteeinsatz unter Putz
+    3036 Universalschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Glimmaggregat
+    1686 230V 1mA LED mit N-Klemme</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Wippe polarweiß glänzend
+    16448989 für Taster vierfach reinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S1/B..Zentralstück polarw. glänz.
+    10338919 für TAE u. Lautsprechersteckd.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Zentralstück polarw. glänzend
+    14098989 für UAE-Anschlußdose 2fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Zentralstück polarw. glänzend
+    14078989 für UAE-Anschlußdose 45Grad</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BERKER 17618989
+    BLC Taste polarweiß, glänzend Berker S.1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Geräteeinsatz unter Putz
+    5031 Taster 1polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Geräteeinsatz unter Putz
+    3035 Serienschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Geräteeinsatz unter Putz
+    3037 Kreuzschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Geräteeinsatz unter Putz
+    303808 Doppelwechselschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Geräteeinsatz unter Putz
+    503503 Taster 2Schließer 2 Wippen getr.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker S.1 Zentralstück polarw. glänzend
+    20348989 Fußbodentemperaturregler</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Programm S.1 polarw. glänzend
+    47438989 Schukosteckdose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Q.1/Q.3 Zentralstück polarweiß
+    20266089 Raumtemperaturr. Wechsler</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker R.3 Abdeckrahmen polarweiß gl.
+    10112289 einfach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker R.3 Abdeckrahmen polarweiß gl.
+    10132289 dreifach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BERKER 10098989
+    Blindverschluss mit Zentralstück polarwe</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BERKER 020 Einsatz-Radio polws
+    S.1/B.3/B.7 glz 28808989</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BERKER 010 Tragring Blindabd
+    S.1 cws glz Klemmbef 10098982</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BERKER 010 Tragring Blindabd
+    S.1/B.3/B.7 polws glz 10098989</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EI ELECTR. Rauchmelder optFunk
+    3VDC VdS ws autark 10J EI650W3XD</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HALMBUR.5I Raumtemp.Regler 230V UP
+    Öffner rws glänzend 214 RTR76RG</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Wand- und Deckenkanal
+    WDK 100230 reinweiß 100x230x2000</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>OBO Geräteeinbaukanal
+    WDK 60170 reinweiß 60x170x2000</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Elektroinstallationskanal
+    HKL4040.3 reinweiß</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Elektroinstallationskanal
+    HKL4060.3 reinweiß</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Elektroinstallationskanal
+    HKL6060.3 reinweiß</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Elektroinstallationskanal
+    HKL60110.3 reinweiß</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Elektroinstallationskanal
+    HKL60150.3 reinweiß</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>HKL-Elektroinstallationskanal, mit Boden</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NEWLEC     HIK2020RW
+    Newlec Kabelkanal 20x20,</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NEWLEC     HIK3030RW
+    Newlec Kabelkanal 30x30,</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>BJ Lautsprecher 8216U</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    6812U-101 Einsatz für Wächter 700W/VA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BUSCH-BALANCE SI Kontrollwippe, Schalte
+    2509-914</material>
+<unit>cm</unit>
+</Material>
+<Material>
+<material>BUSCH-BALANCE SI Bewegungsmeldersensor,
+    6810-914-101</material>
+<unit>cm</unit>
+</Material>
+<Material>
+<material>BJ BWM-UP-Einsatz
+    6800-104</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BUSCH-BALANCE SI Drehknopf, Dimmer, alpi
+    2115-914</material>
+<unit>cm</unit>
+</Material>
+<Material>
+<material>BJ Abdeckung Drehdimmer 1794-914</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger pur edelstahl Abdeckrahmen
+    1722-866K zweifach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Bluetooth-Radio-Einsatz
+    8216 U</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Dimmer, Dreh-/Druckknopf 40-420W
+    6513 U-102</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Kontrollwippe mit roter Kalotte</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Kontrollwippe 214</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Tragring Kabelauslass 914
+    2527-914</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Abdeckung RTH Drehknopf
+    1743-914</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Zentralplatte für Lautsprecher,
+    alpinweiß, 8253-914</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ALRE Abdeckung RTH BJ 914</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Rahmen 1-fach 214
+    mit Beschriftungsfeld</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Rahmen 2-fach 214
+    mit Beschriftungsfeld</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Nebenstellen-Einsatz für
+    Busch-Wächter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Future Linear, studioweiß
+    Rahmen 1-fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Future Linear, studioweiß
+    Rahmen 2-fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Future Linear, studioweiß
+    Rahmen 3-fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Einbaulautsprecher 10W, studioweiß
+    1Weg, passiv-System, 8Ohm, 8225EB</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Einbaulautsprecher 30W, studioweiß
+    2Weg, passiv-System 8Ohm, 8226/10 EB</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Rahmen 1-fach, alpinweiß für
+    Kanaleinbau 2511-214K-102</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Wächter Bewegungsmelder 0-180°
+    alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Relais-Einsatz 0-2300W, 10A
+    64811 U</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ BWM-Sensor 13-180°, weiß, 1,1m
+    6800-214-104</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ BWM-Sensor 13-180°
+    1,1 m, alpinweiß, 64761-914</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>B-J Allwetter 44  Abdeckrahmen (IP44)
+    2101-34  1fach alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>B-J Allwetter 44  Abdeckrahmen (IP44)
+    2102-34  2fach alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>B-J Allwetter 44  Abdeckrahmen (IP44)
+    2103-34  3fach alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Steck-Glimmlampe
+    8350  230V 0,4mA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Glimmlampe
+    3855  für Dimmer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>B-J Allwetter 44  Wippe (IP44) alpinweiß
+    2106-34  für A-W-K Schalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>B-J Allwetter 44  Wippe (IP44) alpinweiß
+    2105-34  zweifach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>B-J Allwetter 44  Schukosteckdose (IP44)
+    20EUGK-34-101 alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ESYLUX PROTECTOR K 9 V Lith
+    Fotoelektronischer Rauchwarnmelder 9 V L</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EI-ELEC Ei603TYC
+    10-Jahres-Hitzewarnmelder mit Festtemper</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger  Geräteeinsatz unter Putz</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger  Geräteeinsatz unter Putz
+    6513U-102 Dimmer 420W</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    6804U-101 MOS-Fet-Einsatz -420W/VA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm
+    2511-214 Abdeckrahmen 1fach alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm
+    2512-214 Abdeckrahmen 2fach alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm
+    2513-214 Abdeckrahmen 3fach alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm
+    2514-214 Abdeckrahmen 4fach alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm
+    2515-214 Abdeckrahmen 5fach alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Refl. SI-Progr. Zentralsch.
+    6815-214 für Komfortschalter alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Refl. SI-Progr. Zentralsch.
+    2115-214 für Dimmer m. Drehkn. alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm
+    2511JH-214 Abdeckr. Heizungsnotschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm Wippe
+    2520Kl-214 mit Symb. Klingel alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm Wippe
+    2506N/Kl-214 mit Beschrifungsf. alpinw.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Refl. SI-Progr. Zentralsch.
+    1743-03-214 für SAT Antennenst. alpinw.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Refl. SI-Progr. Zentralsch.
+    2539-214 für TAE-Anschlußeinheit alpinw.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Zentralscheibe
+    1803-214 für UAE-Anschlußdosen alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger SI-Zentralscheibe
+    8253-214 für Lautsprecher</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>B&amp;J 1789-914
+    Wippe, alpinweiß, Busch-balance SI, Abde</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    2000/6US  Universalschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    2000/7US  Kreuzschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    2000/6USK  Kontrollschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm Wippe
+    2506-214 geschlossen alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm Wippe</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm Wippe
+    2505-214 zweifach alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Zentralscheibe
+    1803-02-214 für UAE-Anschlußd. alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    2020US  Taster 1polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    2000/5US  Serienschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    2000/4US Jalousieschalter 1polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI-Programm Wippe
+    2509-214 für Kontrollschalter alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Refl. SI-Progr. Zentralsch.
+    1746-214-101 für Telekomm.-Eins. alpinw.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Refl. SI-Progr. Zentralsch.
+    1794-214 für Raumtemperaturr. 1094/1097</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Refl. SI-Progr. Zentralsch.
+    2538-214 für Blindabdeckung alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    2000/6/6US-101  Doppelwechselschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    2020US-205-101 Taster 2 getr. Stromb.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    2020/4US Jalousietaster 1polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger  Geräteeinsatz unter Putz
+    6526U LED-Dimmer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger  Geräteeinsatz unter Putz
+    6815U Komfortschalter 40-300W/VA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger  Geräteeinsatz unter Putz
+    6523U LED Dimmer 2-100W/VA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    6401U-102 Universal-Relais-Einsatz</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Refl. SI-Progr. Zentralsch.
+    6810-214-101 Wächter Sensor-Standard</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Reflex SI Schuko-Steckdose
+    20EUC-214 alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Merten Herdanschlußdose
+    520427 unter Putz bis 5x2,5qmm</material>
+<unit>778</unit>
+</Material>
+<Material>
+<material>BJ Rahmen 5-fach, 914</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BUSCH-J.19 Lichtregel-Potentiometer
+    UP DALI Dreh/Druckkn 2117U</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rutenbeck Fernmeldesteckdose
+    TAE 3x6 NFN UP reinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Telegärtner  Miniverteiler
+    MPD6-HS K Cat.6A geschirmt alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Telegärtner  Miniverteiler
+    MPD12-HS K Cat.6A geschirmt lichtgrau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Striebel &amp; John Stromkreisverteiler IP30
+    UK512N2 unter Putz m. Tür 1x12 Teileinh.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>FUBA EAD205DC Stichdose  2Loch
+    A=5dB 5-2200MHz DC EAD205DC</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>FUBA SAT-Dose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Astro Erdungswinkel 7-fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DEHN 1 Leitungshalter V2A Stahl
+    M8,f. Rd 8-10mm 274160</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DEHN 3 Verbindungsklemme
+    St/tZn f. Gebäude- VKAUNIST</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DEHN 3 Verbindungsklemme f. Rd 6
+    St-blank m. Klemmbock 308035</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DEHN 1 T/Kreuz/Parallelverbinder
+    Rd8-10/Rd8-10 V4A unbeh 390079</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DEHN 1 Anschlussklemme  6-10mm
+    18-35mm V2A unbeh 372249</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltropa net-works
+    Modular-Buchse RJ45 8(8)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DEHN Schlagspitze 25 mm, Temperguss
+    feuerverzinkt</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DEHN 3 Kreuzverbinder
+    Rd8-10/Fl30 V4A unbeh 319209</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltropa E37/4 Erdungsrohrschelle V2A
+    17,2-114 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltropa E37/1 N Erdungsrohrschelle V2A
+    17,2-48 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltropa E37/0 N Erdungsrohrschelle
+    Messing, 8-22mm, vernickelt</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltrop Potischiene</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kathrein F-Stecker</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Fuba OVZ090
+    F-Verbinder</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTR E-DAT Modular-Kupplung, 6A
+    2xRJ45</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ASTRO STR. Speisesystem Quad 4Ausg
+    Multisch 40mm ACX985</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>FUBA DEK407 Quattro LNB 40mm
+    optim. Mobilfunkabschirm. DEK407</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Patchkabel 10 m</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    0241/02 TAE 6F+N für Fernmeldeanschluß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    0214 UAE-Anschlußdose 2x8polig par.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Geräteeinsatz unter Putz
+    0213 UAE-Anschlußdose 8polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rutenbeck Fernmeldesteckdose
+    TAE 3x6 NFN AP reinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KATHREIN EBC 03
+    3fach-Verteiler</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ASTRO ESF 05
+    Erdungswinkel, Anschluss von 5 Koaxialka</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ASTRO 276
+    Mastkappe für Mast bis   76 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rutenbeck Daten - Anschlußdose
+    UAE-Cat.5e-8/8 Up oK perlweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KATHREIN Stecker</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KATHREIN Zubehör
+    EMU03  Verbinder F-Doppelbuchse</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rutenbeck Daten - Anschlußdose
+    UAE-Cat.6A iso-8Up0</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>TRIAX      KOK 3 N
+    IEC-Kupplung, Schraubanschluss für</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ASTRO      FKS 06QM
+    F-Kompressionsstecker für CSA 9511 A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rittal Käfigmuttern EL 2092.200 VE50</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KATHREIN Antennensteckdose
+    ESD44 Richtkoppler - Durchschleifdose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KATHREIN Antennensteckdose
+    ESD30  3Loch Einzeldose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DEHN       319209
+    Kreuzstück NIRO (V4A) f. Rd 8-10/8-10mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BETTERMA   254 DIN 8-10 FT
+    Kreuzverbinder 8-10mm, St,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rittal Kreuzschlitzschraube
+    M6x16mm DK 7094.100(VE50)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ASTRO      GUT 103
+    Anschlussdose, Stichdose, 5-2400 MHz, 3</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ASTRO      GUT 162
+    Anschlussdose, Stammdose 5-862 MHz,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KATHREIN
+    ZAS40 Dachsparrenhalter, Länge 90</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DIGITUS CAT 6 Patchk. grau   2,0m
+    S-FTP, LSOH, AWG 27/7 DK-1644-020</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rittal Geräteboden, Festeinbau 19"
+    DK 7000.620  512x22x412mm 30kg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HEBS17-48
+    Erdungsbandschelle 17,5 - 48 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTROPA TE net-works Patchk.gr. 5,0m
+    Cat6A S/FTP 600MHz LSZH PKC6-5,0GR</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTROPA TE net-works Patchk.gr. 7,5m
+    Cat6A S/FTP 600MHz LSZH PKC6-7,5GR</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HSFTPPK0,5
+    Patchkabel SFTP Cat 6A 0,5m, grau,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC HSFTPPK1
+    Patchkabel SFTP Cat 6A 1m, grau, halogen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC HQLNB-B
+    Universal Quattro LNB</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>LNB-Halterung
+    Kathrein, Astron</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Potentialausgleichschiene
+    mit 7x25qmm,1x10mm,1x30x3,5mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTR PC Modular-Buchse Cat6A
+    RJ45 26-22AWG Schirm rnd 130910I</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>TRIAX      GHV 940
+    Multimediafähiger BK-Verstärker für</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BETTER0220 Kreuzverbinder
+    Rd8-10/Fl30 V4A unbeh 250V4A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>TELEG. Verbindungsmodul CAT7
+    600MHZ, VM 8-8 CAT7 J00060A0069</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTROPA TE Modular-Stecker Cat6A
+    RJ45 27-22AWG Schirm si J00026M2000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung mit isolierten Grifflaschen
+    160A  Gr.00</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH1 35A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Selektiver Hauptleitungsschutzsch.
+    HTN380E 80A 3polig (1polig schaltend)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NZR Drehstromzähler DS 10(60)A geeicht
+    IP51, 3x230V/400V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton 3-Phasenschiene
+    EVGK-3PHAS/12Modul</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton 3-Phasenschiene
+    EVGK-3-Phas/N/8Modul</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Striebel und John
+    ZB47 Plombierhaube für Zähler</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HAGER 412 Kombi-Ableiter 4p
+    TN-S 400VAC 1,5kV SPA301Z</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Einspeiseadapter 125A 5p
+    5x12mm, B23mm, K96ESA5</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HAGER 220 Brandschutzschalter
+    B 2p 16A 230V 2TE IP20 ARC916D</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTAKO V Drehstromzähler 3x80A
+    elektr digi B 65A DSZ15DE3X80A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Diazed
+    D 2A träg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Diazed
+    D 4A träg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Diazed
+    D  6A träg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Diazed
+    D  10A träg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Diazed
+    D  16A träg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Diazed
+    D  20A träg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Diazed
+    D  25A träg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Diazed
+    D  50A träg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Diazed
+    D  63A träg</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Neozed
+    D 01  16A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Neozed
+    D 02  20A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Neozed
+    D 02  25A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Neozed
+    D 02  35A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Neozed
+    D 02  50A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungen Neozed
+    D 02  63A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    160A  Gr.00 // 3NA3836</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schraubkappen
+    Neozed  D 01</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    50A  Gr. I // 3NA3120</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    100A  Gr. II // 3NA3230</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    160A  Gr. II // 3NA3236</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung mit isolierten Grifflaschen
+    6A  Gr.000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung mit isolierten Grifflaschen
+    10A  Gr.000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung mit isolierten Grifflaschen
+    25A  Gr.000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung mit isolierten Grifflaschen
+    32A  Gr.000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    80A  Gr.000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    100A  Gr.000 // 3NA3830</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    125A  Gr.00 // 3NA3832</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    63A  Gr.000 // 3NA3822</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    50A  Gr.000 // 3NA3820</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NH Sicherung spannungsführ. Grifflaschen
+    35A  Gr.000 // 3NA3814</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager - Zubehör
+    T95L Zählerverschlußhaube</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Sammelschiene dreipolig
+    KDN363A   10qmm für 12 Module Gabel</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Sammelschiene dreipolig + N
+    KDN363F   10qmm für 12 Module Gabel</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Sammelschienen Endkappe
+    KZN023 für 2/3polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MERSEN NH-Sicherungseinsatz 100A
+    NH1 500V gL/gG isoGriff W215184</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MERSEN NH-Sicherungseinsatz 250A
+    NH1 500V gL/gG isoGriff E218251</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltako
+    Schaltrelais R12-100-230V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltako
+    Schaltrelais R12-100-24V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter 6kA einpolig
+    ABL B6S1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Reiheneinbaugerät
+    Hager SBN363 Ausschalter 3polig  63A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Reiheneinbaugerät
+    Hager EPN510 Fernschalter 1p. 230V 16A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Fehlerstromschutzschalter 6kA Typ A
+    Hager CFA440D vierpolig 300mA/40A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter dreipolig
+    Hager  MCS363  C63A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Steckdose REG, 250V, AC, 16A, mit Klappd
+    Hager</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>FI-Schutzschalter, A, 2p, 230V, 25A, 0,0</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>FI-Schutzschalter, A, 4p, 400V, 40A, 0,0
+    ABB</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>PXF-40/4/003-A FI-Schalter, 40A, 4p, 30m
+    EATON</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>PXL-B16/1 LS-Schalter, 16A, 1p, B-Char
+    EATON</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Überspannungsableiter, Netzform-TN-S/TT,
+    DEHN</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>IS-63/4 Hauptschalter, 4p, 400V, 63A
+    EATON</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eberle Installationsrelais AC 230V 50 Hz
+    1S/1Oe, 16A, IP 40</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTAKO V Wechselstromzähler 32A
+    elektr digi geeicht B 5A WSZ15D32AMID</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABB Installationsschütz, 40A, 230V/AC/DC
+    220-400V/AC/DC, 4S, 3TE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABB Installationsschütz, 25A, 230-240V/
+    AC/DC 220-400V/AC/DC, 4S, 2TE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>DS201 FI/LS-Schutzschalter, 1p+N, B16, 0
+    ABB</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>FI-Schutzschalter, B, 4p, 400V, 63A, 0,0
+    ABB</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltako
+    Schaltrelais R12-200-230V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Treppenlichtzeitschalter
+    Theben  ELPA 8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltako
+    Stromstoßschalter S12-100-230V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter einpolig
+    Hager  MBN106  B6A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter einpolig
+    Hager  MBS116  B16A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter einpolig
+    Hager  MBS120  B20A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter einpolig
+    Hager  MBS125  B25A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter einpolig
+    Hager  MBS132  B32A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter einpolig
+    Hager  MBS150  B50A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter dreipolig
+    Hager  MBS316  B16A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter dreipolig
+    Hager  MBS320  B20A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Fehlerstromschutzschalter QuickConnect
+    Hager CDS440D vierp. 6kA 30mA/40A Typ A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter einpolig
+    Hager  MCS116  C16A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter dreipolig
+    Hager  MCS316  C16A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter dreipolig
+    Hager  MCS310  C10A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter dreipolig
+    Hager  MCS320  C20A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter dreipolig
+    Hager  MCS325  C25A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Leitungsschutzschalter dreipolig
+    Hager  MCS332  C32A mit  Steckklemmen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago Endhalter
+    249-117 schraubenlos</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago
+    210-133 N.Sammelschiene CU 10x3mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago topJob Zubehör
+    2016-7607 PE Einspeiseklmme</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago topJob Zubehör
+    2016-7714 N Einspeiseklmme</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago topJob Zubehör
+    782-321 Sammelschienenträger</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S 2-Leiter-Durchgangsklemme
+    2016-7601 grau (16(25)qmm)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S 2-Leiter-Durchgangsklemme
+    2016-7604 blau (16(25)qmm)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Installations-Etagenklemme
+    2003-7641 NT/L/PE (2,5(4)qmm)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Installations-Etagenklemme
+    2003-7642 L/L (2,5(4)qmm)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Installations-Etagenklemme
+    2003-7646 N/L/PE (2,5(4)qmm)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Installations-Etagenklemme
+    2005-7641 NT/L/PE (4(6)qmm)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Installations-Etagenklemme
+    2005-7642 L/L (4(6)qmm)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Zubehör
+    2016-7692 Abschlussplatte orange</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Zubehör
+    2005-7692 Abschluss- Zwischenpl. orange</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Zubehör
+    2003-7692 Abschluss- Zwischenpl. orange</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Zubehör
+    2009-304 Sammelschienenträger</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Zubehör
+    2009-305 Sammelschienentr, mit Endkl.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Zubehör
+    2002-402 Kammbrücker 2-fach 2,5qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago TopJob-S Zubehör
+    2016-402 Kammbrücker 2-fach 10qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Hauptleitungsabzweigklemme
+    KH25C 5polig fingersicher</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO 22 Abschlussplatte
+    Serie 2016 rastb or 20167792</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Hauptleitungsabzweigklemme 4 pol
+    4x25(16)m²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HARL SH K96Q  960063
+    Sammelschienenklemme 16 qmm² 5mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO 22 Schachtelverbinder 5p
+    Serie 2002 steckb isol 2002475</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO 22 Schachtelverbinder 3p
+    Serie 2002 steckb isol 2002473</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO 22 Schachtelverbinder 7p
+    Serie 2002 steckb isol 2002477</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltropa Hauptleitungsabzweigklemme
+    20f 5pol 10st/16², 10st/25²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTROPA PM Hauptleitungsklemme 4p</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Berührungsschutzabdeckung
+    K20A für K23N/K28N/K29N</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HENS N-oder PE-Verbindungsklemme
+    bis 35qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HENS Verbindungsklemme -16qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HAGER      KH35A
+    Hauptl.-klemme,4-pol,je Pol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Hauptleitungsklemme 5pol., KH45A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Hauptleitungsabzweigklemme
+    K02SN 1polig 25/2x16qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hensel KKL 10
+    Ein- und mehrpolige Klemmenleiste</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HENSEL     KKL 25
+    N- oder PE-Verbindungsklemme, bis 35</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HAGER 610 Hauptleitungsklemme 1p
+    schraub schraub KH70G</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KLEINHUI   651S/12
+    Null- und Schutzleiterklemme, mit 12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Schrankzubehör
+    S35S Abdeckstreifen 221mm lang</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Striebel&amp;J Verschlußstreifen
+    f.12Einheit.abbrech. ZA1P5 VE5</material>
+<unit>Pack</unit>
+</Material>
+<Material>
+<material>Aderendhülse isoliert
+    476/12  10qmm rot</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Aderendhülse isoliert
+    477/12 16qmm blau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Würgenippel metrisch
+    OBO 90M25 mit Durchstoßmembrane</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Doppelmembranstutzen metrisch
+    Spelsberg 260420 M20</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Doppelmembranstutzen metrisch
+    Spelsberg 260425 M25</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Doppelmembranstutzen metrisch
+    Spelsberg 260432 M32</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>RITTAL     SZ 2899.400
+    Stufennippel IP 54 / M40 Dichtbereich</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Anbaustutzen metrisch
+    Spelsberg 230420 M20</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Anbaustutzen metrisch
+    Spelsberg 230425 M25</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Anbaustutzen metrisch
+    Spelsberg 230432 M32</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Anbaustutzen metrisch
+    Spelsberg 230440 M40</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gegenmutter metrisch
+    Spelsberg 208463 M63 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hensel Anbau-Kabelstutzen metrisch
+    AKM63  M63 mit Zugentlastung</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gegenmutter metrisch
+    Spelsberg 208416 M16 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gegenmutter metrisch
+    Spelsberg 208420 M20 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gegenmutter metrisch
+    Spelsberg 208425 M25 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gegenmutter metrisch</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gegenmutter metrisch
+    Spelsberg 208440 M40 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gegenmutter metrisch
+    Spelsberg 208450 M50 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Verschraubung metrisch
+    Spelsberg 247416 M16 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Verschraubung metrisch
+    Spelsberg 247420 M20 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Verschraubung metrisch
+    Spelsberg 247425 M25 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Verschraubung metrisch
+    Spelsberg 247432 M32 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Verschraubung metrisch
+    Spelsberg 247440 M40 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Verschraubung metrisch
+    Spelsberg 247450 M50 Polystyrol</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Quetschkabelschuh Gabelform isoliert
+    650C8 4-6qmm Ld.8,4mm gelb</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HR2M5
+    Ringkabelschuh isoliert 0,5-1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HR5M5
+    Ringkabelschuh isoliert 4-6</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HSV2
+    Stoßverbinder isoliert</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC HICIQ2V
+    Isolierter Stoßverbinder 1,5-2,5qmm blau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC HICIQ1V
+    Isolierter Stoßverbinder 0,5-1qmm rot</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HR3M5
+    Ringkabelschuh isoliert 1,5-2,5</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>INTERC     ICC248FH
+    Flachsteckhülsen DIN 46247 1,5-2,5 mm2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Aderendhülse isoliert
+    476/18 10qmm rot</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC HTAE1
+    Twin-Aderendhülse 1/8 rot</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HTAE15
+    Twin-Aderendhülse 1,5/8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HTAE25
+    Twin-Aderendhülse 2,5/10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HTAE6
+    Twin-Aderendhülse 6,0/14</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HTAE10
+    Twin-Aderendhülse 10/14</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HTAE16
+    Twin-Aderendhülse 16/16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HAE1
+    isolierte Aderendhülse 1/8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HAE15
+    isolierte Aderendhülse 1,5/8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HAE25
+    isolierte Aderendhülse 2,5/8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HAE4
+    isolierte Aderendhülse 4/10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Micro-Verbindungsklemme
+    Wago 243-204 dunkelgrau 4polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Micro-Verbindungsklemme
+    Wago 243-208 dunkelgrau 8polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schraubenlose Leuchtenklemme
+    224-112   bis 2,5qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago Verbindungsklemme
+    222-413  3x0,8-4qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago COMPACT-Verbindungsdosenklemme
+    2273-202  0,5-2,5 qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago COMPACT-Verbindungsdosenklemme
+    221-412  2-Leiter mit Betätigungshebeln</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago COMPACT-Verbindungsdosenklemme
+    221-413  3-Leiter mit Betätigungshebeln</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago COMPACT-Verbindungsdosenklemme
+    221-415  5-Leiter mit Betätigungshebeln</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago COMPACT-Verbindungsdosenklemme
+    2273-203  0,5-2,5 qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago COMPACT-Verbindungsdosenklemme
+    2273-205  0,5-2,5 qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Wago COMPACT-Verbindungsdosenklemme
+    2273-208  0,5-2,5 qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Aderendhülse isoliert
+    470/8 0,75qmm grau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Flachsteckhülse isoliert
+    720 0,5-1qmm Steckerbr. 6,3mm rot</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Flachsteckhülse isoliert
+    730 1,5-2,5qmm Steckerbr. 6,3mm blau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Lüsterklemme
+    12polig 2,5qmm weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KLEINHUI   135.3
+    Anschlussklemme, 20,5x25x174,5 mm,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KLEINHUI   143.0
+    Anschlussklemme, 17,5x23,5x134 mm,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>INTERC.V70 Zwill.Aderen. 0,75mm  8mm
+    isoliert Oberfl. verzinnt ICIAE0758Z</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Abzweigkasten ohne Klrmme
+    Hensel DK 1000G bis 10qmm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg - Abzweigkasten
+    Abox 350  leer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Volta Verteiler IP30 Schutzkl. II
+    VU36NC unter Putz dreireihig 36PLE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg Automatenkasten IP 65
+    AK05   1 reihig  5 Teileinheiten</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg Automatenkasten IP 65
+    AK09   1 reihig  9 Teileinheiten</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg Automatenkasten IP 65
+    AK12   1 reihig  12 Teileinheiten</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg Automatenkasten IP 65
+    AK14   1 reihig  14 Teileinheiten</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg Automatenkasten IP 65
+    AK42   3 reihig  42 Teileinheiten</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Walther CEE-Stecker 5p 63A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg Automatenkasten IP 65
+    AK28   2 reihig  28 Teileinheiten</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg - Abzweigkasten
+    Abox 060  leer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg - Abzweigkasten
+    Abox 100  leer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg - Abzweigkasten
+    Abox 160  leer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Feuchtraum - Abzweigkasten
+    Mini-Dose 25 leer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hensel Zubehör
+    MiPL2  Plombierkappen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg - Abzweigkasten
+    Abox 025  leer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg - Abzweigkasten
+    Abox 040  leer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Walther CEE Phasenwender - Stecker
+    Nr.210 PH  16A 5P 400V 6h IP44</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>CEE Kupplung StarTOP  IP44
+    35  5polig 16A 6h 400V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>CEE Stecker StarTop IP44
+    33  5polig  16A 6h 400V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>CEE - Wandgerätestecker IP44
+    342  5polig 16A 6h 400V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Walther CEE Phasenwender - Stecker
+    Nr.230 PH  32A 5P 400V 6h IP44</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>CEE Stecker StarTop IP44
+    34  5polig  32A 6h 400V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>CEE Kupplung StarTOP  IP44
+    36  5polig 32A 6h 400V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>CEE - Wandsteckdose IP44
+    32 5polig 32A 6h 400V TwinCONTACT</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Walther CEE Kupplung m. außenl. Verschr.
+    Nr.360  63A 5P 400V 6h IP44</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>CEE Steckdose unter Putz alpinweiß
+    4245 (400V)  5polig 32A mit Einbaudose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>CEE Anbausteckdose IP44
+    3385 5polig 16A 6h 400V TwinCONTACT</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Walther 134
+    CEE-Steckdose Aufputz</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  1x6qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  1x16qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  1x25qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  3x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  3x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  4x10qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  5x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  5x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  5x4qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  5x6qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  5x10qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  5x25qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-J  7x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Mantelleitung
+    NYM-O  4x16qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  1x16qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  1x25qmm/rm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  1x35qmm/rm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  3x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  3x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  4x1,5qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  4x2,5qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  4x16qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  4x50qmm/sm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  5x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  5x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  5x10qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  5x16qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  5x25qmm/rm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  5x35qmm/rm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  7x1,5qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  7x2,5qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  12x1,5qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-J  12x2,5qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-O  4x10qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-O  4x16qmm/re</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Energiekabel
+    NYY-O  4x25qmm/rm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>H1Z2Z2-K  6sw EN50618 R100
+    Solarkabel EN50618</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Niedervoltleitung
+    NVL 2x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    1,5qmm  schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    1,5qmm  grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    1,5qmm  hellblau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    2,5qmm  schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    2,5qmm  grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    2,5qmm  hellblau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    4 qmm   schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    4 qmm   grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    4 qmm   hellblau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    6 qmm   schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    6 qmm   grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    6 qmm   hellblau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    10 qmm  grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    10 qmm  braun</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    10 qmm  schwarz / 1</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    10 qmm  blau / N</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    16 qmm  schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    16 qmm  grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    16 qmm  hellblau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    16 qmm  braun</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    25 qmm  schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-K  feindrähtig
+    35 qmm  schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    1,5qmm schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    1,5qmm grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    1,5qmm hellblau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    1,5qmm braun</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    1,5qmm grau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    1,5qmm rot</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    1,5qmm weiß</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    2,5qmm schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    2,5qmm grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    2,5qmm hellblau</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    4 qmm  grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-U
+    10 qmm  grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-R
+    16 qmm  grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Aderleitung  H07V-R
+    25 qmm  grün/gelb</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Gummischlauchleitung
+    H07RN-F   3 G 1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Gummischlauchleitung
+    H07RN-F  3 G 2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Gummischlauchleitung
+    H07RN-F  5 G 2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>PVC - Schlauchleitung  H05VV-F
+    3G1,5 qmm  weiß</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>PVC - Schlauchleitung  H05VV-F
+    3G2,5 qmm  schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>PVC - Schlauchleitung  H05VV-F
+    5G2,5 qmm  weiß</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Lautsprecherleitung
+    2x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Silicon Schlauchleitung
+    SIHF-J 4x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Silicon Schlauchleitung
+    SIHF-J 5x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Silicon Schlauchleitung
+    SIHF-O 2x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-OZ  2x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   3x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   3x1 qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   3x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   3x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   3x10qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JB   3x16qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   4x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   4x1 qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   4x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   4x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   5x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   5x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   5x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   5x4qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   7x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   7x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ   7x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ  12x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLY-JZ  25x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-OZ 2x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-OZ 2x1qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-JZ 3x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-JZ 3x1qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-JZ 4x0,75qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-JZ 4x1qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-JZ 4x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-JZ 4x6qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-JZ 5x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-JZ 7x2,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Steuerleitung
+    YSLYCY-JZ 12x1,5qmm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>EIB-Busleitung
+    YCY 2x2x0,8 grün</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung
+    J-Y(ST)Y  2x2x0,6mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung
+    J-Y(ST)Y   2x2x0,8mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung
+    J-Y(ST)Y  4x2x0,6mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung
+    J-Y(ST)Y   4x2x0,8mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung
+    J-Y(ST)Y  6x2x0,6mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung
+    J-Y(ST)Y  10x2x0,8mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung
+    A-2Y(L)2Y   2x2x0,8mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung
+    A-2Y(L)2Y   6x2x0,8mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Fernmeldeleitung
+    A-2Y(L)2Y  10x2x0,8mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Brandmeldekabel halogenfrei E30
+    JE-H(ST)H  rot 4x2x0,8mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Schwenk Profilfix Eckschienenmörtel</material>
+<unit>kg</unit>
+</Material>
+<Material>
+<material>SIHF 3x1,5 Silikon Trommel</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>KAB+LTG YSLY-JZ 7X2,5
+    Steuerleitung m. numerierten Adern R100</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>HOMEWAY GREENforMEDIA Kabel FRNC
+    Kat7/KOAX 350m HW-KGMHF35</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Kabel Koaxial Quattro KKSQ 80-170
+    &gt; 80 dB, 2-fach geschirmt</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>ASTRO CSA 9516/500
+    CSA 9560 SAT-Erdkabel 500 m Trommel</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NEWLEC HCAT7HS234P100M
+    Cu-Datenkabel 100m Ring CAT7 AWG23 4P FR</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NEWLEC HCAT7PESS234P100M
+    Cu-Datenkabel Aussen R/100m CAT7 AWG23 4</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NEWLEC HCOAX 111 250SB
+    SAT Koaxialkabel 110dB, dreifach geschir</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NEWLEC HCAT7HS23/2x4P100M
+    Cu-Datenkabel 100m Ring CAT7 AWG23 8P FR</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>KN91 NiCr/KCA 2x0,5 ICE
+    (BMHKW DGF)</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Solarflex PV1-F 1 x 95 mm²
+    grau-schwarz</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>H05V-K 1x1 DBU</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NYM-O 4x16</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>YSLY-JZ 7x4²</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Loxonekabel</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    20 EW-54 Schukosteckdose alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    2621 WN-53-205-101 Doppeltaster</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    20-02 EW-53 Schukosteckd. 2fach senkr.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger SI Programm
+    1701-212 Aufputzgehäuse 1fach weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger SI Programm
+    1702-212 Aufputzgehäuse 2fach weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker W.1 auf Putz wassergesch.IP55
+    47803515 Schukosteckd. mit Universalsch.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>CEE Kupplung ProTOP II IP44
+    180A  3polig 16A 6h 230V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Volta Verteiler IP30 Schutzkl. II
+    VA24CN auf Putz zweireihig 24PLE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Volta Verteiler IP30 Schutzkl. II
+    VA36CN auf Putz dreireihig 36PLE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Volta Verteiler IP30 Schutzkl. II</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ AP-Gehäuse 1-fach
+    1701-214</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager AP-Verteiler 12PLE, 1-reihig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ AP-Gehäuse. 3-fach
+    1703-214</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ AP-Gehäuse, 2-fach
+    1702-214</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>SUJ K9 Abdeckung Verteilerfeld
+    B250xH750mm Kst 2CPX062810R9999</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Esylux MD180Basic</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Tür zu auf Putz Verteiler
+    VA24T für VA24C</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Tür zu auf Putz Verteiler
+    VA36T für VA36C</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Plantasche, univers
+    Stahlblech,IP43 FZ707</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HMD200
+    Bewegungsmelder 200</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    2621 W-53 Taster</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    2621 WGL-53 Taster beleuchtet</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    20/2 EW-53 Schukosteckdose 2fach waager.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    2601/7 W-54 Kreuzschalter alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    2601/2 W-54 Ausschalter 2polig alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    2601/6 W-54 Universalschalter alpinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    2601/6 W-53 Universalschalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    2601/6/20EW-53 Universalsch. mit Steckd.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger auf Putz wassergesch. IP44
+    20 EW-53 Schukosteckdose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Busch-Jaeger Perilexstecker
+    2064SWLW 16A  Winkelausführung</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Merten Schukostecker
+    120927 weiß seitliche Einführung</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL Schukostecker mit PVC-Mantel
+    1418080 mit Tülle weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL Schukostecker PVC
+    1428180 spritzwassergesch. weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL Schuko-Gummistecker
+    1429190 spritzwassergesch. IP44 schwarz</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL Schuko-Kupplung
+    1478080 PVC weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>JUNG       10 S 23 L
+    Tischsteckdose, 3fach, 16 A, 250 V ,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL        1169090
+    Vollgummi-SCHUKO-Kupplung, schwarz, ohne</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL        1173503
+    SCHUKOultra-3fach-Vollgummi-Hängekupplun</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL        1529140</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL        1589240
+    SCHUKOultra II Kupplung, 2K-Technologie,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Befestigungsschelle 604
+    28mm einlappig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spanndrahtschelle für Seil 4-9mm 14-18mm
+    OBO</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>GURO-SCL-19/28 Einfachschelle
+    TE</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTROPA BE Kabelbügel zweis
+    16xNYM3x1,5mm 240mm EK16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTROPA BE Kabelbügel eins
+    8xNym3x1,5mm 134mm EK8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MZ020 Befestigungsschelle, Stahl, 1-lapp
+    Don Quichotte</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HRASM40
+    Rohrabstandsschellen M40 und</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HRASM32
+    Rohrabstandsschellen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HRASM25
+    Rohrabstandsschellen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HRASM20
+    Rohrabstandsschellen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HRASM16
+    Rohrabstandsschellen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>FINTECH IK 25 IEC-Klemmschelle
+    Aluminium IK25</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HKL RO-CLIP Rohrschelle
+    796.090 M16  lichtgrau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HKL RO-CLIP Rohrschelle
+    796.130 M20  lichtgrau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HKL RO-CLIP Rohrschelle
+    796.231 M25  lichtgrau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Klemmschelle
+    clipfix 16mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC HAKS25
+    Alu Klemmschelle 25 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HCRS50
+    RO-CLIP-Rohrschelle 50mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HCRS32
+    RO-CLIP-Rohrschelle 32mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Klemmschelle
+    clipfix 32mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Klemmschelle
+    clipfix 40mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HBSM32-2
+    Befestigungsschelle ST zweilappig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HBSM25-2
+    Befestigungsschelle ST zweilappig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HBSM20-2
+    Befestigungsschelle ST zweilappig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rohrfix 18</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rohrfix 24</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BETTERMA   605 63 G
+    Befestigungsschelle zweilappig 63mm, St,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HBSM50-2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HBSM40-2
+    Befestigungsschelle ST zweilappig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO BETT. Befestigungsschelle
+    zweilappig 37mm 605 37 V4A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO BETT. Befestigungsschelle
+    zweilappig 60mm 605 60 V4A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Klemmschelle
+    clipfix 20mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Klemmschelle
+    clipfix 25mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HASM32
+    Alu Steckmuffe 32mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HASM25
+    Alu Steckmuffe 25mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HASM20
+    Alu Steckmuffe 20mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HASM50
+    Alu Steckmuffe 50 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HRETM50
+    Endtülle metrisch M50,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HRETM32
+    Endtülle metrisch M32,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HRETM25
+    Endtülle metrisch M25,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HRETM20
+    Endtülle metrisch M20,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTROPA BE Befestigungsschelle 1f
+    25mm zweilappig ST EBS252</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTROPA BE Befestigungsschelle 1f
+    32mm zweilappig ST EBS322</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Steckmuffe
+    RMKu-E  16mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OZ003 Klemmbügel, max. 16 Leitungen KKB1
+    Don Quichotte</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sammelhalterung für 30 Kabel Material: P
+    Don Quichotte</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sammelhalter, verzinkt für 30 Leitungen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC     HKSHM15
+    Kabelsammelhalter aus Metall für 15</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Steckmuffe
+    RMKu-E  20mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Steckmuffe
+    RMKu-E  25mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>FRAENK.R   FWVS-E 25
+    Verschlussstopfen FWVS-E 25</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>FRAENK.R   FWVS-E 20
+    Verschlussstopfen FWVS-E 20</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rohrverbinder M20</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Steckmuffe
+    RMKu-E  32mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kunststoff - Steckmuffe
+    RMKu-E  40mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Muffe EN50</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HKL 521 Nagelschelle m.Nagel
+    7-11mm lgr 35mm Kst 272335</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HKL 521 Nagelschelle
+    3-5mm lgr Kst 1721</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HKL 521 Nagelschelle
+    10-13mm lgr Kst 1724</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HKL 521 Nagelschelle
+    16-20mm lgr Kst 1569</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HELLERM.11 Kabelbinder L150mm natur
+    3,5x1,2mm hfr Kst T30RN66NAC1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HAUPA 4 Nagelschellen 14-20 weiss
+    262226</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Befestigungs-
+    Nagelschelle 17 - 21mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>KLEINHUI 1569
+    TOP-Nagelschelle, ohne Nagel, für Kabel-</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Nagelschelle mit Nagel
+    4-7mm  Nagellänge 25mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Nagelschelle mit Nagel
+    7-12mm Nagellänge 35mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Stahlnadel
+    18 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Stahlnagel
+    23 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Stahlnagel
+    30 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Stahlnagel
+    40 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Stahlnagel
+    50 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Stahlnagel
+    60 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Ankernägel, klein</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Ankernägel, groß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Nagelscheiben</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Lochband 12 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Fix Pin 18 Profi</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>PANDUIT    ABMS-A-C
+    2-Weg Kabelbinderbefestigung ,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>PANDUIT    ABMM-A-C
+    4-Weg Kabelbinderbefestigung,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>PHOENIX B1 KMK 2 Kabelmarker
+    KMK2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelbinder 140/3,6</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelbinder 100 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelbinder 290/4,8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelbinder 360/4,8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelbinder, 290/3,6</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelbinder 375/7,6</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira E22 Rahmen 3-fach
+    Edelstahl</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Loxone Nano 2 Relay Tree</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABB Linienkoppler LK/S4.2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>SLV LED-Trafo 1-3W, 0,35A, 9V
+    nicht dimmbar</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MDT Spannungsversorgung 4TE REG 750mA
+    24VDC</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Heizaktor TYF646T</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Esylux SW Dali Full Automation Taster-
+    eingang 4015120427473</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Bus-Gateway LAN
+    83342</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Weidmüller Wechselstromversorgung
+    AC/DC 22,5-29,5V, 10A, 240W</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>SLV Cariso LED-Wandanbauleuchte 11W
+    1LED, 3000K, 390lm, schwarz</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>SLV LED-Netzteil LMV12W12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Einsatz Kabelauslass
+    040000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Siemens Thermoantriebaktor
+    5WG1605-1AB01</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Busankoppler 3 KNX-Einsatz
+    2008-00</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Datenschnittstelle REG 2TE
+    216700</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Prion Busankoppler
+    6120/12-101</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Tastsensor K1
+    80142170</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Siemens Binäreingang Bussystem KNX
+    5WG1220-2AB21</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gira Bewegungsmelder-Bus KNX
+    2051600</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MDT RF+ Funk Linienkoppler
+    RF-LK001.02</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Tastsensor mit Beschrift. RGB LED
+    80142329 2fach int. Temperaturf. polarw.</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Tastsensor 5-fach RTR</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Tastsensor 3-fach RTR</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABB IPS/S2.1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Doepke FI 40/0,03</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Meanwell HLG 240 H</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Meanwell DRP-240-24</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Bilton LED-Dimmer</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WHD WR 205</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WHD WR 55</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WHD Einbaulautsprecher M/R 180-8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WHD Blende KBRW R 180 Basic</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Bose Freespace DS 40F</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MDT A Glastaster 8-fach Plus,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ProLed Bodenstrahle
+    L17118RT</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MDT A Jalousieaktor 4-fach, 4TE
+    REG, 8A, 24VDC JAL0410D02</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MDT A Jalousieaktor 8-fach, 8TE
+    REG, 8A, 24VDC JAL0810D02</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Samsung SNO-6084 RP</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Solar-Log 255362</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>RS 485i Modul</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Solar-Log Mobilfunkpaket</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Kabelbox 270</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Brandschutz-Box BDS 206</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Brandschutzschaum</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Gleitmittel</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>4W-Vario-Schaum</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Powerstone</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Konstruktions Klebstoff</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Bohr- und Schneidöl</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Markierungsspray gelb</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Adapterschaum plus</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Druckluftspray</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Trockengleitspray</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Kältespray</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Zinkspray</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Markierungsspray blau</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Markierungsspray rot</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Bremsenreiniger</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Silikon Neutral Plus</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Acryl- Dichtstoff plus</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Markierungsspray grün</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Flexibler Kleb-/ Dichtstoff</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Pistolenreiniger</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rittal ISV Blindabdeckung
+    SV 9666.660 69070960</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Allwetter 44 weiß-glänzend
+    20EUGK-32</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Ausschalter REG, 1S, 16A
+    230V, 1TE SB116</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Quetschverbinder isoliert 6²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bügelschelle 58-64</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Wandausleger 1000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Deckel für Kabelrinne 50</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>BJ Steckdose mit integrierten Wechsel-
+    schalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Ausleger 400</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schneider Phasenschiene 3ph, 18mm
+    210mm, 10mm², 63A, Gabel isoliert</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schneider Leitungsschutzschalter B16A
+    1-polig, Acti9</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Hängestiel 50x50x200
+    6341527</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hilti Brandschutzhülse CFS-SL GA L</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Rittal RiLine Sammelschienenklemme 370A
+    185mm², 5mm, Flachschiene SV3454.500</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Not-Halt/Aus M22-PV/KC11/IY</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Deckel für Kabelrinne 200</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Niedax Deckel für Kabelrinne 300</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Grothe Klingeltrafo 230V, 8V, 1A
+    GTN50810</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Grothe Gong 165 BW</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Wand- und Stielausleger B210
+    6419720</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Wippe, einteilig pws-matt
+    16201909</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Kontrollwippe, psw-matt</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Abdeckung SAT
+    S1 pws-matt</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Abdeckung UAE 1-fach
+    S1 pws-matt</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Drehstromschienenblock
+    B3.0/4-PKZ0</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ RWM vernetzbar über Kabel, weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltako Feldfreischalter FR12-230V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Tridonic LED- EVG 25W 350-1050mA
+    28000675</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Newlec Bügelschelle 22-28</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Newlec Bügelschelle 34-40 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Newlec Bügelschelle 40-46 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Osram Halogen-Glühlampe 230V/50W
+    64824FL</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schneider FI-Schalter RCCB 40A/30mA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Osram OTe 25/220-240/700 PC Power Supply</material>
+<unit>cm</unit>
+</Material>
+<Material>
+<material>Moeller Leistungsschütz DILEM-10-G</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltako Treppenlichtzeitschalter
+    elektro. m. Multifunktion TLZ12D-plus</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Brumberg Steckfassung GU10
+    (Umbau)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Osram Halopar 28W GU10
+    4008321927767</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Radium Halogen RJLS 3512 WFL 12V35W
+    400859710793</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Newlec Halogen HQPAR50/50ES 50W-230V
+    4012289225506</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Fi FRCDM-40/4/03-G/B
+    allstromsensitiv</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Grothe Mistral Funk-Gong
+    weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Trennsteg 60 mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Niedax Trennsteg 30 mm</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Hilti Bügelschelle ME-B 22</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hilti Bügelschelle ME-B 30</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hilti Bügelschelle ME-B 58</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ AP-Gehäuse 1-fach
+    Duro 2000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bügelschelle 28-34</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bügelschelle 34-40 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bügelschelle 40-46</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Legrand Treppenlichtzeitschalter AP
+    250VAC, 049783</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Duro 2000 Jalousiewippe</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Philips CorePro LEDspot 5,5-35W, 827MR
+    47568300</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Duro 2000 Kontrollwippe ohne Linse</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Duro 2000 Rahmen 3-fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Duro 2000 Rahmen 4-fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Duro 2000 Rahmen 5-fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltako Stromstoßschalter 8-230VAC/DC
+    Multifunktion ESR61M-UC</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Siemens Leitungsschutzschalter Typ B
+    16A, 1-polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Siemens Leitungsschutzschalter Typ C
+    16A, 3-polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ AP-Wechselschalter Duro 2000
+    2601/6 AP</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Flachrundschrauben M10x25</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton PXF/40/4/03-A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Hängestiel 6342355</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Hängestiel 50x30x600
+    6342359</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Hängestiel 50x30x200
+    6342351</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leistungsschütz DILEM12-10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Moeller Leistungsschütz DILM17-10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leistungsschütz DILM25-10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Kabelklammer 2204975</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Moeller Motorschutzrelais ZB32-16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leistungsschütz DILM40</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Baldachin, weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Wandausleger 500</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser Wandleuchten-Anschlussdosen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Schlossschraub M6x12
+    FLM 6x12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Elcom Haustelefon weiß
+    BHT-200</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Wand- und Stielausleger B210
+    6420680</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Brumberg Bodeneinbauleuchte P3817WW</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Kabelleiter gelocht, 200</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>OBO Kabelleiter gelocht, 300</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Eltako Phasenwächter 250V AC 230V
+    NR12-001-3x230V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Motorschutzschalter
+    PKZM0-4</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bügelschelle 46-52</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Unterspannungsauslöser U-PKZ0</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Kabelrinne 300 x 60, Stahl</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Niedax Kabelrinne 400 x 60, Stahl</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Hensel KS 240/12 Sammelschienenklemme
+    630A, 240mm², 5-10/12mm, B24mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker RTH S1 weiß
+    20261909</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Legrand TX3 FI-Schutzschalter, Typ A,
+    2-polig 230V, 25A, 0,03A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Rahmen 1-fach pws-glänzend
+    S1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Rahmen 2-fach pws-glänzend
+    S1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Berker Rahmen 3-fach pws-glänzend
+    S1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Merten Triac-Einsatz
+    576799</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Philips LED-Reflektorlampe GU10, 4,8W
+    2700K, 355lm, dimmbar</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Isolierstoffgehäuse CI-PKZ0-GRM</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Polumschalter T3-4-8440/I2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable Rohrkabelschuh 6² M6</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 16² M5</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 25² M12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 70² M8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 70² M12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable Kabelschuh 95² M10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 120² M16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 150² M16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 10² M8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 16² M8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschu 16² M10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 25² M10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 35² M8</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 35² M10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 50² M12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 70² M10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 95² M12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable Presskabelschuh AL 120² M12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 185² M16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable Presskabelschuh 240²
+    28 IC 12-240</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 50² M10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 95² M10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable Presskabelschuh AL 95² M12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 120² M12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelschuh 150² rm/sm 185² rm/sm M12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable AL-Pressverbinder 12-185RM/SM
+    240 SE K28</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable Presskabelschuh AL 70² M10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable Presskabelschu AL 185² M12
+    28 12-185</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Aderendhülse 35²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Aderendhülse 95²
+    Intercable 9532</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Aderendhülse 25²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Aderendhülse 50²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Osram Halotronic HTM 105/230-240</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leistungsschütz DILEM-10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager S-Schienenverbinder 5-polig 12x5mm
+    ZM14S</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser HaloX Leuchteneinbaugehäuse
+    1281-11</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Somfy Trennrelais TR2-U-230</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABB Leitungsschutzschalter Typ B,
+    1-polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Tridonic LED-Treiber LC60W 24V SC SNC
+    87500669</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Phoenix Gleichstromversorgung 24V 100,W
+    85-264VAC/DC Step-PS/1AC/24DC/4.2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Spelsberg KU 2 Direktanschlussklemme M12
+    50-240 SE, 50-185SM 07612001</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Rahmen 1-fach Duro 2000 für Geräte-
+    einbaukanal</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Rahmen 2-fach Duro 2000 für Geräte
+    einbaukanal</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BJ Rahmen 3-fach Duro 2000 für Geräte
+    einbauakanl</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Baufassung</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Tehalit BR-Kanal Endstück</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Grothe Gong 196BW</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Brumberg Treiber CLK15-700-240V-C
+    4,5V to 21,5V 700mA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EVN EF120 - Halogentrafo</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Geyer Direktanschlussklemme 6-70²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser HaloX Leuchteneinbaugehäuse
+    1281-00</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Meanwell LED-Trafo 0-60W, 24V</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Meanwell LED-Trafo 0-240W, 24V
+    nicht dimmbar, HLG-240H-24A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schneider Phasenschiene 3ph, 18mm
+    192mm, 10mm², 63A, Gabel isoliert</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schneider Leitungsschutzschalter B16A
+    1-polig</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Gegenwänne 22-28 mm, Kunststoff</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable Unterlegscheibe M12 M26/13
+    Alu AG3</material>
+<unit>cm</unit>
+</Material>
+<Material>
+<material>Reduzierverbinder Al/Cu 70² bis 15kV</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Intercable Presskabelschuh AL 185²
+    25 IC 12-185</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Merten BWM-Aufsatz</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Meanwell LED-Trafo 1-35W, 24V,
+    nicht dimmbar, LPV-35-24</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Theben Stromstoßschalter 230VAC, 1TE,
+    16A,</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Osram LED-Röhre T8 EMA 1513mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Quetschverbinder 6²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Relco Trafo Micro60 PFS TH Plus RN1622</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Tehalit BR-Kanal Eckstück</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>LEDVance LED AR111 100 24 13.5 927 G53S</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Quetschverbinder 16²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Quetschverbinder 125²</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>XAL Linearconnector 005-4006</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ACC Maxos Abhänger</material>
+<unit>Stc</unit>
+</Material>
+<Material>
+<material>PHILIPS Maxos LTT5 Lichtträger</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>PHILIPS Maxos R T5 Reflektor</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>PERILEX 3polig 16A Steckdose UP</material>
+<unit>Stc</unit>
+</Material>
+<Material>
+<material>PERILEX 3polig 16A Steckdose AP</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MTS AirCon Wireless</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>PRIMO Deckeneinbautopf für Leuchte
+    mit Trafotunel</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>SLV Treppenspot/ Wandeinbauleuchte</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>SLV Treppenlicht 152062</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ELTRIC Kristallglasleuchte 634000</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Fertigbaudose
+    Kaiser 1265-50  Deckenabzweigdose 60mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kleinhuis Endstück WS EG60110.6</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bett. Kantenschutz KSB/2</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>OBO Bett. Kantenschutz KSB/4</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NIEDAX Gitterrinne GR 60.200</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NIEDAX Schraube Flachrundkopf FLM 6 X 12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bett. Blinddeckel
+    f. GES2 in Montaged. DUG-B2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO Trennklemme 1-Leiter-N, TS 35
+    2002-7114</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO Installations-Etagenklemme TS 35
+    2003-7641</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO Installations-Etagenklemme TS 35
+    2003-7642</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bett. BBS-Bügelschelle f.1 Kabel</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bett. BBS-Bügelschelle f.1 Kabel
+    2056/N/12-16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bett. BBS-Bügelschelle f.2 Kabel
+    2056/2/28-34</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Gegenwanne 28-34 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bett. Gegenwanne Iso 2058/FW/ 8-12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bett. Gegenwanne Iso 2058/FW/12-16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OBO Bett. Gegenwanne feuer.vz
+    2058/FW/M/16-22</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Erdungsrohrschelle 24-28 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Erdungsrohrschelle 32 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Erdungsrohrschelle 46 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Erdungsrohrschelle 58 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungsautomat dreipolig
+    ABB S203-B16 System pro M compact</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungsautomat dreipolig
+    ABB S203-B25 System pro M compact</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sicherungsautomat einpolig
+    ABB S201-K16 System pro M compact</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO Etagenklemme 0,08-2,5/4mmq grau
+    775-642</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO Abschlußplatte orange 775-325</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO Etagenklemme 0,08-4mmq grau 777-641</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO Etagenklemme 0,08-4mmq grau 777-642</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO Etagenklemme 0,08-4mmq grau 777-646</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>WAGO Durchgangsklemme 0,08-2,5mmq grau
+    780-601</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-B20/1 einpolig 20A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-B25/1 einpolig 25A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-B32/1 einpolig 32A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-B40/1 einpolig 40A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-B50/1 einpolig 50A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-B63/1 einpolig 63A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-B16/3 dreipolig 16A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-B32/3 dreipolig 32A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-B40/3 dreipolig 40A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-C20/3 dreipolig 20A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Leitungsschutzschalter 10kA
+    PXL-C25/3 dreipolig 25A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eaton Fehlerstromschutzschalter Typ A
+    PXF-80/4/03-A vierpolig 300mA/80A</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Ritto Portier auf Putz
+    18832/70 Flachrahmen zweifach weiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Ritto Zusatzgerät</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Ritto Rufanschaltrelais
+    17646/00 für Wohntelefon 7630/7650</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Eltako Schaltrelais 1S 16A
+    R12-100-24V DC</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Moeller Hilfsschütz 2S2Ö, AC
+    DILA-22(110V50HZ)</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL SURSUM Motorschutzschalter 1.6-2.5 A
+    MS 2.5</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL SURSUM Motorschutzschalter 6.3-10 A
+    MS 10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABL SURSUM Isolierstoffgehäuse IP55
+    MS.G 55</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Merten 3 Kammeranschlußdose UP</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>HKL Formstück
+    ES6060.3 Endstück reinweiß</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Grothe Groß-Läutewerk LTW 742 12V AC</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Phi.LM Leuchtstofflampe Circular
+    TL5 C 40W/840</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Radium Leuchtstofflampe Tageslicht
+    NL-T8 36W/865/G13</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Osram Haloline-Lampe Energy Saver
+    400W 230V R7s 64702 ES</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Osram Halopar-Lampe Energy Saver
+    28W 230V GU10 64819</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Phi.LM Leuchtstofflampe D=16mm G5
+    TL5 HO ECO 45=49W840</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>SYLVANIA Tubular Eco 120W=150W</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Osram Decostar 51 ES-Lampe
+    50W 12V 10Gr GU5,3 48870 SP</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser Betonbaudose 60</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kaiser Betondose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Kanalsteckdose 2 fach</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager Ausgangsstecker für Kanalsteckdose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Hackenschrauben</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Gitterrinnen Klemme</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Hager System Univers Z Abdeckhaube
+    ZU79S für 2xSH Schalter</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Hängestiehl 50.200</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Trilux Befestigungsmittel
+    1 Satz = 4 Stück ENTERIO ZBB/1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Hängestiehl 50.500</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>TRILUX Feuchtraum-Wannenleuchte
+    4000-840 ET TWW PC Nextrema #6233540</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Kabelrinnen Deckel 100</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Niedax Eckanbaustück</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Niedax Gelenkverbinder</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NIedax Kabelrinne 60.100</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>NIedax Trennsteg</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Niedax Steigtrasse 60x500</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Philips GU10 3,5W LED</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABB F202A-25/0,03
+    FI-Schutzschalter 2P,Typ A,25A,30mA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BRUMBERG NV-Einbaustrahler</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>SLV Downlight
+    alu brush+Clipfeder 111274</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABB F204A-63/0,3
+    FI-Schutzschalter 4P,Typ A,63A,300mA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>ABB F204A-63/0,5
+    FI-Schutzschalter 4P,Typ A,63A,500mA</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EGG Kabelrinne 60 x 200</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kabelbahnen Schraubverbinder</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EGG Hängestiehl 200 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EGG Hängestiehl 400 mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EGG Hängestiehl 600mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EGG 90 Grad Bogen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OSRAM ST 111 LL/220-240 UN
+    ST 111 LL/220-240 UNV1 4...80W</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OSRAM SPC.T OVEN CL 15W 23
+    SPC.T OVEN CL 15W 230V E14 FS1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OSRAM 64542 B PRO 30W 230V
+    64542 B PRO 30W 230V E14</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NEWLEC HLEDFSensor30W3000k
+    LED Flutlichtstrahler 100-240V 30W WW Se</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>OSRAM ST 151/220-240V UNV1
+    ST 151/220-240V UNV1</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Trilux Wannenleuchte 3331W-TS3300-830ET</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Dehn Anschlussklemme</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>NIEDAX Trennstegverbinder RTV 60 E2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>SIMENS 5SX21/1P/B16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Elcom Haustelefon BHT-200 ws</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>BTI Knotenkette</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>Spelsberg Betondose</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Betterma. Sechskantschr. SKS</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Längsverbinder</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EJOT Solarbefestigungsset
+    JZ-SB-8,0x125/50 E16</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Stockschrauben (Holz) A2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>STockschrauben A2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Stockschrauben A2 240 x M10</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Aluprofil 40x40mmx6m</material>
+<unit>Stg</unit>
+</Material>
+<Material>
+<material>Endklemmen 44mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Endklemmen 45mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Mittelklemme</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>EPM DIchtung M10/12</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MC3-Stecker Set</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MC3-Stecker Plus ohne Hülsen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>MC3-Stecker Minus ohne Hülsen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Tyco Stecker Plus mit Hülsen</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Tyco Stecker Minus mit Hülse roter Gummi</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Tyco Kupplung Plus mit Hülse</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Tyco Kupplung Minus mit Hülse</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Vierkantmuttern M8 A2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sechskantmuttern M10 A2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Bieberschschwanz- Dahhacken A2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Kupfer-Bieberschwanz- Dachpfanne</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schlossschrauben M10x40mm A2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Zylinderkopfschraube mit Innensechskant
+    A2 M8x40mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Zylinderkopfschraube mit Innensechskant
+    A2 M8x30mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Zylinderkopfschraube mit Innensechskant
+    A2 M8x35mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Ideematec / flexibler Schienen Verbinder</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Beilagscheiben 10,5mm</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Sperrzahnmuttern M10 A2</material>
+<unit>Stck</unit>
+</Material>
+<Material>
+<material>Schwerlastrinne 300</material>
+<unit>m</unit>
+</Material>
+<Material>
+<material>SPELSBER PV 48
+    PV-Verbindungsdose PV 48</material>
+<unit>Stck</unit>
+</Material>
+</list>

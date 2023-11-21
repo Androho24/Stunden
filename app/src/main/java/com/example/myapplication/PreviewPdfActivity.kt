@@ -48,13 +48,13 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         path = bundle!!.getString("path").toString()
         pathToSave = bundle!!.getString("pathToSave").toString()
         customerName = bundle!!.getString("customerName").toString()
-        customerPrename = bundle.getString("customerName").toString()
+        customerPrename = bundle.getString("customerPrename").toString()
         buttonOnClickListeners()
         val file: File = File(path)
         if (!file.exists()) {
             // Since PdfRenderer cannot handle the compressed asset file directly, we copy it into
             // the cache directory.
-            val asset: InputStream = applicationContext.getAssets().open("test.pdf")
+            val asset: InputStream = applicationContext.getAssets().open(path)
             val output = FileOutputStream(file)
             val buffer = ByteArray(2048)
             var size: Int

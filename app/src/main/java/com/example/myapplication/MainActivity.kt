@@ -38,11 +38,13 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
+import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.Objects.WorktimeMain
 import com.example.myapplication.Pdf.PDFCreator
 import com.google.android.material.textfield.TextInputLayout
 import com.itextpdf.layout.Document
 import org.apache.commons.io.FileUtils
+import org.w3c.dom.Text
 import java.io.File
 import java.math.RoundingMode
 import java.time.LocalDate
@@ -57,11 +59,13 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     //var sheet: Sheet? = null
     var buttonSetDate: Button? = null
     var buttonPreview: Button? = null
+    var buttonAddMaterial : Button? = null
     var date: TextView? = null
     var buttonClearAll: Button? = null
     var buttonEditCustomer: Button? = null
     var buttonAddWorkTime: Button? = null
     var tableWorkTimes: TableLayout? = null
+    var tableMaterial: TableLayout? = null
     var spinnerCustomer: Spinner? = null
     var workDescriptionInput: TextInputLayout? = null
     var xmlTool: XmlTool? = null
@@ -80,6 +84,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 //    var locationByNetwork
     var location = "Moosthenning"
     var tableTextColor = Color.BLACK
+
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +96,9 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         buttonClearAll = findViewById<Button>(R.id.buttonClearMain)
         buttonEditCustomer = findViewById<Button>(R.id.buttonEditCustomerMain)
         buttonAddWorkTime = findViewById(R.id.buttonAddWorkTimeMain)
+        buttonAddMaterial= findViewById(R.id.buttonAddMaterialMain)
         tableWorkTimes = findViewById(R.id.tableWorktimes)
+        tableMaterial = findViewById(R.id.tableMaterialMain)
         spinnerCustomer = findViewById(R.id.spinnerCustomerMain)
         workDescriptionInput = findViewById(R.id.textInputWorkDescription)
         date!!.text = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
@@ -207,6 +215,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     private fun loadXml() {
         xmlTool = XmlTool()
         xmlTool!!.loadSavedProfilefromXml(applicationContext)
+        xmlTool!!.loadMaterialsFromXml(applicationContext)
     }
 
     private fun setSpinnerCustomer() {
@@ -362,7 +371,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 workDescriptionInput!!.editText!!.text.toString(),
                 WorktimeMain.staticWorkTimeArrayList,
                 path,
-                customerCount,
+                count,
                 location
             )
             document.close()
@@ -378,6 +387,10 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
         }
 
+        buttonAddMaterial!!.setOnClickListener {
+            val myIntent = Intent(this,AddMaterialActivity::class.java)
+            startActivityForResult(myIntent, materialResult)
+        }
 
 
         buttonEditCustomer!!.setOnClickListener {
@@ -395,6 +408,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
             editNameDialogFragment.show(fm, "fragment_edit_name")
         }
+
+
     }
 
 
@@ -471,6 +486,60 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             showPdfFromUri(selectedPdfFromStorage)
         }
 
+        if (requestCode == materialResult){
+            tableMaterial!!.removeAllViews()
+
+            var imageID = 0
+            for (mat in CustomerMaterial.customerMaterials){
+                var row = TableRow(applicationContext)
+
+                var textMatAmount = TextView(this)
+                textMatAmount.minimumWidth = 100
+                textMatAmount.text = mat.materialAmount
+                row.addView(textMatAmount)
+
+                var textMatUnit = TextView(this)
+                textMatUnit.text = mat.materialUnit
+                row.addView(textMatUnit)
+
+                var textMatName = TextView(this)
+                textMatName.text = mat.materialName
+                row.addView(textMatName)
+
+                var imageDelete = ImageView(this)
+                imageDelete.setImageResource(R.drawable.garbage)
+                imageDelete.id = imageID
+                imageDelete.setOnClickListener{
+                    tableMaterial!!.removeAllViews()
+                    var newMAt = ArrayList<CustomerMaterial>()
+                    for (mat in CustomerMaterial.customerMaterials){
+                        if (mat.materialName == textMatName.text) {
+
+                        }
+                        else{
+                            newMAt.add(mat)
+
+                        }
+
+                    }
+
+                    CustomerMaterial.customerMaterials = newMAt
+
+                    actualiseCustomerMaterial()
+
+
+
+                }
+                row.addView(imageDelete)
+                imageID++
+
+                tableMaterial!!.addView(row)
+
+
+
+            }
+        }
+
 
     }
 
@@ -479,6 +548,79 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
              .defaultPage(0)
              .spacing(10)
              .load()*/
+    }
+
+    private fun actualiseCustomerMaterial(){
+
+        if(CustomerMaterial.customerMaterials.size >0){
+            var imageID = 0
+            for (mat in CustomerMaterial.customerMaterials){
+                var row = TableRow(applicationContext)
+
+                var textMatAmount = TextView(this)
+                textMatAmount.minimumWidth = 100
+                textMatAmount.text = mat.materialAmount
+                row.addView(textMatAmount)
+
+                var textMatUnit = TextView(this)
+                textMatUnit.text = mat.materialUnit
+                row.addView(textMatUnit)
+
+                var textMatName = TextView(this)
+                textMatName.text = mat.materialName
+                row.addView(textMatName)
+
+                var imageDelete = ImageView(this)
+                imageDelete.setImageResource(R.drawable.garbage)
+                imageDelete.id = imageID
+                imageDelete.setOnClickListener{
+                    tableMaterial!!.removeAllViews()
+                    var newMAt1 = ArrayList<CustomerMaterial>()
+                    for (mat in CustomerMaterial.customerMaterials){
+                        if (mat.materialName == textMatName.text){
+                            CustomerMaterial.customerMaterials.remove(mat)
+                        }
+                        else{
+                            newMAt1.add(mat)
+                        }
+
+                    }
+
+                    CustomerMaterial.customerMaterials = newMAt1
+
+                    for (mat in CustomerMaterial.customerMaterials){
+                        var row = TableRow(applicationContext)
+
+                        var textMatAmount = TextView(this)
+                        textMatAmount.minimumWidth = 100
+                        textMatAmount.text = mat.materialAmount
+                        row.addView(textMatAmount)
+
+                        var textMatUnit = TextView(this)
+                        textMatUnit.text = mat.materialUnit
+                        row.addView(textMatUnit)
+
+                        var textMatName = TextView(this)
+                        textMatName.text = mat.materialName
+                        row.addView(textMatName)
+
+
+
+                           actualiseCustomerMaterial()
+
+
+                    }
+
+
+                }
+
+                row.addView(imageDelete)
+                imageID++
+                tableMaterial!!.addView(row)
+
+            }
+        }
+
     }
 
     private fun actualiseWorktimesToTable() {
@@ -590,6 +732,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
     companion object {
         var customerResult = 100
+        var materialResult = 101
         private const val PDF_SELECTION_CODE = 99
     }
 
