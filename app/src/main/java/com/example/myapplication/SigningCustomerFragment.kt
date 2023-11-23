@@ -43,13 +43,14 @@ class SigningCustomerFragment : DialogFragment() {
     }
 
     interface onSignedCustomerCompleteListener {
-        fun onSignedCompleteListener(imageView: ImageView)
+        fun onSignedCustomerCompleteListener(imageView: ImageView)
     }
+
     var signedCompleteListener: onSignedCustomerCompleteListener? = null
     private fun setButtonOnClickListeners() {
         buttonComplete!!.setOnClickListener {
             imageSigned!!.setImageBitmap(signaturePadWorker!!.signatureBitmap)
-            signedCompleteListener!!.onSignedCompleteListener(imageSigned!!)
+            signedCompleteListener!!.onSignedCustomerCompleteListener(imageSigned!!)
             this.dismiss()
         }
     }
@@ -64,8 +65,8 @@ class SigningCustomerFragment : DialogFragment() {
     }
 
     companion object {
-        fun newInstance(title: String?): SigningFragment {
-            val frag = SigningFragment()
+        fun newInstance(title: String?): SigningCustomerFragment {
+            val frag = SigningCustomerFragment()
             val args = Bundle()
             args.putString("title", title)
             frag.setArguments(args)

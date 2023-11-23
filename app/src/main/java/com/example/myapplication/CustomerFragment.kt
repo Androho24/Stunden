@@ -234,11 +234,13 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
                             customer.projectNumber = editProjectNumber!!.text.toString()
                             //  Customer.arrayCustomers.add(customer)
 
-                            Customer.arrayCustomers.sortBy { list -> list.name }
-                            customerIdForEdit = ""
-                            newCustomerListener!!.onNewCustomerListener()
+
                         }
+
                     }
+                    Customer.arrayCustomers.sortBy { list -> list.name }
+                    customerIdForEdit = ""
+                    newCustomerListener!!.onNewCustomerListener()
                 } else {
                     var uudi = UUID.randomUUID()
                     var customerExpanded = CustomerExpanded("", "", "", "", "", "")

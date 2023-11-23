@@ -13,6 +13,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         android:text="Arbeitszeit"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,7 +84,7 @@
         android:id="@+id/editTextWegeRuestWorktime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="88dp"
         android:ems="10"
         android:inputType="number|numberDecimal"
         app:layout_constraintStart_toStartOf="@+id/textViewEndWorktime"
@@ -114,5 +115,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/buttonSaveWorktime"
         app:layout_constraintStart_toStartOf="@+id/editTextWegeRuestWorktime"
         app:layout_constraintTop_toTopOf="@+id/buttonSaveWorktime" />
+
+    <TextView
+        android:id="@+id/textViewWRWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="W/R in h:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextWegeRuestWorktime"
+        app:layout_constraintStart_toStartOf="@+id/editTextWegeRuestWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEndWorktime"
+        app:layout_constraintVertical_bias="0.579" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
