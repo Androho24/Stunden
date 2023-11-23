@@ -40,4 +40,16 @@
         app:layout_constraintStart_toStartOf="@+id/buttonSendPreview"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/buttonSignCustomerPreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="24dp"
+        android:text="Sign"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonSignPreview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonSignPreview"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

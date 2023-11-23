@@ -499,6 +499,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 row.addView(textMatAmount)
 
                 var textMatUnit = TextView(this)
+                textMatUnit.minimumWidth = 100
                 textMatUnit.text = mat.materialUnit
                 row.addView(textMatUnit)
 
@@ -563,6 +564,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 row.addView(textMatAmount)
 
                 var textMatUnit = TextView(this)
+                textMatUnit.minimumWidth = 100
                 textMatUnit.text = mat.materialUnit
                 row.addView(textMatUnit)
 
@@ -597,6 +599,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                         row.addView(textMatAmount)
 
                         var textMatUnit = TextView(this)
+                        textMatUnit.minimumWidth = 100
                         textMatUnit.text = mat.materialUnit
                         row.addView(textMatUnit)
 

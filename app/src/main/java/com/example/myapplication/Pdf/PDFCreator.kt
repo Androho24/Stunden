@@ -355,8 +355,14 @@ class PDFCreator {
             cell13.setFontSize(7f)
             table.addCell(cell13)
 
+            var list = mat.materialName!!.split("\n")
+            var matname = ""
+            for (ma in list){
+                matname = matname+ma+""
+            }
+
             var cell14 = Cell()
-            cell14.add(mat.materialName)
+            cell14.add(matname)
             cell14.setHeight(10f)
             cell14.setFontSize(7f)
             table.addCell(cell14)
