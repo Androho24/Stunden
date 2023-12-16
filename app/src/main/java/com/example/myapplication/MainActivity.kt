@@ -23,9 +23,12 @@ import android.os.Bundle
 import android.os.Environment
 import android.print.PrintAttributes
 import android.provider.Settings
+import android.view.Menu
+import android.view.MenuItem
 import android.webkit.WebView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TableLayout
@@ -33,18 +36,20 @@ import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.Objects.WorktimeMain
 import com.example.myapplication.Pdf.PDFCreator
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputLayout
 import com.itextpdf.layout.Document
 import org.apache.commons.io.FileUtils
-import org.w3c.dom.Text
 import java.io.File
 import java.math.RoundingMode
 import java.time.LocalDate
@@ -64,10 +69,12 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var buttonClearAll: Button? = null
     var buttonEditCustomer: Button? = null
     var buttonAddWorkTime: Button? = null
+    var buttonChangeLocation: Button? = null
     var tableWorkTimes: TableLayout? = null
     var tableMaterial: TableLayout? = null
     var spinnerCustomer: Spinner? = null
     var workDescriptionInput: TextInputLayout? = null
+    var editTextChangeLocation : EditText? = null
     var xmlTool: XmlTool? = null
     var mContext: Context? = null
     var mHtmlString: String? = null
@@ -85,6 +92,11 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var location = "Moosthenning"
     var tableTextColor = Color.BLACK
 
+    var drawerLayout: DrawerLayout? = null
+    var actionBarDrawerToggle: ActionBarDrawerToggle? = null
+    var navView : NavigationView? = null
+    var menuDraw : Menu? = null
+
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,6 +109,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         buttonEditCustomer = findViewById<Button>(R.id.buttonEditCustomerMain)
         buttonAddWorkTime = findViewById(R.id.buttonAddWorkTimeMain)
         buttonAddMaterial= findViewById(R.id.buttonAddMaterialMain)
+        buttonChangeLocation = findViewById(R.id.buttonChangeLocationMain)
+        editTextChangeLocation = findViewById(R.id.editTextChangeLocationMain)
         tableWorkTimes = findViewById(R.id.tableWorktimes)
         tableMaterial = findViewById(R.id.tableMaterialMain)
         spinnerCustomer = findViewById(R.id.spinnerCustomerMain)
@@ -104,6 +118,46 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         date!!.text = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
         fusedLocationClient = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        actionBarDrawerToggle =
+            ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+
+        // pass the Open and Close toggle for the drawer layout listener
+        // to toggle the button
+
+        // pass the Open and Close toggle for the drawer layout listener
+        // to toggle the button
+        drawerLayout!!.addDrawerListener(actionBarDrawerToggle!!)
+        actionBarDrawerToggle!!.syncState()
+
+        // to make the Navigation drawer icon always appear on the action bar
+
+        // to make the Navigation drawer icon always appear on the action bar
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+
+
+
+
+        navView = findViewById(R.id.nav_view)
+
+        navView!!.bringToFront();
+
+        navView!!.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.itemLager -> {
+                    val myIntent = Intent(this, LagerActivity::class.java)
+                    startActivity(myIntent)
+                    true
+                }
+                else -> {
+                    Toast.makeText(this,"hello",Toast.LENGTH_SHORT)
+                    false
+                }
+            }
+        }
+
         when (mode) {
             Configuration.UI_MODE_NIGHT_NO -> {isNightModeOn = false}
             Configuration.UI_MODE_NIGHT_YES -> {isNightModeOn = true}
@@ -209,7 +263,14 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         setSpinnerCustomer()
         buttonOnClickListeners()
         editTextOnClickListeners()
+
+
     }
+
+
+
+
+
 
 
     private fun loadXml() {
@@ -409,6 +470,10 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             editNameDialogFragment.show(fm, "fragment_edit_name")
         }
 
+        buttonChangeLocation!!.setOnClickListener {
+            location = editTextChangeLocation!!.text.toString()
+        }
+
 
     }
 
@@ -476,8 +541,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     @Deprecated("Deprecated in Java")
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == customerResult) {
-
+        if (requestCode == customerResult) {
+            setSpinnerCustomer()
 
         }
 
@@ -819,11 +884,22 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
     }
 
+
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (actionBarDrawerToggle!!.onOptionsItemSelected(item)) {
+            true
+        } else super.onOptionsItemSelected(item)
+    }*/
+
     override fun onNewCustomerListener() {
         xmlTool!!.saveProfilesToXml(Customer.arrayCustomers, applicationContext)
         setSpinnerCustomer()
     }
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (actionBarDrawerToggle!!.onOptionsItemSelected(item)) {
+            true
+        } else super.onOptionsItemSelected(item)
+    }
     override fun onClientEventlistener(customerID: String) {
       var asdf = customerID
     }

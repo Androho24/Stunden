@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Xml
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
     var editLocation: EditText? = null
     var editProjectNumber: EditText? = null
     var buttonSaveCustomer: Button? = null
+    var buttonDelete : Button? = null
     var spinnerCustomers: Spinner? = null
     var customerSelected = false
     var customerIdForEdit = ""
@@ -79,6 +81,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         spinnerCustomers = view.findViewById(R.id.spinnerCustomerCustomer)
         buttonClearText = view.findViewById(R.id.buttonNewClearCustomer)
         buttonAddClient = view.findViewById(R.id.buttonAddExpandedCustomerCustomer)
+        buttonDelete = view.findViewById(R.id.buttonDeleteCustomerFrag)
 
         val title = requireArguments().getString("title", "Enter Name")
         dialog!!.setTitle(title)
@@ -167,6 +170,9 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
     private fun onButtonClickListeners() {
 
         buttonAddClient!!.setOnClickListener {
+
+
+
             if (customerIdForEdit != "") {
                 for (customer in Customer.arrayCustomers) {
                     if (customer.customerId == customerIdForEdit) {
@@ -205,7 +211,35 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
                 )
                 Customer.arrayCustomers.add(newCustomer)
                 Customer.arrayCustomers.sortBy { list -> list.name }
+                var xmlTool = XmlTool()
+                xmlTool.saveProfilesToXml(Customer.arrayCustomers, requireContext())
+                val bundle = Bundle()
+                bundle.putString("customerid", newCustomer.customerId)
+
+                val fm: FragmentManager = requireActivity().supportFragmentManager
+                val customerFragmentDialog: CustomerClientFragment =
+                    CustomerClientFragment.newInstance("Some Title")
+                customerFragmentDialog.arguments = bundle
+                fm.beginTransaction().add(customerFragmentDialog,"some Dialog").commit()
             }
+        }
+
+        buttonDelete!!.setOnClickListener {
+            var newCustomers = ArrayList<Customer>()
+            for (cust in Customer.arrayCustomers){
+                if (editName!!.text.toString() == cust.name && editPrename!!.text.toString() == cust.preName && editStreetName!!.text.toString() == cust.streetName){
+
+                }
+                else{
+                    newCustomers.add(cust)
+                }
+
+                Customer.arrayCustomers = newCustomers
+                setSpinnerCustomerContent()
+
+            }
+            var xmlTool = XmlTool()
+            xmlTool.saveProfilesToXml(Customer.arrayCustomers, requireContext())
         }
 
         buttonClearText!!.setOnClickListener {

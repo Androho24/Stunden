@@ -7,5 +7,6 @@ class CustomerMaterial {
 
     companion object{
         var customerMaterials = ArrayList<CustomerMaterial>()
+        var customerMaterialsLager = ArrayList<CustomerMaterial>()
     }
 }

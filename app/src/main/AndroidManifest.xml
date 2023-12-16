@@ -29,6 +29,10 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
+            <meta-data
+                android:name="android.app.app_name"
+                android:value="">
+            </meta-data>
         </provider>
 
         <provider
@@ -56,10 +60,13 @@
             android:exported="true">
         </activity>
         <activity android:name=".AddMaterialActivity"
-            android:exported="true"
-            android:hardwareAccelerated="true">
+            android:exported="true">
 
         </activity>
+        <activity android:name=".LagerActivity"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>

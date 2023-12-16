@@ -182,4 +182,13 @@
         app:layout_constraintEnd_toEndOf="@+id/buttonNewCustomerCustomer"
         app:layout_constraintTop_toBottomOf="@+id/editTextProjectNumber" />
 
+    <Button
+        android:id="@+id/buttonDeleteCustomerFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Löschen"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAddExpandedCustomerCustomer"
+        app:layout_constraintStart_toStartOf="@+id/buttonNewClearCustomer"
+        app:layout_constraintTop_toTopOf="@+id/buttonAddExpandedCustomerCustomer" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

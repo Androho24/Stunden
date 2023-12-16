@@ -95,6 +95,7 @@ class CustomerClientFragment : DialogFragment() {
       buttonSaveClient!!.setOnClickListener {
           for (customer in Customer.arrayCustomers){
               if (customer.customerId == customerID){
+
                   var clientCust = CustomerExpanded("","","","","","")
                   clientCust.clientName = editName!!.text.toString()
                   clientCust.clientPreName = editPrename!!.text.toString()
