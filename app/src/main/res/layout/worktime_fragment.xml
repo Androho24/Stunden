@@ -43,7 +43,7 @@
         android:id="@+id/buttonEditBeginWorktime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="20dp"
         android:text="Bearbeiten"
         app:layout_constraintBottom_toBottomOf="@+id/textViewBeginWorktime"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,10 +75,9 @@
         android:id="@+id/buttonSaveWorktime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="204dp"
         android:text="Speichern"
         app:layout_constraintStart_toStartOf="@+id/buttonEditEegeRuestWorktime"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxPause" />
+        app:layout_constraintTop_toBottomOf="@+id/tableLayoutWorktime" />
 
     <EditText
         android:id="@+id/editTextWegeRuestWorktime"
@@ -90,27 +89,25 @@
         app:layout_constraintStart_toStartOf="@+id/textViewEndWorktime"
         app:layout_constraintTop_toBottomOf="@+id/textViewEndWorktime" />
 
-    <CheckBox
-        android:id="@+id/checkBoxWorker1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Matthias Höpfler"
-        app:layout_constraintStart_toStartOf="@+id/editTextWegeRuestWorktime"
-        app:layout_constraintTop_toBottomOf="@+id/editTextWegeRuestWorktime" />
+    <TableLayout
+        android:id="@+id/tableLayoutWorktime"
+        android:layout_width="408dp"
+        android:layout_height="265dp"
+        android:layout_marginStart="30dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWegeRuestWorktime">
 
-    <CheckBox
-        android:id="@+id/checkBoxPause"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tägliche Pausenzeit"
-        app:layout_constraintStart_toStartOf="@+id/checkBoxWorker1"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxWorker1" />
+
+    </TableLayout>
 
     <Button
         android:id="@+id/buttonCancelWorktime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
         android:text="Abbrechen"
         app:layout_constraintBottom_toBottomOf="@+id/buttonSaveWorktime"
         app:layout_constraintStart_toStartOf="@+id/editTextWegeRuestWorktime"

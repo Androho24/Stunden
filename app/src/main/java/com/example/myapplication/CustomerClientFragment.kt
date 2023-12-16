@@ -79,13 +79,15 @@ class CustomerClientFragment : DialogFragment() {
     private fun setContent() {
       for (client in Customer.arrayCustomers){
           if (client.customerId == customerID){
-              if (client.customerExpanded.clientName != ""){
-                  editName!!.setText(client.customerExpanded.clientName)
-                  editPrename!!.setText(client.customerExpanded.clientPreName)
-                  editStreetName!!.setText(client.customerExpanded.clientStreetName)
-                  editStreetNumber!!.setText(client.customerExpanded.clientStreetNumber)
-                  editPlz!!.setText(client.customerExpanded.clientPlz)
-                  editLocation!!.setText(client.customerExpanded.clientLocation)
+              if(client.customerExpanded != null) {
+                  if (client.customerExpanded.clientName != "") {
+                      editName!!.setText(client.customerExpanded.clientName)
+                      editPrename!!.setText(client.customerExpanded.clientPreName)
+                      editStreetName!!.setText(client.customerExpanded.clientStreetName)
+                      editStreetNumber!!.setText(client.customerExpanded.clientStreetNumber)
+                      editPlz!!.setText(client.customerExpanded.clientPlz)
+                      editLocation!!.setText(client.customerExpanded.clientLocation)
+                  }
               }
           }
       }

@@ -44,7 +44,7 @@
         android:id="@+id/buttonClearMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+
         android:layout_marginTop="24dp"
         android:text="Leeren"
         app:layout_constraintStart_toStartOf="@+id/textViewMaterial"
@@ -54,7 +54,7 @@
         android:id="@+id/textViewDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="96dp"
         android:text="Datum"
         android:textSize="20sp"
@@ -76,14 +76,14 @@
         android:layout_height="40dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textViewWorkTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Arbeitszeit"
+        android:text="Arbeitszeit :"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/spinnerCustomerMain"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCustomerMain" />
@@ -102,6 +102,8 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_height="150dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,6 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
+            android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +146,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputWorkDescription"
-        android:layout_width="412dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_height="99dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -153,8 +158,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:hint="Arbeitsbeschreibung"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollHorizontally="false" />
@@ -196,11 +199,13 @@
 
     <ScrollView
         android:id="@+id/scrollView4"
-        android:layout_width="394dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_height="205dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewMaterial"
         app:layout_constraintTop_toBottomOf="@+id/textViewMaterial">
 
         <TableLayout
@@ -235,7 +240,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="Datum:"
+        android:text="Datum :"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
         app:layout_constraintTop_toTopOf="parent" />
@@ -244,24 +249,46 @@
         android:id="@+id/buttonChangeLocationMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Change"
+        android:layout_marginTop="90dp"
+        android:text="Ändern"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/buttonPreview"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/buttonPreview"
-        app:layout_constraintTop_toBottomOf="@+id/buttonPreview" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonPreview"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/editTextChangeLocationMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
         app:layout_constraintEnd_toStartOf="@+id/buttonChangeLocationMain"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buttonClearMain"
         app:layout_constraintTop_toTopOf="@+id/buttonChangeLocationMain" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Ort ändern :"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/buttonClearMain"
+        app:layout_constraintTop_toBottomOf="@+id/buttonClearMain" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Auftraggeber :"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewDate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

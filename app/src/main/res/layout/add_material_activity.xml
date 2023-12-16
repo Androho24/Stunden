@@ -38,26 +38,14 @@
         app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
 
     <EditText
-        android:id="@+id/editTextUnitMaterial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Einheit"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFilterMaterial"
-        tools:layout_editor_absoluteX="32dp" />
-
-    <EditText
         android:id="@+id/editTextNewMaterialMaterial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        app:layout_constraintStart_toStartOf="@+id/editTextUnitMaterial"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUnitMaterial" />
+        app:layout_constraintStart_toStartOf="@+id/spinnerAddMaterialMaterial"
+        tools:layout_editor_absoluteY="640dp" />
 
     <TextView
         android:id="@+id/plainTextSearchMaterial"
@@ -77,10 +65,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="Add"
+        android:text="Hinzufügen"
         app:layout_constraintBottom_toBottomOf="@+id/editTextNewMaterialMaterial"
+        app:layout_constraintEnd_toEndOf="@+id/editTextFilterMaterial"
         app:layout_constraintStart_toEndOf="@+id/editTextNewMaterialMaterial"
         app:layout_constraintTop_toTopOf="@+id/editTextNewMaterialMaterial"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/spinnerAddMaterialMaterial"
+        android:layout_width="178dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFilterMaterial" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -44,6 +44,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
+import com.example.myapplication.Objects.Workers
 import com.example.myapplication.Objects.WorktimeMain
 import com.example.myapplication.Pdf.PDFCreator
 import com.google.android.material.navigation.NavigationView
@@ -141,14 +142,14 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
 
         navView = findViewById(R.id.nav_view)
-
+/**/
         navView!!.bringToFront();
 
         navView!!.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemLager -> {
-                    val myIntent = Intent(this, LagerActivity::class.java)
-                    startActivity(myIntent)
+                 /*   val myIntent = Intent(this, LagerActivity::class.java)
+                    startActivity(myIntent)*/
                     true
                 }
                 else -> {
@@ -215,9 +216,11 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         var addresses: List<Address>
         geocoder =  Geocoder(this, Locale.getDefault());
 
-        addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
-        if (!addresses.isEmpty()) {
-            location = addresses[0].locality
+        if(geocoder != null) {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
+            if (!addresses.isEmpty()) {
+                location = addresses[0].locality
+            }
         }
         else{
             location = "Moosthenning"
@@ -242,6 +245,14 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         myIcon = resources.getDrawable(R.drawable.img)
 
 
+Workers.workerArray.add("Matthias Höpfler")
+
+        Workers.workerArray.add("Heizer Oliver")
+
+
+        Workers.workerArray.add("Franz Eibauer")
+        Workers.workerArray.add("Alexander Geisperger")
+        Workers.workerArray.add("Tägliche Pausenzeit")
 
         if (Environment.isExternalStorageManager()) {
 
@@ -422,6 +433,10 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             val folder = "/storage/emulated/0/Documents/test/"
             val f = File(folder, selectedCustomer.name + "_" + selectedCustomer.preName)
             f.mkdir()
+            if(WorktimeMain.staticWorkTimeArrayList.isEmpty()){
+                Toast.makeText(this,"Bitte Arbeitszeit hinzufügen",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             var pathToSave =
                 "/storage/emulated/0/Documents/test/" + selectedCustomer.name + "_" + selectedCustomer.preName + "/" + "Arbeitsnachweis_Nr_" + count + "_" + date!!.text.toString() + "_" + selectedCustomer.name + "_" + customerCount + "_" + WorktimeMain.staticWorkTimeArrayList.iterator()
                     .next().workerName + ".pdf"

@@ -11,9 +11,19 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.DialogFragment
+import com.example.myapplication.Objects.Workers
+import org.apache.poi.ss.usermodel.Row
+import java.lang.IllegalArgumentException
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 class WorkTimeFragment : DialogFragment() {
@@ -29,6 +39,8 @@ class WorkTimeFragment : DialogFragment() {
     var buttonEditWegeRuest: Button? = null
     var buttonSave: Button? = null
     var buttonCancel: Button? = null
+
+    var tableWorkers: TableLayout? = null
 
 
     interface onWorktimeEventLisnter {
@@ -64,11 +76,43 @@ class WorkTimeFragment : DialogFragment() {
     private fun setOnButtonClickListerns() {
         buttonSave!!.setOnClickListener {
             var worker = ArrayList<String>()
-            if (checkBoxWorker1!!.isChecked) {
-                worker.add(checkBoxWorker1!!.text.toString())
+            var i = 0
+            for (workers in Workers.workerArray) {
+                var row = tableWorkers!!.getChildAt(i) as TableRow
+                var checkbox = row.getChildAt(0) as CheckBox
+                if (checkbox.isChecked) {
+                    worker.add(checkbox.text.toString())
+
+                }
+
+                i++
             }
-            if (checkBoxPause!!.isChecked) {
-                worker.add(checkBoxPause!!.text.toString())
+
+try {
+    var formattedDate = SimpleDateFormat(textBeginWorktime!!.text.toString())
+}catch (e: IllegalArgumentException){
+    Toast.makeText(context,"Bitte Arbeitsbeginn hinzufügen",Toast.LENGTH_SHORT).show()
+    return@setOnClickListener
+}
+
+            try {
+                var formated = SimpleDateFormat(textEndWorktime!!.text.toString())
+            }catch (e: IllegalArgumentException){
+                Toast.makeText(context,"Bitte Arbeitsende hinzufügen",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
+            if (worker.size == 0) {
+                Toast.makeText(context, "Bitte Arbeitnehmer auswählen", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
+
+            if(textEndWorktime!!.text.toString() == ""){
+                Toast.makeText(context,"Bitte Arbeitsende hinzufügen",Toast.LENGTH_SHORT)
+                return@setOnClickListener
             }
             worktimeLister!!.worktimeListner(
                 textBeginWorktime!!.text.toString(),
@@ -136,15 +180,15 @@ class WorkTimeFragment : DialogFragment() {
         buttonBeginWorktime = view.findViewById(R.id.buttonEditBeginWorktime)
         buttonEditEndWorktime = view.findViewById(R.id.buttonEditEndWorktime)
         buttonEditWegeRuest = view.findViewById(R.id.buttonEditEegeRuestWorktime)
-        checkBoxWorker1 = view.findViewById(R.id.checkBoxWorker1)
-        checkBoxPause = view.findViewById(R.id.checkBoxPause)
         buttonCancel = view.findViewById(R.id.buttonCancelWorktime)
         textBeginWorktime = view.findViewById(R.id.textViewBeginWorktime)
         textEndWorktime = view.findViewById(R.id.textViewEndWorktime)
         textWegeRuest = view.findViewById(R.id.editTextWegeRuestWorktime)
-
+        tableWorkers = view.findViewById(R.id.tableLayoutWorktime)
 
         setOnButtonClickListerns()
+
+        setUpTableWorker()
         // Fetch arguments from bundle and set title
 
         val title = requireArguments().getString("title", "Enter Name")
@@ -152,6 +196,21 @@ class WorkTimeFragment : DialogFragment() {
         getDialog()?.getWindow()?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
         )
+    }
+
+    private fun setUpTableWorker() {
+
+        tableWorkers!!.removeAllViews()
+        for (workers in Workers.workerArray) {
+            var row = TableRow(activity)
+            val checkBox = CheckBox(activity)
+            checkBox.text = workers.toString()
+            row.addView(checkBox)
+
+            tableWorkers!!.addView(row)
+        }
+
+
     }
 
     companion object {

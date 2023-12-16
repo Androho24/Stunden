@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/CustomerFragment"
-    android:layout_width="match_parent" android:layout_height="700dp"
-    android:layout_gravity="center" android:orientation="vertical"  >
+    android:padding="0dp"
+    android:layout_margin="0dp"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+     >
 
     <EditText
         android:id="@+id/editTextNachnameCustomerClient"

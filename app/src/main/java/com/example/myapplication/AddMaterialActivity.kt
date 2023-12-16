@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.example.myapplication.Objects.Material
 
 class AddMaterialActivity : AppCompatActivity() {
     var lastString =""
+    var spinnerUnit : Spinner? = null
     var tableMaterial : RecyclerView? = null
     var editTextFilter : EditText? = null
     var buttonAddMaterial : Button? = null
@@ -28,7 +30,7 @@ class AddMaterialActivity : AppCompatActivity() {
         editTextFilter = findViewById(R.id.editTextFilterMaterial)
         tableMaterial!!.setLayoutManager(LinearLayoutManager(this));
         buttonAddMaterial = findViewById(R.id.buttonAddMaterialMaterial)
-        editUnit = findViewById(R.id.editTextUnitMaterial)
+        spinnerUnit = findViewById(R.id.spinnerAddMaterialMaterial)
         editMatName = findViewById(R.id.editTextNewMaterialMaterial)
         mainScrollView = findViewById(R.id.scrollMaterial)
         var adapter = CustomAdapter(Material.materials)

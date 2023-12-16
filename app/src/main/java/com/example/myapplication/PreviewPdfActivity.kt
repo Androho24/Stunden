@@ -123,7 +123,7 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
             );
             val intent = Intent(Intent.ACTION_SEND)
             intent.putExtra(Intent.EXTRA_EMAIL, adress)
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Arbeitsnacheis")
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Arbeitsnachweis")
             intent.putExtra(
                 Intent.EXTRA_TEXT,
                 "Sehr geehrte Frau Mayer,\n\n anbei übersende ich Ihnen meinen Arbeitsnachweis.\n\n Mit freundlichen Grüßen\n\nIhr Arbeitnehmer"
@@ -161,7 +161,7 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val imageInByte: ByteArray = baos.toByteArray()
         val data: ImageData = ImageDataFactory.create(imageInByte)
-        var image = Image(data).scaleAbsolute(150f, 80f).setRelativePosition(350f,660f,0f,0f)
+        var image = Image(data).scaleAbsolute(150f, 70f).setRelativePosition(350f,660f,0f,0f)
 
         val pdfDoc = PdfDocument(PdfReader(path), PdfWriter("/storage/emulated/0/Documents/test/test1.pdf"))
         var document = Document(pdfDoc)
@@ -213,7 +213,7 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val imageInByte: ByteArray = baos.toByteArray()
         val data: ImageData = ImageDataFactory.create(imageInByte)
-        var image = Image(data).scaleAbsolute(150f, 80f).setRelativePosition(50f,660f,0f,0f)
+        var image = Image(data).scaleAbsolute(150f, 70f).setRelativePosition(50f,660f,0f,0f)
 
         val pdfDoc = PdfDocument(PdfReader(path), PdfWriter("/storage/emulated/0/Documents/test/test1.pdf"))
         var document = Document(pdfDoc)
