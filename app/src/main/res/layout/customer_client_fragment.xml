@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/CustomerFragment"
-    android:padding="0dp"
-    android:layout_margin="0dp"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-     >
+    android:id="@+id/CustomerClientFragment"
+    android:layout_width="fill_parent" android:layout_height="700dp">
+<View
+    android:id="@+id/CustomerClientView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"></View>
+
 
     <EditText
         android:id="@+id/editTextNachnameCustomerClient"
@@ -16,7 +19,7 @@
         android:ems="10"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.693"
+        app:layout_constraintHorizontal_bias="0.387"
         app:layout_constraintStart_toEndOf="@+id/textViewNachnameClient"
         app:layout_constraintTop_toTopOf="parent" />
 

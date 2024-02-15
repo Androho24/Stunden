@@ -14,7 +14,7 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="1dp"
         android:layout_gravity="start"
         app:menu="@menu/nav_menu"/>
 
@@ -99,7 +99,7 @@
         app:layout_constraintStart_toStartOf="@+id/buttonEditCustomerMain"
         app:layout_constraintTop_toTopOf="@+id/textViewWorkTime" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
@@ -110,39 +110,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWorkTime">
 
-        <TableLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tableWorktimes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:scrollbars="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAddMaterialMain">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </TableLayout>
-    </ScrollView>
+           >
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputWorkDescription"
@@ -197,7 +171,7 @@
         app:layout_constraintTop_toTopOf="@+id/textViewMaterial"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView4"
         android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
@@ -208,32 +182,13 @@
         app:layout_constraintStart_toStartOf="@+id/textViewMaterial"
         app:layout_constraintTop_toBottomOf="@+id/textViewMaterial">
 
-        <TableLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tableMaterialMain"
-            android:layout_width="448dp"
-            android:layout_height="197dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAddMaterialMain">
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </TableLayout>
-    </ScrollView>
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/textViewDateMain"

@@ -1,6 +1,8 @@
 package com.example.myapplication
 
 import android.app.Activity
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Xml
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.annotation.Nullable
@@ -56,19 +59,29 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         }
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        newCustomerListener!!.onNewCustomerListener()
+    }
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
     ): View {
 
-        return inflater.inflate(R.layout.customer_fragment, container)
+        return inflater.inflate(R.layout.customer_fragment, container,false)
     }
 
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Get field from view
-
+        var windowManager : WindowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        var display = windowManager.defaultDisplay
+        var lp : FrameLayout.LayoutParams = FrameLayout.LayoutParams(display.width,display.height)
+        view.layoutParams = lp
         // Fetch arguments from bundle and set title
         editLocation = view.findViewById(R.id.editTextLocationCustomer)
         editName = view.findViewById(R.id.editTextNachnameCustomer)
@@ -172,55 +185,55 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         buttonAddClient!!.setOnClickListener {
 
 
-
-            if (customerIdForEdit != "") {
-                for (customer in Customer.arrayCustomers) {
-                    if (customer.customerId == customerIdForEdit) {
-
-
+            if (editName!!.text.toString() != "") {
+                if (customerIdForEdit != "") {
+                    for (customer in Customer.arrayCustomers) {
+                        if (customer.customerId == customerIdForEdit) {
 
 
+                            val bundle = Bundle()
+                            bundle.putString("customerid", customer.customerId)
+
+                            val fm: FragmentManager = requireActivity().supportFragmentManager
+                            val customerFragmentDialog: CustomerClientFragment =
+                                CustomerClientFragment.newInstance("Some Title")
+                            customerFragmentDialog.arguments = bundle
+                            fm.beginTransaction().add(customerFragmentDialog, "some Dialog")
+                                .commit()
 
 
-                        val bundle = Bundle()
-                        bundle.putString("customerid", customer.customerId)
-
-                        val fm: FragmentManager = requireActivity().supportFragmentManager
-                        val customerFragmentDialog: CustomerClientFragment =
-                            CustomerClientFragment.newInstance("Some Title")
-                        customerFragmentDialog.arguments = bundle
-                        fm.beginTransaction().add(customerFragmentDialog,"some Dialog").commit()
-
-
+                        }
                     }
+
+                } else {
+                    var uudi = UUID.randomUUID()
+                    var customerExpanded = CustomerExpanded("", "", "", "", "", "")
+                    var newCustomer = Customer(
+                        uudi.toString(),
+                        editName!!.text.toString(),
+                        editPrename!!.text.toString(),
+                        editStreetName!!.text.toString(),
+                        editStreetNumber!!.text.toString(),
+                        editPlz!!.text.toString(),
+                        editLocation!!.text.toString(),
+                        editProjectNumber!!.text.toString(),
+                        customerExpanded
+                    )
+                    Customer.arrayCustomers.add(newCustomer)
+                    Customer.arrayCustomers.sortBy { list -> list.name }
+                    var xmlTool = XmlTool()
+                    xmlTool.saveProfilesToXml(Customer.arrayCustomers, requireContext())
+                    val bundle = Bundle()
+                    bundle.putString("customerid", newCustomer.customerId)
+
+                    val fm: FragmentManager = requireActivity().supportFragmentManager
+                    val customerFragmentDialog: CustomerClientFragment =
+                        CustomerClientFragment.newInstance("Some Title")
+                    customerFragmentDialog.arguments = bundle
+                    fm.beginTransaction().add(customerFragmentDialog, "some Dialog").commit()
                 }
-
             }else{
-                var uudi = UUID.randomUUID()
-                var customerExpanded = CustomerExpanded("", "", "", "", "", "")
-                var newCustomer = Customer(
-                    uudi.toString(),
-                    editName!!.text.toString(),
-                    editPrename!!.text.toString(),
-                    editStreetName!!.text.toString(),
-                    editStreetNumber!!.text.toString(),
-                    editPlz!!.text.toString(),
-                    editLocation!!.text.toString(),
-                    editProjectNumber!!.text.toString(),
-                    customerExpanded
-                )
-                Customer.arrayCustomers.add(newCustomer)
-                Customer.arrayCustomers.sortBy { list -> list.name }
-                var xmlTool = XmlTool()
-                xmlTool.saveProfilesToXml(Customer.arrayCustomers, requireContext())
-                val bundle = Bundle()
-                bundle.putString("customerid", newCustomer.customerId)
-
-                val fm: FragmentManager = requireActivity().supportFragmentManager
-                val customerFragmentDialog: CustomerClientFragment =
-                    CustomerClientFragment.newInstance("Some Title")
-                customerFragmentDialog.arguments = bundle
-                fm.beginTransaction().add(customerFragmentDialog,"some Dialog").commit()
+                Toast.makeText(context, "Bitte Nachnamen hinzufügen",Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -301,6 +314,8 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
             }
         }
     }
+
+
 
     companion object {
         fun newInstance(title: String?): CustomerFragment {

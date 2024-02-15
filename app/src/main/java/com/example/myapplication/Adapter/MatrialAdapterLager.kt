@@ -36,7 +36,7 @@ class MatrialAdapterLager(private var dataSet: ArrayList<Material>) :
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.text_row_item, viewGroup, false)
+            .inflate(R.layout.material_row_adapter_mat_act, viewGroup, false)
 
         return ViewHolder(view)
     }

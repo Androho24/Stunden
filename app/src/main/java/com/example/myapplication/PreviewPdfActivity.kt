@@ -163,12 +163,12 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         val data: ImageData = ImageDataFactory.create(imageInByte)
         var image = Image(data).scaleAbsolute(150f, 70f).setRelativePosition(350f,660f,0f,0f)
 
-        val pdfDoc = PdfDocument(PdfReader(path), PdfWriter("/storage/emulated/0/Documents/test/test1.pdf"))
+        val pdfDoc = PdfDocument(PdfReader(path), PdfWriter("/storage/emulated/0/Documents/ElektroEibauer/test1.pdf"))
         var document = Document(pdfDoc)
         document.add(image)
         document.close()
 
-        val file= File("/storage/emulated/0/Documents/test/test1.pdf")
+        val file= File("/storage/emulated/0/Documents/ElektroEibauer/test1.pdf")
 
         var parcelFileDescriptor =
             ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
@@ -215,12 +215,12 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         val data: ImageData = ImageDataFactory.create(imageInByte)
         var image = Image(data).scaleAbsolute(150f, 70f).setRelativePosition(50f,660f,0f,0f)
 
-        val pdfDoc = PdfDocument(PdfReader(path), PdfWriter("/storage/emulated/0/Documents/test/test1.pdf"))
+        val pdfDoc = PdfDocument(PdfReader(path), PdfWriter("/storage/emulated/0/Documents/ElektroEibauer/test1.pdf"))
         var document = Document(pdfDoc)
         document.add(image)
         document.close()
 
-        val file= File("/storage/emulated/0/Documents/test/test1.pdf")
+        val file= File("/storage/emulated/0/Documents/ElektroEibauer/test1.pdf")
 
         var parcelFileDescriptor =
             ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)

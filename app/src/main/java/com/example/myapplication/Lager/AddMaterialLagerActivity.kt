@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapter.CustomAdapter
+import com.example.myapplication.Adapter.MaterialAdapter
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.R
 import com.example.myapplication.XmlTool
@@ -32,7 +33,7 @@ class AddMaterialLagerActivity : AppCompatActivity() {
         editUnit = findViewById(R.id.editTextUnitMaterialLager)
         editMatName = findViewById(R.id.editTextNewMaterialMaterialLager)
         mainScrollView = findViewById(R.id.scrollMaterialLager)
-        var adapter = CustomAdapter(Material.materials)
+        var adapter = MaterialAdapter(Material.materials,applicationContext)
         tableMaterial!!.adapter = adapter
 
 
@@ -49,6 +50,7 @@ class AddMaterialLagerActivity : AppCompatActivity() {
             var xmlTool = XmlTool()
             xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
             mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
+
         }
 
     }
@@ -69,11 +71,11 @@ class AddMaterialLagerActivity : AppCompatActivity() {
 
 
                 }
-                var adapter = CustomAdapter(listMaterial)
+                var adapter = MaterialAdapter(listMaterial,applicationContext)
                 tableMaterial!!.adapter = adapter
             }
             else{
-                var adapter = CustomAdapter(Material.materials)
+                var adapter = MaterialAdapter(Material.materials,applicationContext)
                 tableMaterial!!.adapter = adapter
             }
 

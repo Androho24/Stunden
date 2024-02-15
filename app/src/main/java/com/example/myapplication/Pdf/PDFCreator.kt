@@ -413,9 +413,12 @@ class PDFCreator {
             }
         }
         var readyDescription = ArrayList<String>()
-
+        var line = 0
         for (item in workDescription){
             var itemList = item.chunked(50)
+           /* if (itemList.size >0){
+                itemList.get(line).substringBeforeLast(" ")
+            }*/
             for (chunkedItem in itemList){
                 readyDescription.add(chunkedItem)
             }

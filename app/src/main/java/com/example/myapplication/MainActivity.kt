@@ -39,8 +39,15 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.widget.NestedScrollView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Adapter.MaterialAdapterMain
+import com.example.myapplication.Adapter.WorktimeAdapterMain
+import com.example.myapplication.Interfaces.MainActivityMatInterface
+import com.example.myapplication.Interfaces.MainActivityWorktimeInterface
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
@@ -60,7 +67,8 @@ import java.util.Locale
 
 @SuppressLint("SetJavaScriptEnabled")
 class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnter,
-    CustomerFragment.onNewCustomerEventListener,CustomerClientFragment.onClientEventListener {
+    CustomerFragment.onNewCustomerEventListener,CustomerClientFragment.onClientEventListener,
+    MainActivityMatInterface,MainActivityWorktimeInterface {
     // var ourWorkbook: Workbook? = null
     //var sheet: Sheet? = null
     var buttonSetDate: Button? = null
@@ -71,12 +79,13 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var buttonEditCustomer: Button? = null
     var buttonAddWorkTime: Button? = null
     var buttonChangeLocation: Button? = null
-    var tableWorkTimes: TableLayout? = null
-    var tableMaterial: TableLayout? = null
+    var tableWorkTimes: RecyclerView? = null
+    var tableMaterial: RecyclerView? = null
     var spinnerCustomer: Spinner? = null
     var workDescriptionInput: TextInputLayout? = null
     var editTextChangeLocation : EditText? = null
     var xmlTool: XmlTool? = null
+    var scrollViewMateriel:NestedScrollView? = null
     var mContext: Context? = null
     var mHtmlString: String? = null
     var mPdfFile: File? = null
@@ -113,7 +122,12 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         buttonChangeLocation = findViewById(R.id.buttonChangeLocationMain)
         editTextChangeLocation = findViewById(R.id.editTextChangeLocationMain)
         tableWorkTimes = findViewById(R.id.tableWorktimes)
+        tableWorkTimes!!.setLayoutManager(LinearLayoutManager(this))
         tableMaterial = findViewById(R.id.tableMaterialMain)
+        tableMaterial!!.setLayoutManager(LinearLayoutManager(this));
+
+        scrollViewMateriel = findViewById(R.id.scrollView4)
+
         spinnerCustomer = findViewById(R.id.spinnerCustomerMain)
         workDescriptionInput = findViewById(R.id.textInputWorkDescription)
         date!!.text = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
@@ -138,7 +152,11 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-
+        val filedir : File = File("/storage/emulated/0/Documents/ElektroEibauer/")
+        if (!filedir.exists()) {
+            var fdir = File("/storage/emulated/0/Documents/", "ElektroEibauer")
+            fdir.mkdir()
+        }
 
 
         navView = findViewById(R.id.nav_view)
@@ -239,8 +257,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         )
         var asdf: PdfRenderer
         var xmlTool = XmlTool()
-        var input = File("/storage/emulated/0/documents/test/Arbeitsnachweis.xlsx")
-        var output = File("/storage/emulated/0/documents/test/Arbeitsnachweiss.pdf")
+        var input = File("/storage/emulated/0/documents/ElektroEibauer/Arbeitsnachweis.xlsx")
+        var output = File("/storage/emulated/0/documents/ElektroEibauer/Arbeitsnachweiss.pdf")
         pdfCreator = PDFCreator()
         myIcon = resources.getDrawable(R.drawable.img)
 
@@ -269,7 +287,7 @@ Workers.workerArray.add("Matthias Höpfler")
 
 
 
-
+        setScrollViews()
         loadXml()
         setSpinnerCustomer()
         buttonOnClickListeners()
@@ -278,10 +296,9 @@ Workers.workerArray.add("Matthias Höpfler")
 
     }
 
-
-
-
-
+    private fun setScrollViews() {
+        scrollViewMateriel!!.requestFocus()
+    }
 
 
     private fun loadXml() {
@@ -416,7 +433,7 @@ Workers.workerArray.add("Matthias Höpfler")
             }
 
             val fi: File =
-                File("/storage/emulated/0/Documents/test/" + selectedCustomer.name + "_" + selectedCustomer.preName)
+                File("/storage/emulated/0/Documents/ElektroEibauer/" + selectedCustomer.name + "_" + selectedCustomer.preName)
             val files = fi.listFiles()
             var count = 1
             if (files != null) for (i in files.indices) {
@@ -429,8 +446,8 @@ Workers.workerArray.add("Matthias Höpfler")
 
 
             var customerCount = 1
-            var path = "/storage/emulated/0/Documents/test/test.pdf"
-            val folder = "/storage/emulated/0/Documents/test/"
+            var path = "/storage/emulated/0/Documents/ElektroEibauer/test.pdf"
+            val folder = "/storage/emulated/0/Documents/ElektroEibauer/"
             val f = File(folder, selectedCustomer.name + "_" + selectedCustomer.preName)
             f.mkdir()
             if(WorktimeMain.staticWorkTimeArrayList.isEmpty()){
@@ -438,7 +455,7 @@ Workers.workerArray.add("Matthias Höpfler")
                 return@setOnClickListener
             }
             var pathToSave =
-                "/storage/emulated/0/Documents/test/" + selectedCustomer.name + "_" + selectedCustomer.preName + "/" + "Arbeitsnachweis_Nr_" + count + "_" + date!!.text.toString() + "_" + selectedCustomer.name + "_" + customerCount + "_" + WorktimeMain.staticWorkTimeArrayList.iterator()
+                "/storage/emulated/0/Documents/ElektroEibauer/" + selectedCustomer.name + "_" + selectedCustomer.preName + "/" + "Arbeitsnachweis_Nr_" + count + "_" + date!!.text.toString() + "_" + selectedCustomer.name + "_" + customerCount + "_" + WorktimeMain.staticWorkTimeArrayList.iterator()
                     .next().workerName + ".pdf"
             var document = pdfCreator!!.returnCreatedDocument(
                 myIcon,
@@ -471,6 +488,7 @@ Workers.workerArray.add("Matthias Höpfler")
 
         buttonEditCustomer!!.setOnClickListener {
             val fm: FragmentManager = supportFragmentManager
+
             val customerFragmentDialog: CustomerFragment =
                 CustomerFragment.newInstance("Some Title")
 
@@ -567,9 +585,13 @@ Workers.workerArray.add("Matthias Höpfler")
         }
 
         if (requestCode == materialResult){
-            tableMaterial!!.removeAllViews()
+           // tableMaterial!!.removeAllViews()
+            var adapter = MaterialAdapterMain(CustomerMaterial.customerMaterials,applicationContext,this)
+            tableMaterial!!.adapter = adapter
 
-            var imageID = 0
+
+
+           /* var imageID = 0
             for (mat in CustomerMaterial.customerMaterials){
                 var row = TableRow(applicationContext)
 
@@ -618,7 +640,7 @@ Workers.workerArray.add("Matthias Höpfler")
 
 
 
-            }
+            }*/
         }
 
 
@@ -655,19 +677,20 @@ Workers.workerArray.add("Matthias Höpfler")
                 var imageDelete = ImageView(this)
                 imageDelete.setImageResource(R.drawable.garbage)
                 imageDelete.id = imageID
+                row.addView(imageDelete)
                 imageDelete.setOnClickListener{
-                    tableMaterial!!.removeAllViews()
+                    var row = imageDelete.id
                     var newMAt1 = ArrayList<CustomerMaterial>()
                     for (mat in CustomerMaterial.customerMaterials){
                         if (mat.materialName == textMatName.text){
-                            CustomerMaterial.customerMaterials.remove(mat)
+
                         }
                         else{
                             newMAt1.add(mat)
                         }
 
                     }
-
+                    tableMaterial!!.removeAllViews()
                     CustomerMaterial.customerMaterials = newMAt1
 
                     for (mat in CustomerMaterial.customerMaterials){
@@ -687,7 +710,7 @@ Workers.workerArray.add("Matthias Höpfler")
                         textMatName.text = mat.materialName
                         row.addView(textMatName)
 
-
+                        tableMaterial!!.addView(row)
 
                            actualiseCustomerMaterial()
 
@@ -817,7 +840,10 @@ Workers.workerArray.add("Matthias Höpfler")
         var customerResult = 100
         var materialResult = 101
         private const val PDF_SELECTION_CODE = 99
+
     }
+
+
 
     override fun worktimeListner(
         beginWorktime: String,
@@ -825,7 +851,38 @@ Workers.workerArray.add("Matthias Höpfler")
         wegeRuest: String,
         workers: ArrayList<String>
     ) {
-        System.out.println(wegeRuest)
+        var i = 0
+        for (worker in workers) {
+            var newWorktime = WorktimeMain()
+            newWorktime.beginWorktime = beginWorktime
+            newWorktime.endWorktime = endWorkTime
+            var stringBeginWork = beginWorktime.split(":")
+            var stringEndWork = endWorkTime.split(":")
+
+            var hours = Integer.parseInt(stringEndWork[0]) - Integer.parseInt(stringBeginWork[0])
+            var minutes = Integer.parseInt(stringEndWork[1]) - Integer.parseInt(stringBeginWork[1])
+
+            if (minutes < 0) {
+                hours = hours - 1
+                minutes = 60 + minutes
+            }
+
+            var minutesFloat = minutes.toFloat() / 60
+            var formatMinute =
+                minutesFloat.toBigDecimal().setScale(2, RoundingMode.HALF_EVEN).toString()
+                    .split(("."))
+            var formatedMinute = formatMinute[1]
+
+            newWorktime.workTime = hours.toString() + "," + formatedMinute
+
+            newWorktime.wegeRuest = wegeRuest
+            newWorktime.workerName = workers.get(i)
+            WorktimeMain.staticWorkTimeArrayList.add(newWorktime)
+            i++
+        }
+        var adapter = WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList,applicationContext,this)
+        tableWorkTimes!!.adapter = adapter
+       /* System.out.println(wegeRuest)
         var i = 0
 
         tableWorkTimes!!.removeAllViews()
@@ -865,36 +922,9 @@ Workers.workerArray.add("Matthias Höpfler")
 
         tableWorkTimes!!.addView(row0)
 
-        for (worker in workers) {
-            var newWorktime = WorktimeMain()
-            newWorktime.beginWorktime = beginWorktime
-            newWorktime.endWorktime = endWorkTime
-            var stringBeginWork = beginWorktime.split(":")
-            var stringEndWork = endWorkTime.split(":")
 
-            var hours = Integer.parseInt(stringEndWork[0]) - Integer.parseInt(stringBeginWork[0])
-            var minutes = Integer.parseInt(stringEndWork[1]) - Integer.parseInt(stringBeginWork[1])
 
-            if (minutes < 0) {
-                hours = hours - 1
-                minutes = 60 + minutes
-            }
-
-            var minutesFloat = minutes.toFloat() / 60
-            var formatMinute =
-                minutesFloat.toBigDecimal().setScale(2, RoundingMode.HALF_EVEN).toString()
-                    .split(("."))
-            var formatedMinute = formatMinute[1]
-
-            newWorktime.workTime = hours.toString() + "," + formatedMinute
-
-            newWorktime.wegeRuest = wegeRuest
-            newWorktime.workerName = workers.get(i)
-            WorktimeMain.staticWorkTimeArrayList.add(newWorktime)
-            i++
-        }
-
-        actualiseWorktimesToTable()
+        actualiseWorktimesToTable()*/
 
 
     }
@@ -917,6 +947,17 @@ Workers.workerArray.add("Matthias Höpfler")
     }
     override fun onClientEventlistener(customerID: String) {
       var asdf = customerID
+    }
+
+
+    override fun onMaterialDeletedListener() {
+        var adapter = MaterialAdapterMain(CustomerMaterial.customerMaterials,applicationContext,this)
+        tableMaterial!!.adapter = adapter
+    }
+
+    override fun onWorktimeDeletedListener() {
+        var adapter = WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList,applicationContext,this)
+        tableWorkTimes!!.adapter = adapter
     }
 
 

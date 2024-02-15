@@ -1,16 +1,27 @@
 package com.example.myapplication
 
 import android.app.Activity
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.Spinner
 import androidx.annotation.Nullable
+import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
+import androidx.core.view.setMargins
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 
@@ -42,6 +53,7 @@ class CustomerClientFragment : DialogFragment() {
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,13 +61,20 @@ class CustomerClientFragment : DialogFragment() {
     ): View {
 
             customerID = getArguments()?.getString("customerid").toString();
-            return inflater.inflate(R.layout.customer_client_fragment, container)
+
+
+            var view : View = inflater.inflate(R.layout.customer_client_fragment, container,false)
+
+            return view
+
     }
 
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Get field from view
-
+        var windowManager : WindowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        var display = windowManager.defaultDisplay
+        var lp : FrameLayout.LayoutParams = FrameLayout.LayoutParams(display.width,display.height)
+        view.layoutParams = lp
         // Fetch arguments from bundle and set title
         editLocation = view.findViewById(R.id.editTextLocationCustomerClient)
         editName = view.findViewById(R.id.editTextNachnameCustomerClient)

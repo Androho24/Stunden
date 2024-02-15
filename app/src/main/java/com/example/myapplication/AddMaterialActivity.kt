@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
@@ -10,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapter.CustomAdapter
+import com.example.myapplication.Adapter.MaterialAdapter
 import com.example.myapplication.Objects.Material
 
 
@@ -20,7 +21,6 @@ class AddMaterialActivity : AppCompatActivity() {
     var tableMaterial : RecyclerView? = null
     var editTextFilter : EditText? = null
     var buttonAddMaterial : Button? = null
-    var editUnit : EditText? = null
     var editMatName : EditText? = null
     var mainScrollView :ScrollView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,18 +33,30 @@ class AddMaterialActivity : AppCompatActivity() {
         spinnerUnit = findViewById(R.id.spinnerAddMaterialMaterial)
         editMatName = findViewById(R.id.editTextNewMaterialMaterial)
         mainScrollView = findViewById(R.id.scrollMaterial)
-        var adapter = CustomAdapter(Material.materials)
+        var adapter = MaterialAdapter(Material.materials,applicationContext)
         tableMaterial!!.adapter = adapter
 
 
         onTextChanged()
         onButtonClickListeners()
+        setSpinnerContent()
 
+    }
+
+    private fun setSpinnerContent() {
+        var unitList = ArrayList<String>()
+        unitList.add("Stck")
+        unitList.add("m")
+
+        val dataAdapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unitList!!)
+        dataAdapter.setDropDownViewResource(R.layout.spinner_style)
+        spinnerUnit!!.adapter = dataAdapter
     }
 
     private fun onButtonClickListeners() {
         buttonAddMaterial!!.setOnClickListener {
-            var mat = Material(editMatName!!.text.toString(),editUnit!!.text.toString())
+            var mat = Material(editMatName!!.text.toString(),spinnerUnit!!.selectedItem!!.toString())
 
 
             Material.materials.add(mat)
@@ -71,19 +83,17 @@ class AddMaterialActivity : AppCompatActivity() {
 
 
                 }
-                var adapter = CustomAdapter(listMaterial)
+                var adapter = MaterialAdapter(listMaterial,applicationContext)
                 tableMaterial!!.adapter = adapter
             }
             else{
-                var adapter = CustomAdapter(Material.materials)
+                var adapter = MaterialAdapter(Material.materials,applicationContext)
                 tableMaterial!!.adapter = adapter
             }
 
         }
 
-        editUnit!!.setOnClickListener {
-            mainScrollView!!.fullScroll(ScrollView.FOCUS_DOWN)
-        }
+
 
         editMatName!!.setOnClickListener {
             mainScrollView!!.fullScroll(ScrollView.FOCUS_DOWN)

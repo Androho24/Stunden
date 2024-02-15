@@ -88,17 +88,17 @@ class WorkTimeFragment : DialogFragment() {
                 i++
             }
 
-try {
-    var formattedDate = SimpleDateFormat(textBeginWorktime!!.text.toString())
-}catch (e: IllegalArgumentException){
-    Toast.makeText(context,"Bitte Arbeitsbeginn hinzufügen",Toast.LENGTH_SHORT).show()
-    return@setOnClickListener
-}
+            try {
+                var formattedDate = SimpleDateFormat(textBeginWorktime!!.text.toString())
+            } catch (e: IllegalArgumentException) {
+                Toast.makeText(context, "Bitte Arbeitsbeginn hinzufügen", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             try {
                 var formated = SimpleDateFormat(textEndWorktime!!.text.toString())
-            }catch (e: IllegalArgumentException){
-                Toast.makeText(context,"Bitte Arbeitsende hinzufügen",Toast.LENGTH_SHORT).show()
+            } catch (e: IllegalArgumentException) {
+                Toast.makeText(context, "Bitte Arbeitsende hinzufügen", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -110,8 +110,8 @@ try {
 
 
 
-            if(textEndWorktime!!.text.toString() == ""){
-                Toast.makeText(context,"Bitte Arbeitsende hinzufügen",Toast.LENGTH_SHORT)
+            if (textEndWorktime!!.text.toString() == "") {
+                Toast.makeText(context, "Bitte Arbeitsende hinzufügen", Toast.LENGTH_SHORT)
                 return@setOnClickListener
             }
             worktimeLister!!.worktimeListner(
