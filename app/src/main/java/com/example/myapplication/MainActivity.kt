@@ -32,8 +32,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
-import android.widget.TableLayout
-import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -51,13 +49,14 @@ import com.example.myapplication.Adapter.MaterialAdapterMain
 import com.example.myapplication.Adapter.WorktimeAdapterMain
 import com.example.myapplication.Interfaces.MainActivityMatInterface
 import com.example.myapplication.Interfaces.MainActivityWorktimeInterface
+import com.example.myapplication.Lager.LagerActivity
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
-import com.example.myapplication.Objects.Material
 import com.example.myapplication.Objects.Workers
 import com.example.myapplication.Objects.WorktimeMain
 import com.example.myapplication.Pdf.PDFCreator
+import com.example.myapplication.Pdf.PreviewPdfActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputLayout
 import com.itextpdf.layout.Document
@@ -162,6 +161,12 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             fdir.mkdir()
         }
 
+        val filedirMat : File = File("/storage/emulated/0/Documents/ElektroEibauer/Materialschein/")
+        if (!filedirMat.exists()) {
+            var fdir = File("/storage/emulated/0/Documents/ElektroEibauer", "Materialschein")
+            fdir.mkdir()
+        }
+
 
         navView = findViewById(R.id.nav_view)
 /**/
@@ -170,12 +175,12 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         navView!!.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemLager -> {
-                 /*   val myIntent = Intent(this, LagerActivity::class.java)
-                    startActivity(myIntent)*/
+                    val myIntent = Intent(this, LagerActivity::class.java)
+                    startActivity(myIntent)
                     true
                 }
                 else -> {
-                    Toast.makeText(this,"hello",Toast.LENGTH_SHORT)
+                    Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show()
                     false
                 }
             }
@@ -404,7 +409,6 @@ Workers.workerArray.add("Matthias Höpfler")
 //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
 
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-                tableWorkTimes!!.removeAllViews()
                 WorktimeMain.staticWorkTimeArrayList.clear()
                 workDescriptionInput!!.editText!!.setText("")
                 var adapterWT = WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList,applicationContext,this)
@@ -618,56 +622,7 @@ Workers.workerArray.add("Matthias Höpfler")
 
 
 
-           /* var imageID = 0
-            for (mat in CustomerMaterial.customerMaterials){
-                var row = TableRow(applicationContext)
 
-                var textMatAmount = TextView(this)
-                textMatAmount.minimumWidth = 100
-                textMatAmount.text = mat.materialAmount
-                row.addView(textMatAmount)
-
-                var textMatUnit = TextView(this)
-                textMatUnit.minimumWidth = 100
-                textMatUnit.text = mat.materialUnit
-                row.addView(textMatUnit)
-
-                var textMatName = TextView(this)
-                textMatName.text = mat.materialName
-                row.addView(textMatName)
-
-                var imageDelete = ImageView(this)
-                imageDelete.setImageResource(R.drawable.garbage)
-                imageDelete.id = imageID
-                imageDelete.setOnClickListener{
-                    tableMaterial!!.removeAllViews()
-                    var newMAt = ArrayList<CustomerMaterial>()
-                    for (mat in CustomerMaterial.customerMaterials){
-                        if (mat.materialName == textMatName.text) {
-
-                        }
-                        else{
-                            newMAt.add(mat)
-
-                        }
-
-                    }
-
-                    CustomerMaterial.customerMaterials = newMAt
-
-                    actualiseCustomerMaterial()
-
-
-
-                }
-                row.addView(imageDelete)
-                imageID++
-
-                tableMaterial!!.addView(row)
-
-
-
-            }*/
         }
 
 
@@ -680,187 +635,9 @@ Workers.workerArray.add("Matthias Höpfler")
              .load()*/
     }
 
-    private fun actualiseCustomerMaterial(){
-
-        if(CustomerMaterial.customerMaterials.size >0){
-            var imageID = 0
-            for (mat in CustomerMaterial.customerMaterials){
-                var row = TableRow(applicationContext)
-
-                var textMatAmount = TextView(this)
-                textMatAmount.minimumWidth = 100
-                textMatAmount.text = mat.materialAmount
-                row.addView(textMatAmount)
-
-                var textMatUnit = TextView(this)
-                textMatUnit.minimumWidth = 100
-                textMatUnit.text = mat.materialUnit
-                row.addView(textMatUnit)
-
-                var textMatName = TextView(this)
-                textMatName.text = mat.materialName
-                row.addView(textMatName)
-
-                var imageDelete = ImageView(this)
-                imageDelete.setImageResource(R.drawable.garbage)
-                imageDelete.id = imageID
-                row.addView(imageDelete)
-                imageDelete.setOnClickListener{
-                    var row = imageDelete.id
-                    var newMAt1 = ArrayList<CustomerMaterial>()
-                    for (mat in CustomerMaterial.customerMaterials){
-                        if (mat.materialName == textMatName.text){
-
-                        }
-                        else{
-                            newMAt1.add(mat)
-                        }
-
-                    }
-                    tableMaterial!!.removeAllViews()
-                    CustomerMaterial.customerMaterials = newMAt1
-
-                    for (mat in CustomerMaterial.customerMaterials){
-                        var row = TableRow(applicationContext)
-
-                        var textMatAmount = TextView(this)
-                        textMatAmount.minimumWidth = 100
-                        textMatAmount.text = mat.materialAmount
-                        row.addView(textMatAmount)
-
-                        var textMatUnit = TextView(this)
-                        textMatUnit.minimumWidth = 100
-                        textMatUnit.text = mat.materialUnit
-                        row.addView(textMatUnit)
-
-                        var textMatName = TextView(this)
-                        textMatName.text = mat.materialName
-                        row.addView(textMatName)
-
-                        tableMaterial!!.addView(row)
-
-                           actualiseCustomerMaterial()
 
 
-                    }
 
-
-                }
-
-                row.addView(imageDelete)
-                imageID++
-                tableMaterial!!.addView(row)
-
-            }
-        }
-
-    }
-
-    private fun actualiseWorktimesToTable() {
-        if (WorktimeMain.staticWorkTimeArrayList.size > 0) {
-            var row = TableRow(this)
-            var text = TextView(this)
-            var id = 0
-            var textId = 0
-
-            WorktimeMain.staticWorkTimeArrayList.sortBy { list -> list.beginWorktime }
-
-            for (worktime in WorktimeMain.staticWorkTimeArrayList) {
-                row = TableRow(this)
-
-
-                text = TextView(this)
-                text.text = worktime.beginWorktime
-                text.setTextColor(tableTextColor)
-                row.addView(text)
-
-                text = TextView(this)
-                text.text = worktime.endWorktime
-                text.setTextColor(tableTextColor)
-                row.addView(text)
-
-                text = TextView(this)
-                text.text = worktime.workTime
-                text.setTextColor(tableTextColor)
-                row.addView(text)
-
-                text = TextView(this)
-                text.text = worktime.wegeRuest
-                text.setTextColor(tableTextColor)
-                row.addView(text)
-
-                text = TextView(this)
-                text.text = worktime.workerName
-                text.setTextColor(tableTextColor)
-                row.addView(text)
-
-                 var newImage = ImageView(this)
-                 newImage.id = id
-                 newImage.setImageResource(R.drawable.garbage)
-              //   newImage.setBackgroundColor(Color.WHITE)
-                 row.addView(newImage)
-
-                 newImage.setOnClickListener {
-                     var row = newImage.id
-                     var countMats = 0
-                     var newMaterialsForMain: ArrayList<WorktimeMain> = ArrayList()
-                     for (mat in WorktimeMain.staticWorkTimeArrayList) {
-                         if (row == countMats) {
-
-                         } else {
-                             newMaterialsForMain!!.add(mat)
-                         }
-                         countMats++
-                     }
-
-
-                     tableWorkTimes!!.removeAllViews()
-
-
-                     var row0 = TableRow(this)
-                     val tv1 = TextView(this)
-                     tv1.text = " Beginn"
-                     tv1.setTextColor(tableTextColor)
-                     tv1.minimumWidth = 150
-                     row0.minimumHeight = 30
-                     row0.addView(tv1)
-
-                     val tv2 = TextView(this)
-                     tv2.text = " Ende"
-                     tv2.minimumWidth = 150
-                     tv2.setTextColor(tableTextColor)
-                     row0.addView(tv2)
-
-                     val tv5 = TextView(this)
-                     tv5.text = "in h"
-                     tv5.minimumWidth = 100
-                     tv5.setTextColor(tableTextColor)
-                     row0.addView(tv5)
-
-                     val tv3 = TextView(this)
-                     tv3.minimumWidth = 100
-                     tv3.text = " W/R"
-                     tv3.setTextColor(tableTextColor)
-                     row0.addView(tv3)
-
-                     val tv4 = TextView(this)
-                     tv4.text = "Name"
-                     tv4.left = 200
-                     tv3.setTextColor(tableTextColor)
-                     row0.addView(tv4)
-
-                     tableWorkTimes!!.addView(row0)
-
-                     WorktimeMain.staticWorkTimeArrayList = newMaterialsForMain
-                     actualiseWorktimesToTable()
-
-                 }
-                tableWorkTimes!!.addView(row)
-                id++
-                textId++
-            }
-        }
-    }
 
 
     companion object {
@@ -909,49 +686,7 @@ Workers.workerArray.add("Matthias Höpfler")
         }
         var adapter = WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList,applicationContext,this)
         tableWorkTimes!!.adapter = adapter
-       /* System.out.println(wegeRuest)
-        var i = 0
 
-        tableWorkTimes!!.removeAllViews()
-
-
-        var row0 = TableRow(this)
-        val tv1 = TextView(this)
-        tv1.text = " Beginn"
-        tv1.setTextColor(tableTextColor)
-        tv1.minimumWidth = 150
-        row0.minimumHeight = 30
-        row0.addView(tv1)
-
-        val tv2 = TextView(this)
-        tv2.text = " Ende"
-        tv2.minimumWidth = 150
-        tv2.setTextColor(tableTextColor)
-        row0.addView(tv2)
-
-        val tv5 = TextView(this)
-        tv5.text = "in h"
-        tv5.minimumWidth = 100
-        tv5.setTextColor(tableTextColor)
-        row0.addView(tv5)
-
-        val tv3 = TextView(this)
-        tv3.minimumWidth = 100
-        tv3.text = " W/R"
-        tv3.setTextColor(tableTextColor)
-        row0.addView(tv3)
-
-        val tv4 = TextView(this)
-        tv4.text = "Name"
-        tv4.left = 200
-        tv3.setTextColor(tableTextColor)
-        row0.addView(tv4)
-
-        tableWorkTimes!!.addView(row0)
-
-
-
-        actualiseWorktimesToTable()*/
 
 
     }

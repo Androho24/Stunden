@@ -7,17 +7,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
-    tools:context=".MainActivity">
+    tools:context=".Lager.LagerActivity">
 
 
     <!-- this the navigation view which draws and shows the navigation drawer -->
     <!-- include the menu created in the menu folder -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view_lager"
-        android:layout_width="wrap_content"
+        android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/nav_menu"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,7 +31,8 @@
             android:id="@+id/buttonPreviewLager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="40dp"
             android:text="Vorschau"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/buttonAddMaterialLager" />
@@ -36,75 +41,139 @@
             android:id="@+id/buttonAddMaterialLager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
-            android:layout_marginBottom="68dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="12dp"
             android:text="Hinzufügen"
             app:layout_constraintBottom_toTopOf="@+id/buttonPreviewLager"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollViewLager"
+            app:layout_constraintVertical_bias="0.776" />
 
         <Spinner
             android:id="@+id/spinnerCustomerLager"
-            android:layout_width="307dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="12dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView"
-            app:layout_constraintVertical_bias="0.446" />
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollViewLager"
             android:layout_width="411dp"
             android:layout_height="364dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="36dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerCustomerLager">
 
-            <TableLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tableMaterialLager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonAddMaterialMain">
+                android:layout_height="match_parent" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </TableLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="52dp"
             android:text="Kunde"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/checkBoxLagerZugang"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textViewLager"
+            android:layout_width="77dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Datum:"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/textViewDatumLager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Datum"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/textViewLager"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLager" />
+
+        <Button
+            android:id="@+id/buttonLagerDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bearbeiten"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewDatumLager"
+            app:layout_constraintEnd_toEndOf="@+id/buttonAddMaterialLager"
+            app:layout_constraintTop_toTopOf="@+id/textViewDatumLager" />
+
+        <Button
+            android:id="@+id/buttonLagerClearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leeren"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonAddMaterialLager"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/buttonAddMaterialLager" />
+
+        <CheckBox
+            android:id="@+id/checkBoxLagerZugang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            android:text="Zugang"
+            app:layout_constraintStart_toStartOf="@+id/textViewDatumLager"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDatumLager" />
+
+        <CheckBox
+            android:id="@+id/checkBoxLagerAbgang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:textSize="20sp"
+            android:text="Abgang"
+            app:layout_constraintBottom_toBottomOf="@+id/checkBoxLagerZugang"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxLagerZugang"
+            app:layout_constraintTop_toTopOf="@+id/checkBoxLagerZugang"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textSize="20sp"
+            android:text="Bearbeiter"
+            app:layout_constraintStart_toStartOf="@+id/checkBoxLagerZugang"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxLagerZugang" />
+
+        <Spinner
+            android:id="@+id/spinnerWorkersLager"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="@+id/textView5"
+            app:layout_constraintVertical_bias="0.515" />
+
+        <Button
+            android:id="@+id/buttonEditCustomerLager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bearbeiten"
+            app:layout_constraintBottom_toBottomOf="@+id/spinnerCustomerLager"
+            app:layout_constraintStart_toStartOf="@+id/buttonLagerDate"
+            app:layout_constraintTop_toTopOf="@+id/spinnerCustomerLager" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Pdf
 
 
 
@@ -8,12 +8,15 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.pdf.PdfRenderer
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
+import com.example.myapplication.BuildConfig
+import com.example.myapplication.R
+import com.example.myapplication.SigningCustomerFragment
+import com.example.myapplication.SigningFragment
 import com.itextpdf.io.image.ImageData
 import com.itextpdf.io.image.ImageDataFactory
 import com.itextpdf.kernel.pdf.PdfDocument
@@ -29,7 +32,8 @@ import java.io.InputStream
 import java.util.Objects
 
 
-class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedCompleteListener, SigningCustomerFragment.onSignedCustomerCompleteListener{
+class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedCompleteListener,
+    SigningCustomerFragment.onSignedCustomerCompleteListener {
 
     var pdfView: TouchImageView? = null
     var buttonSend: Button? = null

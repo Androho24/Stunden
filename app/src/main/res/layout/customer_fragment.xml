@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/CustomerFragment"
-    android:layout_width="match_parent" android:layout_height="700dp"
-    android:layout_gravity="center" android:orientation="vertical"  >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/editTextNachnameCustomer"
@@ -83,18 +85,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Speichern"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonNewClearCustomer"
         app:layout_constraintEnd_toEndOf="@+id/editTextProjectNumber"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.991"
         app:layout_constraintStart_toEndOf="@+id/buttonNewClearCustomer"
-        app:layout_constraintTop_toTopOf="@+id/buttonNewClearCustomer"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:layout_editor_absoluteY="594dp" />
 
     <Button
         android:id="@+id/buttonNewClearCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
         android:text="Leeren"
         app:layout_constraintStart_toStartOf="@+id/textViewProjrctNumber"
         app:layout_constraintTop_toBottomOf="@+id/editTextProjectNumber" />
@@ -177,18 +178,28 @@
         android:id="@+id/buttonAddExpandedCustomerCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="Auftraggeber"
-        app:layout_constraintBottom_toTopOf="@+id/buttonNewCustomerCustomer"
         app:layout_constraintEnd_toEndOf="@+id/buttonNewCustomerCustomer"
-        app:layout_constraintTop_toBottomOf="@+id/editTextProjectNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonNewCustomerCustomer" />
 
     <Button
         android:id="@+id/buttonDeleteCustomerFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Löschen"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonAddExpandedCustomerCustomer"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonNewClearCustomer"
+        app:layout_constraintEnd_toEndOf="@+id/editTextProjectNumber"
+        app:layout_constraintTop_toTopOf="@+id/buttonNewClearCustomer"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonCancelClientFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abbrechen"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonNewCustomerCustomer"
         app:layout_constraintStart_toStartOf="@+id/buttonNewClearCustomer"
-        app:layout_constraintTop_toTopOf="@+id/buttonAddExpandedCustomerCustomer" />
+        app:layout_constraintTop_toTopOf="@+id/buttonNewCustomerCustomer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

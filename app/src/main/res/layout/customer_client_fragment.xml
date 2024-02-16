@@ -5,11 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/CustomerClientFragment"
     android:layout_width="fill_parent" android:layout_height="700dp">
-<View
-    android:id="@+id/CustomerClientView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"></View>
 
+
+    <View
+        android:id="@+id/CustomerClientView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-137dp"
+        tools:layout_editor_absoluteY="80dp"></View>
 
     <EditText
         android:id="@+id/editTextNachnameCustomerClient"
@@ -78,9 +81,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Speichern"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonClearClient"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonCancelClient"
         app:layout_constraintEnd_toEndOf="@+id/editTextLocationCustomerClient"
-        app:layout_constraintTop_toTopOf="@+id/buttonClearClient"
+        app:layout_constraintTop_toTopOf="@+id/buttonCancelClient"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -155,5 +158,14 @@
         android:text="Abbrechen"
         app:layout_constraintStart_toStartOf="@+id/buttonClearClient"
         app:layout_constraintTop_toBottomOf="@+id/buttonClearClient" />
+
+    <Button
+        android:id="@+id/buttonDeleteClientFragmentExpanded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Löschen"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonClearClient"
+        app:layout_constraintStart_toStartOf="@+id/buttonSaveClient"
+        app:layout_constraintTop_toTopOf="@+id/buttonClearClient" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

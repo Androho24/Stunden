@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -39,6 +41,8 @@ class CustomerClientFragment : DialogFragment() {
     var buttonClearText: Button? = null
     var buttonSaveClient : Button? = null
     var customerID : String= ""
+
+    var buttonDeleteExmpanded : Button? = null
     interface onClientEventListener {
         fun onClientEventlistener(customerID :String)
     }
@@ -85,6 +89,7 @@ class CustomerClientFragment : DialogFragment() {
         buttonCancel = view.findViewById(R.id.buttonCancelClient)
         buttonClearText = view.findViewById(R.id.buttonClearClient)
         buttonSaveClient = view.findViewById(R.id.buttonSaveClient)
+        buttonDeleteExmpanded = view.findViewById(R.id.buttonDeleteClientFragmentExpanded)
 
         val title = requireArguments().getString("title", "Enter Name")
         dialog!!.setTitle(title)
@@ -112,27 +117,59 @@ class CustomerClientFragment : DialogFragment() {
       }
     }
 
+
+
     private fun onButtonClickListeners() {
       buttonSaveClient!!.setOnClickListener {
-          for (customer in Customer.arrayCustomers){
-              if (customer.customerId == customerID){
+          if(!editName!!.text.toString().isEmpty() && !editPrename!!.text.toString().isEmpty()) {
+              for (customer in Customer.arrayCustomers) {
+                  if (customer.customerId == customerID) {
 
-                  var clientCust = CustomerExpanded("","","","","","")
-                  clientCust.clientName = editName!!.text.toString()
-                  clientCust.clientPreName = editPrename!!.text.toString()
-                  clientCust.clientStreetName = editStreetName!!.text.toString()
-                  clientCust.clientStreetNumber = editStreetNumber!!.text.toString()
-                  clientCust.clientPlz = editPlz!!.text.toString()
-                  clientCust.clientLocation = editLocation!!.text.toString()
-                  customer.customerExpanded = clientCust
-                  var xmlTool = XmlTool()
-                  xmlTool.saveProfilesToXml(Customer.arrayCustomers,requireContext())
-                  this.dismiss()
+                      var clientCust = CustomerExpanded("", "", "", "", "", "")
+                      clientCust.clientName = editName!!.text.toString()
+                      clientCust.clientPreName = editPrename!!.text.toString()
+                      clientCust.clientStreetName = editStreetName!!.text.toString()
+                      clientCust.clientStreetNumber = editStreetNumber!!.text.toString()
+                      clientCust.clientPlz = editPlz!!.text.toString()
+                      clientCust.clientLocation = editLocation!!.text.toString()
+                      customer.customerExpanded = clientCust
+                      var xmlTool = XmlTool()
+                      xmlTool.saveProfilesToXml(Customer.arrayCustomers, requireContext())
+                      this.dismiss()
+                  }
               }
+              newClientListener!!.onClientEventlistener(customerID)
+              this.dismiss()
           }
-          newClientListener!!.onClientEventlistener(customerID)
-          this.dismiss()
+          else{
+              Toast.makeText(requireContext(), "Bitte Nachname oder Vorname hinzufügen", Toast.LENGTH_SHORT).show()
+          }
       }
+
+        buttonDeleteExmpanded!!.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Kunde löschen")
+            builder.setMessage("Wollen Sie wirklich den Kunden löschen?")
+//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                for (customer in Customer.arrayCustomers) {
+                    if (customer.customerId == customerID) {
+
+                        var clientCust = CustomerExpanded("", "", "", "", "", "")
+                        customer.customerExpanded = clientCust
+                        var xmlTool = XmlTool()
+                        xmlTool.saveProfilesToXml(Customer.arrayCustomers, requireContext())
+                        this.dismiss()
+                    }
+                }
+            }
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+            }
+
+            builder.show()
+        }
 
         buttonCancel!!.setOnClickListener {
             this.dismiss()

@@ -56,16 +56,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".PreviewPdfActivity"
+        <activity android:name=".Pdf.PreviewPdfActivity"
             android:exported="true">
         </activity>
         <activity android:name=".AddMaterialActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".LagerActivity"
+        <activity android:name=".Lager.LagerActivity"
             android:exported="true">
         </activity>
+        <activity android:name=".Lager.AddMaterialLagerActivity"
+            android:exported="true"
+            />
 
     </application>
 

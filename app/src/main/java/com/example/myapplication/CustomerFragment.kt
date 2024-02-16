@@ -45,6 +45,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
     var customerIdForEdit = ""
     var buttonClearText: Button? = null
     var buttonAddClient : Button? = null
+    var buttonCancel : Button? = null
 
 
     interface onNewCustomerEventListener {
@@ -309,7 +310,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         }
 
         buttonSaveCustomer!!.setOnClickListener {
-            if (editName!!.text.toString() != "") {
+            if (!editName!!.text.toString().isEmpty() && !editPrename!!.text.toString().isEmpty()) {
                 if (customerIdForEdit != "") {
                     for (customer in Customer.arrayCustomers) {
                         if (customer.customerId == customerIdForEdit) {
@@ -350,8 +351,11 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
                 }
                 this.dismiss()
             } else {
-                Toast.makeText(requireContext(), "Bitte Nachnamen hinzufügen", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(requireContext(), "Bitte Nachname oder Vorname hinzufügen", Toast.LENGTH_SHORT).show()
+            }
+
+            buttonCancel!!.setOnClickListener {
+                this.dismiss()
             }
         }
     }

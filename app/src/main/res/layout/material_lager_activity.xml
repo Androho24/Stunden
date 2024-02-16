@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <ScrollView
-            android:id="@+id/scrollViewMaterialLager"
+            android:id="@+id/scrollViewMaterialLagerAddLager"
             android:layout_width="416dp"
             android:layout_height="465dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -21,13 +21,13 @@
             app:layout_constraintVertical_bias="0.019">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycleViewMaterialLager"
+                android:id="@+id/recycleViewMaterialLagerAddLager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </ScrollView>
 
         <EditText
-            android:id="@+id/editTextFilterMaterialLager"
+            android:id="@+id/editTextFilterMaterialAddLager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="184dp"
@@ -35,52 +35,50 @@
             android:ems="10"
             android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollViewMaterialLager" />
+            app:layout_constraintTop_toBottomOf="@+id/scrollViewMaterialLagerAddLager" />
 
         <EditText
-            android:id="@+id/editTextUnitMaterialLager"
+            android:id="@+id/editTextNewMaterialMaterialAddLager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Einheit"
-            app:layout_constraintTop_toBottomOf="@+id/editTextFilterMaterialLager"
-            tools:layout_editor_absoluteX="32dp" />
-
-        <EditText
-            android:id="@+id/editTextNewMaterialMaterialLager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:ems="10"
             android:inputType="text"
             android:text="Name"
-            app:layout_constraintStart_toStartOf="@+id/editTextUnitMaterialLager"
-            app:layout_constraintTop_toBottomOf="@+id/editTextUnitMaterialLager" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerLagerAddLager"
+            tools:layout_editor_absoluteX="40dp" />
 
         <TextView
-            android:id="@+id/plainTextSearchMaterialLager"
+            android:id="@+id/plainTextSearchMaterialAddLager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Suche"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextFilterMaterialLager"
-            app:layout_constraintEnd_toStartOf="@+id/editTextFilterMaterialLager"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextFilterMaterialAddLager"
+            app:layout_constraintEnd_toStartOf="@+id/editTextFilterMaterialAddLager"
             app:layout_constraintHorizontal_bias="0.515"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextFilterMaterialLager"
+            app:layout_constraintTop_toTopOf="@+id/editTextFilterMaterialAddLager"
             app:layout_constraintVertical_bias="0.423" />
 
         <Button
-            android:id="@+id/buttonAddMaterialMaterialLager"
+            android:id="@+id/buttonAddMaterialMaterialAddLager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="Add"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNewMaterialMaterialLager"
-            app:layout_constraintStart_toEndOf="@+id/editTextNewMaterialMaterialLager"
-            app:layout_constraintTop_toTopOf="@+id/editTextNewMaterialMaterialLager"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextNewMaterialMaterialAddLager"
+            app:layout_constraintStart_toEndOf="@+id/editTextNewMaterialMaterialAddLager"
+            app:layout_constraintTop_toTopOf="@+id/editTextNewMaterialMaterialAddLager"
             app:layout_constraintVertical_bias="1.0" />
+
+        <Spinner
+            android:id="@+id/spinnerLagerAddLager"
+            android:layout_width="154dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="72dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plainTextSearchMaterialAddLager" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

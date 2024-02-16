@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".PreviewPdfActivity">
+    tools:context=".Pdf.PreviewPdfActivity">
 
 
     <com.github.gcacace.signaturepad.views.SignaturePad
