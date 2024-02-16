@@ -27,7 +27,7 @@ class SigningCustomerFragment : DialogFragment() {
         return inflater.inflate(R.layout.signing_worker_fragment, container)
     }
 
-    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonClear = view.findViewById(R.id.buttonClearWorkerSigning)
         buttonComplete = view.findViewById(R.id.buttonCompleteWorkerSigning)
@@ -37,7 +37,7 @@ class SigningCustomerFragment : DialogFragment() {
         dialog!!.setTitle(title)
         setButtonOnClickListeners()
 
-        getDialog()?.getWindow()?.setSoftInputMode(
+        dialog?.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
         )
     }
@@ -69,7 +69,7 @@ class SigningCustomerFragment : DialogFragment() {
             val frag = SigningCustomerFragment()
             val args = Bundle()
             args.putString("title", title)
-            frag.setArguments(args)
+            frag.arguments = args
             return frag
         }
     }

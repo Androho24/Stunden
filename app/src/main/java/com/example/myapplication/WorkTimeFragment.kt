@@ -173,7 +173,7 @@ class WorkTimeFragment : DialogFragment() {
         }
     }
 
-    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View,  savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Get field from view
         buttonSave = view.findViewById(R.id.buttonSaveWorktime)
@@ -193,7 +193,7 @@ class WorkTimeFragment : DialogFragment() {
 
         val title = requireArguments().getString("title", "Enter Name")
         dialog!!.setTitle(title)
-        getDialog()?.getWindow()?.setSoftInputMode(
+        dialog?.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
         )
     }
@@ -218,7 +218,7 @@ class WorkTimeFragment : DialogFragment() {
             val frag = WorkTimeFragment()
             val args = Bundle()
             args.putString("title", title)
-            frag.setArguments(args)
+            frag.arguments = args
             return frag
         }
     }

@@ -40,7 +40,7 @@ class PDFCreator {
         // Creating a Document object
         doc = Document(pdfDoc)
 
-        doc!!.add(firmenTable(drawable!!))
+        doc.add(firmenTable(drawable!!))
 
         // Creating a table
         val pointColumnWidths1 = floatArrayOf(400f,100f)
@@ -60,7 +60,7 @@ class PDFCreator {
         cell2.add("Lfd.-Nr.:"+count)
         cell2.setFontSize(10f)
         table.addCell(cell2)
-        doc!!.add(table)
+        doc.add(table)
 
         val auftragColumns = floatArrayOf(250f,250f)
         val tableAuftrag = Table(auftragColumns)
@@ -112,10 +112,10 @@ class PDFCreator {
 
 
 
-        doc!!.add(tableAuftrag)
-        doc!!.add(tableZeiten(worktimes,date,arbeitsbeschreibung))
-        doc!!.add(tableMaterial())
-        doc!!.add(tableSigning(date,location))
+        doc.add(tableAuftrag)
+        doc.add(tableZeiten(worktimes,date,arbeitsbeschreibung))
+        doc.add(tableMaterial())
+        doc.add(tableSigning(date,location))
 
 
      return doc
@@ -292,7 +292,7 @@ class PDFCreator {
 
 // This adds the image to the page
 // This adds the image to the page
-        cell2!!.add(image)
+        cell2.add(image)
 
 
         return table

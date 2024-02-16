@@ -84,11 +84,12 @@
         android:id="@+id/buttonNewCustomerCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Speichern"
         app:layout_constraintEnd_toEndOf="@+id/editTextProjectNumber"
-        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintHorizontal_bias="0.983"
         app:layout_constraintStart_toEndOf="@+id/buttonNewClearCustomer"
-        tools:layout_editor_absoluteY="594dp" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonDeleteCustomerFrag" />
 
     <Button
         android:id="@+id/buttonNewClearCustomer"

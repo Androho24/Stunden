@@ -125,9 +125,9 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         buttonChangeLocation = findViewById(R.id.buttonChangeLocationMain)
         editTextChangeLocation = findViewById(R.id.editTextChangeLocationMain)
         tableWorkTimes = findViewById(R.id.tableWorktimes)
-        tableWorkTimes!!.setLayoutManager(LinearLayoutManager(this))
+        tableWorkTimes!!.layoutManager = LinearLayoutManager(this)
         tableMaterial = findViewById(R.id.tableMaterialMain)
-        tableMaterial!!.setLayoutManager(LinearLayoutManager(this));
+        tableMaterial!!.layoutManager = LinearLayoutManager(this)
 
         scrollViewMateriel = findViewById(R.id.scrollView4)
 
@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
         navView = findViewById(R.id.nav_view)
 /**/
-        navView!!.bringToFront();
+        navView!!.bringToFront()
 
         navView!!.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -261,13 +261,13 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         if (locationByGPS != null && locationByNetwork != null) {
             if (locationByGPS.accuracy > locationByNetwork!!.accuracy) {
                 locationCoordinates = locationByGPS
-                latitude = locationCoordinates!!.latitude
-                longitude = locationCoordinates!!.longitude
+                latitude = locationCoordinates.latitude
+                longitude = locationCoordinates.longitude
                 // use latitude and longitude as per your need
             } else {
                 locationCoordinates = locationByNetwork
                 latitude = locationCoordinates!!.latitude
-                longitude = locationCoordinates!!.longitude
+                longitude = locationCoordinates.longitude
                 // use latitude and longitude as per your need
             }
         }
@@ -275,7 +275,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
         var geocoder : Geocoder
         var addresses: List<Address>
-        geocoder =  Geocoder(this, Locale.getDefault());
+        geocoder =  Geocoder(this, Locale.getDefault())
 
         if(geocoder != null) {
             addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
@@ -356,7 +356,7 @@ Workers.workerArray.add("Matthias Höpfler")
             customerList.add(customer.name + ", " + customer.preName + ", " + customer.streetName)
         }
         val dataAdapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, customerList!!)
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, customerList)
         dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         spinnerCustomer!!.adapter = dataAdapter
     }

@@ -39,7 +39,7 @@ class LagerPdfCreator {
         doc = Document(pdfDoc)
 
 
-        doc!!.add(createHeader(drawable))
+        doc.add(createHeader(drawable))
 
         val pointColumnWidths1 = floatArrayOf(400f,100f)
         val table = Table(pointColumnWidths1)
@@ -58,7 +58,7 @@ class LagerPdfCreator {
         cell2.add(richtung)
         cell2.setFontSize(18f)
         table.addCell(cell2)
-        doc!!.add(table)
+        doc.add(table)
 
         val auftragColumns = floatArrayOf(250f,250f)
         val tableAuftrag = Table(auftragColumns)
@@ -116,10 +116,10 @@ class LagerPdfCreator {
         tableAuftrag.addCell(cellBearbeiter2)
 
 
-        doc!!.add(tableAuftrag)
+        doc.add(tableAuftrag)
 
-        doc!!.add(tableMaterial())
-        doc!!.add(tableSigning(date,location))
+        doc.add(tableMaterial())
+        doc.add(tableSigning(date,location))
 
         return doc
 
@@ -167,7 +167,7 @@ class LagerPdfCreator {
 
 // This adds the image to the page
 // This adds the image to the page
-        cell2!!.add(image)
+        cell2.add(image)
 
 
         return table

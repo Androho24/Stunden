@@ -30,11 +30,11 @@
             android:id="@+id/editTextFilterMaterialAddLager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="184dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="16dp"
             android:ems="10"
             android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/plainTextSearchMaterialAddLager"
             app:layout_constraintTop_toBottomOf="@+id/scrollViewMaterialLagerAddLager" />
 
         <EditText
@@ -45,21 +45,20 @@
             android:ems="10"
             android:inputType="text"
             android:text="Name"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerLagerAddLager"
-            tools:layout_editor_absoluteX="40dp" />
+            app:layout_constraintStart_toStartOf="@+id/spinnerLagerAddLager"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerLagerAddLager" />
 
         <TextView
             android:id="@+id/plainTextSearchMaterialAddLager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:text="Suche"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/editTextFilterMaterialAddLager"
-            app:layout_constraintEnd_toStartOf="@+id/editTextFilterMaterialAddLager"
-            app:layout_constraintHorizontal_bias="0.515"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editTextFilterMaterialAddLager"
-            app:layout_constraintVertical_bias="0.423" />
+            app:layout_constraintVertical_bias="0.388" />
 
         <Button
             android:id="@+id/buttonAddMaterialMaterialAddLager"

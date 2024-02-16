@@ -64,16 +64,16 @@ class CustomerClientFragment : DialogFragment() {
 
     ): View {
 
-            customerID = getArguments()?.getString("customerid").toString();
+            customerID = arguments?.getString("customerid").toString()
 
 
-            var view : View = inflater.inflate(R.layout.customer_client_fragment, container,false)
+        var view : View = inflater.inflate(R.layout.customer_client_fragment, container,false)
 
             return view
 
     }
 
-    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var windowManager : WindowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
         var display = windowManager.defaultDisplay
@@ -93,7 +93,7 @@ class CustomerClientFragment : DialogFragment() {
 
         val title = requireArguments().getString("title", "Enter Name")
         dialog!!.setTitle(title)
-        getDialog()?.getWindow()?.setSoftInputMode(
+        dialog?.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
         )
         setContent()
@@ -190,7 +190,7 @@ class CustomerClientFragment : DialogFragment() {
             val frag = CustomerClientFragment()
             val args = Bundle()
             args.putString("title", title)
-            frag.setArguments(args)
+            frag.arguments = args
             return frag
         }
     }

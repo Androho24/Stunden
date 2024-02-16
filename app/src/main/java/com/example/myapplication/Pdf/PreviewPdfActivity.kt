@@ -52,15 +52,15 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         buttonCustomerSign = findViewById(R.id.buttonSignCustomerPreview)
         val bundle = intent.extras
         path = bundle!!.getString("path").toString()
-        pathToSave = bundle!!.getString("pathToSave").toString()
-        customerName = bundle!!.getString("customerName").toString()
+        pathToSave = bundle.getString("pathToSave").toString()
+        customerName = bundle.getString("customerName").toString()
         customerPrename = bundle.getString("customerPrename").toString()
         buttonOnClickListeners()
         val file: File = File(path)
         if (!file.exists()) {
             // Since PdfRenderer cannot handle the compressed asset file directly, we copy it into
             // the cache directory.
-            val asset: InputStream = applicationContext.getAssets().open(path)
+            val asset: InputStream = applicationContext.assets.open(path)
             val output = FileOutputStream(file)
             val buffer = ByteArray(2048)
             var size: Int
@@ -122,9 +122,9 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
             var adress = arrayOf<String>("matthias.hoepfler@gmail.com")
 
             var photoURI = FileProvider.getUriForFile(
-                Objects.requireNonNull(getApplicationContext()),
+                Objects.requireNonNull(applicationContext),
                 BuildConfig.APPLICATION_ID + ".provider", uri
-            );
+            )
             val intent = Intent(Intent.ACTION_SEND)
             intent.putExtra(Intent.EXTRA_EMAIL, adress)
             intent.putExtra(Intent.EXTRA_SUBJECT, "Arbeitsnachweis")
@@ -135,8 +135,8 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
             intent.type = "message/rfc822"
-            intent.setType("application/pdf");
-            intent.putExtra(Intent.EXTRA_STREAM, photoURI);
+            intent.setType("application/pdf")
+            intent.putExtra(Intent.EXTRA_STREAM, photoURI)
             if (intent.resolveActivity(packageManager) != null) {
                 startActivity(intent)
             }

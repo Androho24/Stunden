@@ -30,7 +30,7 @@ class AddMaterialLagerActivity : AppCompatActivity() {
         setContentView(R.layout.material_lager_activity)
         tableMaterial = findViewById(R.id.recycleViewMaterialLagerAddLager)
         editTextFilter = findViewById(R.id.editTextFilterMaterialAddLager)
-        tableMaterial!!.setLayoutManager(LinearLayoutManager(this));
+        tableMaterial!!.layoutManager = LinearLayoutManager(this)
         buttonAddMaterial = findViewById(R.id.buttonAddMaterialMaterialAddLager)
         editUnit = findViewById(R.id.spinnerLagerAddLager)
         editMatName = findViewById(R.id.editTextNewMaterialMaterialAddLager)
@@ -51,7 +51,7 @@ class AddMaterialLagerActivity : AppCompatActivity() {
         unitList.add("m")
 
         val dataAdapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unitList!!)
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unitList)
         dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         editUnit!!.adapter = dataAdapter
     }
@@ -78,7 +78,7 @@ class AddMaterialLagerActivity : AppCompatActivity() {
                 var listMaterial = ArrayList<Material>()
                 for (mat in Material.materials) {
 
-                    if(mat.material!!.contains(editTextFilter!!.text.toString(),ignoreCase = true)){
+                    if(mat.material.contains(editTextFilter!!.text.toString(),ignoreCase = true)){
                         listMaterial.add(mat)
                     }
 

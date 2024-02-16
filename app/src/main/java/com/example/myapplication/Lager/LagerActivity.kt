@@ -72,7 +72,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
             ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
         buttonAddMaterial = findViewById(R.id.buttonAddMaterialLager)
         tableMaterial = findViewById(R.id.tableMaterialLager)
-        tableMaterial!!.setLayoutManager(LinearLayoutManager(this))
+        tableMaterial!!.layoutManager = LinearLayoutManager(this)
         editTextDate = findViewById(R.id.textViewDatumLager)
         buttonPreview = findViewById(R.id.buttonPreviewLager)
         buttonClearAll = findViewById(R.id.buttonLagerClearAll)
@@ -103,7 +103,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
         navView = findViewById(R.id.nav_view_lager)
 
 
-        navView!!.bringToFront();
+        navView!!.bringToFront()
 
         navView!!.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -132,7 +132,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
             customerList.add(customer.name + ", " + customer.preName + ", " + customer.streetName)
         }
         val dataAdapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, customerList!!)
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, customerList)
         dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         spinnerCustomer!!.adapter = dataAdapter
     }
@@ -285,7 +285,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
             var pdfCreator = LagerPdfCreator()
             var pathToSave =
                 "/storage/emulated/0/Documents/ElektroEibauer/Materialschein/" + selectedCustomer.name + "_" + selectedCustomer.preName + "/" + "Arbeitsnachweis_Nr_" + count + "_" + editTextDate!!.text.toString() + "_" + selectedCustomer.name + "_" + customerCount + "_" + ".pdf"
-            var document = pdfCreator!!.returnLagerPdf(
+            var document = pdfCreator.returnLagerPdf(
                 myIcon,
                 editTextDate!!.text.toString(),
                 spinnerWorkers!!.selectedItem.toString(),
@@ -354,7 +354,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
 
     override fun onNewCustomerListener() {
         var xmlTool = XmlTool()
-        xmlTool!!.saveProfilesToXml(Customer.arrayCustomers, applicationContext)
+        xmlTool.saveProfilesToXml(Customer.arrayCustomers, applicationContext)
         setSpinnerCustomer()
     }
 }

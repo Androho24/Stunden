@@ -52,10 +52,6 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         fun onNewCustomerListener()
     }
 
-    override fun onCreate(SavedInstanceState: Bundle?) {
-        super.onCreate(SavedInstanceState)
-    }
-
     var newCustomerListener: onNewCustomerEventListener? = null
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
@@ -82,7 +78,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         return inflater.inflate(R.layout.customer_fragment, container,false)
     }
 
-    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Get field from view
         var windowManager : WindowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -105,7 +101,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
 
         val title = requireArguments().getString("title", "Enter Name")
         dialog!!.setTitle(title)
-        getDialog()?.getWindow()?.setSoftInputMode(
+        dialog?.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
         )
 
@@ -181,7 +177,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         val dataAdapter = ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            customerList!!
+            customerList
         )
         dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         spinnerCustomers!!.adapter = dataAdapter
@@ -367,7 +363,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
             val frag = CustomerFragment()
             val args = Bundle()
             args.putString("title", title)
-            frag.setArguments(args)
+            frag.arguments = args
             return frag
         }
     }

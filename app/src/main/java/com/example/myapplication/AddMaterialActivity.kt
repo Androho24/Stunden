@@ -28,7 +28,7 @@ class AddMaterialActivity : AppCompatActivity() {
         setContentView(R.layout.add_material_activity)
         tableMaterial = findViewById(R.id.recycleViewMaterial)
         editTextFilter = findViewById(R.id.editTextFilterMaterial)
-        tableMaterial!!.setLayoutManager(LinearLayoutManager(this));
+        tableMaterial!!.layoutManager = LinearLayoutManager(this)
         buttonAddMaterial = findViewById(R.id.buttonAddMaterialMaterial)
         spinnerUnit = findViewById(R.id.spinnerAddMaterialMaterial)
         editMatName = findViewById(R.id.editTextNewMaterialMaterial)
@@ -49,7 +49,7 @@ class AddMaterialActivity : AppCompatActivity() {
         unitList.add("m")
 
         val dataAdapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unitList!!)
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unitList)
         dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         spinnerUnit!!.adapter = dataAdapter
     }
@@ -76,7 +76,7 @@ class AddMaterialActivity : AppCompatActivity() {
                 var listMaterial = ArrayList<Material>()
                 for (mat in Material.materials) {
 
-                    if(mat.material!!.contains(editTextFilter!!.text.toString(),ignoreCase = true)){
+                    if(mat.material.contains(editTextFilter!!.text.toString(),ignoreCase = true)){
                         listMaterial.add(mat)
                     }
 

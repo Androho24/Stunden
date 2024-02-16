@@ -67,7 +67,7 @@ class MaterialAdapterMain(private var dataSet: ArrayList<CustomerMaterial>, priv
                }
            }
             CustomerMaterial.customerMaterials = newMats
-           adapterItemClickListener!!.onMaterialDeletedListener()
+           adapterItemClickListener.onMaterialDeletedListener()
 
 
 
