@@ -1,8 +1,10 @@
 package com.example.myapplication
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Xml
 import android.view.LayoutInflater
@@ -19,8 +21,12 @@ import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.example.myapplication.Adapter.MaterialAdapterMain
+import com.example.myapplication.Adapter.WorktimeAdapterMain
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
+import com.example.myapplication.Objects.CustomerMaterial
+import com.example.myapplication.Objects.WorktimeMain
 import java.util.UUID
 
 class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventListener {
@@ -238,33 +244,68 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         }
 
         buttonDelete!!.setOnClickListener {
-            var newCustomers = ArrayList<Customer>()
-            for (cust in Customer.arrayCustomers){
-                if (editName!!.text.toString() == cust.name && editPrename!!.text.toString() == cust.preName && editStreetName!!.text.toString() == cust.streetName){
+
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Kunde löschen")
+            builder.setMessage("Wollen Sie wirklich den Kunden löschen?")
+//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                var newCustomers = ArrayList<Customer>()
+                for (cust in Customer.arrayCustomers){
+                    if (editName!!.text.toString() == cust.name && editPrename!!.text.toString() == cust.preName && editStreetName!!.text.toString() == cust.streetName){
+
+                    }
+                    else{
+                        newCustomers.add(cust)
+                    }
+
+                    Customer.arrayCustomers = newCustomers
+                    setSpinnerCustomerContent()
 
                 }
-                else{
-                    newCustomers.add(cust)
-                }
+                var xmlTool = XmlTool()
+                xmlTool.saveProfilesToXml(Customer.arrayCustomers, requireContext())
+            }
 
-                Customer.arrayCustomers = newCustomers
-                setSpinnerCustomerContent()
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
 
             }
-            var xmlTool = XmlTool()
-            xmlTool.saveProfilesToXml(Customer.arrayCustomers, requireContext())
+
+            builder.show()
+
+
         }
 
         buttonClearText!!.setOnClickListener {
-            editLocation!!.setText("")
-            editName!!.setText("")
-            editPlz!!.setText("")
-            editPrename!!.setText("")
-            editStreetName!!.setText("")
-            editStreetNumber!!.setText("")
-            editProjectNumber!!.setText("")
 
-            customerIdForEdit = ""
+
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Eingaben löschen")
+            builder.setMessage("Wollen Sie wirklich alle Eingaben löschen?")
+//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                editLocation!!.setText("")
+                editName!!.setText("")
+                editPlz!!.setText("")
+                editPrename!!.setText("")
+                editStreetName!!.setText("")
+                editStreetNumber!!.setText("")
+                editProjectNumber!!.setText("")
+
+                customerIdForEdit = ""
+            }
+
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+            }
+
+            builder.show()
+
+
+
+
         }
 
         buttonSaveCustomer!!.setOnClickListener {

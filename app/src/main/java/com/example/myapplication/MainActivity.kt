@@ -4,6 +4,7 @@ package com.example.myapplication
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -35,10 +36,12 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
@@ -51,6 +54,7 @@ import com.example.myapplication.Interfaces.MainActivityWorktimeInterface
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
+import com.example.myapplication.Objects.Material
 import com.example.myapplication.Objects.Workers
 import com.example.myapplication.Objects.WorktimeMain
 import com.example.myapplication.Pdf.PDFCreator
@@ -188,24 +192,58 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         else{
             tableTextColor = Color.BLACK
         }
-        if (ActivityCompat.checkSelfPermission(
-                this,
+
+
+        val requestPermissionLauncher =
+            registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted: Boolean ->
+                if (isGranted) {
+                    // Permission is granted. Continue the action or workflow in your
+                    // app.
+                } else {
+                    // Explain to the user that the feature is unavailable because the
+                    // feature requires a permission that the user has denied. At the
+                    // same time, respect the user's decision. Don't link to system
+                    // settings in an effort to convince the user to change their
+                    // decision.
+                }
+            }
+
+        when {
+            ContextCompat.checkSelfPermission(
+                applicationContext,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(
-                    android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                return)
-                        Toast.makeText(this,"Bitte Lokalisierung erlauben",Toast.LENGTH_SHORT).show()
-            return
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                // You can use the API that requires the permission.
+
+            }
+            else -> {
+                // You can directly ask for the permission.
+                ActivityCompat.requestPermissions(this@MainActivity,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 111)
+
+            }
         }
+
+        when {
+            ContextCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                // You can use the API that requires the permission.
+
+            }
+            else -> {
+                // You can directly ask for the permission.
+                requestPermissions(
+                    arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),112)
+            }
+        }
+
+
+
+
         var locationByGPS = fusedLocationClient!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
         var locationByNetwork = fusedLocationClient!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
 
@@ -359,44 +397,33 @@ Workers.workerArray.add("Matthias Höpfler")
         }
 
         buttonClearAll!!.setOnClickListener {
-            tableWorkTimes!!.removeAllViews()
-            WorktimeMain.staticWorkTimeArrayList.clear()
-            workDescriptionInput!!.editText!!.setText("")
-            var textColor = Color.BLACK
 
-            var row0 = TableRow(this)
-            val tv1 = TextView(this)
-            tv1.text = " Beginn"
-            tv1.setTextColor(textColor)
-            tv1.minimumWidth = 150
-            row0.minimumHeight = 30
-            row0.addView(tv1)
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Eingaben löschen")
+            builder.setMessage("Wollen Sie wirklich alle Eingaben löschen?")
+//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
 
-            val tv2 = TextView(this)
-            tv2.text = " Ende"
-            tv2.minimumWidth = 150
-            tv2.setTextColor(textColor)
-            row0.addView(tv2)
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                tableWorkTimes!!.removeAllViews()
+                WorktimeMain.staticWorkTimeArrayList.clear()
+                workDescriptionInput!!.editText!!.setText("")
+                var adapterWT = WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList,applicationContext,this)
+                tableWorkTimes!!.adapter = adapterWT
+                CustomerMaterial.customerMaterials.clear()
+                var adapterMaterial = MaterialAdapterMain(CustomerMaterial.customerMaterials,applicationContext,this)
+                tableMaterial!!.adapter = adapterMaterial
+                var textColor = Color.BLACK
+            }
 
-            val tv5 = TextView(this)
-            tv5.text = "in h"
-            tv5.minimumWidth = 100
-            tv5.setTextColor(textColor)
-            row0.addView(tv5)
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
 
-            val tv3 = TextView(this)
-            tv3.minimumWidth = 100
-            tv3.text = " W/R"
-            tv3.setTextColor(textColor)
-            row0.addView(tv3)
+            }
 
-            val tv4 = TextView(this)
-            tv4.text = "Name"
-            tv4.left = 200
-            tv3.setTextColor(textColor)
-            row0.addView(tv4)
+            builder.show()
 
-            tableWorkTimes!!.addView(row0)
+
+
+
         }
 
         buttonPreview!!.setOnClickListener {
@@ -958,6 +985,31 @@ Workers.workerArray.add("Matthias Höpfler")
     override fun onWorktimeDeletedListener() {
         var adapter = WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList,applicationContext,this)
         tableWorkTimes!!.adapter = adapter
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            111 -> {
+                // If request is cancelled, the result arrays are empty.
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    // Permission is granted. Continue the action or workflow
+                    // in your app.
+                } else {
+                   Toast.makeText(applicationContext,"Um die App zu verwenden bitte Standortfreigabe aktiviere",Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                return
+            }
+
+            // Add other 'when' lines to check for other
+            // permissions this app might request.
+            else -> {
+                // Ignore all other requests.
+            }
+        }
     }
 
 
