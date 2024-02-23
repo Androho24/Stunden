@@ -113,8 +113,8 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
                     true
                 }
                 else -> {
-                    Toast.makeText(this,"hello", Toast.LENGTH_SHORT)
-                    false
+                    drawerLayout!!.closeDrawers()
+                    true
                 }
             }
         }
@@ -284,7 +284,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
             var myIcon = resources.getDrawable(R.drawable.img)
             var pdfCreator = LagerPdfCreator()
             var pathToSave =
-                "/storage/emulated/0/Documents/ElektroEibauer/Materialschein/" + selectedCustomer.name + "_" + selectedCustomer.preName + "/" + "Arbeitsnachweis_Nr_" + count + "_" + editTextDate!!.text.toString() + "_" + selectedCustomer.name + "_" + customerCount + "_" + ".pdf"
+                "/storage/emulated/0/Documents/ElektroEibauer/Materialschein/" + selectedCustomer.name + "_" + selectedCustomer.preName + "/" + "Materialschein_Nr_" + count + "_" + editTextDate!!.text.toString() + "_" + selectedCustomer.name + "_" + customerCount + "_" + ".pdf"
             var document = pdfCreator.returnLagerPdf(
                 myIcon,
                 editTextDate!!.text.toString(),
@@ -302,6 +302,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
             myIntent.putExtra("pathToSave", pathToSave)
             myIntent.putExtra("customerPrename", selectedCustomer.preName)
             myIntent.putExtra("customerName", selectedCustomer.name)
+            myIntent.putExtra("isLager","true")
 
             startActivity(myIntent)
         }

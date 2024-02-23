@@ -57,11 +57,14 @@ import com.example.myapplication.Objects.Workers
 import com.example.myapplication.Objects.WorktimeMain
 import com.example.myapplication.Pdf.PDFCreator
 import com.example.myapplication.Pdf.PreviewPdfActivity
+import com.example.myapplication.Worktime.WorkTimeFragment
+import com.example.myapplication.Worktime.WorktimeEditFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputLayout
 import com.itextpdf.layout.Document
 import org.apache.commons.io.FileUtils
 import java.io.File
+import java.io.IOException
 import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -70,13 +73,13 @@ import java.util.Locale
 
 @SuppressLint("SetJavaScriptEnabled")
 class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnter,
-    CustomerFragment.onNewCustomerEventListener,CustomerClientFragment.onClientEventListener,
-    MainActivityMatInterface,MainActivityWorktimeInterface {
+    CustomerFragment.onNewCustomerEventListener, CustomerClientFragment.onClientEventListener,WorktimeEditFragment.onWorktimeEditEventLisnter,
+    MainActivityMatInterface, MainActivityWorktimeInterface {
     // var ourWorkbook: Workbook? = null
     //var sheet: Sheet? = null
     var buttonSetDate: Button? = null
     var buttonPreview: Button? = null
-    var buttonAddMaterial : Button? = null
+    var buttonAddMaterial: Button? = null
     var date: TextView? = null
     var buttonClearAll: Button? = null
     var buttonEditCustomer: Button? = null
@@ -86,9 +89,9 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var tableMaterial: RecyclerView? = null
     var spinnerCustomer: Spinner? = null
     var workDescriptionInput: TextInputLayout? = null
-    var editTextChangeLocation : EditText? = null
+    var editTextChangeLocation: EditText? = null
     var xmlTool: XmlTool? = null
-    var scrollViewMateriel:NestedScrollView? = null
+    var scrollViewMateriel: NestedScrollView? = null
     var mContext: Context? = null
     var mHtmlString: String? = null
     var mPdfFile: File? = null
@@ -98,17 +101,18 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var doc: Document? = null
     var myIcon: Drawable? = null
     var pdfCreator: PDFCreator? = null
-    var fusedLocationClient : LocationManager? = null
-    var isNightModeOn : Boolean = false
-//    var locationByGPS
+    var fusedLocationClient: LocationManager? = null
+    var isNightModeOn: Boolean = false
+
+    //    var locationByGPS
 //    var locationByNetwork
     var location = "Moosthenning"
     var tableTextColor = Color.BLACK
 
     var drawerLayout: DrawerLayout? = null
     var actionBarDrawerToggle: ActionBarDrawerToggle? = null
-    var navView : NavigationView? = null
-    var menuDraw : Menu? = null
+    var navView: NavigationView? = null
+    var menuDraw: Menu? = null
 
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -121,7 +125,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         buttonClearAll = findViewById<Button>(R.id.buttonClearMain)
         buttonEditCustomer = findViewById<Button>(R.id.buttonEditCustomerMain)
         buttonAddWorkTime = findViewById(R.id.buttonAddWorkTimeMain)
-        buttonAddMaterial= findViewById(R.id.buttonAddMaterialMain)
+        buttonAddMaterial = findViewById(R.id.buttonAddMaterialMain)
         buttonChangeLocation = findViewById(R.id.buttonChangeLocationMain)
         editTextChangeLocation = findViewById(R.id.editTextChangeLocationMain)
         tableWorkTimes = findViewById(R.id.tableWorktimes)
@@ -155,13 +159,13 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        val filedir : File = File("/storage/emulated/0/Documents/ElektroEibauer/")
+        val filedir: File = File("/storage/emulated/0/Documents/ElektroEibauer/")
         if (!filedir.exists()) {
             var fdir = File("/storage/emulated/0/Documents/", "ElektroEibauer")
             fdir.mkdir()
         }
 
-        val filedirMat : File = File("/storage/emulated/0/Documents/ElektroEibauer/Materialschein/")
+        val filedirMat: File = File("/storage/emulated/0/Documents/ElektroEibauer/Materialschein/")
         if (!filedirMat.exists()) {
             var fdir = File("/storage/emulated/0/Documents/ElektroEibauer", "Materialschein")
             fdir.mkdir()
@@ -169,7 +173,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
 
         navView = findViewById(R.id.nav_view)
-/**/
+        /**/
         navView!!.bringToFront()
 
         navView!!.setNavigationItemSelectedListener { menuItem ->
@@ -179,22 +183,30 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                     startActivity(myIntent)
                     true
                 }
+
                 else -> {
-                    Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show()
-                    false
+                    drawerLayout!!.closeDrawers()
+                    true
                 }
             }
         }
 
         when (mode) {
-            Configuration.UI_MODE_NIGHT_NO -> {isNightModeOn = false}
-            Configuration.UI_MODE_NIGHT_YES -> {isNightModeOn = true}
-            Configuration.UI_MODE_NIGHT_UNDEFINED -> {isNightModeOn = false }
+            Configuration.UI_MODE_NIGHT_NO -> {
+                isNightModeOn = false
+            }
+
+            Configuration.UI_MODE_NIGHT_YES -> {
+                isNightModeOn = true
+            }
+
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> {
+                isNightModeOn = false
+            }
         }
-        if (isNightModeOn){
+        if (isNightModeOn) {
             tableTextColor = Color.WHITE
-        }
-        else{
+        } else {
             tableTextColor = Color.BLACK
         }
 
@@ -223,10 +235,13 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 // You can use the API that requires the permission.
 
             }
+
             else -> {
                 // You can directly ask for the permission.
-                ActivityCompat.requestPermissions(this@MainActivity,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 111)
+                ActivityCompat.requestPermissions(
+                    this@MainActivity,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 111
+                )
 
             }
         }
@@ -239,25 +254,26 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 // You can use the API that requires the permission.
 
             }
+
             else -> {
                 // You can directly ask for the permission.
                 requestPermissions(
-                    arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),112)
+                    arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 112
+                )
             }
         }
 
 
-
-
         var locationByGPS = fusedLocationClient!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-        var locationByNetwork = fusedLocationClient!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        var locationByNetwork =
+            fusedLocationClient!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
 
         locationByNetwork?.let {
             locationByNetwork = locationByGPS
         }
-        var latitude : Double = 0.0
-        var longitude : Double = 0.0
-        var locationCoordinates : Location? = null
+        var latitude: Double = 0.0
+        var longitude: Double = 0.0
+        var locationCoordinates: Location? = null
         if (locationByGPS != null && locationByNetwork != null) {
             if (locationByGPS.accuracy > locationByNetwork!!.accuracy) {
                 locationCoordinates = locationByGPS
@@ -273,17 +289,27 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         }
 
 
-        var geocoder : Geocoder
-        var addresses: List<Address>
-        geocoder =  Geocoder(this, Locale.getDefault())
+        var geocoder: Geocoder
+        var locale: Locale = Locale("de", "de", "Moosthenning")
+        var address: Address = Address(locale)
 
-        if(geocoder != null) {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
-            if (!addresses.isEmpty()) {
-                location = addresses[0].locality
+        var addresses: List<Address> = emptyList()
+
+        geocoder = Geocoder(this, Locale.getDefault())
+
+        if (geocoder != null) {
+            try {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
+                if (!addresses.isEmpty()) {
+                    location = addresses[0].locality
+                }
+                else{
+                    location ="Moosthenning"
+                }
+            } catch (e: IOException) {
+
             }
-        }
-        else{
+        } else {
             location = "Moosthenning"
         }
         System.setProperty(
@@ -306,7 +332,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         myIcon = resources.getDrawable(R.drawable.img)
 
 
-Workers.workerArray.add("Matthias Höpfler")
+        Workers.workerArray.add("Matthias Höpfler")
 
         Workers.workerArray.add("Heizer Oliver")
 
@@ -411,10 +437,18 @@ Workers.workerArray.add("Matthias Höpfler")
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
                 WorktimeMain.staticWorkTimeArrayList.clear()
                 workDescriptionInput!!.editText!!.setText("")
-                var adapterWT = WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList,applicationContext,this)
+                var adapterWT = WorktimeAdapterMain(
+                    WorktimeMain.staticWorkTimeArrayList,
+                    applicationContext,
+                    this
+                )
                 tableWorkTimes!!.adapter = adapterWT
                 CustomerMaterial.customerMaterials.clear()
-                var adapterMaterial = MaterialAdapterMain(CustomerMaterial.customerMaterials,applicationContext,this)
+                var adapterMaterial = MaterialAdapterMain(
+                    CustomerMaterial.customerMaterials,
+                    applicationContext,
+                    this
+                )
                 tableMaterial!!.adapter = adapterMaterial
                 var textColor = Color.BLACK
             }
@@ -426,13 +460,11 @@ Workers.workerArray.add("Matthias Höpfler")
             builder.show()
 
 
-
-
         }
 
         buttonPreview!!.setOnClickListener {
-            var customExpand = CustomerExpanded("","","","","","")
-            var selectedCustomer = Customer("", "", "", "", "", "", "", "",customExpand)
+            var customExpand = CustomerExpanded("", "", "", "", "", "")
+            var selectedCustomer = Customer("", "", "", "", "", "", "", "", customExpand)
             var spinnerStringCustomer = spinnerCustomer!!.selectedItem.toString()
 
             var name = spinnerStringCustomer.split(", ")
@@ -442,22 +474,20 @@ Workers.workerArray.add("Matthias Höpfler")
                         selectedCustomer = customer
                     }
                 }
-            }
-            else if (name.lastIndex == 1){
-                for (customer in Customer.arrayCustomers){
-                    if (customer.name == name[0] && customer.preName == name[1]){
+            } else if (name.lastIndex == 1) {
+                for (customer in Customer.arrayCustomers) {
+                    if (customer.name == name[0] && customer.preName == name[1]) {
                         selectedCustomer = customer
                     }
                 }
-                for (customer in Customer.arrayCustomers){
-                    if (customer.name == name[0] && customer.streetName == name[1]){
+                for (customer in Customer.arrayCustomers) {
+                    if (customer.name == name[0] && customer.streetName == name[1]) {
                         selectedCustomer = customer
                     }
                 }
-            }
-            else if (name.lastIndex == 0){
-                for(customer in Customer.arrayCustomers){
-                    if (customer.name == name[0]){
+            } else if (name.lastIndex == 0) {
+                for (customer in Customer.arrayCustomers) {
+                    if (customer.name == name[0]) {
                         selectedCustomer = customer
                     }
                 }
@@ -481,8 +511,8 @@ Workers.workerArray.add("Matthias Höpfler")
             val folder = "/storage/emulated/0/Documents/ElektroEibauer/"
             val f = File(folder, selectedCustomer.name + "_" + selectedCustomer.preName)
             f.mkdir()
-            if(WorktimeMain.staticWorkTimeArrayList.isEmpty()){
-                Toast.makeText(this,"Bitte Arbeitszeit hinzufügen",Toast.LENGTH_SHORT).show()
+            if (WorktimeMain.staticWorkTimeArrayList.isEmpty()) {
+                Toast.makeText(this, "Bitte Arbeitszeit hinzufügen", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             var pathToSave =
@@ -506,13 +536,14 @@ Workers.workerArray.add("Matthias Höpfler")
             myIntent.putExtra("pathToSave", pathToSave)
             myIntent.putExtra("customerPrename", selectedCustomer.preName)
             myIntent.putExtra("customerName", selectedCustomer.name)
+            myIntent.putExtra("isLager", "false")
 
             startActivity(myIntent)
 
         }
 
         buttonAddMaterial!!.setOnClickListener {
-            val myIntent = Intent(this,AddMaterialActivity::class.java)
+            val myIntent = Intent(this, AddMaterialActivity::class.java)
             startActivityForResult(myIntent, materialResult)
         }
 
@@ -615,12 +646,11 @@ Workers.workerArray.add("Matthias Höpfler")
             showPdfFromUri(selectedPdfFromStorage)
         }
 
-        if (requestCode == materialResult){
-           // tableMaterial!!.removeAllViews()
-            var adapter = MaterialAdapterMain(CustomerMaterial.customerMaterials,applicationContext,this)
+        if (requestCode == materialResult) {
+            // tableMaterial!!.removeAllViews()
+            var adapter =
+                MaterialAdapterMain(CustomerMaterial.customerMaterials, applicationContext, this)
             tableMaterial!!.adapter = adapter
-
-
 
 
         }
@@ -636,17 +666,12 @@ Workers.workerArray.add("Matthias Höpfler")
     }
 
 
-
-
-
-
     companion object {
         var customerResult = 100
         var materialResult = 101
         private const val PDF_SELECTION_CODE = 99
 
     }
-
 
 
     override fun worktimeListner(
@@ -684,9 +709,9 @@ Workers.workerArray.add("Matthias Höpfler")
             WorktimeMain.staticWorkTimeArrayList.add(newWorktime)
             i++
         }
-        var adapter = WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList,applicationContext,this)
+        var adapter =
+            WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList, applicationContext, this)
         tableWorkTimes!!.adapter = adapter
-
 
 
     }
@@ -702,38 +727,51 @@ Workers.workerArray.add("Matthias Höpfler")
         xmlTool!!.saveProfilesToXml(Customer.arrayCustomers, applicationContext)
         setSpinnerCustomer()
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (actionBarDrawerToggle!!.onOptionsItemSelected(item)) {
             true
-        } else super.onOptionsItemSelected(item)
+        } else {
+            super.onOptionsItemSelected(item)
+        }
     }
+
     override fun onClientEventlistener(customerID: String) {
-      var asdf = customerID
+        var asdf = customerID
     }
 
 
     override fun onMaterialDeletedListener() {
-        var adapter = MaterialAdapterMain(CustomerMaterial.customerMaterials,applicationContext,this)
+        var adapter =
+            MaterialAdapterMain(CustomerMaterial.customerMaterials, applicationContext, this)
         tableMaterial!!.adapter = adapter
     }
 
     override fun onWorktimeDeletedListener() {
-        var adapter = WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList,applicationContext,this)
+        var adapter =
+            WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList, applicationContext, this)
         tableWorkTimes!!.adapter = adapter
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             111 -> {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() &&
-                            grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
                     // Permission is granted. Continue the action or workflow
                     // in your app.
                 } else {
-                   Toast.makeText(applicationContext,"Um die App zu verwenden bitte Standortfreigabe aktiviere",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Um die App zu verwenden bitte Standortfreigabe aktiviere",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     finish()
                 }
                 return

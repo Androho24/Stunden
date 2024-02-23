@@ -98,6 +98,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         buttonClearText = view.findViewById(R.id.buttonNewClearCustomer)
         buttonAddClient = view.findViewById(R.id.buttonAddExpandedCustomerCustomer)
         buttonDelete = view.findViewById(R.id.buttonDeleteCustomerFrag)
+        buttonCancel = view.findViewById(R.id.buttonCancelClientFragment)
 
         val title = requireArguments().getString("title", "Enter Name")
         dialog!!.setTitle(title)

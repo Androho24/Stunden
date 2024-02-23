@@ -43,6 +43,7 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
     var customerName = ""
     var buttonSign: Button? = null
     var buttonCustomerSign: Button? = null
+    var isLager = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.preview_pdf_activity)
@@ -55,6 +56,14 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         pathToSave = bundle.getString("pathToSave").toString()
         customerName = bundle.getString("customerName").toString()
         customerPrename = bundle.getString("customerPrename").toString()
+        var stringIsLager = bundle.getString("isLager").toString()
+
+        if (stringIsLager == "true"){
+            isLager = true
+        }
+        else{
+            isLager = false
+        }
         buttonOnClickListeners()
         val file: File = File(path)
         if (!file.exists()) {
@@ -117,28 +126,58 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
 
             pdfDocument.close()
 
-            var uri = File(pathToSave)
+            if (!isLager) {
 
-            var adress = arrayOf<String>("matthias.hoepfler@gmail.com")
+                var uri = File(pathToSave)
 
-            var photoURI = FileProvider.getUriForFile(
-                Objects.requireNonNull(applicationContext),
-                BuildConfig.APPLICATION_ID + ".provider", uri
-            )
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.putExtra(Intent.EXTRA_EMAIL, adress)
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Arbeitsnachweis")
-            intent.putExtra(
-                Intent.EXTRA_TEXT,
-                "Sehr geehrte Frau Mayer,\n\n anbei übersende ich Ihnen meinen Arbeitsnachweis.\n\n Mit freundlichen Grüßen\n\nIhr Arbeitnehmer"
-            )
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-            intent.type = "message/rfc822"
-            intent.setType("application/pdf")
-            intent.putExtra(Intent.EXTRA_STREAM, photoURI)
-            if (intent.resolveActivity(packageManager) != null) {
-                startActivity(intent)
+                var adress = arrayOf<String>("matthias.hoepfler@gmail.com")
+
+                var photoURI = FileProvider.getUriForFile(
+                    Objects.requireNonNull(applicationContext),
+                    BuildConfig.APPLICATION_ID + ".provider", uri
+                )
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.putExtra(Intent.EXTRA_EMAIL, adress)
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Arbeitsnachweis")
+                intent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "Sehr geehrte Frau Mayer,\n\n anbei übersende ich Ihnen meinen Arbeitsnachweis.\n\n Mit freundlichen Grüßen\n\nIhr Arbeitnehmer"
+                )
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                intent.type = "message/rfc822"
+                intent.setType("application/pdf")
+                intent.putExtra(Intent.EXTRA_STREAM, photoURI)
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
+            }
+            else{
+                var uri = File(pathToSave)
+
+                var adress = arrayOf<String>("matthias.hoepfler@gmail.com")
+
+                var photoURI = FileProvider.getUriForFile(
+                    Objects.requireNonNull(applicationContext),
+                    BuildConfig.APPLICATION_ID + ".provider", uri
+                )
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.putExtra(Intent.EXTRA_EMAIL, adress)
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Materialschein")
+                intent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "Sehr geehrte Frau Mayer,\n\n anbei übersende ich Ihnen meinen Materialschein.\n\n Mit freundlichen Grüßen\n\nIhr Arbeitnehmer"
+                )
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                intent.type = "message/rfc822"
+                intent.setType("application/pdf")
+                intent.putExtra(Intent.EXTRA_STREAM, photoURI)
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
+
+
             }
         }
         buttonSign!!.setOnClickListener {

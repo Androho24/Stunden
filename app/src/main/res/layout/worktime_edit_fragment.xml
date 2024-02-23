@@ -1,0 +1,127 @@
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/worktimeEditFragment"
+    android:layout_width="match_parent" android:layout_height="700dp"
+    android:layout_gravity="center" android:orientation="vertical"  >
+
+    <TextView
+        android:id="@+id/textViewArbeitszeitEditHEaderWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Arbeitszeit"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewBeginEditWorktime"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="48dp"
+        android:text="Anfang"
+        app:layout_constraintStart_toStartOf="@+id/textViewArbeitszeitEditHEaderWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewArbeitszeitEditHEaderWorktime">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/textViewEndEditWorktime"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="36dp"
+        android:text="Ende"
+        app:layout_constraintStart_toStartOf="@+id/textViewArbeitszeitEditHEaderWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBeginEditWorktime">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/buttonEditBeginEditWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Bearbeiten"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewBeginEditWorktime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewBeginEditWorktime"
+        app:layout_constraintTop_toTopOf="@+id/textViewBeginEditWorktime"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <Button
+        android:id="@+id/buttonEditEndEditWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bearbeiten"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEndEditWorktime"
+        app:layout_constraintStart_toStartOf="@+id/buttonEditBeginEditWorktime"
+        app:layout_constraintTop_toTopOf="@+id/textViewEndEditWorktime"
+        app:layout_constraintVertical_bias="0.555" />
+
+    <Button
+        android:id="@+id/buttonEditEegeRuestEditWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bearbeiten"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextWegeRuestEditWorktime"
+        app:layout_constraintStart_toStartOf="@+id/buttonEditEndEditWorktime"
+        app:layout_constraintTop_toTopOf="@+id/editTextWegeRuestEditWorktime" />
+
+    <Button
+        android:id="@+id/buttonSaveEditWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speichern"
+        app:layout_constraintStart_toStartOf="@+id/buttonEditEegeRuestEditWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayoutEditWorktime" />
+
+    <EditText
+        android:id="@+id/editTextWegeRuestEditWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/textViewEndEditWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEndEditWorktime" />
+
+    <TableLayout
+        android:id="@+id/tableLayoutEditWorktime"
+        android:layout_width="408dp"
+        android:layout_height="265dp"
+        android:layout_marginStart="30dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWegeRuestEditWorktime">
+
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/buttonCancelEditWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="Abbrechen"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonSaveEditWorktime"
+        app:layout_constraintStart_toStartOf="@+id/editTextWegeRuestEditWorktime"
+        app:layout_constraintTop_toTopOf="@+id/buttonSaveEditWorktime" />
+
+    <TextView
+        android:id="@+id/textViewWREditWorktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="W/R in h:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextWegeRuestEditWorktime"
+        app:layout_constraintStart_toStartOf="@+id/editTextWegeRuestEditWorktime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEndEditWorktime"
+        app:layout_constraintVertical_bias="0.579" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

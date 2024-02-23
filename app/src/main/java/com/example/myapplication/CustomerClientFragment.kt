@@ -67,9 +67,9 @@ class CustomerClientFragment : DialogFragment() {
             customerID = arguments?.getString("customerid").toString()
 
 
-        var view : View = inflater.inflate(R.layout.customer_client_fragment, container,false)
 
-            return view
+
+            return inflater.inflate(R.layout.customer_client_fragment, container,false)
 
     }
 
