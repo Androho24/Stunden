@@ -36,7 +36,8 @@ class AddMaterialActivity : AppCompatActivity() {
         spinnerUnit = findViewById(R.id.spinnerAddMaterialMaterial)
         editMatName = findViewById(R.id.editTextNewMaterialMaterial)
         mainScrollView = findViewById(R.id.scrollMaterial)
-        var adapter = MaterialAdapter(Material.materials,applicationContext)
+        Material.connectMaterial()
+        var adapter = MaterialAdapter(Material.connectedMaterials,applicationContext)
         tableMaterial!!.adapter = adapter
 
 
@@ -62,12 +63,12 @@ class AddMaterialActivity : AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Material hinzufügen")
             builder.setMessage("Möchten sie folegendes Material hinzufügen?\n\n"+"Einheit: "+spinnerUnit!!.selectedItem.toString()+"\n"+"Name: "+editMatName!!.text.toString())
-//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
 
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
 
                 var materialExists = false
-                for (mat in Material.materials){
+                for (mat in Material.connectedMaterials){
                     if (editMatName!!.text.toString() == mat.material){
                         materialExists = true
                     }
@@ -77,11 +78,11 @@ class AddMaterialActivity : AppCompatActivity() {
                     Toast.makeText(this,"Material existiert bereits", Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    var mat = Material(editMatName!!.text.toString(), spinnerUnit!!.selectedItem!!.toString())
-                    Material.materials.add(mat)
+                    var mat = Material(editMatName!!.text.toString(), spinnerUnit!!.selectedItem!!.toString(),"")
+                    Material.ownMaterials.add(mat)
                     editTextFilter!!.setText(mat.material)
                     var xmlTool = XmlTool()
-                    xmlTool.saveMaterialsToXml(Material.materials, applicationContext)
+                    xmlTool.saveOwnMaterialsToXml(Material.ownMaterials, applicationContext)
                     mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
                 }
             }
@@ -101,7 +102,7 @@ class AddMaterialActivity : AppCompatActivity() {
             if (lastString.length < editTextFilter!!.text.toString().length) {
                 var i = 0
                 var listMaterial = ArrayList<Material>()
-                for (mat in Material.materials) {
+                for (mat in Material.connectedMaterials) {
 
                     if(mat.material.contains(editTextFilter!!.text.toString(),ignoreCase = true)){
                         listMaterial.add(mat)
@@ -114,7 +115,7 @@ class AddMaterialActivity : AppCompatActivity() {
                 tableMaterial!!.adapter = adapter
             }
             else{
-                var adapter = MaterialAdapter(Material.materials,applicationContext)
+                var adapter = MaterialAdapter(Material.connectedMaterials,applicationContext)
                 tableMaterial!!.adapter = adapter
             }
 
@@ -134,7 +135,7 @@ class AddMaterialActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == LagerActivity.materialEditList){
-            var adapter = MaterialAdapter(Material.materials,applicationContext)
+            var adapter = MaterialAdapter(Material.connectedMaterials,applicationContext)
             tableMaterial!!.adapter = adapter
             editTextFilter!!.setText("")
         }

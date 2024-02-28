@@ -47,10 +47,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapter.MaterialAdapterMain
 import com.example.myapplication.Adapter.WorktimeAdapterMain
+import com.example.myapplication.Admin.AdminMaterialActivity
 import com.example.myapplication.Interfaces.MainActivityMatInterface
 import com.example.myapplication.Interfaces.MainActivityWorktimeInterface
 import com.example.myapplication.Lager.LagerActivity
-import com.example.myapplication.Material.MaterialEditMain
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
@@ -181,6 +181,11 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             when (menuItem.itemId) {
                 R.id.itemLager -> {
                     val myIntent = Intent(this, LagerActivity::class.java)
+                    startActivity(myIntent)
+                    true
+                }
+                R.id.itemAdminMaterial ->{
+                    val myIntent = Intent(this,AdminMaterialActivity::class.java)
                     startActivity(myIntent)
                     true
                 }
@@ -377,6 +382,7 @@ Workers.workerArray = ArrayList<String>()
         xmlTool = XmlTool()
         xmlTool!!.loadSavedProfilefromXml(applicationContext)
         xmlTool!!.loadMaterialsFromXml(applicationContext)
+        xmlTool!!.loadOwnMaterialsFromXml(applicationContext)
     }
 
     private fun setSpinnerCustomer() {

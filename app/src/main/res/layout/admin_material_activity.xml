@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_admin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="start"
+    tools:context=".Admin.AdminMaterialActivity">
+
+    <!-- this the navigation view which draws and shows the navigation drawer -->
+    <!-- include the menu created in the menu folder -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:id="@+id/scrollViewAdminMaterialMain"
+                android:layout_width="match_parent"
+                android:layout_height="465dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.019">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleViewAdminMaterialMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </ScrollView>
+
+            <EditText
+                android:id="@+id/editTextFilterAdminMaterialMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="184dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scrollViewAdminMaterialMain" />
+
+            <EditText
+                android:id="@+id/editTextNewAdminMaterialMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Name"
+                app:layout_constraintStart_toStartOf="@+id/spinnerAddAdminMaterialMain"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerAddAdminMaterialMain" />
+
+            <TextView
+                android:id="@+id/plainTextSearchAdminMaterialMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Suche"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextFilterAdminMaterialMain"
+                app:layout_constraintEnd_toStartOf="@+id/editTextFilterAdminMaterialMain"
+                app:layout_constraintHorizontal_bias="0.515"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editTextFilterAdminMaterialMain"
+                app:layout_constraintVertical_bias="0.423" />
+
+            <Button
+                android:id="@+id/buttonAddAdminMaterialMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="Hinzufügen"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextNewAdminMaterialMain"
+                app:layout_constraintEnd_toEndOf="@+id/editTextFilterAdminMaterialMain"
+                app:layout_constraintStart_toEndOf="@+id/editTextNewAdminMaterialMain"
+                app:layout_constraintTop_toTopOf="@+id/editTextNewAdminMaterialMain"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Spinner
+                android:id="@+id/spinnerAddAdminMaterialMain"
+                android:layout_width="178dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="44dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextFilterAdminMaterialMain" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.drawerlayout.widget.DrawerLayout>

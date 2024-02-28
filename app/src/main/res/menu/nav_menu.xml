@@ -3,13 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.myapplication.MainActivity"
     tools:showIn="navigation_view">
-    <group
-        android:checkableBehavior="single">
-    <item
-        android:id="@+id/regieBericht"
-        android:title="Arbeitsbericht" />
-    <item
-        android:id="@+id/itemLager"
-        android:title="Lager" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/regieBericht"
+            android:title="Arbeitsbericht" />
+        <item
+            android:id="@+id/itemLager"
+            android:title="Lager" />
+        <item
+            android:id="@+id/itemAdmin"
+            android:title="Admin" >
+            <menu>
+                <item
+                    android:id="@+id/itemAdminMaterial"
+                    android:title="Admin Material"/>
+            </menu>
+        </item>
     </group>
 </menu>

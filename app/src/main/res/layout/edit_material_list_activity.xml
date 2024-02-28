@@ -104,7 +104,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/buttonCancelEditMatList"
+        android:id="@+id/buttonCancelEditMatListAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -116,7 +116,8 @@
         android:id="@+id/textViewHeaderEditMatList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:text="Zu bearbeitendes Material:"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="67dp" />
+        app:layout_constraintStart_toStartOf="@+id/textViewNameTextEdit"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

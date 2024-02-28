@@ -74,6 +74,7 @@ dependencies {
     implementation ("com.github.MikeOrtiz:TouchImageView:1.4.1")
     implementation ("com.google.android.gms:play-services-location:21.1.0")
     implementation ("com.github.gcacace:signature-pad:1.3.1")
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
 
 
 

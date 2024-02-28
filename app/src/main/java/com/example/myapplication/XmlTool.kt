@@ -85,6 +85,54 @@ class XmlTool {
             e.printStackTrace()
         }
     }
+
+    @Synchronized
+    fun saveOwnMaterialsToXml(materials: ArrayList<Material>?, context: Context) {
+        try {
+            val xStream = XStream()
+            xStream.allowTypes(arrayOf<Class<*>>(Material::class.java))
+            xStream.alias("Material", Customer::class.java)
+            val asdfd = xStream.toXML(materials)
+            val fos = FileOutputStream(context.cacheDir.toString() + "/" + "materialsown.xml")
+            //FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+            fos.write("<?xml version=\"1.0\"?>".toByteArray(charset("UTF-8")))
+            val bytes = asdfd.toByteArray(charset("UTF-8"))
+            fos.write(bytes)
+            fos.close()
+        } catch (e: Resources.NotFoundException) {
+            e.printStackTrace()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: UnsupportedEncodingException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    @Synchronized
+    fun loadOwnMaterialsFromXml(context:Context){
+        try {
+            val xStream = XStream()
+            xStream.allowTypes(arrayOf<Class<*>>(Material::class.java))
+            xStream.alias("Material", Material::class.java)
+            val pixelExistFile = File(context.cacheDir.toString() + "/" + "materialsown.xml")
+            //File pixelExistFile = new File(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+            val fos1: InputStream
+            fos1 = if (pixelExistFile.exists()) {
+                FileInputStream(context.cacheDir.toString() + "/" + "materialsown.xml")
+                // fos1 = new FileInputStream(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+            } else {
+                context.resources.openRawResource(R.raw.materialsown)
+            }
+            val item = xStream.fromXML(fos1) as ArrayList<Material>
+            Material.ownMaterials= item
+        } catch (e: Resources.NotFoundException) {
+            e.printStackTrace()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+    }
     @Synchronized
     fun saveProfilesToXml(customers: ArrayList<Customer>?, context: Context) {
         try {

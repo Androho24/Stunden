@@ -1,5 +1,6 @@
 package com.example.myapplication.Lager
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -7,11 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapter.MaterialAdapter
 import com.example.myapplication.Adapter.MaterialAdapterAddLager
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.R
@@ -35,7 +36,8 @@ class AddMaterialLagerActivity : AppCompatActivity() {
         editUnit = findViewById(R.id.spinnerLagerAddLager)
         editMatName = findViewById(R.id.editTextNewMaterialMaterialAddLager)
         mainScrollView = findViewById(R.id.scrollMaterialLager)
-        var adapter = MaterialAdapterAddLager(Material.materials,applicationContext)
+        Material.connectMaterial()
+        var adapter = MaterialAdapterAddLager(Material.connectedMaterials,applicationContext)
         tableMaterial!!.adapter = adapter
 
 
@@ -58,12 +60,38 @@ class AddMaterialLagerActivity : AppCompatActivity() {
 
     private fun onButtonClickListeners() {
         buttonAddMaterial!!.setOnClickListener {
-            var mat = Material(editMatName!!.text.toString(),editUnit!!.toString())
-            Material.materials.add(mat)
-            editTextFilter!!.setText(mat.material)
-            var xmlTool = XmlTool()
-            xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
-            mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Material hinzufügen")
+            builder.setMessage("Möchten sie folegendes Material hinzufügen?\n\n"+"Einheit: "+editUnit!!.selectedItem.toString()+"\n"+"Name: "+editMatName!!.text.toString())
+
+
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+
+                var materialExists = false
+                for (mat in Material.connectedMaterials){
+                    if (editMatName!!.text.toString() == mat.material){
+                        materialExists = true
+                    }
+                }
+
+                if (materialExists){
+                    Toast.makeText(this,"Material existiert bereits", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    var mat = Material(editMatName!!.text.toString(), editUnit!!.selectedItem!!.toString(),"")
+                    Material.ownMaterials.add(mat)
+                    editTextFilter!!.setText(mat.material)
+                    var xmlTool = XmlTool()
+                    xmlTool.saveOwnMaterialsToXml(Material.ownMaterials, applicationContext)
+                    mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
+                }
+            }
+
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+            }
+
+            builder.show()
 
         }
 
@@ -76,7 +104,7 @@ class AddMaterialLagerActivity : AppCompatActivity() {
             if (lastString.length < editTextFilter!!.text.toString().length) {
                 var i = 0
                 var listMaterial = ArrayList<Material>()
-                for (mat in Material.materials) {
+                for (mat in Material.connectedMaterials) {
 
                     if(mat.material.contains(editTextFilter!!.text.toString(),ignoreCase = true)){
                         listMaterial.add(mat)
@@ -89,7 +117,7 @@ class AddMaterialLagerActivity : AppCompatActivity() {
                 tableMaterial!!.adapter = adapter
             }
             else{
-                var adapter = MaterialAdapterAddLager(Material.materials,applicationContext)
+                var adapter = MaterialAdapterAddLager(Material.connectedMaterials,applicationContext)
                 tableMaterial!!.adapter = adapter
             }
 

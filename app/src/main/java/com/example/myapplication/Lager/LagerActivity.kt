@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapter.MaterialAdapterLager
+import com.example.myapplication.Admin.AdminMaterialActivity
 import com.example.myapplication.CustomerClientFragment
 import com.example.myapplication.CustomerFragment
 import com.example.myapplication.Interfaces.LagerActivityInterface
@@ -113,6 +114,11 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
             when (menuItem.itemId) {
                 R.id.regieBericht -> {
                     val myIntent = Intent(this, MainActivity::class.java)
+                    startActivity(myIntent)
+                    true
+                }
+                R.id.itemAdminMaterial ->{
+                    val myIntent = Intent(this,AdminMaterialActivity::class.java)
                     startActivity(myIntent)
                     true
                 }
@@ -348,6 +354,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
         var customerResult = 100
         var materialEditResult = 1005
         var materialEditList = 1006
+        var adminEditMaterialRequest = 1007
     }
 
     override fun onDeletedListener() {

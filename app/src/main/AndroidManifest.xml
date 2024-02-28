@@ -76,6 +76,8 @@
             android:exported="true"/>
       <activity android:name=".Material.EditMaterialList"
           android:exported="true"/>
+        <activity android:name=".Admin.AdminMaterialActivity"
+            android:exported="true"/>
 
     </application>
 

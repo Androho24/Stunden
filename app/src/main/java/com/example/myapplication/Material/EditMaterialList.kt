@@ -3,7 +3,6 @@ package com.example.myapplication.Material
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -33,7 +32,7 @@ class EditMaterialList : AppCompatActivity() {
         textViewMaterialUnitToEdit = findViewById(R.id.textViewUnitToEditMatList)
         spinnerUnitNew = findViewById(R.id.spinnerNewUnitEditMatList)
         editTextNewMaterialName = findViewById(R.id.editTextNewNameEditMatList)
-        buttonCancel = findViewById(R.id.buttonCancelEditMatList)
+        buttonCancel = findViewById(R.id.buttonCancelEditMatListAdmin)
         buttonDelete = findViewById(R.id.buttonDeleteEditMatList)
         buttonSave = findViewById(R.id.buttonSaveEditMatList)
         unit = intent.extras!!.getString("unit")
@@ -55,14 +54,14 @@ class EditMaterialList : AppCompatActivity() {
 
 
            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-           for (mat in Material.materials){
+           for (mat in Material.ownMaterials){
                if (mat.material == name && mat.unit == unit) {
                    mat.material = editTextNewMaterialName!!.text.toString()
                    mat.unit = spinnerUnitNew!!.selectedItem!!.toString()
                }
            }
                var xmlTool = XmlTool()
-               xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
+               xmlTool.saveOwnMaterialsToXml(Material.ownMaterials,applicationContext)
                finish()
            }
 
@@ -81,7 +80,7 @@ class EditMaterialList : AppCompatActivity() {
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
 
                     var materialNew = ArrayList<Material>()
-                for (mat in Material.materials){
+                for (mat in Material.ownMaterials){
                     if (mat.material == name && mat.unit == unit){
 
                     }
@@ -89,9 +88,9 @@ class EditMaterialList : AppCompatActivity() {
                         materialNew.add(mat)
                     }
                 }
-                Material.materials = materialNew
+                Material.ownMaterials = materialNew
                 var xmlTool = XmlTool()
-                xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
+                xmlTool.saveOwnMaterialsToXml(Material.ownMaterials,applicationContext)
                 finish()
 
             }

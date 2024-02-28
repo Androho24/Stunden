@@ -1,5 +1,6 @@
 package com.example.myapplication.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -70,21 +71,65 @@ RecyclerView.Adapter<MaterialAdapterAddLager.ViewHolder>() {
         }
         viewHolder.textView1.setOnClickListener (object :View.OnClickListener{
             override fun onClick(v: View?) {
-                var activity = v!!.context as AppCompatActivity
-                var intent = Intent(activity, EditMaterialList::class.java)
-                intent.putExtra("unit", viewHolder.textView1.text.toString())
-                intent.putExtra("name", viewHolder.textView2.text.toString())
-                activity.startActivityForResult(intent, LagerActivity.materialEditList)
+                var isInMaterial = false
+                for (mat in Material.materials) {
+                    if (viewHolder.textView1.text.toString() == mat.unit && viewHolder.textView2.text.toString() == mat.material) {
+                        isInMaterial = true
+                    }
+                }
+
+                if (isInMaterial == true) {
+                    val builder = AlertDialog.Builder(v!!.context)
+                    builder.setTitle("Material ändern")
+                    builder.setMessage("Dieses Material kann nicht geändert werden!")
+
+
+                    builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+
+                        isInMaterial = false
+                    }
+
+
+                    builder.show()
+                }else{
+                    var activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity,EditMaterialList::class.java)
+                    intent.putExtra("unit",viewHolder.textView1.text.toString())
+                    intent.putExtra("name",viewHolder.textView2.text.toString())
+                    activity.startActivityForResult(intent,LagerActivity.materialEditList)
+                }
             }
 
         })
         viewHolder.textView2.setOnClickListener (object :View.OnClickListener{
             override fun onClick(v: View?) {
-                var activity = v!!.context as AppCompatActivity
-                var intent = Intent(activity,EditMaterialList::class.java)
-                intent.putExtra("unit",viewHolder.textView1.text.toString())
-                intent.putExtra("name",viewHolder.textView2.text.toString())
-                activity.startActivityForResult(intent,LagerActivity.materialEditList)
+                var isInMaterial = false
+                for (mat in Material.materials) {
+                    if (viewHolder.textView1.text.toString() == mat.unit && viewHolder.textView2.text.toString() == mat.material) {
+                        isInMaterial = true
+                    }
+                }
+
+                if (isInMaterial == true) {
+                    val builder = AlertDialog.Builder(v!!.context)
+                    builder.setTitle("Material ändern")
+                    builder.setMessage("Dieses Material kann nicht geändert werden!")
+
+
+                    builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+
+                        isInMaterial = false
+                    }
+
+
+                    builder.show()
+                }else{
+                    var activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity,EditMaterialList::class.java)
+                    intent.putExtra("unit",viewHolder.textView1.text.toString())
+                    intent.putExtra("name",viewHolder.textView2.text.toString())
+                    activity.startActivityForResult(intent,LagerActivity.materialEditList)
+                }
 
             }
         })
