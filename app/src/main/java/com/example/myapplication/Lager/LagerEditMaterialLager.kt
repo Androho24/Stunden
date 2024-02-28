@@ -1,6 +1,5 @@
-package com.example.myapplication.Material
+package com.example.myapplication.Lager
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,24 +17,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapter.MaterialAdapter
+import com.example.myapplication.Adapter.MaterialAdapterAddLager
 import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.R
 import com.example.myapplication.XmlTool
 
-class MaterialEditMain()  : AppCompatActivity() {
-
-
+class LagerEditMaterialLager : AppCompatActivity() {
     var lastString =""
-    var spinnerUnit : Spinner? = null
     var tableMaterial : RecyclerView? = null
     var editTextFilter : EditText? = null
     var buttonAddMaterial : Button? = null
-    var buttonCancel : Button? = null
+    var editUnit : Spinner? = null
     var editMatName : EditText? = null
     var mainScrollView : ScrollView? = null
-    var bundle : Bundle? = null
 
     var wasSaved : Boolean = false
 
@@ -43,39 +38,31 @@ class MaterialEditMain()  : AppCompatActivity() {
     var name: String? = null
     var unit: String? = null
     var amount: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.material_edit_main_activity)
-        tableMaterial = findViewById(R.id.recycleViewEditMaterial)
-        editTextFilter = findViewById(R.id.editTextFilterEditMaterial)
+        setContentView(R.layout.material_lager_activity)
+        tableMaterial = findViewById(R.id.recycleViewMaterialLagerAddLager)
+        editTextFilter = findViewById(R.id.editTextFilterMaterialAddLager)
         tableMaterial!!.layoutManager = LinearLayoutManager(this)
-        buttonAddMaterial = findViewById(R.id.buttonAddMaterialEditMaterial)
-        spinnerUnit = findViewById(R.id.spinnerAddMaterialEditMaterial)
-        editMatName = findViewById(R.id.editTextNewMaterialEditMaterial)
-        mainScrollView = findViewById(R.id.scrollMaterial)
-        buttonCancel = findViewById(R.id.buttonCancelEditMaterialMain)
-        var adapter = MaterialAdapterEditMaterialEditMain(Material.materials,applicationContext)
+        buttonAddMaterial = findViewById(R.id.buttonAddMaterialMaterialAddLager)
+        editUnit = findViewById(R.id.spinnerLagerAddLager)
+        editMatName = findViewById(R.id.editTextNewMaterialMaterialAddLager)
+        mainScrollView = findViewById(R.id.scrollMaterialLager)
+        var adapter = MaterialAdapterEditLager(Material.materials,applicationContext)
         tableMaterial!!.adapter = adapter
-        bundle = Bundle()
-        amount = intent.extras!!.getString("amount")
-        unit = intent.extras!!.getString("unit")
-        name = intent.extras!!.getString("name")
-
 
 
         onTextChanged()
         onButtonClickListeners()
         setSpinnerContent()
 
-        editTextFilter!!.setText(name)
+        amount = intent.extras!!.getString("amount")
+        unit = intent.extras!!.getString("unit")
+        name = intent.extras!!.getString("name")
 
-        oldMaterials = CustomerMaterial.customerMaterials
+        oldMaterials = CustomerMaterial.customerMaterialsLager
         var newMaterials = ArrayList<CustomerMaterial>()
-        for (mat in CustomerMaterial.customerMaterials){
+        for (mat in CustomerMaterial.customerMaterialsLager){
             if(mat.materialName == name && mat.materialAmount == amount && mat.materialUnit == unit){
 
             }
@@ -83,11 +70,13 @@ class MaterialEditMain()  : AppCompatActivity() {
                 newMaterials.add(mat)
             }
         }
-        CustomerMaterial.customerMaterials = newMaterials
+        CustomerMaterial.customerMaterialsLager = newMaterials
+
+
+
 
 
     }
-
 
     private fun setSpinnerContent() {
         var unitList = ArrayList<String>()
@@ -97,53 +86,21 @@ class MaterialEditMain()  : AppCompatActivity() {
         val dataAdapter =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unitList)
         dataAdapter.setDropDownViewResource(R.layout.spinner_style)
-        spinnerUnit!!.adapter = dataAdapter
+        editUnit!!.adapter = dataAdapter
     }
 
     private fun onButtonClickListeners() {
         buttonAddMaterial!!.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Material hinzufügen")
-            builder.setMessage("Möchten sie folegendes Material hinzufügen?\n"+"Einheit: "+spinnerUnit!!.selectedItem.toString()+"\n"+"Name: "+editMatName!!.text.toString())
-//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+            var mat = Material(editMatName!!.text.toString(),editUnit!!.toString())
+            Material.materials.add(mat)
+            editTextFilter!!.setText(mat.material)
+            var xmlTool = XmlTool()
+            xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
+            mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
 
-            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-
-            var materialExists = false
-            for (mat in Material.materials){
-                if (editMatName!!.text.toString() == mat.material){
-                    materialExists = true
-                }
-            }
-
-            if (materialExists){
-                Toast.makeText(this,"Material existiert bereits",Toast.LENGTH_SHORT).show()
-            }
-            else {
-                var mat = Material(editMatName!!.text.toString(), spinnerUnit!!.selectedItem!!.toString())
-                Material.materials.add(mat)
-                editTextFilter!!.setText(mat.material)
-                var xmlTool = XmlTool()
-                xmlTool.saveMaterialsToXml(Material.materials, applicationContext)
-                mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
-            }
-
-            }
-
-            builder.setNegativeButton(android.R.string.no) { dialog, which ->
-
-            }
-
-            builder.show()
         }
 
-        buttonCancel!!.setOnClickListener {
-            CustomerMaterial.customerMaterials = oldMaterials
-            finish()
-        }
     }
-
-
 
     private fun onTextChanged() {
 
@@ -161,11 +118,11 @@ class MaterialEditMain()  : AppCompatActivity() {
 
 
                 }
-                var adapter = MaterialAdapterEditMaterialEditMain(listMaterial,applicationContext)
+                var adapter = MaterialAdapterEditLager(listMaterial,applicationContext)
                 tableMaterial!!.adapter = adapter
             }
             else{
-                var adapter = MaterialAdapterEditMaterialEditMain(Material.materials,applicationContext)
+                var adapter = MaterialAdapterEditLager(Material.materials,applicationContext)
                 tableMaterial!!.adapter = adapter
             }
 
@@ -185,15 +142,15 @@ class MaterialEditMain()  : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         if (wasSaved == false){
-            CustomerMaterial.customerMaterials = oldMaterials
+            CustomerMaterial.customerMaterialsLager = oldMaterials
         }
         val intent = Intent()
         setResult(RESULT_OK, intent)
         finish()
     }
 
-    inner class MaterialAdapterEditMaterialEditMain(private var dataSet: ArrayList<Material>,private var context: Context) :
-        RecyclerView.Adapter<MaterialAdapterEditMaterialEditMain.ViewHolder>() {
+    inner class MaterialAdapterEditLager (private var dataSet: ArrayList<Material>,private var context: Context) :
+        RecyclerView.Adapter<MaterialAdapterEditLager.ViewHolder>() {
 
         /**
          * Provide a reference to the type of views that you are using
@@ -206,10 +163,10 @@ class MaterialEditMain()  : AppCompatActivity() {
             val button : Button
             init {
                 // Define click listener for the ViewHolder's View
-                textView1 = view.findViewById(R.id.textView1)
-                textView2 = view.findViewById(R.id.textView2)
-                editText = view.findViewById(R.id.editTextHolder)
-                button = view.findViewById(R.id.buttonHolder)
+                textView1 = view.findViewById(R.id.textViewUnitAddLagerAdapter)
+                textView2 = view.findViewById(R.id.textViewNameAddLagerAdapter)
+                editText = view.findViewById(R.id.editTextAmountAddLagerAdapter)
+                button = view.findViewById(R.id.buttonAddAddLagerAdapter)
             }
         }
 
@@ -217,7 +174,7 @@ class MaterialEditMain()  : AppCompatActivity() {
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
             // Create a new view, which defines the UI of the list item
             val view = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.material_row_adapter_mat_act, viewGroup, false)
+                .inflate(R.layout.material_add_lager_adapter, viewGroup, false)
 
             return ViewHolder(view)
         }
@@ -239,11 +196,10 @@ class MaterialEditMain()  : AppCompatActivity() {
                     newMaterial.materialName = viewHolder.textView2.text.toString()
                     newMaterial.materialUnit = viewHolder.textView1.text.toString()
                     newMaterial.materialAmount = viewHolder.editText.text.toString()
-                    CustomerMaterial.customerMaterials.add(newMaterial)
+                    CustomerMaterial.customerMaterialsLager.add(newMaterial)
                     wasSaved = true
                     Toast.makeText(context, "Material hinzugefügt", Toast.LENGTH_SHORT).show()
                     finish()
-
                 }
             }
 

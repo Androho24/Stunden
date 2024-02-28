@@ -83,16 +83,7 @@ class WorktimeEditFragment : DialogFragment() {
         wr = requireArguments()!!.getString("wr")
         name = requireArguments()!!.getString("name")
 
-        oldWT = WorktimeMain.staticWorkTimeArrayList
-        for (worktime in WorktimeMain.staticWorkTimeArrayList){
-            if (worktime.beginWorktime == begin && worktime.endWorktime == end && worktime.wegeRuest == wr && worktime.workerName == name){
-                worktimeToEdit = worktime
-            }
-            else {
-                newWt.add(worktime)
-            }
-        }
-        WorktimeMain.staticWorkTimeArrayList = newWt
+
 
         return inflater.inflate(R.layout.worktime_edit_fragment, container)
     }
@@ -100,6 +91,16 @@ class WorktimeEditFragment : DialogFragment() {
 
     private fun setOnButtonClickListerns() {
         buttonSave!!.setOnClickListener {
+            oldWT = WorktimeMain.staticWorkTimeArrayList
+            for (worktime in WorktimeMain.staticWorkTimeArrayList){
+                if (worktime.beginWorktime == begin && worktime.endWorktime == end && worktime.wegeRuest == wr && worktime.workerName == name){
+                    worktimeToEdit = worktime
+                }
+                else {
+                    newWt.add(worktime)
+                }
+            }
+            WorktimeMain.staticWorkTimeArrayList = newWt
             var worker = ArrayList<String>()
             var i = 0
             for (workers in Workers.workerArray) {

@@ -50,6 +50,7 @@ import com.example.myapplication.Adapter.WorktimeAdapterMain
 import com.example.myapplication.Interfaces.MainActivityMatInterface
 import com.example.myapplication.Interfaces.MainActivityWorktimeInterface
 import com.example.myapplication.Lager.LagerActivity
+import com.example.myapplication.Material.MaterialEditMain
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
@@ -331,15 +332,17 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         pdfCreator = PDFCreator()
         myIcon = resources.getDrawable(R.drawable.img)
 
+Workers.workerArray = ArrayList<String>()
+    Workers.workerArray.add("Matthias Höpfler")
 
-        Workers.workerArray.add("Matthias Höpfler")
-
-        Workers.workerArray.add("Heizer Oliver")
+    Workers.workerArray.add("Heizer Oliver")
 
 
-        Workers.workerArray.add("Franz Eibauer")
-        Workers.workerArray.add("Alexander Geisperger")
-        Workers.workerArray.add("Tägliche Pausenzeit")
+    Workers.workerArray.add("Franz Eibauer")
+    Workers.workerArray.add("Alexander Geisperger")
+    Workers.workerArray.add("Marcel Radu-Iliuta")
+    Workers.workerArray.add("Florin Iftode")
+    Workers.workerArray.add("Tägliche Pausenzeit")
 
         if (Environment.isExternalStorageManager()) {
 
@@ -641,17 +644,66 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
         }
 
+
+
+        if (requestCode == MaterialAdapterMain.materialResultCode){
+            var newMats = ArrayList<CustomerMaterial>()
+            for (mat in CustomerMaterial.customerMaterials){
+                var matExists = false
+                var amount : Float = 0f
+                for (mat2 in CustomerMaterial.customerMaterials){
+                    if (mat.materialName == mat2.materialName){
+                        matExists = true
+                        amount = mat2.materialAmount!!.toFloat()
+                    }
+                }
+                if (matExists == false){
+                    newMats.add(mat)
+                }
+                else{
+                    mat.materialAmount == (mat.materialAmount!!.toFloat() + amount).toString()
+                }
+
+
+                newMats.add(mat)
+            }
+            CustomerMaterial.customerMaterials = newMats
+
+            var adapter =
+                MaterialAdapterMain(CustomerMaterial.customerMaterials, applicationContext, this)
+            tableMaterial!!.adapter = adapter
+
+        }
+
         if (requestCode == PDF_SELECTION_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val selectedPdfFromStorage = data.data
             showPdfFromUri(selectedPdfFromStorage)
         }
 
         if (requestCode == materialResult) {
-            // tableMaterial!!.removeAllViews()
+            var newMats = ArrayList<CustomerMaterial>()
+            for (mat in CustomerMaterial.customerMaterials){
+                var matExists = false
+                var amount : Float = 0f
+                if (!newMats.isEmpty()) {
+                    for (mat2 in newMats) {
+                        if (mat.materialName == mat2.materialName) {
+                            matExists = true
+                            amount = mat2.materialAmount!!.toFloat()
+                            mat2.materialAmount = (mat.materialAmount!!.toFloat() + mat2.materialAmount!!.toFloat()).toString()
+                        }
+                    }
+                }
+                if (matExists == false) {
+                    newMats.add(mat)
+                }
+
+            }
+            CustomerMaterial.customerMaterials = newMats
+
             var adapter =
                 MaterialAdapterMain(CustomerMaterial.customerMaterials, applicationContext, this)
             tableMaterial!!.adapter = adapter
-
 
         }
 
@@ -784,6 +836,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             }
         }
     }
+
+
 
 
 }

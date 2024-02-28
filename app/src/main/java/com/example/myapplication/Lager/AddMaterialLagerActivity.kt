@@ -106,7 +106,17 @@ class AddMaterialLagerActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == LagerActivity.materialEditResult){
+            var adapter = MaterialAdapterAddLager(Material.materials,applicationContext)
+            tableMaterial!!.adapter = adapter
+            editTextFilter!!.setText("")
+        }
+    }
+
     override fun onBackPressed() {
+        super.onBackPressed()
         val intent = Intent()
         setResult(RESULT_OK, intent)
         finish()

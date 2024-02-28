@@ -99,6 +99,10 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
+        var adapter = MaterialAdapterLager(CustomerMaterial.customerMaterialsLager,this)
+        tableMaterial!!.adapter = adapter
+
+
 
         navView = findViewById(R.id.nav_view_lager)
 
@@ -342,6 +346,8 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
     companion object{
         var materialresult = 103
         var customerResult = 100
+        var materialEditResult = 1005
+        var materialEditList = 1006
     }
 
     override fun onDeletedListener() {

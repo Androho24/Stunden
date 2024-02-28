@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scrollMaterial"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".Material.MaterialEditMain">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView3EditMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="465dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.019">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleViewEditMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+        <EditText
+            android:id="@+id/editTextFilterEditMaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="184dp"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView3EditMaterial" />
+
+        <EditText
+            android:id="@+id/editTextNewMaterialEditMaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name"
+            app:layout_constraintStart_toStartOf="@+id/spinnerAddMaterialEditMaterial"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerAddMaterialEditMaterial" />
+
+        <TextView
+            android:id="@+id/plainTextSearchEditMaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Suche"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextFilterEditMaterial"
+            app:layout_constraintEnd_toStartOf="@+id/editTextFilterEditMaterial"
+            app:layout_constraintHorizontal_bias="0.515"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextFilterEditMaterial"
+            app:layout_constraintVertical_bias="0.423" />
+
+        <Button
+            android:id="@+id/buttonAddMaterialEditMaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="Hinzufügen"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextNewMaterialEditMaterial"
+            app:layout_constraintEnd_toEndOf="@+id/editTextFilterEditMaterial"
+            app:layout_constraintStart_toEndOf="@+id/editTextNewMaterialEditMaterial"
+            app:layout_constraintTop_toTopOf="@+id/editTextNewMaterialEditMaterial"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Spinner
+            android:id="@+id/spinnerAddMaterialEditMaterial"
+            android:layout_width="178dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="92dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextFilterEditMaterial" />
+
+        <Button
+            android:id="@+id/buttonCancelEditMaterialMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="@+id/editTextFilterEditMaterial"
+            app:layout_constraintTop_toBottomOf="@+id/editTextFilterEditMaterial" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

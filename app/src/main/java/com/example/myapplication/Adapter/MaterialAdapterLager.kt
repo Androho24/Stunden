@@ -1,12 +1,16 @@
 package com.example.myapplication.Adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Interfaces.LagerActivityInterface
+import com.example.myapplication.Lager.LagerActivity
+import com.example.myapplication.Lager.LagerEditMaterialLager
 import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.R
 
@@ -48,10 +52,43 @@ class MaterialAdapterLager(private var dataSet: ArrayList<CustomerMaterial>, onD
         // contents of the view with that element
         viewHolder.textViewAmount.id = position
         viewHolder.textViewAmount.text = m.materialAmount
+        viewHolder.textViewAmount.setOnClickListener ( object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val activity = v!!.context as AppCompatActivity
+                var intent = Intent(activity, LagerEditMaterialLager::class.java)
+                intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                intent.putExtra("name",viewHolder.textViewName.text.toString())
+                activity.startActivityForResult(intent,LagerActivity.materialEditResult)
+            }
+
+        })
         viewHolder.textViewUnit.id = position
         viewHolder.textViewUnit.text = m.materialUnit
+        viewHolder.textViewUnit.setOnClickListener ( object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val activity = v!!.context as AppCompatActivity
+                var intent = Intent(activity, LagerEditMaterialLager::class.java)
+                intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                intent.putExtra("name",viewHolder.textViewName.text.toString())
+                activity.startActivityForResult(intent,LagerActivity.materialEditResult)
+            }
+
+        })
         viewHolder.textViewName.id = position
         viewHolder.textViewName.text = m.materialName
+        viewHolder.textViewName.setOnClickListener ( object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val activity = v!!.context as AppCompatActivity
+                var intent = Intent(activity, LagerEditMaterialLager::class.java)
+                intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                intent.putExtra("name",viewHolder.textViewName.text.toString())
+                activity.startActivityForResult(intent,LagerActivity.materialEditResult)
+            }
+
+        })
         viewHolder.buttonDelete.id = position
         viewHolder.buttonDelete.setOnClickListener {
             var newMats = ArrayList<CustomerMaterial>()

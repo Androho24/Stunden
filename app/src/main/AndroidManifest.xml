@@ -69,6 +69,13 @@
         <activity android:name=".Lager.AddMaterialLagerActivity"
             android:exported="true"
             />
+        <activity android:name=".Material.MaterialEditMain"
+            android:exported="true"
+            />
+        <activity android:name=".Lager.LagerEditMaterialLager"
+            android:exported="true"/>
+      <activity android:name=".Material.EditMaterialList"
+          android:exported="true"/>
 
     </application>
 

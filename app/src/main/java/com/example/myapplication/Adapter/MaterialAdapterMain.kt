@@ -1,21 +1,26 @@
 package com.example.myapplication.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Interfaces.MainActivityMatInterface
+import com.example.myapplication.Material.MaterialEditMain
 import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.R
 
 
-class MaterialAdapterMain(private var dataSet: ArrayList<CustomerMaterial>, private var context: Context,private var onDeleteListener: MainActivityMatInterface):RecyclerView.Adapter<MaterialAdapterMain.ViewHolder>() {
+class MaterialAdapterMain(private var dataSet: ArrayList<CustomerMaterial>, private var context: Context,private var onDeleteListener: MainActivityMatInterface):RecyclerView.Adapter<MaterialAdapterMain.ViewHolder>(){
 
 
     private var adapterItemClickListener  = onDeleteListener
+
 
 
 
@@ -51,35 +56,94 @@ class MaterialAdapterMain(private var dataSet: ArrayList<CustomerMaterial>, priv
         // contents of the view with that element
         viewHolder.textViewAmount.text = m.materialAmount
         viewHolder.textViewAmount.id = position
+        viewHolder.textViewAmount.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val activity = v!!.context as AppCompatActivity
+                var intent = Intent(activity,MaterialEditMain::class.java)
+                intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                intent.putExtra("name",viewHolder.textViewName.text.toString())
+                activity.startActivityForResult(intent, materialResultCode)
+
+
+
+
+            }
+
+
+
+
+        })
         viewHolder.textViewUnit.text = m.materialUnit
         viewHolder.textViewUnit.id = position
+        viewHolder.textViewUnit.setOnClickListener(object: View.OnClickListener {
+            override fun onClick(v: View?) {
+                val activity = v!!.context as AppCompatActivity
+                var intent = Intent(activity,MaterialEditMain::class.java)
+                intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                intent.putExtra("name",viewHolder.textViewName.text.toString())
+
+                activity.startActivityForResult(intent, materialResultCode)
+
+
+
+
+            }
+
+        })
         viewHolder.textViewName.id = position
         viewHolder.textViewName.text = m.materialName
+        viewHolder.textViewName.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val activity = v!!.context as AppCompatActivity
+                var intent = Intent(activity,MaterialEditMain::class.java)
+                intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                intent.putExtra("name",viewHolder.textViewName.text.toString())
+
+                activity.startActivityForResult(intent, materialResultCode)
+
+
+
+
+            }
+
+
+
+
+        })
         viewHolder.buttonDelete.id = position
        viewHolder.buttonDelete.setOnClickListener {
-           var newMats = ArrayList<CustomerMaterial>()
-           for (mat in CustomerMaterial.customerMaterials){
-               if (viewHolder.textViewName.text == mat.materialName){
 
+                   var newMats = ArrayList<CustomerMaterial>()
+                   for (mat in CustomerMaterial.customerMaterials){
+                       if (viewHolder.textViewName.text == mat.materialName){
+
+                       }
+                       else {
+                           newMats.add(mat)
+                       }
+                   }
+                   CustomerMaterial.customerMaterials = newMats
+                   adapterItemClickListener.onMaterialDeletedListener()
                }
-               else {
-                   newMats.add(mat)
-               }
-           }
-            CustomerMaterial.customerMaterials = newMats
-           adapterItemClickListener.onMaterialDeletedListener()
 
-
-
-
-        }
 
     }
 
 
 
+
+
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+
+    companion object{
+        var materialResultCode = 1001
+    }
+
+
 
 
 }

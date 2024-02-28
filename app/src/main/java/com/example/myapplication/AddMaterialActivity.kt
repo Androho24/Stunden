@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -7,11 +8,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapter.MaterialAdapter
+import com.example.myapplication.Lager.LagerActivity
 import com.example.myapplication.Objects.Material
 
 
@@ -56,14 +59,38 @@ class AddMaterialActivity : AppCompatActivity() {
 
     private fun onButtonClickListeners() {
         buttonAddMaterial!!.setOnClickListener {
-            var mat = Material(editMatName!!.text.toString(),spinnerUnit!!.selectedItem!!.toString())
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Material hinzufügen")
+            builder.setMessage("Möchten sie folegendes Material hinzufügen?\n\n"+"Einheit: "+spinnerUnit!!.selectedItem.toString()+"\n"+"Name: "+editMatName!!.text.toString())
+//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
 
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
 
-            Material.materials.add(mat)
-            editTextFilter!!.setText(mat.material)
-            var xmlTool = XmlTool()
-            xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
-            mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
+                var materialExists = false
+                for (mat in Material.materials){
+                    if (editMatName!!.text.toString() == mat.material){
+                        materialExists = true
+                    }
+                }
+
+                if (materialExists){
+                    Toast.makeText(this,"Material existiert bereits", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    var mat = Material(editMatName!!.text.toString(), spinnerUnit!!.selectedItem!!.toString())
+                    Material.materials.add(mat)
+                    editTextFilter!!.setText(mat.material)
+                    var xmlTool = XmlTool()
+                    xmlTool.saveMaterialsToXml(Material.materials, applicationContext)
+                    mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
+                }
+            }
+
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+            }
+
+            builder.show()
         }
     }
 
@@ -104,7 +131,16 @@ class AddMaterialActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == LagerActivity.materialEditList){
+            var adapter = MaterialAdapter(Material.materials,applicationContext)
+            tableMaterial!!.adapter = adapter
+            editTextFilter!!.setText("")
+        }
+    }
     override fun onBackPressed() {
+        super.onBackPressed()
         val intent = Intent()
         setResult(RESULT_OK, intent)
         finish()

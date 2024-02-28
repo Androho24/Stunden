@@ -8,6 +8,6 @@ class Material(var material: String,var unit:String) {
 
     companion object {
         var materials = ArrayList<Material>()
-        var materialsLager = ArrayList<Material>()
+        var ownMaterias = ArrayList<Material>()
     }
 }
