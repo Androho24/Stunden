@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "776731154059",
+    "project_id": "lager-da632",
+    "storage_bucket": "lager-da632.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776731154059:android:8416928659225c5a3aa68e",
+        "android_client_info": {
+          "package_name": "com.example.lager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkQrWby1cJXN2jA1psmz37HBHFfO3Or7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776731154059:android:d68e3bdb486d0c533aa68e",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkQrWby1cJXN2jA1psmz37HBHFfO3Or7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

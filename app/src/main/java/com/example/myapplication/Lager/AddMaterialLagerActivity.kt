@@ -14,9 +14,13 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapter.MaterialAdapterAddLager
+import com.example.myapplication.Barcode.CaptureAct
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.R
 import com.example.myapplication.XmlTool
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanIntentResult
+import com.journeyapps.barcodescanner.ScanOptions
 
 class AddMaterialLagerActivity : AppCompatActivity() {
     var lastString =""
@@ -26,6 +30,7 @@ class AddMaterialLagerActivity : AppCompatActivity() {
     var editUnit : Spinner? = null
     var editMatName : EditText? = null
     var mainScrollView : ScrollView? = null
+    var buttonBarcode : Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.material_lager_activity)
@@ -36,6 +41,7 @@ class AddMaterialLagerActivity : AppCompatActivity() {
         editUnit = findViewById(R.id.spinnerLagerAddLager)
         editMatName = findViewById(R.id.editTextNewMaterialMaterialAddLager)
         mainScrollView = findViewById(R.id.scrollMaterialLager)
+        buttonBarcode = findViewById(R.id.buttonAddMaterialBarcodeAddLager)
         Material.connectMaterial()
         var adapter = MaterialAdapterAddLager(Material.connectedMaterials,applicationContext)
         tableMaterial!!.adapter = adapter
@@ -59,6 +65,9 @@ class AddMaterialLagerActivity : AppCompatActivity() {
     }
 
     private fun onButtonClickListeners() {
+        buttonBarcode!!.setOnClickListener {
+            scanCode()
+        }
         buttonAddMaterial!!.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Material hinzufügen")
@@ -78,7 +87,13 @@ class AddMaterialLagerActivity : AppCompatActivity() {
                     Toast.makeText(this,"Material existiert bereits", Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    var mat = Material(editMatName!!.text.toString(), editUnit!!.selectedItem!!.toString(),"")
+                    var i =0
+                    for (mat in Material.ownMaterials){
+                        if (mat.id > 0){
+                            i = mat.id
+                        }
+                    }
+                    var mat = Material(i+1,editMatName!!.text.toString(), editUnit!!.selectedItem!!.toString(),"",0,false)
                     Material.ownMaterials.add(mat)
                     editTextFilter!!.setText(mat.material)
                     var xmlTool = XmlTool()
@@ -140,6 +155,35 @@ class AddMaterialLagerActivity : AppCompatActivity() {
             var adapter = MaterialAdapterAddLager(Material.materials,applicationContext)
             tableMaterial!!.adapter = adapter
             editTextFilter!!.setText("")
+        }
+    }
+    private fun scanCode() {
+        val options = ScanOptions()
+        options.setPrompt("Volume up to flash on")
+        options.setBeepEnabled(false)
+        options.setOrientationLocked(true)
+        options.setCaptureActivity(CaptureAct::class.java)
+        barLauncher.launch(options)
+    }
+
+    var barLauncher = registerForActivityResult(
+        ScanContract()
+    ) { result: ScanIntentResult? ->
+
+
+        if (result!!.contents != null) {
+          /*  var builder = androidx.appcompat.app.AlertDialog.Builder(this)
+            builder.setTitle("Result").setMessage(result.contents).setPositiveButton(
+                "ok"
+            ) { _, _ ->*/
+                var i = 0
+                for (mat in Material.connectedMaterials) {
+                    if (result.contents.toString() == mat.barcode) {
+                        editTextFilter!!.setText(mat.material)
+                    }
+                }
+
+        /*    }.show()*/
         }
     }
 

@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.res.Resources
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.Material
+import com.example.myapplication.Objects.Times
+import com.google.firebase.Timestamp
 import com.thoughtworks.xstream.XStream
 import java.io.File
 import java.io.FileInputStream
@@ -12,6 +14,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.UnsupportedEncodingException
+import java.sql.Time
 
 class XmlTool {
 
@@ -153,6 +156,52 @@ class XmlTool {
         } catch (e: UnsupportedEncodingException) {
             e.printStackTrace()
         } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    @Synchronized
+    fun saveUpdatedMaterialToXml(timestamp: ArrayList<Times>, context: Context) {
+        try {
+            val xStream = XStream()
+            xStream.allowTypes(arrayOf<Class<*>>(Times::class.java))
+            xStream.alias("time", Times::class.java)
+            val asdfd = xStream.toXML(timestamp)
+            val fos = FileOutputStream(context.cacheDir.toString() + "/" + "updatedat.xml")
+            //FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+            fos.write("<?xml version=\"1.0\"?>".toByteArray(charset("UTF-8")))
+            val bytes = asdfd.toByteArray(charset("UTF-8"))
+            fos.write(bytes)
+            fos.close()
+        } catch (e: Resources.NotFoundException) {
+            e.printStackTrace()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: UnsupportedEncodingException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    @Synchronized
+    fun loadUpdatedMaterialFromXml(context:Context){
+        try {
+            val xStream = XStream()
+            xStream.allowTypes(arrayOf<Class<*>>(Times::class.java))
+            xStream.alias("time", Times::class.java)
+            val pixelExistFile = File(context.cacheDir.toString() + "/" + "updatedat.xml")
+            //File pixelExistFile = new File(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+            val fos1: InputStream
+
+            fos1 = FileInputStream(context.cacheDir.toString() + "/" + "updatedat.xml")
+                // fos1 = new FileInputStream(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+
+            val item = xStream.fromXML(fos1) as ArrayList<Times>
+            Times.updatedLocal= item
+        } catch (e: Resources.NotFoundException) {
+            e.printStackTrace()
+        } catch (e: FileNotFoundException) {
             e.printStackTrace()
         }
     }

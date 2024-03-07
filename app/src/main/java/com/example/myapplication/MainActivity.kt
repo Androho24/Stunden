@@ -11,6 +11,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.pdf.PdfRenderer
 import android.icu.util.Calendar
@@ -38,6 +39,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
@@ -48,12 +51,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapter.MaterialAdapterMain
 import com.example.myapplication.Adapter.WorktimeAdapterMain
 import com.example.myapplication.Admin.AdminMaterialActivity
+import com.example.myapplication.Database.GoogleFirebase
+import com.example.myapplication.Interfaces.FirestoreMaterialFromDBCallback
+import com.example.myapplication.Interfaces.FirestoreTimeCallback
 import com.example.myapplication.Interfaces.MainActivityMatInterface
 import com.example.myapplication.Interfaces.MainActivityWorktimeInterface
 import com.example.myapplication.Lager.LagerActivity
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
+import com.example.myapplication.Objects.Times
 import com.example.myapplication.Objects.Workers
 import com.example.myapplication.Objects.WorktimeMain
 import com.example.myapplication.Pdf.PDFCreator
@@ -62,6 +69,7 @@ import com.example.myapplication.Worktime.WorkTimeFragment
 import com.example.myapplication.Worktime.WorktimeEditFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.Timestamp
 import com.itextpdf.layout.Document
 import org.apache.commons.io.FileUtils
 import java.io.File
@@ -74,7 +82,8 @@ import java.util.Locale
 
 @SuppressLint("SetJavaScriptEnabled")
 class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnter,
-    CustomerFragment.onNewCustomerEventListener, CustomerClientFragment.onClientEventListener,WorktimeEditFragment.onWorktimeEditEventLisnter,
+    CustomerFragment.onNewCustomerEventListener, CustomerClientFragment.onClientEventListener,
+    WorktimeEditFragment.onWorktimeEditEventLisnter,
     MainActivityMatInterface, MainActivityWorktimeInterface {
     // var ourWorkbook: Workbook? = null
     //var sheet: Sheet? = null
@@ -105,6 +114,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var fusedLocationClient: LocationManager? = null
     var isNightModeOn: Boolean = false
 
+    var loadingImageView : ImageView? = null
+
     //    var locationByGPS
 //    var locationByNetwork
     var location = "Moosthenning"
@@ -115,11 +126,31 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var navView: NavigationView? = null
     var menuDraw: Menu? = null
 
+    var layout : DrawerLayout? = null
+
+
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+
+
+       GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
+           override fun onCallback() {
+               super.onCallback()
+               loadXml()
+           }
+       })
+
+        setLoadingImage()
+
+
+
+
+
         buttonSetDate = findViewById<Button>(R.id.buttonAddDate)
         buttonPreview = findViewById(R.id.buttonPreview)
         date = findViewById<TextView>(R.id.textViewDate)
@@ -142,7 +173,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         fusedLocationClient = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
-        drawerLayout = findViewById(R.id.drawer_layout)
+
         actionBarDrawerToggle =
             ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
 
@@ -184,8 +215,9 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                     startActivity(myIntent)
                     true
                 }
-                R.id.itemAdminMaterial ->{
-                    val myIntent = Intent(this,AdminMaterialActivity::class.java)
+
+                R.id.itemAdminMaterial -> {
+                    val myIntent = Intent(this, AdminMaterialActivity::class.java)
                     startActivity(myIntent)
                     true
                 }
@@ -308,9 +340,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
                 if (!addresses.isEmpty()) {
                     location = addresses[0].locality
-                }
-                else{
-                    location ="Moosthenning"
+                } else {
+                    location = "Moosthenning"
                 }
             } catch (e: IOException) {
 
@@ -337,17 +368,17 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         pdfCreator = PDFCreator()
         myIcon = resources.getDrawable(R.drawable.img)
 
-Workers.workerArray = ArrayList<String>()
-    Workers.workerArray.add("Matthias Höpfler")
+        Workers.workerArray = ArrayList<String>()
+        Workers.workerArray.add("Matthias Höpfler")
 
-    Workers.workerArray.add("Heizer Oliver")
+        Workers.workerArray.add("Heizer Oliver")
 
 
-    Workers.workerArray.add("Franz Eibauer")
-    Workers.workerArray.add("Alexander Geisperger")
-    Workers.workerArray.add("Marcel Radu-Iliuta")
-    Workers.workerArray.add("Florin Iftode")
-    Workers.workerArray.add("Tägliche Pausenzeit")
+        Workers.workerArray.add("Franz Eibauer")
+        Workers.workerArray.add("Alexander Geisperger")
+        Workers.workerArray.add("Marcel Radu-Iliuta")
+        Workers.workerArray.add("Florin Iftode")
+        Workers.workerArray.add("Tägliche Pausenzeit")
 
         if (Environment.isExternalStorageManager()) {
 
@@ -365,11 +396,18 @@ Workers.workerArray = ArrayList<String>()
 
 
         setScrollViews()
-        loadXml()
-        setSpinnerCustomer()
-        buttonOnClickListeners()
-        editTextOnClickListeners()
 
+           setSpinnerCustomer()
+           buttonOnClickListeners()
+           editTextOnClickListeners()
+
+
+    }
+
+    private fun setLoadingImage() {
+        loadingImageView = ImageView(applicationContext)
+        loadingImageView!!.setImageDrawable(getDrawable(R.drawable.loading_image))
+        drawerLayout!!.addView(loadingImageView)
 
     }
 
@@ -381,7 +419,38 @@ Workers.workerArray = ArrayList<String>()
     private fun loadXml() {
         xmlTool = XmlTool()
         xmlTool!!.loadSavedProfilefromXml(applicationContext)
-        xmlTool!!.loadMaterialsFromXml(applicationContext)
+        xmlTool!!.loadUpdatedMaterialFromXml(applicationContext)
+
+        if (Times.updatedLocal.isEmpty()){
+            var timarr = ArrayList<Times>()
+            var time = Times(Timestamp.now())
+            timarr.add(time)
+            xmlTool!!.saveUpdatedMaterialToXml(timarr,applicationContext)
+            Times.updatedLocal.iterator().next().time = Timestamp.now()
+        }
+
+
+        if (GoogleFirebase.materialLastUpdatedDb > Times.updatedLocal.iterator().next().time){
+            GoogleFirebase.loadMaterialsFromDb(object : FirestoreMaterialFromDBCallback {
+                override fun onSuccessCallback() {
+                    var timarr = ArrayList<Times>()
+                    var time = Times(Timestamp.now())
+                    timarr.add(time)
+                    xmlTool!!.saveUpdatedMaterialToXml(timarr,applicationContext)
+                    Times.updatedLocal.iterator().next().time = Timestamp.now()
+                   drawerLayout!!.removeView(loadingImageView)
+                }
+
+                override fun onFailureCallback() {
+                    xmlTool!!.loadMaterialsFromXml(applicationContext)
+                    drawerLayout!!.removeView(loadingImageView)
+                }
+
+                })
+        }else {
+            xmlTool!!.loadMaterialsFromXml(applicationContext)
+            drawerLayout!!.removeView(loadingImageView)
+        }
         xmlTool!!.loadOwnMaterialsFromXml(applicationContext)
     }
 
@@ -652,21 +721,20 @@ Workers.workerArray = ArrayList<String>()
 
 
 
-        if (requestCode == MaterialAdapterMain.materialResultCode){
+        if (requestCode == MaterialAdapterMain.materialResultCode) {
             var newMats = ArrayList<CustomerMaterial>()
-            for (mat in CustomerMaterial.customerMaterials){
+            for (mat in CustomerMaterial.customerMaterials) {
                 var matExists = false
-                var amount : Float = 0f
-                for (mat2 in CustomerMaterial.customerMaterials){
-                    if (mat.materialName == mat2.materialName){
+                var amount: Float = 0f
+                for (mat2 in CustomerMaterial.customerMaterials) {
+                    if (mat.materialName == mat2.materialName) {
                         matExists = true
                         amount = mat2.materialAmount!!.toFloat()
                     }
                 }
-                if (matExists == false){
+                if (matExists == false) {
                     newMats.add(mat)
-                }
-                else{
+                } else {
                     mat.materialAmount == (mat.materialAmount!!.toFloat() + amount).toString()
                 }
 
@@ -688,15 +756,16 @@ Workers.workerArray = ArrayList<String>()
 
         if (requestCode == materialResult) {
             var newMats = ArrayList<CustomerMaterial>()
-            for (mat in CustomerMaterial.customerMaterials){
+            for (mat in CustomerMaterial.customerMaterials) {
                 var matExists = false
-                var amount : Float = 0f
+                var amount: Float = 0f
                 if (!newMats.isEmpty()) {
                     for (mat2 in newMats) {
                         if (mat.materialName == mat2.materialName) {
                             matExists = true
                             amount = mat2.materialAmount!!.toFloat()
-                            mat2.materialAmount = (mat.materialAmount!!.toFloat() + mat2.materialAmount!!.toFloat()).toString()
+                            mat2.materialAmount =
+                                (mat.materialAmount!!.toFloat() + mat2.materialAmount!!.toFloat()).toString()
                         }
                     }
                 }
@@ -811,6 +880,13 @@ Workers.workerArray = ArrayList<String>()
         tableWorkTimes!!.adapter = adapter
     }
 
+    suspend fun waitForUpdatedAtLoaded(): Boolean {
+        while (!!GoogleFirebase.loadedUpdatedAtFromDB) {
+            Thread.sleep(100)
+        }
+        return true
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>, grantResults: IntArray
@@ -842,8 +918,6 @@ Workers.workerArray = ArrayList<String>()
             }
         }
     }
-
-
 
 
 }

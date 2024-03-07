@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapter.MaterialAdapterAddLager
 import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.R
@@ -111,7 +110,13 @@ class LagerEditMaterialLager : AppCompatActivity() {
                     Toast.makeText(this,"Material existiert bereits",Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    var mat = Material(editMatName!!.text.toString(), editUnit!!.selectedItem!!.toString(),"")
+                    var i =0
+                    for (mat in Material.ownMaterials){
+                        if (mat.id > 0){
+                            i = mat.id
+                        }
+                    }
+                    var mat = Material(i+1,editMatName!!.text.toString(), editUnit!!.selectedItem!!.toString(),"",0,false)
                     Material.ownMaterials.add(mat)
                     editTextFilter!!.setText(mat.material)
                     var xmlTool = XmlTool()

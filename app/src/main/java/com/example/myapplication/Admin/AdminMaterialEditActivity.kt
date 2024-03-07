@@ -8,9 +8,14 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.Barcode.CaptureAct
+import com.example.myapplication.Database.GoogleFirebase
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.R
 import com.example.myapplication.XmlTool
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanIntentResult
+import com.journeyapps.barcodescanner.ScanOptions
 
 class AdminMaterialEditActivity : AppCompatActivity() {
 
@@ -44,8 +49,7 @@ class AdminMaterialEditActivity : AppCompatActivity() {
         textViewBarcodeToEdit = findViewById(R.id.textViewBarcodeToEditMatAdmin)
         textViewNewBarcode = findViewById(R.id.textViewNewBarcodeMatEditAdmin)
 
-        Material.connectMaterial()
-        for (mat in Material.connectedMaterials){
+        for (mat in Material.materials){
             if (mat.material == name && mat.unit == unit){
                 textViewBarcodeToEdit!!.text = mat.barcode
                 textViewNewBarcode!!.text = mat.barcode
@@ -61,6 +65,10 @@ class AdminMaterialEditActivity : AppCompatActivity() {
     }
 
     private fun setButtonOnClickListeners() {
+
+        buttonBarcode!!.setOnClickListener {
+            scanCode()
+        }
         buttonSave!!.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Material ändern")
@@ -68,13 +76,7 @@ class AdminMaterialEditActivity : AppCompatActivity() {
 
 
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-                for (mat in Material.ownMaterials){
-                    if (mat.material == name && mat.unit == unit && mat.barcode == textViewBarcodeToEdit!!.text.toString()) {
-                        mat.material = editTextNewMaterialName!!.text.toString()
-                        mat.unit = spinnerUnitNew!!.selectedItem!!.toString()
-                        mat.barcode = textViewNewBarcode!!.text.toString()
-                    }
-                }
+
                 for (mat in Material.materials){
                     if (mat.material == name && mat.unit == unit && mat.barcode == textViewBarcodeToEdit!!.text.toString()) {
                         mat.material = editTextNewMaterialName!!.text.toString()
@@ -85,6 +87,7 @@ class AdminMaterialEditActivity : AppCompatActivity() {
                 var xmlTool = XmlTool()
                 xmlTool.saveOwnMaterialsToXml(Material.ownMaterials,applicationContext)
                 xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
+                GoogleFirebase.updateMaterialToDatabase()
                 finish()
             }
 
@@ -102,16 +105,7 @@ class AdminMaterialEditActivity : AppCompatActivity() {
 
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
 
-                var materialNew = ArrayList<Material>()
-                for (mat in Material.ownMaterials){
-                    if (mat.material == name && mat.unit == unit){
 
-                    }
-                    else{
-                        materialNew.add(mat)
-                    }
-                }
-                Material.ownMaterials = materialNew
 
                 var materialLagerNew = ArrayList<Material>()
                 for (mat in Material.materials){
@@ -125,6 +119,7 @@ class AdminMaterialEditActivity : AppCompatActivity() {
                 var xmlTool = XmlTool()
                 xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
                 xmlTool.saveOwnMaterialsToXml(Material.ownMaterials,applicationContext)
+                GoogleFirebase.updateMaterialToDatabase()
                 finish()
 
             }
@@ -140,6 +135,32 @@ class AdminMaterialEditActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun scanCode() {
+        val options = ScanOptions()
+        options.setPrompt("Volume up to flash on")
+        options.setBeepEnabled(true)
+        options.setOrientationLocked(true)
+        options.setCaptureActivity(CaptureAct::class.java)
+        barLauncher.launch(options)
+    }
+    var barLauncher = registerForActivityResult(
+        ScanContract()
+    ) { result: ScanIntentResult? ->
+
+
+        if (result!!.contents != null) {
+            var builder = AlertDialog.Builder(this)
+            builder.setTitle("Result").setMessage(result.contents).setPositiveButton(
+                "ok"
+            ) { _, _ ->
+                var i = 0
+                textViewNewBarcode!!.text = result.contents.toString()
+
+
+            }.show()
+        }
     }
     override fun onBackPressed() {
         super.onBackPressed()

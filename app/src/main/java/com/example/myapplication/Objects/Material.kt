@@ -1,10 +1,8 @@
 package com.example.myapplication.Objects
 
-class Material(var material: String,var unit:String,var barcode:String) {
+class Material(var id : Int, var material: String, var unit:String, var barcode:String,var anzahl:Int,var bestellen:Boolean) {
+    constructor() : this(id = 0,material ="",unit ="",barcode ="",0,false)
 
-    open fun Material(){
-
-    }
 
     companion object {
 

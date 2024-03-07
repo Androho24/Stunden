@@ -19,12 +19,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapter.MaterialAdapterAddLager
+import com.example.myapplication.Database.GoogleFirebase
 import com.example.myapplication.Lager.LagerActivity
 import com.example.myapplication.MainActivity
-import com.example.myapplication.Material.EditMaterialList
-import com.example.myapplication.Objects.CustomerMaterial
+
+
 import com.example.myapplication.Objects.Material
 import com.google.android.material.navigation.NavigationView
 import com.example.myapplication.R
@@ -43,6 +44,8 @@ class AdminMaterialActivity : AppCompatActivity() {
     var spinnerUnit: Spinner? = null
     var editMatName: EditText? = null
     var mainScrollView: ScrollView? = null
+
+    var context : Context? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.admin_material_activity)
@@ -51,10 +54,11 @@ class AdminMaterialActivity : AppCompatActivity() {
         editTextFilter = findViewById(R.id.editTextFilterAdminMaterialMain)
         buttonAddMaterial = findViewById(R.id.buttonAddAdminMaterialMain)
         spinnerUnit = findViewById(R.id.spinnerAddAdminMaterialMain)
-        editMatName = findViewById(R.id.editTextFilterAdminMaterialMain)
+        editMatName = findViewById(R.id.editTextNewAdminMaterialMain)
         mainScrollView = findViewById(R.id.scrollViewAdminMaterialMain)
+        tableMaterial!!.layoutManager = LinearLayoutManager(this)
         Material.connectMaterial()
-        var adapter = MaterialAdapterMainAdmin(Material.connectedMaterials,applicationContext)
+        var adapter = MaterialAdapterMainAdmins(Material.materials, applicationContext)
         tableMaterial!!.adapter = adapter
         drawerLayout = findViewById(R.id.drawer_layout_admin)
         actionBarDrawerToggle =
@@ -72,6 +76,7 @@ class AdminMaterialActivity : AppCompatActivity() {
         navView = findViewById(R.id.nav_view_admin)
         /**/
         navView!!.bringToFront()
+        context = applicationContext
 
         navView!!.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -99,6 +104,8 @@ class AdminMaterialActivity : AppCompatActivity() {
         setSpinnerContent()
 
 
+
+
     }
 
     private fun onButtonClickListeners() {
@@ -111,7 +118,7 @@ class AdminMaterialActivity : AppCompatActivity() {
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
 
                 var materialExists = false
-                for (mat in Material.connectedMaterials) {
+                for (mat in Material.materials) {
                     if (editMatName!!.text.toString() == mat.material) {
                         materialExists = true
                     }
@@ -120,15 +127,22 @@ class AdminMaterialActivity : AppCompatActivity() {
                 if (materialExists) {
                     Toast.makeText(this, "Material existiert bereits", Toast.LENGTH_SHORT).show()
                 } else {
-                    var mat = Material(
+                    var i =0
+                    for (mat in Material.materials){
+                        if (mat.id > 0){
+                            i = mat.id
+                        }
+                    }
+                    var mat = Material(i+1,
                         editMatName!!.text.toString(),
                         spinnerUnit!!.selectedItem!!.toString(),
-                        ""
+                        "",0,false
                     )
-                    Material.ownMaterials.add(mat)
+                    Material.materials.add(mat)
                     editTextFilter!!.setText(mat.material)
                     var xmlTool = XmlTool()
-                    xmlTool.saveOwnMaterialsToXml(Material.ownMaterials, applicationContext)
+                    xmlTool.saveOwnMaterialsToXml(Material.materials, applicationContext)
+                    GoogleFirebase.updateMaterialToDatabase()
                     mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
                 }
             }
@@ -181,11 +195,12 @@ class AdminMaterialActivity : AppCompatActivity() {
 
 
                 }
-                var adapter = MaterialAdapterMainAdmin(listMaterial, applicationContext)
+                var adapter = MaterialAdapterMainAdmins(listMaterial, applicationContext)
                 tableMaterial!!.adapter = adapter
             } else {
                 Material.connectMaterial()
-                var adapter = MaterialAdapterMainAdmin(Material.connectedMaterials,applicationContext)
+                var adapter =
+                    MaterialAdapterMainAdmins(Material.connectedMaterials, applicationContext)
                 tableMaterial!!.adapter = adapter
             }
 
@@ -204,18 +219,17 @@ class AdminMaterialActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == LagerActivity.adminEditMaterialRequest){
+        if (requestCode == LagerActivity.adminEditMaterialRequest) {
             Material.connectMaterial()
-            var adapter = MaterialAdapterMainAdmin(Material.connectedMaterials,applicationContext)
+            var adapter = MaterialAdapterMainAdmins(Material.connectedMaterials, applicationContext)
             tableMaterial!!.adapter = adapter
         }
     }
 
-    inner class MaterialAdapterMainAdmin(
+    inner class MaterialAdapterMainAdmins(
         private var dataSet: ArrayList<Material>,
         private var context: Context
-    ) :
-        RecyclerView.Adapter<MaterialAdapterMainAdmin.ViewHolder>() {
+    ) : RecyclerView.Adapter<MaterialAdapterMainAdmins.ViewHolder>() {
 
         /**
          * Provide a reference to the type of views that you are using
@@ -224,25 +238,24 @@ class AdminMaterialActivity : AppCompatActivity() {
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val textView1: TextView
             val textView2: TextView
-            val editText: EditText
+
             val button: Button
 
             init {
                 // Define click listener for the ViewHolder's View
-                textView1 = view.findViewById(R.id.textViewUnitAddLagerAdapter)
-                textView2 = view.findViewById(R.id.textViewNameAddLagerAdapter)
-                editText = view.findViewById(R.id.editTextAmountAddLagerAdapter)
-                button = view.findViewById(R.id.buttonAddAddLagerAdapter)
+                textView1 = view.findViewById(R.id.textViewUnitAdminAdapter)
+                textView2 = view.findViewById(R.id.textViewNameAdminAdapter)
+
+                button = view.findViewById(R.id.buttonAdminAdapter)
             }
         }
-
 
 
         // Create new views (invoked by the layout manager)
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
             // Create a new view, which defines the UI of the list item
             val view = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.material_add_lager_adapter, viewGroup, false)
+                .inflate(R.layout.material_admin_adapter, viewGroup, false)
 
             return ViewHolder(view)
         }
@@ -256,20 +269,18 @@ class AdminMaterialActivity : AppCompatActivity() {
             viewHolder.textView1.id = position
             viewHolder.textView2.text = m.material
             viewHolder.textView2.id = position
-            viewHolder.editText.id = position
+
             viewHolder.button.id = position
 
-            viewHolder.button.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    var activity = v!!.context as AppCompatActivity
-                    var intent = Intent(activity, AdminMaterialEditActivity::class.java)
-                    intent.putExtra("unit", viewHolder.textView1.text.toString())
-                    intent.putExtra("name", viewHolder.textView2.text.toString())
-                    activity.startActivityForResult(intent, LagerActivity.adminEditMaterialRequest)
+            viewHolder.button.setOnClickListener {
 
-                }
+                var intent = Intent(context, AdminMaterialEditActivity::class.java)
+                intent.putExtra("unit", viewHolder.textView1.text.toString())
+                intent.putExtra("name", viewHolder.textView2.text.toString())
+                startActivityForResult(intent, LagerActivity.adminEditMaterialRequest)
+
+
             }
-            )
             viewHolder.textView1.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
 
