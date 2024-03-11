@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
@@ -22,14 +23,18 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Database.GoogleFirebase
+import com.example.myapplication.Interfaces.FirestoreMaterialFromDBCallback
+import com.example.myapplication.Interfaces.FirestoreTimeCallback
 import com.example.myapplication.Lager.LagerActivity
 import com.example.myapplication.MainActivity
 
 
 import com.example.myapplication.Objects.Material
+import com.example.myapplication.Objects.Times
 import com.google.android.material.navigation.NavigationView
 import com.example.myapplication.R
 import com.example.myapplication.XmlTool
+import com.google.firebase.Timestamp
 
 class AdminMaterialActivity : AppCompatActivity() {
 
@@ -44,6 +49,9 @@ class AdminMaterialActivity : AppCompatActivity() {
     var spinnerUnit: Spinner? = null
     var editMatName: EditText? = null
     var mainScrollView: ScrollView? = null
+    var xmlTool : XmlTool? = null
+
+    var loadingImageView : ImageView? = null
 
     var context : Context? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +69,24 @@ class AdminMaterialActivity : AppCompatActivity() {
         var adapter = MaterialAdapterMainAdmins(Material.materials, applicationContext)
         tableMaterial!!.adapter = adapter
         drawerLayout = findViewById(R.id.drawer_layout_admin)
+
+        GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
+            override fun onCallback() {
+                super.onCallback()
+                loadXml()
+            }
+
+            override fun onFailureCallback() {
+                super.onFailureCallback()
+                Toast.makeText(applicationContext,"Datenbank nicht erreichbar, stellen Sie eine Internetverbindung her, oder probieren Sie es später nochmal",Toast.LENGTH_SHORT)
+            }
+        })
+
+        setLoadingImage()
+
+
+
+
         actionBarDrawerToggle =
             ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
 
@@ -105,6 +131,50 @@ class AdminMaterialActivity : AppCompatActivity() {
 
 
 
+
+    }
+
+    private fun setLoadingImage() {
+        loadingImageView = ImageView(applicationContext)
+        loadingImageView!!.setImageDrawable(getDrawable(R.drawable.loading_image))
+        drawerLayout!!.addView(loadingImageView)
+
+    }
+
+    private fun loadXml() {
+        xmlTool = XmlTool()
+        xmlTool!!.loadUpdatedMaterialFromXml(applicationContext)
+
+        if (Times.updatedLocal.isEmpty()){
+            var timarr = ArrayList<Times>()
+            var time = Times(Timestamp.now())
+            timarr.add(time)
+            xmlTool!!.saveUpdatedMaterialToXml(timarr,applicationContext)
+            Times.updatedLocal.iterator().next().time = Timestamp.now()
+        }
+
+
+        if (GoogleFirebase.materialLastUpdatedDb > Times.updatedLocal.iterator().next().time){
+            GoogleFirebase.loadMaterialsFromDb(object : FirestoreMaterialFromDBCallback {
+                override fun onSuccessCallback() {
+                    var timarr = ArrayList<Times>()
+                    var time = Times(Timestamp.now())
+                    timarr.add(time)
+                    xmlTool!!.saveUpdatedMaterialToXml(timarr,applicationContext)
+                    Times.updatedLocal.iterator().next().time = Timestamp.now()
+                    drawerLayout!!.removeView(loadingImageView)
+                }
+
+                override fun onFailureCallback() {
+                    xmlTool!!.loadMaterialsFromXml(applicationContext)
+                    drawerLayout!!.removeView(loadingImageView)
+                }
+
+            })
+        }else {
+            xmlTool!!.loadMaterialsFromXml(applicationContext)
+            drawerLayout!!.removeView(loadingImageView)
+        }
 
     }
 

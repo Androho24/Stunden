@@ -47,6 +47,10 @@ class GoogleFirebase {
                         firestoreTime.onCallback()
 
                     }
+                   .addOnFailureListener {
+                       loadedUpdatedAtFromDB = false
+                       firestoreTime.onFailureCallback()
+                   }
 
 
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -16,6 +17,7 @@ import com.example.myapplication.XmlTool
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
+import org.w3c.dom.Text
 
 class AdminMaterialEditActivity : AppCompatActivity() {
 
@@ -31,16 +33,33 @@ class AdminMaterialEditActivity : AppCompatActivity() {
     var name:String? = ""
     var textViewBarcodeToEdit : TextView? = null
     var textViewNewBarcode : TextView? = null
+    var textViewAmountToEdit : TextView? = null
+    var textViewOrderToEdit : TextView? = null
+
+    var textViewAmountNew : TextView? = null
+    var checkBoxOrderNew : CheckBox? = null
+
+    var buttonDeleteBarcode : Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.admin_material_edit_activity)
         textViewMaterialNameToEdit = findViewById(R.id.textViewNameToEditEditMatListAdmin)
         textViewMaterialUnitToEdit = findViewById(R.id.textViewUnitToEditMatListAdmin)
+        textViewAmountToEdit = findViewById(R.id.textViewMatAmountToEditAdim)
+        textViewOrderToEdit = findViewById(R.id.textViewMatOrderToEditAdmin)
+
+        textViewAmountNew = findViewById(R.id.editTextAmountNewMatAdmin)
+        checkBoxOrderNew = findViewById(R.id.checkBoxMatOrderAdmin)
+
+
         spinnerUnitNew = findViewById(R.id.spinnerNewUnitEditMatListAdmin)
         editTextNewMaterialName = findViewById(R.id.editTextNewNameEditMatListAdmin)
         buttonCancel = findViewById(R.id.buttonCancelEditMatListAdmin)
         buttonDelete = findViewById(R.id.buttonDeleteEditMatListAdmin)
         buttonSave = findViewById(R.id.buttonSaveEditMatListAdmin)
+        buttonDeleteBarcode = findViewById(R.id.buttonDeleteBarcodeMatEditAdmin)
+
+
         unit = intent.extras!!.getString("unit")
         name = intent.extras!!.getString("name")
         textViewMaterialNameToEdit!!.text = name
@@ -53,6 +72,13 @@ class AdminMaterialEditActivity : AppCompatActivity() {
             if (mat.material == name && mat.unit == unit){
                 textViewBarcodeToEdit!!.text = mat.barcode
                 textViewNewBarcode!!.text = mat.barcode
+                if (mat.bestellen == true){
+                    textViewOrderToEdit!!.setText("Ja")
+                }
+                else {
+                    textViewOrderToEdit!!.setText("Nein")
+                }
+                textViewAmountToEdit!!.setText(mat.anzahl.toString())
             }
         }
 
@@ -66,6 +92,9 @@ class AdminMaterialEditActivity : AppCompatActivity() {
 
     private fun setButtonOnClickListeners() {
 
+        buttonDeleteBarcode!!.setOnClickListener {
+            textViewNewBarcode!!.text = ""
+        }
         buttonBarcode!!.setOnClickListener {
             scanCode()
         }
@@ -82,6 +111,8 @@ class AdminMaterialEditActivity : AppCompatActivity() {
                         mat.material = editTextNewMaterialName!!.text.toString()
                         mat.unit = spinnerUnitNew!!.selectedItem!!.toString()
                         mat.barcode = textViewNewBarcode!!.text.toString()
+                        mat.bestellen = checkBoxOrderNew!!.isChecked
+                        mat.anzahl = textViewAmountNew!!.text as Int
                     }
                 }
                 var xmlTool = XmlTool()

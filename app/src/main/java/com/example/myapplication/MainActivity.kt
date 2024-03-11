@@ -11,7 +11,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.pdf.PdfRenderer
 import android.icu.util.Calendar
@@ -39,8 +38,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
@@ -141,6 +138,11 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
        GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
            override fun onCallback() {
                super.onCallback()
+               loadXml()
+           }
+
+           override fun onFailureCallback() {
+               super.onFailureCallback()
                loadXml()
            }
        })
@@ -418,7 +420,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
     private fun loadXml() {
         xmlTool = XmlTool()
-        xmlTool!!.loadSavedProfilefromXml(applicationContext)
+        xmlTool!!.loadSavedCustomersfromXml(applicationContext)
         xmlTool!!.loadUpdatedMaterialFromXml(applicationContext)
 
         if (Times.updatedLocal.isEmpty()){

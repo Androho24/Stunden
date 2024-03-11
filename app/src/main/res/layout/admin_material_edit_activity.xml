@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/textViewNameTextEdit1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="92dp"
         android:text="Einheit:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,56 +30,58 @@
         android:id="@+id/textViewNameToEditNameAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:text="Name:"
         app:layout_constraintStart_toStartOf="@+id/textViewNameTextEdit1"
         app:layout_constraintTop_toBottomOf="@+id/textViewNameTextEdit1" />
 
     <TextView
         android:id="@+id/textViewNameToEditEditMatListAdmin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/textViewNameToEditNameAdmin"
-        app:layout_constraintStart_toStartOf="@+id/textViewUnitToEditMatListAdmin"
-        app:layout_constraintTop_toTopOf="@+id/textViewNameToEditName" />
+        app:layout_constraintEnd_toEndOf="@+id/buttonSaveEditMatListAdmin"
+        app:layout_constraintStart_toStartOf="@+id/textViewUnitToEditMatListAdmin" />
 
     <TextView
         android:id="@+id/textViewNewUnitEditMatNameAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="176dp"
         android:text="Einheit"
         app:layout_constraintStart_toStartOf="@+id/textViewNameToEditNameAdmin"
         app:layout_constraintTop_toBottomOf="@+id/textViewNameToEditNameAdmin" />
 
     <Spinner
         android:id="@+id/spinnerNewUnitEditMatListAdmin"
-        android:layout_width="251dp"
+        android:layout_width="0dp"
         android:layout_height="38dp"
-        android:layout_marginStart="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewNewUnitEditMatNameAdmin"
-        app:layout_constraintStart_toEndOf="@+id/textViewNewUnitEditMatNameAdmin"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSaveEditMatListAdmin"
+        app:layout_constraintStart_toStartOf="@+id/textViewMatOrderToEditAdmin"
         app:layout_constraintTop_toTopOf="@+id/textViewNewUnitEditMatNameAdmin"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintVertical_bias="0.526" />
 
     <TextView
         android:id="@+id/textViewNewNameNameEditMatListAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:text="Name:"
         app:layout_constraintStart_toStartOf="@+id/textViewNewUnitEditMatNameAdmin"
         app:layout_constraintTop_toBottomOf="@+id/textViewNewUnitEditMatNameAdmin" />
 
     <EditText
         android:id="@+id/editTextNewNameEditMatListAdmin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="@+id/textViewNewNameNameEditMatListAdmin"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSaveEditMatListAdmin"
         app:layout_constraintStart_toStartOf="@+id/spinnerNewUnitEditMatListAdmin"
         app:layout_constraintTop_toTopOf="@+id/textViewNewNameNameEditMatListAdmin" />
 
@@ -86,7 +89,7 @@
         android:id="@+id/buttonDeleteEditMatListAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="192dp"
         android:text="Löschen"
         app:layout_constraintStart_toStartOf="@+id/textViewNewNameNameEditMatListAdmin"
         app:layout_constraintTop_toBottomOf="@+id/textViewNewNameNameEditMatListAdmin" />
@@ -117,23 +120,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="Zu bearbeitendes Material:"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewNameTextEdit1"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonAddBarcodeMatEditAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Barcode"
-        app:layout_constraintStart_toStartOf="@+id/buttonSaveEditMatListAdmin"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewNameEditMatListAdmin" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:text="Barcode:"
         app:layout_constraintStart_toStartOf="@+id/textViewNameToEditNameAdmin"
         app:layout_constraintTop_toBottomOf="@+id/textViewNameToEditNameAdmin" />
@@ -151,7 +146,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
         android:text="Barcode"
         app:layout_constraintStart_toStartOf="@+id/textViewNewNameNameEditMatListAdmin"
         app:layout_constraintTop_toBottomOf="@+id/textViewNewNameNameEditMatListAdmin" />
@@ -162,6 +157,104 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/editTextNewNameEditMatListAdmin"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Anzahl"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textViewMatAmountToEditAdim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="@+id/textViewBarcodeToEditMatAdmin"
-        app:layout_constraintTop_toTopOf="@+id/textView8" />
+        app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Bestellnachricht:"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textViewMatOrderToEditAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/textViewMatAmountToEditAdim"
+        app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Anzahl:"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <EditText
+        android:id="@+id/editTextAmountNewMatAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="@+id/textViewNewBarcodeMatEditAdmin"
+        app:layout_constraintTop_toTopOf="@+id/textView12"
+        app:layout_constraintVertical_bias="0.423" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Bestellnachr.:"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <CheckBox
+        android:id="@+id/checkBoxMatOrderAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nein"
+        app:layout_constraintBottom_toBottomOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="@+id/textViewNewBarcodeMatEditAdmin"
+        app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+    <Button
+        android:id="@+id/buttonAddBarcodeMatEditAdmin"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewNewBarcodeMatEditAdmin"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSaveEditMatListAdmin"
+        app:layout_constraintTop_toTopOf="@+id/textViewNewBarcodeMatEditAdmin"
+        app:layout_constraintVertical_bias="0.413" />
+
+    <Button
+        android:id="@+id/buttonDeleteBarcodeMatEditAdmin"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:text="-"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAddBarcodeMatEditAdmin"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAddBarcodeMatEditAdmin"
+        app:layout_constraintTop_toTopOf="@+id/buttonAddBarcodeMatEditAdmin"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

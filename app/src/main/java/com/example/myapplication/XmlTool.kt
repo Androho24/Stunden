@@ -5,7 +5,6 @@ import android.content.res.Resources
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.Objects.Times
-import com.google.firebase.Timestamp
 import com.thoughtworks.xstream.XStream
 import java.io.File
 import java.io.FileInputStream
@@ -14,12 +13,11 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.UnsupportedEncodingException
-import java.sql.Time
 
 class XmlTool {
 
     @Synchronized
-    fun loadSavedProfilefromXml(context: Context) {
+    fun loadSavedCustomersfromXml(context: Context) {
         try {
             val xStream = XStream()
             xStream.allowTypes(arrayOf<Class<*>>(Customer::class.java))
