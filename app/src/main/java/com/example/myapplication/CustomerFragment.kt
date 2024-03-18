@@ -21,8 +21,6 @@ import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.example.myapplication.Adapter.MaterialAdapterMain
-import com.example.myapplication.Adapter.WorktimeAdapterMain
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial

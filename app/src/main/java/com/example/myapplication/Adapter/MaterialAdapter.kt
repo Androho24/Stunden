@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -32,12 +33,14 @@ class MaterialAdapter(private var dataSet: ArrayList<Material>,private var conte
         val textView2: TextView
         val editText : EditText
         val button : Button
+        var checkBox:CheckBox
         init {
             // Define click listener for the ViewHolder's View
             textView1 = view.findViewById(R.id.textView1)
             textView2 = view.findViewById(R.id.textView2)
             editText = view.findViewById(R.id.editTextHolder)
             button = view.findViewById(R.id.buttonHolder)
+            checkBox = view.findViewById(R.id.checkBoxMaterialAdapterZugang)
         }
     }
 
@@ -60,13 +63,21 @@ class MaterialAdapter(private var dataSet: ArrayList<Material>,private var conte
         viewHolder.textView2.text = m.material
         viewHolder.textView2.id = position
         viewHolder.editText.id = position
+        viewHolder.checkBox.id = position
         viewHolder.button.id = position
         viewHolder.button.setOnClickListener {
             if (viewHolder.editText.text.toString() != "") {
                 var newMaterial = CustomerMaterial()
                 newMaterial.materialName = viewHolder.textView2.text.toString()
                 newMaterial.materialUnit = viewHolder.textView1.text.toString()
-                newMaterial.materialAmount = viewHolder.editText.text.toString()
+                if (viewHolder.checkBox.isChecked){
+                    newMaterial.materialAmount = viewHolder.editText.text.toString().toFloat().toString()
+                    newMaterial.materialZugang = true
+                }
+                else{
+                    var amou = (Math.abs(viewHolder.editText.text.toString().toFloat())*-1).toString()
+                    newMaterial.materialAmount = amou
+                }
                 CustomerMaterial.customerMaterials.add(newMaterial)
                 Toast.makeText(context, "Material hinzugefügt", Toast.LENGTH_SHORT).show()
             }

@@ -6,8 +6,10 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.pdf.PdfRenderer
+import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
+import android.webkit.WebView
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +19,7 @@ import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
 import com.example.myapplication.SigningCustomerFragment
 import com.example.myapplication.SigningFragment
+import com.github.barteksc.pdfviewer.PDFView
 import com.itextpdf.io.image.ImageData
 import com.itextpdf.io.image.ImageDataFactory
 import com.itextpdf.kernel.pdf.PdfDocument
@@ -24,7 +27,6 @@ import com.itextpdf.kernel.pdf.PdfReader
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Image
-import com.ortiz.touchview.TouchImageView
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -35,7 +37,9 @@ import java.util.Objects
 class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedCompleteListener,
     SigningCustomerFragment.onSignedCustomerCompleteListener {
 
-    var pdfView: TouchImageView? = null
+        var webView: WebView? = null
+
+
     var buttonSend: Button? = null
     var path = ""
     var pathToSave = ""
@@ -44,11 +48,13 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
     var buttonSign: Button? = null
     var buttonCustomerSign: Button? = null
     var isLager = false
+    var pdfViewTest:PDFView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.preview_pdf_activity)
+
         buttonSend = findViewById(R.id.buttonSendPreview)
-        pdfView = findViewById(R.id.pdf_image)
+
         buttonSign = findViewById(R.id.buttonSignPreview)
         buttonCustomerSign = findViewById(R.id.buttonSignCustomerPreview)
         val bundle = intent.extras
@@ -57,6 +63,8 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         customerName = bundle.getString("customerName").toString()
         customerPrename = bundle.getString("customerPrename").toString()
         var stringIsLager = bundle.getString("isLager").toString()
+         pdfViewTest = findViewById(R.id.webviewTest)
+
 
         if (stringIsLager == "true"){
             isLager = true
@@ -83,22 +91,39 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
             ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
         // This is the PdfRenderer we use to render the PDF.
         // This is the PdfRenderer we use to render the PDF.
-
-        var pdfRenderer = PdfRenderer(parcelFileDescriptor)
-
-
-        // Make sure to close the current page before opening another one.
-        // Make sure to close the current page before opening another one.
-
-        // Use `openPage` to open a specific page in PDF.
-        // Use `openPage` to open a specific page in PDF.
-        var currentPage = pdfRenderer.openPage(0)
-        // Important: the destination bitmap must be ARGB (not RGB).
-        // Important: the destination bitmap must be ARGB (not RGB).
         val bitmap = Bitmap.createBitmap(
             2048, 2896,
             Bitmap.Config.ARGB_8888
         )
+        var pdfRenderer = PdfRenderer(parcelFileDescriptor)
+        val file1 = Uri.fromFile(file)
+        pdfViewTest!!.fromUri(file1).load()
+
+
+      /*  var pageCount = pdfRenderer.pageCount
+
+        for(i in 0..pageCount){
+            var page = pdfRenderer.openPage(0)
+            page.render(bitmap,null,null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+            page.close()
+
+        }*/
+
+
+
+
+
+
+        // Make sure to close the current page before opening another one.
+        // Make sure to close the current page before opening another one.
+
+        // Use `openPage` to open a specific page in PDF.
+        // Use `openPage` to open a specific page in PDF.
+      /*  var currentPage = pdfRenderer.openPage(0)
+
+        // Important: the destination bitmap must be ARGB (not RGB).
+        // Important: the destination bitmap must be ARGB (not RGB).
+
         // Here, we render the page onto the Bitmap.
         // To render a portion of the page, use the second and third parameter. Pass nulls to get
         // the default result.
@@ -107,15 +132,27 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         // To render a portion of the page, use the second and third parameter. Pass nulls to get
         // the default result.
         // Pass either RENDER_MODE_FOR_DISPLAY or RENDER_MODE_FOR_PRINT for the last parameter.
-        currentPage.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+        currentPage.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)*/
         // We are ready to show the Bitmap to user.
         // We are ready to show the Bitmap to user.
-        pdfView!!.setImageBitmap(bitmap)
+
+
+
+       // pdfView!!.setImageBitmap(bitmap)
+
         // updateUi()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent()
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
 
     private fun buttonOnClickListeners() {
+
         buttonSend!!.setOnClickListener {
 
 
@@ -176,8 +213,6 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
                 if (intent.resolveActivity(packageManager) != null) {
                     startActivity(intent)
                 }
-
-
             }
         }
         buttonSign!!.setOnClickListener {
@@ -204,9 +239,10 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val imageInByte: ByteArray = baos.toByteArray()
         val data: ImageData = ImageDataFactory.create(imageInByte)
-        var image = Image(data).scaleAbsolute(150f, 70f).setRelativePosition(350f,660f,0f,0f)
+
 
         val pdfDoc = PdfDocument(PdfReader(path), PdfWriter("/storage/emulated/0/Documents/ElektroEibauer/test1.pdf"))
+        var image = Image(data).scaleAbsolute(150f, 70f).setFixedPosition(pdfDoc.numberOfPages,350f,80f)
         var document = Document(pdfDoc)
         document.add(image)
         document.close()
@@ -219,6 +255,8 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         // This is the PdfRenderer we use to render the PDF.
 
         var pdfRenderer = PdfRenderer(parcelFileDescriptor)
+
+
 
 
         // Make sure to close the current page before opening another one.
@@ -244,9 +282,13 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         currentPage.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
         // We are ready to show the Bitmap to user.
         // We are ready to show the Bitmap to user.
-        pdfView!!.setImageBitmap(bitmap)
         var orig = File(path)
+
+
         file.copyTo(orig,true)
+        var file1 = Uri.fromFile(orig)
+        pdfViewTest!!.removeAllViews()
+        pdfViewTest!!.fromUri(file1).load()
         file.delete()
     }
 
@@ -256,9 +298,11 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val imageInByte: ByteArray = baos.toByteArray()
         val data: ImageData = ImageDataFactory.create(imageInByte)
-        var image = Image(data).scaleAbsolute(150f, 70f).setRelativePosition(50f,660f,0f,0f)
+
+       // var image = Image(data).scaleAbsolute(150f, 70f).setRelativePosition(50f,660f,0f,0f)
 
         val pdfDoc = PdfDocument(PdfReader(path), PdfWriter("/storage/emulated/0/Documents/ElektroEibauer/test1.pdf"))
+        var image = Image(data).scaleAbsolute(150f, 70f).setFixedPosition(pdfDoc.numberOfPages,50f,80f)
         var document = Document(pdfDoc)
         document.add(image)
         document.close()
@@ -296,9 +340,14 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
         currentPage.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
         // We are ready to show the Bitmap to user.
         // We are ready to show the Bitmap to user.
-        pdfView!!.setImageBitmap(bitmap)
+      //  pdfView!!.setImageBitmap(bitmap)
         var orig = File(path)
+
+
         file.copyTo(orig,true)
+        var file1 = Uri.fromFile(orig)
+        pdfViewTest!!.removeAllViews()
+        pdfViewTest!!.fromUri(file1).load()
         file.delete()
     }
 }

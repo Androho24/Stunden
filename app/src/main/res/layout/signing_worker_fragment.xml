@@ -22,10 +22,9 @@
         app:penColor="@color/black" />
 
 
-
     <Button
         android:id="@+id/buttonCompleteWorkerSigning"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
@@ -39,7 +38,7 @@
 
     <Button
         android:id="@+id/buttonClearWorkerSigning"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:layout_weight="1"

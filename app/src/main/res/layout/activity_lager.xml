@@ -29,43 +29,54 @@
 
         <Button
             android:id="@+id/buttonPreviewLager"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="28dp"
             android:text="Vorschau"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/buttonAddMaterialLager" />
+            app:layout_constraintBottom_toTopOf="@+id/buttonChangeLocationLagerActivity"
+            app:layout_constraintEnd_toEndOf="@+id/buttonAddMaterialLager"
+            app:layout_constraintTop_toBottomOf="@+id/scrollViewLager" />
 
         <Button
             android:id="@+id/buttonAddMaterialLager"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="12dp"
             android:text="Hinzufügen"
-            app:layout_constraintBottom_toTopOf="@+id/buttonPreviewLager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollViewLager"
-            app:layout_constraintVertical_bias="0.776" />
+
+            app:layout_constraintBottom_toBottomOf="@+id/textViewMaterial"
+            app:layout_constraintStart_toStartOf="@+id/buttonEditCustomerLager"
+            app:layout_constraintTop_toTopOf="@+id/textViewMaterial" />
 
         <Spinner
             android:id="@+id/spinnerCustomerLager"
             android:layout_width="200dp"
             android:layout_height="60dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textViewMaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@color/material_dynamic_neutral90"
+            android:text="Material:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/spinnerCustomerLager"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCustomerLager" />
+
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollViewLager"
             android:layout_width="411dp"
             android:layout_height="364dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerCustomerLager">
+            app:layout_constraintTop_toBottomOf="@+id/textViewMaterial">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tableMaterialLager"
@@ -80,7 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
-            android:text="Kunde"
+            android:background="@color/material_dynamic_neutral90"
+            android:text="Kunde:"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/checkBoxLagerZugang"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -88,9 +100,10 @@
         <TextView
             android:id="@+id/textViewLager"
             android:layout_width="77dp"
-            android:layout_height="39dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
+            android:background="@color/material_dynamic_neutral90"
             android:text="Datum:"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -108,21 +121,23 @@
 
         <Button
             android:id="@+id/buttonLagerDate"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
             android:text="Bearbeiten"
             app:layout_constraintBottom_toBottomOf="@+id/textViewDatumLager"
-            app:layout_constraintEnd_toEndOf="@+id/buttonAddMaterialLager"
-            app:layout_constraintTop_toTopOf="@+id/textViewDatumLager" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewDatumLager"
+            app:layout_constraintVertical_bias="0.571" />
 
         <Button
             android:id="@+id/buttonLagerClearAll"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="Leeren"
-            app:layout_constraintBottom_toBottomOf="@+id/buttonAddMaterialLager"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonPreviewLager"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/buttonAddMaterialLager" />
+            app:layout_constraintTop_toTopOf="@+id/buttonPreviewLager" />
 
         <CheckBox
             android:id="@+id/checkBoxLagerZugang"
@@ -151,8 +166,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:background="@color/material_dynamic_neutral90"
+            android:text="Bearbeiter:"
             android:textSize="20sp"
-            android:text="Bearbeiter"
             app:layout_constraintStart_toStartOf="@+id/checkBoxLagerZugang"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxLagerZugang" />
 
@@ -168,12 +184,100 @@
 
         <Button
             android:id="@+id/buttonEditCustomerLager"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="Bearbeiten"
             app:layout_constraintBottom_toBottomOf="@+id/spinnerCustomerLager"
             app:layout_constraintStart_toStartOf="@+id/buttonLagerDate"
             app:layout_constraintTop_toTopOf="@+id/spinnerCustomerLager" />
+
+        <Button
+            android:id="@+id/buttonChangeLocationLagerActivity"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Ändern"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/buttonPreviewLager" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/material_dynamic_neutral90"
+            android:text="Ort:"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonChangeLocationLagerActivity"
+            app:layout_constraintStart_toStartOf="@+id/buttonLagerClearAll"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLagerClearAll"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/editTextChangeLocationLagerActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Moosthenning"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonChangeLocationLagerActivity"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toTopOf="@+id/buttonChangeLocationLagerActivity" />
+
+        <View
+            android:id="@+id/divider6"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/checkBoxLagerZugang"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDatumLager"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <View
+            android:id="@+id/divider7"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerWorkersLager"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxLagerAbgang"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <View
+            android:id="@+id/divider8"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerWorkersLager"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <View
+            android:id="@+id/divider9"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAddMaterialLager"
+            app:layout_constraintTop_toBottomOf="@+id/buttonEditCustomerLager"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <View
+            android:id="@+id/divider10"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="12dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/buttonLagerClearAll"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <View
+            android:id="@+id/divider11"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/editTextChangeLocationLagerActivity"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLagerClearAll"
+            app:layout_constraintVertical_bias="0.275"
+            tools:layout_editor_absoluteX="2dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.drawerlayout.widget.DrawerLayout>

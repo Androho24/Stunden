@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="230dp"
+        android:layout_width="175dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="0dp"
 
@@ -38,4 +38,11 @@
         android:layout_marginLeft="330dp"
         android:text=""
         app:icon="@drawable/accept" />
+
+    <CheckBox
+        android:id="@+id/checkBoxMaterialAdapterZugang"
+        android:layout_marginLeft="175dp"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:text="Zu" />
 </FrameLayout>

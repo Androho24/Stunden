@@ -78,7 +78,7 @@
 
     <Button
         android:id="@+id/buttonSaveClient"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Speichern"
         app:layout_constraintBottom_toBottomOf="@+id/buttonCancelClient"
@@ -88,7 +88,7 @@
 
     <Button
         android:id="@+id/buttonClearClient"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
         android:text="Leeren"
@@ -152,7 +152,7 @@
 
     <Button
         android:id="@+id/buttonCancelClient"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="Abbrechen"
@@ -161,7 +161,7 @@
 
     <Button
         android:id="@+id/buttonDeleteClientFragmentExpanded"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Löschen"
         app:layout_constraintBottom_toBottomOf="@+id/buttonClearClient"

@@ -87,7 +87,7 @@
 
     <Button
         android:id="@+id/buttonDeleteEditMatListAdmin"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="192dp"
         android:text="Löschen"
@@ -96,7 +96,7 @@
 
     <Button
         android:id="@+id/buttonSaveEditMatListAdmin"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:text="Speichern"
@@ -107,7 +107,7 @@
 
     <Button
         android:id="@+id/buttonCancelEditMatListAdmin"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:text="Abbrechen"
@@ -153,8 +153,8 @@
 
     <TextView
         android:id="@+id/textViewNewBarcodeMatEditAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="53dp"
+        android:layout_height="23dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/editTextNewNameEditMatListAdmin"
@@ -239,18 +239,19 @@
         android:id="@+id/buttonAddBarcodeMatEditAdmin"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:text="+"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewNewBarcodeMatEditAdmin"
-        app:layout_constraintEnd_toEndOf="@+id/buttonSaveEditMatListAdmin"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewNewBarcodeMatEditAdmin"
-        app:layout_constraintVertical_bias="0.413" />
+        app:layout_constraintVertical_bias="0.44" />
 
     <Button
         android:id="@+id/buttonDeleteBarcodeMatEditAdmin"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
+        android:layout_marginEnd="8dp"
         android:text="-"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonAddBarcodeMatEditAdmin"

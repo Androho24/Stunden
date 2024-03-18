@@ -6,6 +6,8 @@ import com.example.myapplication.Objects.Material
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
@@ -27,6 +29,13 @@ class GoogleFirebase {
         lateinit var db: FirebaseFirestore
 
         var valueLock = Object()
+
+        lateinit  var auth :FirebaseAuth
+
+
+        fun createAuthConnection(){
+            auth = Firebase.auth
+        }
           fun createDBConnectionAndLoadMaterialUpdatedAt(firestoreTime: FirestoreTimeCallback)   {
 
 

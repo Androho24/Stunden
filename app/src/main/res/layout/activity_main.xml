@@ -30,19 +30,18 @@
 
     <Button
         android:id="@+id/buttonAddDate"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
+        android:layout_marginEnd="40dp"
         android:text="Bearbeiten"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewDate"
         app:layout_constraintTop_toTopOf="@+id/textViewDate"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonClearMain"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
 
         android:layout_marginTop="24dp"
@@ -63,7 +62,7 @@
 
     <Button
         android:id="@+id/buttonEditCustomerMain"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Bearbeiten"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerCustomerMain"
@@ -83,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:background="@color/material_dynamic_neutral90"
         android:text="Arbeitszeit :"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/spinnerCustomerMain"
@@ -90,7 +90,7 @@
 
     <Button
         android:id="@+id/buttonAddWorkTimeMain"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Hinzufügen"
         app:layout_constraintBottom_toBottomOf="@+id/textViewWorkTime"
@@ -121,11 +121,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputWorkDescription"
         android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="24dp"
         android:layout_marginRight="20dp"
-        android:layout_height="99dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
@@ -139,7 +139,7 @@
 
     <Button
         android:id="@+id/buttonPreview"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         android:text="Vorschau"
@@ -156,6 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="36dp"
+        android:background="@color/material_dynamic_neutral90"
         android:text="Material"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewWorkTime"
@@ -163,7 +164,7 @@
 
     <Button
         android:id="@+id/buttonAddMaterialMain"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Hinzufügen"
         app:layout_constraintBottom_toBottomOf="@+id/textViewMaterial"
@@ -174,10 +175,10 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView4"
         android:layout_width="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_height="205dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="56dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textViewMaterial"
         app:layout_constraintTop_toBottomOf="@+id/textViewMaterial">
@@ -195,6 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
+        android:background="@color/material_dynamic_neutral90"
         android:text="Datum :"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
@@ -202,7 +204,7 @@
 
     <Button
         android:id="@+id/buttonChangeLocationMain"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
         android:text="Ändern"
@@ -230,7 +232,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="Ort ändern :"
+        android:background="@color/material_dynamic_neutral90"
+        android:text="Ort:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/buttonClearMain"
         app:layout_constraintTop_toBottomOf="@+id/buttonClearMain" />
@@ -240,10 +243,67 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:background="@color/material_dynamic_neutral90"
         android:text="Auftraggeber :"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddDate"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddWorkTimeMain"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEditCustomerMain"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/textInputWorkDescription"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="20dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMaterial"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/buttonClearMain"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <View
+        android:id="@+id/divider12"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="15dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/buttonClearMain"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,14 @@
 package com.example.myapplication.Admin
 
+
+
 import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +17,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
@@ -27,14 +33,13 @@ import com.example.myapplication.Interfaces.FirestoreMaterialFromDBCallback
 import com.example.myapplication.Interfaces.FirestoreTimeCallback
 import com.example.myapplication.Lager.LagerActivity
 import com.example.myapplication.MainActivity
-
-
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.Objects.Times
-import com.google.android.material.navigation.NavigationView
 import com.example.myapplication.R
 import com.example.myapplication.XmlTool
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.Timestamp
+
 
 class AdminMaterialActivity : AppCompatActivity() {
 
@@ -70,64 +75,451 @@ class AdminMaterialActivity : AppCompatActivity() {
         tableMaterial!!.adapter = adapter
         drawerLayout = findViewById(R.id.drawer_layout_admin)
 
-        GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
-            override fun onCallback() {
-                super.onCallback()
-                loadXml()
-            }
-
-            override fun onFailureCallback() {
-                super.onFailureCallback()
-                Toast.makeText(applicationContext,"Datenbank nicht erreichbar, stellen Sie eine Internetverbindung her, oder probieren Sie es später nochmal",Toast.LENGTH_SHORT)
-            }
-        })
-
+        GoogleFirebase.createAuthConnection()
         setLoadingImage()
 
+        val alertDialog = AlertDialog.Builder(this@AdminMaterialActivity)
+        alertDialog.setTitle("Login")
+
+        val inflater = this.layoutInflater
+        var alertView = inflater.inflate(R.layout.password_dialog,null)
+        var email = alertView.findViewById(R.id.usernameLoginDialog) as EditText
+        var password = alertView.findViewById(R.id.passwordLoginDialog) as EditText
+        alertDialog.setView(alertView)
+            .setNeutralButton("Passwort zurücksetzen", DialogInterface.OnClickListener{dialog, which ->
+
+                GoogleFirebase.auth.sendPasswordResetEmail(email.text.toString())
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d(TAG, "Email sent.")
+                        }
+                    }
+
+                val alertDialog = AlertDialog.Builder(this@AdminMaterialActivity)
+                alertDialog.setTitle("Login")
+
+                val inflater = this.layoutInflater
+                var alertView = inflater.inflate(R.layout.password_dialog,null)
+                var email = alertView.findViewById(R.id.usernameLoginDialog) as EditText
+                var password = alertView.findViewById(R.id.passwordLoginDialog) as EditText
+                alertDialog.setView(alertView)
+                    .setNeutralButton("Passwort zurücksetzen", DialogInterface.OnClickListener{dialog, which ->
+
+                        GoogleFirebase.auth.sendPasswordResetEmail(email.text.toString())
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Log.d(TAG, "Email sent.")
+                                }
+                            }
+
+                    })
+                    .setPositiveButton("Login",
+                        DialogInterface.OnClickListener { dialog, which ->
 
 
 
-        actionBarDrawerToggle =
-            ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+                            GoogleFirebase.auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+                                .addOnCompleteListener(this) { task ->
+                                    if (task.isSuccessful) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithEmail:success")
+                                        val user = GoogleFirebase.auth.currentUser
+                                        GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
+                                            override fun onCallback() {
+                                                super.onCallback()
+                                                loadXml()
+                                            }
 
-        // pass the Open and Close toggle for the drawer layout listener
-        // to toggle the button
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
-        // pass the Open and Close toggle for the drawer layout listener
-        // to toggle the button
-        drawerLayout!!.addDrawerListener(actionBarDrawerToggle!!)
-        actionBarDrawerToggle!!.syncState()
+                                            override fun onFailureCallback() {
+                                                super.onFailureCallback()
+                                                Toast.makeText(applicationContext,"Datenbank nicht erreichbar, stellen Sie eine Internetverbindung her, oder probieren Sie es später nochmal",Toast.LENGTH_SHORT)
+                                            }
+                                        })
 
-        navView = findViewById(R.id.nav_view_admin)
-        /**/
-        navView!!.bringToFront()
-        context = applicationContext
 
-        navView!!.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.itemLager -> {
-                    val myIntent = Intent(this, LagerActivity::class.java)
-                    startActivity(myIntent)
-                    true
+
+
+
+
+                                        actionBarDrawerToggle =
+                                            ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+
+                                        // pass the Open and Close toggle for the drawer layout listener
+                                        // to toggle the button
+                                        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                                        supportActionBar!!.setDisplayShowTitleEnabled(false)
+                                        // pass the Open and Close toggle for the drawer layout listener
+                                        // to toggle the button
+                                        drawerLayout!!.addDrawerListener(actionBarDrawerToggle!!)
+                                        actionBarDrawerToggle!!.syncState()
+
+                                        navView = findViewById(R.id.nav_view_admin)
+                                        /**/
+                                        navView!!.bringToFront()
+                                        context = applicationContext
+
+                                        navView!!.setNavigationItemSelectedListener { menuItem ->
+                                            when (menuItem.itemId) {
+                                                R.id.itemLager -> {
+                                                    val myIntent = Intent(this, LagerActivity::class.java)
+                                                    startActivity(myIntent)
+                                                    true
+                                                }
+
+                                                R.id.regieBericht -> {
+                                                    val myIntent = Intent(this, MainActivity::class.java)
+                                                    startActivity(myIntent)
+                                                    true
+                                                }
+
+                                                else -> {
+                                                    drawerLayout!!.closeDrawers()
+                                                    true
+                                                }
+                                            }
+                                        }
+
+                                        onTextChanged()
+                                        onButtonClickListeners()
+                                        setSpinnerContent()
+
+
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithEmail:failure", task.exception)
+                                        Toast.makeText(
+                                            baseContext,
+                                            "Authentication failed.",
+                                            Toast.LENGTH_SHORT,
+                                        ).show()
+                                        alertDialog.show()
+
+                                    }
+                                }
+                        })
+
+                alertDialog.show()
+
+            })
+            .setPositiveButton("Login",
+                DialogInterface.OnClickListener { dialog, which ->
+
+
+
+                    GoogleFirebase.auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success")
+                                val user = GoogleFirebase.auth.currentUser
+                                GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
+                                    override fun onCallback() {
+                                        super.onCallback()
+                                        loadXml()
+                                    }
+
+                                    override fun onFailureCallback() {
+                                        super.onFailureCallback()
+                                        Toast.makeText(applicationContext,"Datenbank nicht erreichbar, stellen Sie eine Internetverbindung her, oder probieren Sie es später nochmal",Toast.LENGTH_SHORT)
+                                    }
+                                })
+
+
+
+
+
+
+                                actionBarDrawerToggle =
+                                    ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+
+                                // pass the Open and Close toggle for the drawer layout listener
+                                // to toggle the button
+                                supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                                supportActionBar!!.setDisplayShowTitleEnabled(false)
+                                // pass the Open and Close toggle for the drawer layout listener
+                                // to toggle the button
+                                drawerLayout!!.addDrawerListener(actionBarDrawerToggle!!)
+                                actionBarDrawerToggle!!.syncState()
+
+                                navView = findViewById(R.id.nav_view_admin)
+                                /**/
+                                navView!!.bringToFront()
+                                context = applicationContext
+
+                                navView!!.setNavigationItemSelectedListener { menuItem ->
+                                    when (menuItem.itemId) {
+                                        R.id.itemLager -> {
+                                            val myIntent = Intent(this, LagerActivity::class.java)
+                                            startActivity(myIntent)
+                                            true
+                                        }
+
+                                        R.id.regieBericht -> {
+                                            val myIntent = Intent(this, MainActivity::class.java)
+                                            startActivity(myIntent)
+                                            true
+                                        }
+
+                                        else -> {
+                                            drawerLayout!!.closeDrawers()
+                                            true
+                                        }
+                                    }
+                                }
+
+                                onTextChanged()
+                                onButtonClickListeners()
+                                setSpinnerContent()
+
+
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.exception)
+                                Toast.makeText(
+                                    baseContext,
+                                    "Authentication failed.",
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                                val alertDialog = AlertDialog.Builder(this@AdminMaterialActivity)
+                                alertDialog.setTitle("Login")
+
+                                val inflater = this.layoutInflater
+                                var alertView = inflater.inflate(R.layout.password_dialog,null)
+                                var email = alertView.findViewById(R.id.usernameLoginDialog) as EditText
+                                var password = alertView.findViewById(R.id.passwordLoginDialog) as EditText
+                                alertDialog.setView(alertView)
+                                    .setNeutralButton("Passwort zurücksetzen", DialogInterface.OnClickListener{dialog, which ->
+
+                                        GoogleFirebase.auth.sendPasswordResetEmail(email.text.toString())
+                                            .addOnCompleteListener { task ->
+                                                if (task.isSuccessful) {
+                                                    Log.d(TAG, "Email sent.")
+                                                }
+                                            }
+
+                                        val alertDialog = AlertDialog.Builder(this@AdminMaterialActivity)
+                                        alertDialog.setTitle("Login")
+
+                                        val inflater = this.layoutInflater
+                                        var alertView = inflater.inflate(R.layout.password_dialog,null)
+                                        var email = alertView.findViewById(R.id.usernameLoginDialog) as EditText
+                                        var password = alertView.findViewById(R.id.passwordLoginDialog) as EditText
+                                        alertDialog.setView(alertView)
+                                            .setNeutralButton("Passwort zurücksetzen", DialogInterface.OnClickListener{dialog, which ->
+
+                                                GoogleFirebase.auth.sendPasswordResetEmail(email.text.toString())
+                                                    .addOnCompleteListener { task ->
+                                                        if (task.isSuccessful) {
+                                                            Log.d(TAG, "Email sent.")
+                                                        }
+                                                    }
+
+                                            })
+                                            .setPositiveButton("Login",
+                                                DialogInterface.OnClickListener { dialog, which ->
+
+
+
+                                                    GoogleFirebase.auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+                                                        .addOnCompleteListener(this) { task ->
+                                                            if (task.isSuccessful) {
+                                                                // Sign in success, update UI with the signed-in user's information
+                                                                Log.d(TAG, "signInWithEmail:success")
+                                                                val user = GoogleFirebase.auth.currentUser
+                                                                GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
+                                                                    override fun onCallback() {
+                                                                        super.onCallback()
+                                                                        loadXml()
+                                                                    }
+
+                                                                    override fun onFailureCallback() {
+                                                                        super.onFailureCallback()
+                                                                        Toast.makeText(applicationContext,"Datenbank nicht erreichbar, stellen Sie eine Internetverbindung her, oder probieren Sie es später nochmal",Toast.LENGTH_SHORT)
+                                                                    }
+                                                                })
+
+
+
+
+
+
+                                                                actionBarDrawerToggle =
+                                                                    ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+
+                                                                // pass the Open and Close toggle for the drawer layout listener
+                                                                // to toggle the button
+                                                                supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                                                                supportActionBar!!.setDisplayShowTitleEnabled(false)
+                                                                // pass the Open and Close toggle for the drawer layout listener
+                                                                // to toggle the button
+                                                                drawerLayout!!.addDrawerListener(actionBarDrawerToggle!!)
+                                                                actionBarDrawerToggle!!.syncState()
+
+                                                                navView = findViewById(R.id.nav_view_admin)
+                                                                /**/
+                                                                navView!!.bringToFront()
+                                                                context = applicationContext
+
+                                                                navView!!.setNavigationItemSelectedListener { menuItem ->
+                                                                    when (menuItem.itemId) {
+                                                                        R.id.itemLager -> {
+                                                                            val myIntent = Intent(this, LagerActivity::class.java)
+                                                                            startActivity(myIntent)
+                                                                            true
+                                                                        }
+
+                                                                        R.id.regieBericht -> {
+                                                                            val myIntent = Intent(this, MainActivity::class.java)
+                                                                            startActivity(myIntent)
+                                                                            true
+                                                                        }
+
+                                                                        else -> {
+                                                                            drawerLayout!!.closeDrawers()
+                                                                            true
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                                onTextChanged()
+                                                                onButtonClickListeners()
+                                                                setSpinnerContent()
+
+
+                                                            } else {
+                                                                // If sign in fails, display a message to the user.
+                                                                Log.w(TAG, "signInWithEmail:failure", task.exception)
+                                                                Toast.makeText(
+                                                                    baseContext,
+                                                                    "Authentication failed.",
+                                                                    Toast.LENGTH_SHORT,
+                                                                ).show()
+                                                                alertDialog.show()
+
+                                                            }
+                                                        }
+                                                })
+
+                                        alertDialog.show()
+
+                                    })
+                                    .setPositiveButton("Login",
+                                        DialogInterface.OnClickListener { dialog, which ->
+
+
+
+                                            GoogleFirebase.auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+                                                .addOnCompleteListener(this) { task ->
+                                                    if (task.isSuccessful) {
+                                                        // Sign in success, update UI with the signed-in user's information
+                                                        Log.d(TAG, "signInWithEmail:success")
+                                                        val user = GoogleFirebase.auth.currentUser
+                                                        GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
+                                                            override fun onCallback() {
+                                                                super.onCallback()
+                                                                loadXml()
+                                                            }
+
+                                                            override fun onFailureCallback() {
+                                                                super.onFailureCallback()
+                                                                Toast.makeText(applicationContext,"Datenbank nicht erreichbar, stellen Sie eine Internetverbindung her, oder probieren Sie es später nochmal",Toast.LENGTH_SHORT)
+                                                            }
+                                                        })
+
+
+
+
+
+
+                                                        actionBarDrawerToggle =
+                                                            ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+
+                                                        // pass the Open and Close toggle for the drawer layout listener
+                                                        // to toggle the button
+                                                        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                                                        supportActionBar!!.setDisplayShowTitleEnabled(false)
+                                                        // pass the Open and Close toggle for the drawer layout listener
+                                                        // to toggle the button
+                                                        drawerLayout!!.addDrawerListener(actionBarDrawerToggle!!)
+                                                        actionBarDrawerToggle!!.syncState()
+
+                                                        navView = findViewById(R.id.nav_view_admin)
+                                                        /**/
+                                                        navView!!.bringToFront()
+                                                        context = applicationContext
+
+                                                        navView!!.setNavigationItemSelectedListener { menuItem ->
+                                                            when (menuItem.itemId) {
+                                                                R.id.itemLager -> {
+                                                                    val myIntent = Intent(this, LagerActivity::class.java)
+                                                                    startActivity(myIntent)
+                                                                    true
+                                                                }
+
+                                                                R.id.regieBericht -> {
+                                                                    val myIntent = Intent(this, MainActivity::class.java)
+                                                                    startActivity(myIntent)
+                                                                    true
+                                                                }
+
+                                                                else -> {
+                                                                    drawerLayout!!.closeDrawers()
+                                                                    true
+                                                                }
+                                                            }
+                                                        }
+
+                                                        onTextChanged()
+                                                        onButtonClickListeners()
+                                                        setSpinnerContent()
+
+
+                                                    } else {
+                                                        // If sign in fails, display a message to the user.
+                                                        Log.w(TAG, "signInWithEmail:failure", task.exception)
+                                                        Toast.makeText(
+                                                            baseContext,
+                                                            "Authentication failed.",
+                                                            Toast.LENGTH_SHORT,
+                                                        ).show()
+                                                        alertDialog.show()
+
+                                                    }
+                                                }
+                                        })
+
+                                alertDialog.show()
+
+
+                            }
+                        }
+                })
+
+        alertDialog.show()
+
+
+       /* GoogleFirebase.auth.createUserWithEmailAndPassword("hoepfler.matthias@gmail.com", "password")
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "createUserWithEmail:success")
+
+
+
+
+                } else {
+                    // If sign in fails, display a message to the user.
+
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication failed.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+
                 }
+            }*/
 
-                R.id.regieBericht -> {
-                    val myIntent = Intent(this, MainActivity::class.java)
-                    startActivity(myIntent)
-                    true
-                }
 
-                else -> {
-                    drawerLayout!!.closeDrawers()
-                    true
-                }
-            }
-        }
-
-        onTextChanged()
-        onButtonClickListeners()
-        setSpinnerContent()
 
 
 
@@ -175,6 +567,7 @@ class AdminMaterialActivity : AppCompatActivity() {
             xmlTool!!.loadMaterialsFromXml(applicationContext)
             drawerLayout!!.removeView(loadingImageView)
         }
+        setSpinnerContent()
 
     }
 

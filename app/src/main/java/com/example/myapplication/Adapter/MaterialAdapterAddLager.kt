@@ -64,7 +64,7 @@ RecyclerView.Adapter<MaterialAdapterAddLager.ViewHolder>() {
                 var newMaterial = CustomerMaterial()
                 newMaterial.materialName = viewHolder.textView2.text.toString()
                 newMaterial.materialUnit = viewHolder.textView1.text.toString()
-                newMaterial.materialAmount = viewHolder.editText.text.toString()
+                newMaterial.materialAmount = viewHolder.editText.text.toString().toFloat().toString()
                 CustomerMaterial.customerMaterialsLager.add(newMaterial)
                 Toast.makeText(context, "Material hinzugefügt", Toast.LENGTH_SHORT).show()
             }

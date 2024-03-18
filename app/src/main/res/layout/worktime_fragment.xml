@@ -41,7 +41,7 @@
 
     <Button
         android:id="@+id/buttonEditBeginWorktime"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="Bearbeiten"
@@ -54,7 +54,7 @@
 
     <Button
         android:id="@+id/buttonEditEndWorktime"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Bearbeiten"
         app:layout_constraintBottom_toBottomOf="@+id/textViewEndWorktime"
@@ -64,7 +64,7 @@
 
     <Button
         android:id="@+id/buttonEditEegeRuestWorktime"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Bearbeiten"
         app:layout_constraintBottom_toBottomOf="@+id/editTextWegeRuestWorktime"
@@ -73,7 +73,7 @@
 
     <Button
         android:id="@+id/buttonSaveWorktime"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Speichern"
         app:layout_constraintStart_toStartOf="@+id/buttonEditEegeRuestWorktime"
@@ -105,7 +105,7 @@
 
     <Button
         android:id="@+id/buttonCancelWorktime"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:text="Abbrechen"

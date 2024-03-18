@@ -5,51 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.ortiz.touchview.TouchImageView
-        android:id="@+id/pdf_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:background="@android:color/white"
-        android:contentDescription="@null"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSendPreview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <Button
         android:id="@+id/buttonSendPreview"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Senden"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/buttonSignPreview"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
 
-        android:text="Sign"
+        android:text="Unterschrift"
         app:layout_constraintStart_toStartOf="@+id/buttonSendPreview"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonSignCustomerPreview"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
 
         android:layout_marginStart="24dp"
-        android:text="Sign"
+        android:text="Unterschrift"
         app:layout_constraintBottom_toBottomOf="@+id/buttonSignPreview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/buttonSignPreview"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/webviewTest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignCustomerPreview"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

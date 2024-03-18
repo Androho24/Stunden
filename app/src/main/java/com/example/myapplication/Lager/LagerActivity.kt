@@ -1,14 +1,21 @@
 package com.example.myapplication.Lager
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -37,12 +44,16 @@ import com.example.myapplication.XmlTool
 import com.google.android.material.navigation.NavigationView
 import org.apache.commons.io.FileUtils
 import java.io.File
+import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 
 class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientFragment.onClientEventListener,CustomerFragment.onNewCustomerEventListener {
 
+
+    var location : String = "Moosthenning"
     var drawerLayout : DrawerLayout? = null
     var navView : NavigationView? = null
     var actionBarDrawerToggle: ActionBarDrawerToggle? = null
@@ -62,6 +73,9 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
 
     var spinnerWorkers : Spinner? = null
 
+    var editTextChangeLocation : EditText? = null
+    var buttonChangeLocation: Button? = null
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +93,8 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
         buttonClearAll = findViewById(R.id.buttonLagerClearAll)
         buttonEditDate = findViewById(R.id.buttonLagerDate)
         buttonEditCustomer = findViewById(R.id.buttonEditCustomerLager)
+        editTextChangeLocation = findViewById(R.id.editTextChangeLocationLagerActivity)
+        buttonChangeLocation = findViewById(R.id.buttonChangeLocationLagerActivity)
 
         checkBoxAbgang = findViewById(R.id.checkBoxLagerAbgang)
         checkBoxZugang = findViewById(R.id.checkBoxLagerZugang)
@@ -103,6 +119,14 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
         var adapter = MaterialAdapterLager(CustomerMaterial.customerMaterialsLager,this)
         tableMaterial!!.adapter = adapter
 
+      /* for (i in 0..26) {
+
+            var customerMat = CustomerMaterial()
+            customerMat.materialAmount = "1"
+            customerMat.materialName = "test"
+            customerMat.materialUnit = "Stck"
+        CustomerMaterial.customerMaterialsLager.add(customerMat)
+        }*/
 
 
         navView = findViewById(R.id.nav_view_lager)
@@ -133,7 +157,62 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
         setSpinnerWorkers()
         setSpinnerCustomer()
         setCheckboxOnClickListeners()
+        getLocationLager()
 
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocationLager() {
+        var fusedLocationClient = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var locationByGPS = fusedLocationClient!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        var locationByNetwork =
+            fusedLocationClient!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+        locationByNetwork?.let {
+            locationByNetwork = locationByGPS
+        }
+        var latitude: Double = 0.0
+        var longitude: Double = 0.0
+        var locationCoordinates: Location? = null
+        if (locationByGPS != null && locationByNetwork != null) {
+            if (locationByGPS.accuracy > locationByNetwork!!.accuracy) {
+                locationCoordinates = locationByGPS
+                latitude = locationCoordinates.latitude
+                longitude = locationCoordinates.longitude
+                // use latitude and longitude as per your need
+            } else {
+                locationCoordinates = locationByNetwork
+                latitude = locationCoordinates!!.latitude
+                longitude = locationCoordinates.longitude
+                // use latitude and longitude as per your need
+            }
+        }
+
+
+        var geocoder: Geocoder
+        var locale: Locale = Locale("de", "de", "Moosthenning")
+        var address: Address = Address(locale)
+
+        var addresses: List<Address> = emptyList()
+
+        geocoder = Geocoder(this, Locale.getDefault())
+
+        if (geocoder != null) {
+            try {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
+                if (!addresses.isEmpty()) {
+                    location = addresses[0].locality
+                } else {
+                    location = "Moosthenning"
+                }
+            } catch (e: IOException) {
+
+            }
+        } else {
+            location = "Moosthenning"
+        }
+
+        editTextChangeLocation!!.setText(location)
     }
 
     private fun setSpinnerCustomer() {
@@ -161,6 +240,10 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
     }
 
     private fun setButtonOnClickListeners() {
+
+        buttonChangeLocation!!.setOnClickListener {
+            location = editTextChangeLocation!!.text.toString()
+        }
         buttonEditDate!!.setOnClickListener {
             val c = Calendar.getInstance()
 
@@ -230,6 +313,20 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
         }
 
         buttonPreview!!.setOnClickListener {
+            if (checkBoxAbgang!!.isChecked){
+                for (custMat in CustomerMaterial.customerMaterialsLager){
+                    custMat.materialAmount = (Math.abs(custMat.materialAmount!!.toFloat())*-1).toString()
+
+                }
+            }
+
+            if(checkBoxZugang!!.isChecked){
+                for (custMat1 in CustomerMaterial.customerMaterialsLager){
+                    custMat1.materialAmount = (Math.abs(custMat1.materialAmount!!.toFloat())).toString()
+                }
+
+            }
+
             var richtungMat = ""
             if (checkBoxAbgang!!.isChecked && !checkBoxZugang!!.isChecked){
                 richtungMat = "Abgang"
@@ -302,7 +399,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
                 richtungMat,
                 path,
                 selectedCustomer,
-                "Moosthenning"
+                location
             )
             document.close()
 
@@ -314,7 +411,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
             myIntent.putExtra("customerName", selectedCustomer.name)
             myIntent.putExtra("isLager","true")
 
-            startActivity(myIntent)
+            startActivityForResult(myIntent,MainActivity.previewResult)
         }
     }
 
@@ -339,6 +436,11 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        if(requestCode == MainActivity.previewResult){
+            for (mat in CustomerMaterial.customerMaterialsLager){
+                mat.materialAmount = Math.abs(mat.materialAmount.toString().toFloat()).toString()
+            }
+        }
         if(requestCode == materialresult){
         var adapter = MaterialAdapterLager(CustomerMaterial.customerMaterialsLager,this)
             tableMaterial!!.adapter = adapter

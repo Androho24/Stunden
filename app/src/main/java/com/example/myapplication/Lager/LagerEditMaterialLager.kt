@@ -49,7 +49,7 @@ class LagerEditMaterialLager : AppCompatActivity() {
         editMatName = findViewById(R.id.editTextNewMaterialMaterialAddLager)
         mainScrollView = findViewById(R.id.scrollMaterialLager)
         Material.connectMaterial()
-        var adapter = MaterialAdapterEditLager(Material.ownMaterials,applicationContext)
+        var adapter = MaterialAdapterEditLager(Material.connectedMaterials,applicationContext)
         tableMaterial!!.adapter = adapter
 
 
@@ -60,6 +60,8 @@ class LagerEditMaterialLager : AppCompatActivity() {
         amount = intent.extras!!.getString("amount")
         unit = intent.extras!!.getString("unit")
         name = intent.extras!!.getString("name")
+
+        editTextFilter!!.setText(name)
 
         oldMaterials = CustomerMaterial.customerMaterialsLager
         var newMaterials = ArrayList<CustomerMaterial>()
@@ -237,7 +239,7 @@ class LagerEditMaterialLager : AppCompatActivity() {
                     var newMaterial = CustomerMaterial()
                     newMaterial.materialName = viewHolder.textView2.text.toString()
                     newMaterial.materialUnit = viewHolder.textView1.text.toString()
-                    newMaterial.materialAmount = viewHolder.editText.text.toString()
+                    newMaterial.materialAmount = viewHolder.editText.text.toString().toFloat().toString()
                     CustomerMaterial.customerMaterialsLager.add(newMaterial)
                     wasSaved = true
                     Toast.makeText(context, "Material hinzugefügt", Toast.LENGTH_SHORT).show()

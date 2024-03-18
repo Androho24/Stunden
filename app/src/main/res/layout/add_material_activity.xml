@@ -64,12 +64,12 @@
 
     <Button
         android:id="@+id/buttonAddMaterialMaterial"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="Hinzufügen"
         app:layout_constraintBottom_toBottomOf="@+id/editTextNewMaterialMaterial"
-        app:layout_constraintEnd_toEndOf="@+id/editTextFilterMaterial"
+        app:layout_constraintEnd_toEndOf="@+id/buttonAddBarcodeMaterial"
         app:layout_constraintStart_toEndOf="@+id/editTextNewMaterialMaterial"
         app:layout_constraintTop_toTopOf="@+id/editTextNewMaterialMaterial"
         app:layout_constraintVertical_bias="1.0" />
@@ -85,7 +85,7 @@
 
     <Button
         android:id="@+id/buttonAddBarcodeMaterial"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Barcode"

@@ -24,8 +24,11 @@ import android.os.Bundle
 import android.os.Environment
 import android.print.PrintAttributes
 import android.provider.Settings
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -45,8 +48,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapter.MaterialAdapterMain
-import com.example.myapplication.Adapter.WorktimeAdapterMain
 import com.example.myapplication.Admin.AdminMaterialActivity
 import com.example.myapplication.Database.GoogleFirebase
 import com.example.myapplication.Interfaces.FirestoreMaterialFromDBCallback
@@ -54,6 +55,7 @@ import com.example.myapplication.Interfaces.FirestoreTimeCallback
 import com.example.myapplication.Interfaces.MainActivityMatInterface
 import com.example.myapplication.Interfaces.MainActivityWorktimeInterface
 import com.example.myapplication.Lager.LagerActivity
+import com.example.myapplication.Material.MaterialEditMain
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
@@ -110,6 +112,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var pdfCreator: PDFCreator? = null
     var fusedLocationClient: LocationManager? = null
     var isNightModeOn: Boolean = false
+
 
     var loadingImageView : ImageView? = null
 
@@ -204,6 +207,16 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             var fdir = File("/storage/emulated/0/Documents/ElektroEibauer", "Materialschein")
             fdir.mkdir()
         }
+
+       /* for (i in 0..53){
+            var customerMaterial = CustomerMaterial()
+            customerMaterial.materialUnit ="1"
+            customerMaterial.materialName = "test"
+            customerMaterial.materialAmount = "1"
+            customerMaterial.materialZugang = false
+            CustomerMaterial.customerMaterials.add(customerMaterial)
+
+        }*/
 
 
         navView = findViewById(R.id.nav_view)
@@ -363,6 +376,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             "org.apache.poi.javax.xml.stream.XMLEventFactory",
             "com.fasterxml.aalto.stax.EventFactoryImpl"
         )
+
+        editTextChangeLocation!!.setText(location)
         var asdf: PdfRenderer
         var xmlTool = XmlTool()
         var input = File("/storage/emulated/0/documents/ElektroEibauer/Arbeitsnachweis.xlsx")
@@ -454,6 +469,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             drawerLayout!!.removeView(loadingImageView)
         }
         xmlTool!!.loadOwnMaterialsFromXml(applicationContext)
+        setSpinnerCustomer()
     }
 
     private fun setSpinnerCustomer() {
@@ -618,7 +634,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             myIntent.putExtra("customerName", selectedCustomer.name)
             myIntent.putExtra("isLager", "false")
 
-            startActivity(myIntent)
+            startActivityForResult(myIntent, previewResult)
 
         }
 
@@ -716,6 +732,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     @Deprecated("Deprecated in Java")
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == customerResult) {
             setSpinnerCustomer()
 
@@ -723,7 +740,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
 
 
-        if (requestCode == MaterialAdapterMain.materialResultCode) {
+        if (requestCode == materialResultCode) {
             var newMats = ArrayList<CustomerMaterial>()
             for (mat in CustomerMaterial.customerMaterials) {
                 var matExists = false
@@ -744,7 +761,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 newMats.add(mat)
             }
             CustomerMaterial.customerMaterials = newMats
-
+            var sortedList =  CustomerMaterial.customerMaterials.sortedBy { s -> s.materialName }.toCollection(ArrayList<CustomerMaterial>())
+            CustomerMaterial.customerMaterials = sortedList
             var adapter =
                 MaterialAdapterMain(CustomerMaterial.customerMaterials, applicationContext, this)
             tableMaterial!!.adapter = adapter
@@ -777,7 +795,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
             }
             CustomerMaterial.customerMaterials = newMats
-
+            var sortedList =  CustomerMaterial.customerMaterials.sortedBy { s -> s.materialName }.toCollection(ArrayList<CustomerMaterial>())
+            CustomerMaterial.customerMaterials = sortedList
             var adapter =
                 MaterialAdapterMain(CustomerMaterial.customerMaterials, applicationContext, this)
             tableMaterial!!.adapter = adapter
@@ -798,7 +817,9 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     companion object {
         var customerResult = 100
         var materialResult = 101
+        var previewResult = 102
         private const val PDF_SELECTION_CODE = 99
+        var materialResultCode = 1001
 
     }
 
@@ -838,6 +859,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             WorktimeMain.staticWorkTimeArrayList.add(newWorktime)
             i++
         }
+       var sortedList =  WorktimeMain.staticWorkTimeArrayList.sortedBy { s -> s.beginWorktime }.toCollection(ArrayList<WorktimeMain>())
+        WorktimeMain.staticWorkTimeArrayList = sortedList
         var adapter =
             WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList, applicationContext, this)
         tableWorkTimes!!.adapter = adapter
@@ -919,6 +942,391 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 // Ignore all other requests.
             }
         }
+    }
+
+   inner class MaterialAdapterMain(private var dataSet: ArrayList<CustomerMaterial>, private var context: Context,private var onDeleteListener: MainActivityMatInterface):RecyclerView.Adapter<MaterialAdapterMain.ViewHolder>(){
+
+
+        private var adapterItemClickListener  = onDeleteListener
+
+
+
+
+
+
+
+        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val textViewAmount: TextView
+            val textViewUnit: TextView
+            val textViewName : TextView
+            val buttonDelete : Button
+            init {
+                // Define click listener for the ViewHolder's View
+                textViewAmount = view.findViewById(R.id.textViewMatAmountMain)
+                textViewUnit = view.findViewById(R.id.textViewMatUnitMain)
+                textViewName = view.findViewById(R.id.textViewMaterialNameMain)
+                buttonDelete = view.findViewById(R.id.buttonDeleteMatMain)
+
+            }
+        }
+
+        // Create new views (invoked by the layout manager)
+        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+            // Create a new view, which defines the UI of the list item
+            val view = LayoutInflater.from(viewGroup.context)
+                .inflate(R.layout.material_adapter_main, viewGroup, false)
+
+            return ViewHolder(view)
+        }
+
+        // Replace the contents of a view (invoked by the layout manager)
+        override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+            val m = dataSet.get(position)
+            // Get element from your dataset at this position and replace the
+            // contents of the view with that element
+            viewHolder.textViewAmount.text = m.materialAmount
+            viewHolder.textViewAmount.id = position
+            viewHolder.textViewAmount.setOnClickListener(object: View.OnClickListener{
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity, MaterialEditMain::class.java)
+                    intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                    intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                    intent.putExtra("name",viewHolder.textViewName.text.toString())
+                    activity.startActivityForResult(intent, materialResultCode)
+                }
+            })
+            viewHolder.textViewUnit.text = m.materialUnit
+            viewHolder.textViewUnit.id = position
+            viewHolder.textViewUnit.setOnClickListener(object: View.OnClickListener {
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity,MaterialEditMain::class.java)
+                    intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                    intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                    intent.putExtra("name",viewHolder.textViewName.text.toString())
+                    activity.startActivityForResult(intent, materialResultCode)
+                }
+
+            })
+            viewHolder.textViewName.id = position
+            viewHolder.textViewName.text = m.materialName
+            viewHolder.textViewName.setOnClickListener(object: View.OnClickListener{
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity,MaterialEditMain::class.java)
+                    intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                    intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                    intent.putExtra("name",viewHolder.textViewName.text.toString())
+
+                    activity.startActivityForResult(intent, materialResultCode)
+                }
+            })
+            viewHolder.buttonDelete.id = position
+            viewHolder.buttonDelete.setOnClickListener {
+                val builder = AlertDialog.Builder(this@MainActivity)
+                builder.setTitle("Material hinzufügen")
+                builder.setMessage("Möchten Sie folgendes Material löschen?\n\n Name: " + viewHolder.textViewName!!.text.toString())
+
+
+                builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                    var newMats = ArrayList<CustomerMaterial>()
+                    for (mat in CustomerMaterial.customerMaterials) {
+                        if (viewHolder.textViewName.text == mat.materialName) {
+
+                        } else {
+                            newMats.add(mat)
+                        }
+                    }
+                    CustomerMaterial.customerMaterials = newMats
+                    adapterItemClickListener.onMaterialDeletedListener()
+                }
+
+
+                builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+                }
+
+                builder.show()
+            }
+        }
+
+
+
+
+
+        // Return the size of your dataset (invoked by the layout manager)
+        override fun getItemCount() = dataSet.size
+    }
+
+    inner class WorktimeAdapterMain (private var dataSet: ArrayList<WorktimeMain>, private var context: Context, private var onDeleteListener: MainActivityWorktimeInterface):WorktimeEditFragment.onWorktimeEditEventLisnter,RecyclerView.Adapter<WorktimeAdapterMain.ViewHolder>() {
+
+
+        private var adapterItemClickListener  = onDeleteListener
+
+
+
+
+       inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val textViewBegin: TextView
+            val textViewEnd: TextView
+            val textViewWorktime : TextView
+            val textViewWR : TextView
+            val textViewWorkerName : TextView
+
+            val buttonDelete : Button
+            init {
+                // Define click listener for the ViewHolder's View
+                textViewBegin = view.findViewById(R.id.textViewWorkTimeBeginMainAdapter)
+                textViewEnd = view.findViewById(R.id.textViewWorkTimeEndAdapter)
+                textViewWorktime = view.findViewById(R.id.textViewWorkTimeMainAdapter)
+                textViewWR = view.findViewById(R.id.textViewWorktimeWRMainAdapter)
+                textViewWorkerName = view.findViewById(R.id.textViewWorkTimeWorkerNameMainAdapter)
+                buttonDelete = view.findViewById(R.id.buttonDeleteWorktimeMainAdapter)
+
+            }
+        }
+
+        // Create new views (invoked by the layout manager)
+        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+            // Create a new view, which defines the UI of the list item
+            val view = LayoutInflater.from(viewGroup.context)
+                .inflate(R.layout.worktime_main_adapter, viewGroup, false)
+
+            return ViewHolder(view)
+        }
+
+        // Replace the contents of a view (invoked by the layout manager)
+        override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+            val m = dataSet.get(position)
+            // Get element from your dataset at this position and replace the
+            // contents of the view with that element
+            viewHolder.textViewBegin.text = m.beginWorktime
+            viewHolder.textViewBegin.id = position
+            viewHolder.textViewBegin.setOnClickListener (object : View.OnClickListener, WorktimeEditFragment.onWorktimeEditEventLisnter {
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    val fm : FragmentManager = activity.supportFragmentManager
+                    val worktimeEditFragment : WorktimeEditFragment = WorktimeEditFragment.newInstance("Edit Fragment")
+                    val bundle = Bundle()
+
+                    bundle.putString("begin",viewHolder.textViewBegin.text.toString())
+                    bundle.putString("end",viewHolder.textViewEnd.text.toString())
+                    bundle.putString("wr",viewHolder.textViewWR.text.toString())
+                    bundle.putString("name",viewHolder.textViewWorkerName.text.toString())
+
+                    worktimeEditFragment.arguments = bundle
+
+                    worktimeEditFragment.show(fm,"edit dialog")
+
+
+                }
+
+                override fun worktimeListner(
+                    beginWorktime: String,
+                    endWorkTime: String,
+                    wegeRuest: String,
+                    workers: ArrayList<String>
+                ) {
+                    onDeleteListener.onWorktimeDeletedListener()
+                }
+            })
+            viewHolder.textViewEnd.text = m.endWorktime
+            viewHolder.textViewEnd.id = position
+            viewHolder.textViewEnd.setOnClickListener (object : View.OnClickListener, WorktimeEditFragment.onWorktimeEditEventLisnter {
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    val fm : FragmentManager = activity.supportFragmentManager
+                    val worktimeEditFragment : WorktimeEditFragment = WorktimeEditFragment.newInstance("Edit Fragment")
+                    val bundle = Bundle()
+
+                    bundle.putString("begin",viewHolder.textViewBegin.text.toString())
+                    bundle.putString("end",viewHolder.textViewEnd.text.toString())
+                    bundle.putString("wr",viewHolder.textViewWR.text.toString())
+                    bundle.putString("name",viewHolder.textViewWorkerName.text.toString())
+
+                    worktimeEditFragment.arguments = bundle
+
+                    worktimeEditFragment.show(fm,"edit dialog")
+
+
+                }
+
+                override fun worktimeListner(
+                    beginWorktime: String,
+                    endWorkTime: String,
+                    wegeRuest: String,
+                    workers: ArrayList<String>
+                ) {
+                    onDeleteListener.onWorktimeDeletedListener()
+                }
+            })
+            viewHolder.textViewWorktime.id = position
+            viewHolder.textViewWorktime.text = m.workTime
+            viewHolder.textViewWorktime.setOnClickListener (object : View.OnClickListener, WorktimeEditFragment.onWorktimeEditEventLisnter {
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    val fm : FragmentManager = activity.supportFragmentManager
+                    val worktimeEditFragment : WorktimeEditFragment = WorktimeEditFragment.newInstance("Edit Fragment")
+                    val bundle = Bundle()
+
+                    bundle.putString("begin",viewHolder.textViewBegin.text.toString())
+                    bundle.putString("end",viewHolder.textViewEnd.text.toString())
+                    bundle.putString("wr",viewHolder.textViewWR.text.toString())
+                    bundle.putString("name",viewHolder.textViewWorkerName.text.toString())
+
+                    worktimeEditFragment.arguments = bundle
+
+                    worktimeEditFragment.show(fm,"edit dialog")
+
+
+                }
+
+                override fun worktimeListner(
+                    beginWorktime: String,
+                    endWorkTime: String,
+                    wegeRuest: String,
+                    workers: ArrayList<String>
+                ) {
+                    onDeleteListener.onWorktimeDeletedListener()
+                }
+            })
+            viewHolder.textViewWR.id = position
+            viewHolder.textViewWR.text = m.wegeRuest
+            viewHolder.textViewWR.setOnClickListener (object : View.OnClickListener, WorktimeEditFragment.onWorktimeEditEventLisnter {
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    val fm : FragmentManager = activity.supportFragmentManager
+                    val worktimeEditFragment : WorktimeEditFragment = WorktimeEditFragment.newInstance("Edit Fragment")
+                    val bundle = Bundle()
+
+                    bundle.putString("begin",viewHolder.textViewBegin.text.toString())
+                    bundle.putString("end",viewHolder.textViewEnd.text.toString())
+                    bundle.putString("wr",viewHolder.textViewWR.text.toString())
+                    bundle.putString("name",viewHolder.textViewWorkerName.text.toString())
+
+                    worktimeEditFragment.arguments = bundle
+
+                    worktimeEditFragment.show(fm,"edit dialog")
+
+
+                }
+
+                override fun worktimeListner(
+                    beginWorktime: String,
+                    endWorkTime: String,
+                    wegeRuest: String,
+                    workers: ArrayList<String>
+                ) {
+                    onDeleteListener.onWorktimeDeletedListener()
+                }
+            })
+            viewHolder.textViewWorkerName.id = position
+            viewHolder.textViewWorkerName.text = m.workerName
+            viewHolder.textViewWorkerName.setOnClickListener (object : View.OnClickListener, WorktimeEditFragment.onWorktimeEditEventLisnter {
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    val fm : FragmentManager = activity.supportFragmentManager
+                    val worktimeEditFragment : WorktimeEditFragment = WorktimeEditFragment.newInstance("Edit Fragment")
+                    val bundle = Bundle()
+
+                    bundle.putString("begin",viewHolder.textViewBegin.text.toString())
+                    bundle.putString("end",viewHolder.textViewEnd.text.toString())
+                    bundle.putString("wr",viewHolder.textViewWR.text.toString())
+                    bundle.putString("name",viewHolder.textViewWorkerName.text.toString())
+
+                    worktimeEditFragment.arguments = bundle
+
+                    worktimeEditFragment.show(fm,"edit dialog")
+
+
+                }
+
+                override fun worktimeListner(
+                    beginWorktime: String,
+                    endWorkTime: String,
+                    wegeRuest: String,
+                    workers: ArrayList<String>
+                ) {
+                    onDeleteListener.onWorktimeDeletedListener()
+                }
+            })
+            viewHolder.textViewWorktime.setOnClickListener (object : View.OnClickListener, WorktimeEditFragment.onWorktimeEditEventLisnter {
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    val fm : FragmentManager = activity.supportFragmentManager
+                    val worktimeEditFragment : WorktimeEditFragment = WorktimeEditFragment.newInstance("Edit Fragment")
+                    val bundle = Bundle()
+
+                    bundle.putString("begin",viewHolder.textViewBegin.text.toString())
+                    bundle.putString("end",viewHolder.textViewEnd.text.toString())
+                    bundle.putString("wr",viewHolder.textViewWR.text.toString())
+                    bundle.putString("name",viewHolder.textViewWorkerName.text.toString())
+
+                    worktimeEditFragment.arguments = bundle
+
+                    worktimeEditFragment.show(fm,"edit dialog")
+
+
+                }
+
+                override fun worktimeListner(
+                    beginWorktime: String,
+                    endWorkTime: String,
+                    wegeRuest: String,
+                    workers: ArrayList<String>
+                ) {
+                    onDeleteListener.onWorktimeDeletedListener()
+                }
+            })
+            viewHolder.buttonDelete.id = position
+            viewHolder.buttonDelete.setOnClickListener {
+                val builder = AlertDialog.Builder(this@MainActivity)
+                builder.setTitle("Arbeitszeit löschen")
+                builder.setMessage("Möchten Sie folgende Arbeitszeit löschen?\n\n Name: " + viewHolder.textViewWorkerName!!.text.toString()+"\nBeginn: "+viewHolder.textViewBegin.text
+                +"\nEnde: "+viewHolder.textViewEnd.text
+                )
+
+
+                builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+
+                    var newWorkers = ArrayList<WorktimeMain>()
+                    for (mat in WorktimeMain.staticWorkTimeArrayList) {
+                        if (viewHolder.textViewBegin.text == mat.beginWorktime && viewHolder.textViewEnd.text == mat.endWorktime && viewHolder.textViewWorkerName.text == mat.workerName) {
+
+                        } else {
+                            newWorkers.add(mat)
+                        }
+                    }
+                    WorktimeMain.staticWorkTimeArrayList = newWorkers
+                    onDeleteListener.onWorktimeDeletedListener()
+                }
+                    builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+                    }
+
+                    builder.show()
+                }
+
+
+
+
+        }
+
+
+
+        // Return the size of your dataset (invoked by the layout manager)
+        override fun getItemCount() = dataSet.size
+        override fun worktimeListner(
+            beginWorktime: String,
+            endWorkTime: String,
+            wegeRuest: String,
+            workers: ArrayList<String>
+        ) {
+
+        }
+
+
     }
 
 

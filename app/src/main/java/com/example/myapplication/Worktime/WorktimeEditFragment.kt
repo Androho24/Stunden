@@ -101,6 +101,7 @@ class WorktimeEditFragment : DialogFragment() {
                 }
             }
             WorktimeMain.staticWorkTimeArrayList = newWt
+
             var worker = ArrayList<String>()
             var i = 0
             for (workers in Workers.workerArray) {
@@ -146,6 +147,8 @@ class WorktimeEditFragment : DialogFragment() {
                 textWegeRuest!!.text.toString(),
                 worker
             )
+            var sortedList =  WorktimeMain.staticWorkTimeArrayList.sortedBy { s -> s.beginWorktime }.toCollection(ArrayList<WorktimeMain>())
+            WorktimeMain.staticWorkTimeArrayList = sortedList
             this.dismiss()
         }
         buttonBeginWorktime!!.setOnClickListener {

@@ -34,6 +34,7 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/plainTextSearchMaterialAddLager"
             app:layout_constraintTop_toBottomOf="@+id/scrollViewMaterialLagerAddLager" />
 
@@ -62,12 +63,11 @@
 
         <Button
             android:id="@+id/buttonAddMaterialMaterialAddLager"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="Add"
+            android:text="Hinzufügen"
             app:layout_constraintBottom_toBottomOf="@+id/editTextNewMaterialMaterialAddLager"
-            app:layout_constraintStart_toEndOf="@+id/editTextNewMaterialMaterialAddLager"
+            app:layout_constraintEnd_toEndOf="@+id/buttonAddMaterialBarcodeAddLager"
             app:layout_constraintTop_toTopOf="@+id/editTextNewMaterialMaterialAddLager"
             app:layout_constraintVertical_bias="1.0" />
 
@@ -82,7 +82,7 @@
 
         <Button
             android:id="@+id/buttonAddMaterialBarcodeAddLager"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="Barcode"
             app:layout_constraintBottom_toTopOf="@+id/spinnerLagerAddLager"

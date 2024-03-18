@@ -1,5 +1,6 @@
 package com.example.myapplication.Pdf
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -7,23 +8,40 @@ import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.R
+import com.google.firebase.database.collection.LLRBNode
 import com.itextpdf.io.image.ImageDataFactory
+import com.itextpdf.kernel.color.Color
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.border.Border
+import com.itextpdf.layout.element.AreaBreak
 import com.itextpdf.layout.element.Cell
+import com.itextpdf.layout.element.Paragraph
 import com.itextpdf.layout.element.Table
+import com.itextpdf.layout.property.AreaBreakType
 import com.itextpdf.layout.property.TextAlignment
 import com.itextpdf.text.pdf.PdfWriter
 import java.io.ByteArrayOutputStream
 
 
 class LagerPdfCreator {
+    var doc : Document? = null
 
-    fun returnLagerPdf (drawable: Drawable,date:String,bearbeiter:String ,richtung:String, path: String,customer:Customer,location:String) : Document {
+    private var drawable : Drawable? = null
+    private var customer : Customer? = null
+    private var richtung : String? = null
+    private var bearbeiter : String? = null
+    private var date : String? = null
+    var pdfDoc : com.itextpdf.kernel.pdf.PdfDocument? = null
+    fun returnLagerPdf (drawableStart: Drawable,dateStart:String,bearbeiterStart:String ,richtungStart:String, path: String,customerStart:Customer,location:String) : Document {
 
-        var doc : Document? = null
+
         // Creating a workbook object from the XSSFWorkbook() class
         //val doc = XWPFDocument(OPCPackage.open("/storage/emulated/0/documents/test/word.docx"))
+        richtung = richtungStart
+        drawable = drawableStart
+        customer = customerStart
+        bearbeiter = bearbeiterStart
+        date = dateStart
 
         val dest = path
         val writer = com.itextpdf.kernel.pdf.PdfWriter(dest)
@@ -31,15 +49,17 @@ class LagerPdfCreator {
         // Creating a PdfDocument object
 
         // Creating a PdfDocument object
-        val pdfDoc = com.itextpdf.kernel.pdf.PdfDocument(writer)
+        pdfDoc = com.itextpdf.kernel.pdf.PdfDocument(writer)
+        pdfDoc!!.addNewPage()
 
         // Creating a Document object
 
         // Creating a Document object
         doc = Document(pdfDoc)
+      //  doc!!.add(Paragraph("first Page"))
 
 
-        doc.add(createHeader(drawable))
+        doc!!.add(createHeader(drawable!!))
 
         val pointColumnWidths1 = floatArrayOf(400f,100f)
         val table = Table(pointColumnWidths1)
@@ -56,9 +76,15 @@ class LagerPdfCreator {
         cell2.setBorderRight(Border.NO_BORDER)
         cell2.setBorderLeft(Border.NO_BORDER)
         cell2.add(richtung)
+        if (richtung.equals("Zugang")){
+            cell2.setFontColor(Color.GREEN)
+        }else{
+            cell2.setFontColor(Color.RED)
+        }
+
         cell2.setFontSize(18f)
         table.addCell(cell2)
-        doc.add(table)
+        doc!!.add(table)
 
         val auftragColumns = floatArrayOf(250f,250f)
         val tableAuftrag = Table(auftragColumns)
@@ -72,28 +98,28 @@ class LagerPdfCreator {
         cell2Auftrag.add("Bauvorhaben:")
         tableAuftrag.addCell(cell2Auftrag)
 
-        if(customer.customerExpanded.clientName != ""){
+        if(customer!!.customerExpanded.clientName != ""){
             val cell3Auftrag = Cell()
             cell3Auftrag.setFontSize(11f)
-            cell3Auftrag.add(customer.customerExpanded.clientName+" "+customer.customerExpanded.clientPreName+"\n"+customer.customerExpanded.clientStreetName+" "+customer.customerExpanded.clientStreetNumber+" \n"+customer.customerExpanded.clientPlz+" "+customer.customerExpanded.clientLocation)
+            cell3Auftrag.add(customer!!.customerExpanded.clientName+" "+customer!!.customerExpanded.clientPreName+"\n"+customer!!.customerExpanded.clientStreetName+" "+customer!!.customerExpanded.clientStreetNumber+" \n"+customer!!.customerExpanded.clientPlz+" "+customer!!.customerExpanded.clientLocation)
             tableAuftrag.addCell(cell3Auftrag)
         }
         else{
             val cell3Auftrag = Cell()
             cell3Auftrag.setFontSize(11f)
-            cell3Auftrag.add(customer.name+" "+customer.preName+"\n"+customer.streetName+" "+customer.streetNumber+" \n"+customer.plz+" "+customer.location)
+            cell3Auftrag.add(customer!!.name+" "+customer!!.preName+"\n"+customer!!.streetName+" "+customer!!.streetNumber+" \n"+customer!!.plz+" "+customer!!.location)
             tableAuftrag.addCell(cell3Auftrag)
         }
 
         val cell4Auftrag = Cell()
         cell4Auftrag.setFontSize(11f)
-        cell4Auftrag.add(customer.name+" "+customer.preName+"\n"+customer.streetName+" "+customer.streetNumber+" \n"+customer.plz+" "+customer.location)
+        cell4Auftrag.add(customer!!.name+" "+customer!!.preName+"\n"+customer!!.streetName+" "+customer!!.streetNumber+" \n"+customer!!.plz+" "+customer!!.location)
         tableAuftrag.addCell(cell4Auftrag)
 
         val cell5Auftrag = Cell()
         cell5Auftrag.setFontSize(11f)
-        if (customer.projectNumber != ""){
-            cell5Auftrag.add("Projektnummer: "+customer.projectNumber)
+        if (customer!!.projectNumber != ""){
+            cell5Auftrag.add("Projektnummer: "+customer!!.projectNumber)
         }
         else {
             cell5Auftrag.add("Projektnummer: ")
@@ -116,12 +142,12 @@ class LagerPdfCreator {
         tableAuftrag.addCell(cellBearbeiter2)
 
 
-        doc.add(tableAuftrag)
+        doc!!.add(tableAuftrag)
 
-        doc.add(tableMaterial())
-        doc.add(tableSigning(date,location))
+        doc!!.add(tableMaterial())
+        doc!!.add(tableSigning(date!!,location))
 
-        return doc
+        return doc!!
 
     }
 
@@ -174,9 +200,10 @@ class LagerPdfCreator {
 
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun tableMaterial(): Table {
-        val pointColumnWidths1 = floatArrayOf(50f,50f,50f,350f)
-        val table = Table(pointColumnWidths1)
+        var pointColumnWidths1 = floatArrayOf(50f,50f,50f,350f)
+        var table = Table(pointColumnWidths1)
 
         val cell1 = Cell()
         cell1.add("Pos.")
@@ -213,7 +240,16 @@ class LagerPdfCreator {
              table.addCell(cell4)*/
 
         var count = 1
+
+        var countForNextPage = 1
+
+        var areMoreMaterials = false
+
+
         for (mat in CustomerMaterial.customerMaterialsLager){
+
+
+
             var cell11 = Cell()
             cell11.add(count.toString())
             cell11.setHeight(10f)
@@ -243,11 +279,154 @@ class LagerPdfCreator {
             cell14.setHeight(10f)
             cell14.setFontSize(7f)
             table.addCell(cell14)
+            countForNextPage++
             count++
+
+            var lastIndex = CustomerMaterial.customerMaterialsLager.lastIndex
+
+            if (lastIndex != countForNextPage-2) {
+
+                if (countForNextPage.mod(26) == 1) {
+                    doc!!.add(table)
+
+                    countForNextPage = 1
+                    pointColumnWidths1 = floatArrayOf(50f, 50f, 50f, 350f)
+
+                    table = Table(pointColumnWidths1)
+
+
+                    doc!!.add(AreaBreak(AreaBreakType.NEXT_PAGE))
+                    /*  doc= Document(pdfDoc)
+                doc!!.add(AreaBreak(AreaBreakType.NEXT_PAGE))*/
+
+                    // doc!!.add(Paragraph("second Page"))
+
+
+                    doc!!.add(createHeader(drawable!!))
+
+
+                    var pointColumnWidths12 = floatArrayOf(400f, 100f)
+                    val table = Table(pointColumnWidths12)
+                    val cell1 = Cell()
+                    cell1.setBorderTop(Border.NO_BORDER)
+                    cell1.setBorderRight(Border.NO_BORDER)
+                    cell1.setBorderLeft(Border.NO_BORDER)
+                    cell1.add("Materialschein")
+                    cell1.setFontSize(18f)
+                    table.addCell(cell1)
+
+                    val cell2 = Cell()
+                    cell2.setBorderTop(Border.NO_BORDER)
+                    cell2.setBorderRight(Border.NO_BORDER)
+                    cell2.setBorderLeft(Border.NO_BORDER)
+                    cell2.add(richtung)
+                    if (richtung.equals("Zugang")) {
+                        cell2.setFontColor(Color.GREEN)
+                    } else {
+                        cell2.setFontColor(Color.RED)
+                    }
+
+                    cell2.setFontSize(18f)
+                    table.addCell(cell2)
+                    doc!!.add(table)
+
+                    val auftragColumns = floatArrayOf(250f, 250f)
+                    val tableAuftrag = Table(auftragColumns)
+                    val cell1Auftrag = Cell()
+                    cell1Auftrag.setFontSize(11f)
+                    cell1Auftrag.add("Auftraggeber:")
+                    tableAuftrag.addCell(cell1Auftrag)
+
+                    val cell2Auftrag = Cell()
+                    cell2Auftrag.setFontSize(11f)
+                    cell2Auftrag.add("Bauvorhaben:")
+                    tableAuftrag.addCell(cell2Auftrag)
+
+                    if (customer!!.customerExpanded.clientName != "") {
+                        val cell3Auftrag = Cell()
+                        cell3Auftrag.setFontSize(11f)
+                        cell3Auftrag.add(customer!!.customerExpanded.clientName + " " + customer!!.customerExpanded.clientPreName + "\n" + customer!!.customerExpanded.clientStreetName + " " + customer!!.customerExpanded.clientStreetNumber + " \n" + customer!!.customerExpanded.clientPlz + " " + customer!!.customerExpanded.clientLocation)
+                        tableAuftrag.addCell(cell3Auftrag)
+                    } else {
+                        val cell3Auftrag = Cell()
+                        cell3Auftrag.setFontSize(11f)
+                        cell3Auftrag.add(customer!!.name + " " + customer!!.preName + "\n" + customer!!.streetName + " " + customer!!.streetNumber + " \n" + customer!!.plz + " " + customer!!.location)
+                        tableAuftrag.addCell(cell3Auftrag)
+                    }
+
+                    val cell4Auftrag = Cell()
+                    cell4Auftrag.setFontSize(11f)
+                    cell4Auftrag.add(customer!!.name + " " + customer!!.preName + "\n" + customer!!.streetName + " " + customer!!.streetNumber + " \n" + customer!!.plz + " " + customer!!.location)
+                    tableAuftrag.addCell(cell4Auftrag)
+
+                    val cell5Auftrag = Cell()
+                    cell5Auftrag.setFontSize(11f)
+                    if (customer!!.projectNumber != "") {
+                        cell5Auftrag.add("Projektnummer: " + customer!!.projectNumber)
+                    } else {
+                        cell5Auftrag.add("Projektnummer: ")
+                    }
+                    tableAuftrag.addCell(cell5Auftrag)
+
+                    val cell6Auftrag = Cell()
+                    cell6Auftrag.setFontSize(11f)
+                    cell6Auftrag.add("Datum: " + date)
+                    tableAuftrag.addCell(cell6Auftrag)
+
+                    val cellBearbeiter = Cell()
+                    cellBearbeiter.setFontSize(11f)
+                    cellBearbeiter.add("Bearbeiter: ")
+                    tableAuftrag.addCell(cellBearbeiter)
+
+                    val cellBearbeiter2 = Cell()
+                    cellBearbeiter2.setFontSize(11f)
+                    cellBearbeiter2.add(bearbeiter)
+                    tableAuftrag.addCell(cellBearbeiter2)
+
+                    doc!!.add(tableAuftrag)
+
+                    var pointColumnWidths1 = floatArrayOf(50f,50f,50f,350f)
+                    var table1 = Table(pointColumnWidths1)
+
+                    val cell11 = Cell()
+                    cell11.add("Pos.")
+                    cell11.setHeight(10f)
+                    cell11.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
+                    cell11.setFontSize(7f)
+                    table1.addCell(cell11)
+
+                    val cell21 = Cell()
+                    cell21.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
+                    cell21.add("Anzahl")
+                    cell21.setHeight(10f)
+                    cell21.setFontSize(7f)
+                    table1.addCell(cell21)
+
+                    val cell41 = Cell()
+                    cell41.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
+                    cell41.add("Einheit")
+                    cell41.setHeight(10f)
+                    cell41.setFontSize(7f)
+                    table1.addCell(cell41)
+
+                    val cell31 = Cell()
+                    cell31.setHeight(10f)
+                    cell31.setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY)
+                    cell31.add("Material")
+                    cell31.setFontSize(7f)
+                    table1.addCell(cell31)
+
+                    doc!!.add(table1)
+
+
+                }
+            }
         }
 
 
-        for (i in count..26
+
+
+        for (i in countForNextPage..26
         ){
             var cell11 = Cell()
             cell11.add("")

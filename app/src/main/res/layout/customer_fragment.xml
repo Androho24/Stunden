@@ -82,7 +82,7 @@
 
     <Button
         android:id="@+id/buttonNewCustomerCustomer"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Speichern"
@@ -93,7 +93,7 @@
 
     <Button
         android:id="@+id/buttonNewClearCustomer"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
@@ -177,7 +177,7 @@
 
     <Button
         android:id="@+id/buttonAddExpandedCustomerCustomer"
-        android:layout_width="wrap_content"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Auftraggeber"
@@ -186,7 +186,7 @@
 
     <Button
         android:id="@+id/buttonDeleteCustomerFrag"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Löschen"
         app:layout_constraintBottom_toBottomOf="@+id/buttonNewClearCustomer"
@@ -196,7 +196,7 @@
 
     <Button
         android:id="@+id/buttonCancelClientFragment"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Abbrechen"
         app:layout_constraintBottom_toBottomOf="@+id/buttonNewCustomerCustomer"
