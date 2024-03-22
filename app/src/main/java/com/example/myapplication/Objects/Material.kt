@@ -19,5 +19,6 @@ class Material(var id : Int, var material: String, var unit:String, var barcode:
         var connectedMaterials = ArrayList<Material>()
         var materials = ArrayList<Material>()
         var ownMaterials = ArrayList<Material>()
+        var adminCustList = ArrayList<Material>()
     }
 }

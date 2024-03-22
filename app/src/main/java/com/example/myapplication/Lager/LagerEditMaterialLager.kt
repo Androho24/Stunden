@@ -243,6 +243,8 @@ class LagerEditMaterialLager : AppCompatActivity() {
                     CustomerMaterial.customerMaterialsLager.add(newMaterial)
                     wasSaved = true
                     Toast.makeText(context, "Material hinzugefügt", Toast.LENGTH_SHORT).show()
+                    var intent = Intent()
+                    setResult(RESULT_OK,intent)
                     finish()
                 }
             }

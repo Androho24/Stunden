@@ -1,0 +1,196 @@
+package com.example.myapplication.Admin
+
+import android.content.Context
+import android.content.Intent
+import android.opengl.Visibility
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Database.GoogleFirebase
+import com.example.myapplication.Lager.LagerActivity
+import com.example.myapplication.Material.MaterialEditMain
+import com.example.myapplication.Objects.CustomerMaterial
+import com.example.myapplication.Objects.Material
+import com.example.myapplication.R
+import com.example.myapplication.XmlTool
+
+class AdminUploadCustomMaterialsActivity : AppCompatActivity() {
+
+    var tableCustomMat: RecyclerView? = null
+    var buttonCancel: Button? = null
+    var buttonAdd: Button? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.admin_add_upload_custommat_activity)
+        tableCustomMat = findViewById(R.id.recycleViewAdminCustomUpAddMatAt)
+        buttonAdd = findViewById(R.id.buttonAddAdminCustUpMatAt)
+        buttonCancel = findViewById(R.id.buttonCancelAdminCustUpMatAt)
+        tableCustomMat!!.layoutManager = LinearLayoutManager(this)
+        if (!Material.ownMaterials.isEmpty()) {
+            Material.adminCustList = ArrayList<Material>()
+            Material.adminCustList.addAll(Material.ownMaterials)
+        }
+        var adapter = MaterialAdapterCustAdaper(
+            Material.adminCustList,
+            applicationContext
+        )
+        tableCustomMat!!.adapter = adapter
+
+        setButtonOnClickListeners()
+    }
+
+    private fun setButtonOnClickListeners() {
+        buttonCancel!!.setOnClickListener { finish() }
+
+        buttonAdd!!.setOnClickListener {
+
+            for (matCust in Material.adminCustList) {
+                var exits = false
+                for (mat in Material.materials) {
+                    if(mat.material == matCust.material){
+                        exits = true
+                    }
+                }
+
+                if (exits == false){
+                    var id = 0;
+                    for (mat in Material.materials){
+                        if (id <mat.id){
+                            id = mat.id
+                        }
+                    }
+                    matCust.id = id+1
+                    Material.materials.add(matCust)
+
+
+                }
+
+            }
+            var xmlTool = XmlTool()
+            xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
+            GoogleFirebase.updateMaterialToDatabase()
+        }
+    }
+
+
+    inner class MaterialAdapterCustAdaper(
+        private var dataSet: ArrayList<Material>,
+        private var context: Context
+    ) :
+        RecyclerView.Adapter<MaterialAdapterCustAdaper.ViewHolder>() {
+
+        /**
+         * Provide a reference to the type of views that you are using
+         * (custom ViewHolder)
+         */
+        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val textView1: TextView
+            val textView2: TextView
+
+            val button: Button
+
+
+            init {
+                // Define click listener for the ViewHolder's View
+                textView1 = view.findViewById(R.id.textViewUnitAdminAddCustomMat)
+                textView2 = view.findViewById(R.id.textViewNameAdminAddCustomMat)
+                button = view.findViewById(R.id.buttonDeleteAdminAddCustomMat)
+
+
+            }
+        }
+
+        // Create new views (invoked by the layout manager)
+        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+            // Create a new view, which defines the UI of the list item
+            val view = LayoutInflater.from(viewGroup.context)
+                .inflate(R.layout.admin_custom_mat_list, viewGroup, false)
+
+            return ViewHolder(view)
+        }
+
+
+        override fun getItemCount() = dataSet.size
+
+
+        // Replace the contents of a view (invoked by the layout manager)
+        override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+            val m = dataSet.get(position)
+            // Get element from your dataset at this position and replace the
+            // contents of the view with that element
+            viewHolder.textView1.text = m.unit
+            viewHolder.textView1.id = position
+            viewHolder.textView1.setOnClickListener(object : View.OnClickListener{
+                override fun onClick(v: View?) {
+                    var activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity, AdminMaterialEditActivity::class.java)
+                    intent.putExtra("unit", viewHolder.textView1.text.toString())
+                    intent.putExtra("name", viewHolder.textView2.text.toString())
+                    intent.putExtra("ownMat", true)
+                    activity.startActivityForResult(intent, custEditResult)
+                }
+
+            })
+            viewHolder.textView2.text = m.material
+            viewHolder.textView2.id = position
+
+            viewHolder.textView2.setOnClickListener(object : View.OnClickListener{
+                override fun onClick(v: View?) {
+                    var activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity, AdminMaterialEditActivity::class.java)
+                    intent.putExtra("unit", viewHolder.textView1.text.toString())
+                    intent.putExtra("name", viewHolder.textView2.text.toString())
+                    intent.putExtra("ownMat", true)
+                    activity.startActivityForResult(intent, custEditResult)
+                }
+
+            })
+            viewHolder.button.id = position
+            viewHolder.button.setOnClickListener {
+                var deletedList = ArrayList<Material>()
+                for (mat in Material.adminCustList){
+                    if (viewHolder.textView2.text == mat.material){
+
+                    }
+                    else{
+                        deletedList.add(mat)
+                    }
+                }
+                Material.adminCustList = deletedList
+                var adapter = MaterialAdapterCustAdaper(
+                    Material.adminCustList,
+                    applicationContext
+                )
+                tableCustomMat!!.adapter = adapter
+
+            }
+        }
+
+
+    }
+    companion object{
+        var custEditResult = 10007
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == custEditResult){
+            var adapter = MaterialAdapterCustAdaper(
+                Material.adminCustList,
+                applicationContext
+            )
+            tableCustomMat!!.adapter = adapter
+        }
+    }
+}

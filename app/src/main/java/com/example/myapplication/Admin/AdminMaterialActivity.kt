@@ -51,8 +51,7 @@ class AdminMaterialActivity : AppCompatActivity() {
     var tableMaterial: RecyclerView? = null
     var editTextFilter: EditText? = null
     var buttonAddMaterial: Button? = null
-    var spinnerUnit: Spinner? = null
-    var editMatName: EditText? = null
+
     var mainScrollView: ScrollView? = null
     var xmlTool : XmlTool? = null
 
@@ -66,8 +65,6 @@ class AdminMaterialActivity : AppCompatActivity() {
         tableMaterial = findViewById(R.id.recycleViewAdminMaterialMain)
         editTextFilter = findViewById(R.id.editTextFilterAdminMaterialMain)
         buttonAddMaterial = findViewById(R.id.buttonAddAdminMaterialMain)
-        spinnerUnit = findViewById(R.id.spinnerAddAdminMaterialMain)
-        editMatName = findViewById(R.id.editTextNewAdminMaterialMain)
         mainScrollView = findViewById(R.id.scrollViewAdminMaterialMain)
         tableMaterial!!.layoutManager = LinearLayoutManager(this)
         Material.connectMaterial()
@@ -181,7 +178,7 @@ class AdminMaterialActivity : AppCompatActivity() {
 
                                         onTextChanged()
                                         onButtonClickListeners()
-                                        setSpinnerContent()
+
 
 
                                     } else {
@@ -269,7 +266,7 @@ class AdminMaterialActivity : AppCompatActivity() {
 
                                 onTextChanged()
                                 onButtonClickListeners()
-                                setSpinnerContent()
+
 
 
                             } else {
@@ -383,7 +380,7 @@ class AdminMaterialActivity : AppCompatActivity() {
 
                                                                 onTextChanged()
                                                                 onButtonClickListeners()
-                                                                setSpinnerContent()
+
 
 
                                                             } else {
@@ -471,7 +468,7 @@ class AdminMaterialActivity : AppCompatActivity() {
 
                                                         onTextChanged()
                                                         onButtonClickListeners()
-                                                        setSpinnerContent()
+
 
 
                                                     } else {
@@ -567,69 +564,21 @@ class AdminMaterialActivity : AppCompatActivity() {
             xmlTool!!.loadMaterialsFromXml(applicationContext)
             drawerLayout!!.removeView(loadingImageView)
         }
-        setSpinnerContent()
+
 
     }
 
     private fun onButtonClickListeners() {
         buttonAddMaterial!!.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Material hinzufügen")
-            builder.setMessage("Möchten sie folegendes Material hinzufügen?\n\n" + "Einheit: " + spinnerUnit!!.selectedItem.toString() + "\n" + "Name: " + editMatName!!.text.toString())
 
 
-            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-
-                var materialExists = false
-                for (mat in Material.materials) {
-                    if (editMatName!!.text.toString() == mat.material) {
-                        materialExists = true
-                    }
-                }
-
-                if (materialExists) {
-                    Toast.makeText(this, "Material existiert bereits", Toast.LENGTH_SHORT).show()
-                } else {
-                    var i =0
-                    for (mat in Material.materials){
-                        if (mat.id > 0){
-                            i = mat.id
-                        }
-                    }
-                    var mat = Material(i+1,
-                        editMatName!!.text.toString(),
-                        spinnerUnit!!.selectedItem!!.toString(),
-                        "",0,false
-                    )
-                    Material.materials.add(mat)
-                    editTextFilter!!.setText(mat.material)
-                    var xmlTool = XmlTool()
-                    xmlTool.saveOwnMaterialsToXml(Material.materials, applicationContext)
-                    GoogleFirebase.updateMaterialToDatabase()
-                    mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
-                }
-            }
-
-            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+              var intent2 = Intent(this,AdminAddNewMaterialActivity::class.java)
+                startActivityForResult(intent2,newMaterialResult)
 
             }
-
-            builder.show()
-
-        }
-
     }
 
-    private fun setSpinnerContent() {
-        var unitList = ArrayList<String>()
-        unitList.add("Stck")
-        unitList.add("m")
 
-        val dataAdapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unitList)
-        dataAdapter.setDropDownViewResource(R.layout.spinner_style)
-        spinnerUnit!!.adapter = dataAdapter
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (actionBarDrawerToggle!!.onOptionsItemSelected(item)) {
@@ -646,7 +595,13 @@ class AdminMaterialActivity : AppCompatActivity() {
             if (lastString.length < editTextFilter!!.text.toString().length) {
                 var i = 0
                 var listMaterial = ArrayList<Material>()
+                var seperatedBySpace = false
+                var splitSearch = editTextFilter!!.text.toString().split(" ")
+                if (splitSearch.size >1){
+                    seperatedBySpace = true
+                }
                 for (mat in Material.connectedMaterials) {
+                    if (seperatedBySpace == false) {
 
                     if (mat.material.contains(
                             editTextFilter!!.text.toString(),
@@ -655,6 +610,28 @@ class AdminMaterialActivity : AppCompatActivity() {
                     ) {
                         listMaterial.add(mat)
                     }
+                    }
+                    else{
+
+                        if (splitSearch.size == 2){
+                            if (mat.material.contains(splitSearch[0],true) && mat.material.contains(splitSearch[1],true)){
+                                listMaterial.add(mat)
+                            }
+
+                        }
+                        else if (splitSearch.size == 3){
+                            if (mat.material.contains(splitSearch[0],true) && mat.material.contains(splitSearch[1],true)&& mat.material.contains(splitSearch[2],true)){
+                                listMaterial.add(mat)
+                            }
+                        }
+                        else if (splitSearch.size == 4){
+                            if (mat.material.contains(splitSearch[0],true) && mat.material.contains(splitSearch[1],true)&& mat.material.contains(splitSearch[2],true)&& mat.material.contains(splitSearch[3],true)){
+                                listMaterial.add(mat)
+                            }
+                        }
+
+                    }
+
 
 
                 }
@@ -669,12 +646,6 @@ class AdminMaterialActivity : AppCompatActivity() {
 
         }
 
-
-
-        editMatName!!.setOnClickListener {
-            mainScrollView!!.fullScroll(ScrollView.FOCUS_DOWN)
-        }
-
         editTextFilter!!.setOnClickListener {
             mainScrollView!!.fullScroll(ScrollView.FOCUS_DOWN)
         }
@@ -682,6 +653,11 @@ class AdminMaterialActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AdminMaterialActivity.newMaterialResult){
+            var adpater = MaterialAdapterMainAdmins(Material.materials,this)
+            tableMaterial!!.adapter = adpater
+        }
+
         if (requestCode == LagerActivity.adminEditMaterialRequest) {
             Material.connectMaterial()
             var adapter = MaterialAdapterMainAdmins(Material.connectedMaterials, applicationContext)
@@ -740,6 +716,7 @@ class AdminMaterialActivity : AppCompatActivity() {
                 var intent = Intent(context, AdminMaterialEditActivity::class.java)
                 intent.putExtra("unit", viewHolder.textView1.text.toString())
                 intent.putExtra("name", viewHolder.textView2.text.toString())
+                intent.putExtra("ownMat", false)
                 startActivityForResult(intent, LagerActivity.adminEditMaterialRequest)
 
 
@@ -751,6 +728,7 @@ class AdminMaterialActivity : AppCompatActivity() {
                     var intent = Intent(activity, AdminMaterialEditActivity::class.java)
                     intent.putExtra("unit", viewHolder.textView1.text.toString())
                     intent.putExtra("name", viewHolder.textView2.text.toString())
+                    intent.putExtra("ownMat", false)
                     activity.startActivityForResult(intent, LagerActivity.adminEditMaterialRequest)
 
                 }
@@ -763,6 +741,7 @@ class AdminMaterialActivity : AppCompatActivity() {
                     var intent = Intent(activity, AdminMaterialEditActivity::class.java)
                     intent.putExtra("unit", viewHolder.textView1.text.toString())
                     intent.putExtra("name", viewHolder.textView2.text.toString())
+                    intent.putExtra("ownMat", false)
                     activity.startActivityForResult(intent, LagerActivity.adminEditMaterialRequest)
 
 
@@ -772,10 +751,14 @@ class AdminMaterialActivity : AppCompatActivity() {
         }
 
 
+
         // Return the size of your dataset (invoked by the layout manager)
         override fun getItemCount() = dataSet.size
 
 
+    }
+    companion object {
+        var newMaterialResult = 1008
     }
 
 }

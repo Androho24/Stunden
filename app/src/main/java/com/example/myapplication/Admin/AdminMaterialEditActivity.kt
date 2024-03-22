@@ -17,29 +17,31 @@ import com.example.myapplication.XmlTool
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
+import org.apache.commons.math3.linear.ArrayRealVector
 import org.w3c.dom.Text
 
 class AdminMaterialEditActivity : AppCompatActivity() {
 
-    var textViewMaterialUnitToEdit : TextView? = null
-    var textViewMaterialNameToEdit : TextView? = null
-    var spinnerUnitNew : Spinner? = null
-    var editTextNewMaterialName : TextView? = null
-    var buttonCancel : Button? = null
-    var buttonSave : Button? = null
+    var isFromCustMat = false
+    var textViewMaterialUnitToEdit: TextView? = null
+    var textViewMaterialNameToEdit: TextView? = null
+    var spinnerUnitNew: Spinner? = null
+    var editTextNewMaterialName: TextView? = null
+    var buttonCancel: Button? = null
+    var buttonSave: Button? = null
     var buttonDelete: Button? = null
-    var buttonBarcode : Button? = null
-    var unit:String? = ""
-    var name:String? = ""
-    var textViewBarcodeToEdit : TextView? = null
-    var textViewNewBarcode : TextView? = null
-    var textViewAmountToEdit : TextView? = null
-    var textViewOrderToEdit : TextView? = null
+    var buttonBarcode: Button? = null
+    var unit: String? = ""
+    var name: String? = ""
+    var textViewBarcodeToEdit: TextView? = null
+    var textViewNewBarcode: TextView? = null
+    var textViewAmountToEdit: TextView? = null
+    var textViewOrderToEdit: TextView? = null
 
-    var textViewAmountNew : TextView? = null
-    var checkBoxOrderNew : CheckBox? = null
+    var textViewAmountNew: TextView? = null
+    var checkBoxOrderNew: CheckBox? = null
 
-    var buttonDeleteBarcode : Button? = null
+    var buttonDeleteBarcode: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.admin_material_edit_activity)
@@ -58,27 +60,43 @@ class AdminMaterialEditActivity : AppCompatActivity() {
         buttonDelete = findViewById(R.id.buttonDeleteEditMatListAdmin)
         buttonSave = findViewById(R.id.buttonSaveEditMatListAdmin)
         buttonDeleteBarcode = findViewById(R.id.buttonDeleteBarcodeMatEditAdmin)
-
+Material.connectMaterial()
 
         unit = intent.extras!!.getString("unit")
         name = intent.extras!!.getString("name")
+        isFromCustMat = intent.extras!!.getBoolean("ownMat")
+
+
         textViewMaterialNameToEdit!!.text = name
         textViewMaterialUnitToEdit!!.text = unit
         editTextNewMaterialName!!.text = name
         textViewBarcodeToEdit = findViewById(R.id.textViewBarcodeToEditMatAdmin)
         textViewNewBarcode = findViewById(R.id.textViewNewBarcodeMatEditAdmin)
-
-        for (mat in Material.materials){
-            if (mat.material == name && mat.unit == unit){
-                textViewBarcodeToEdit!!.text = mat.barcode
-                textViewNewBarcode!!.text = mat.barcode
-                if (mat.bestellen == true){
-                    textViewOrderToEdit!!.setText("Ja")
+        if (isFromCustMat) {
+            for (mat in Material.adminCustList) {
+                if (mat.material == name && mat.unit == unit) {
+                    textViewBarcodeToEdit!!.text = mat.barcode
+                    textViewNewBarcode!!.text = mat.barcode
+                    if (mat.bestellen == true) {
+                        textViewOrderToEdit!!.setText("Ja")
+                    } else {
+                        textViewOrderToEdit!!.setText("Nein")
+                    }
+                    textViewAmountToEdit!!.setText(mat.anzahl.toString())
                 }
-                else {
-                    textViewOrderToEdit!!.setText("Nein")
+            }
+        } else {
+            for (mat in Material.connectedMaterials) {
+                if (mat.material == name && mat.unit == unit) {
+                    textViewBarcodeToEdit!!.text = mat.barcode
+                    textViewNewBarcode!!.text = mat.barcode
+                    if (mat.bestellen == true) {
+                        textViewOrderToEdit!!.setText("Ja")
+                    } else {
+                        textViewOrderToEdit!!.setText("Nein")
+                    }
+                    textViewAmountToEdit!!.setText(mat.anzahl.toString())
                 }
-                textViewAmountToEdit!!.setText(mat.anzahl.toString())
             }
         }
 
@@ -101,24 +119,58 @@ class AdminMaterialEditActivity : AppCompatActivity() {
         buttonSave!!.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Material ändern")
-            builder.setMessage("Möchten sie folegendes Material ändern?\n"+"Einheit: "+unit+"\n"+"Name: "+name)
+            builder.setMessage("Möchten Sie folgendes Material ändern?\n" + "Einheit: " + unit + "\n" + "Name: " + name)
 
 
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
 
-                for (mat in Material.materials){
-                    if (mat.material == name && mat.unit == unit && mat.barcode == textViewBarcodeToEdit!!.text.toString()) {
-                        mat.material = editTextNewMaterialName!!.text.toString()
-                        mat.unit = spinnerUnitNew!!.selectedItem!!.toString()
-                        mat.barcode = textViewNewBarcode!!.text.toString()
-                        mat.bestellen = checkBoxOrderNew!!.isChecked
-                        mat.anzahl = textViewAmountNew!!.text as Int
+                if (isFromCustMat) {
+                    for (mat in Material.adminCustList) {
+                        var barcodeForMat = ""
+                        if (mat.barcode == null){
+                            barcodeForMat = ""
+                        }
+                        else{
+                            barcodeForMat = mat.barcode
+                        }
+
+                        if (mat.material == name && mat.unit == unit && barcodeForMat == textViewBarcodeToEdit!!.text.toString()) {
+                            mat.material = editTextNewMaterialName!!.text.toString()
+                            mat.unit = spinnerUnitNew!!.selectedItem!!.toString()
+                            mat.barcode = textViewNewBarcode!!.text.toString()
+                            mat.bestellen = checkBoxOrderNew!!.isChecked
+                            if (!textViewAmountNew!!.text.toString().equals("")) {
+                                mat.anzahl = textViewAmountNew!!.text.toString().toInt()
+                            }
+                        }
                     }
+                } else {
+                    for (mat in Material.materials) {
+                        var barcodeForMat = ""
+                        if (mat.barcode == null){
+                            barcodeForMat = ""
+                        }
+                        else{
+                            barcodeForMat = mat.barcode
+                        }
+                        if (mat.material == name && mat.unit == unit && barcodeForMat == textViewBarcodeToEdit!!.text.toString()) {
+                            mat.material = editTextNewMaterialName!!.text.toString()
+                            mat.unit = spinnerUnitNew!!.selectedItem!!.toString()
+                            mat.barcode = textViewNewBarcode!!.text.toString()
+                            mat.bestellen = checkBoxOrderNew!!.isChecked
+                            if (!textViewAmountNew!!.text.toString().equals("")) {
+                                mat.anzahl = textViewAmountNew!!.text.toString().toInt()
+                            }
+                        }
+                    }
+                    var xmlTool = XmlTool()
+                    xmlTool.saveOwnMaterialsToXml(Material.ownMaterials, applicationContext)
+                    xmlTool.saveMaterialsToXml(Material.materials, applicationContext)
+                    GoogleFirebase.updateMaterialToDatabase()
                 }
-                var xmlTool = XmlTool()
-                xmlTool.saveOwnMaterialsToXml(Material.ownMaterials,applicationContext)
-                xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
-                GoogleFirebase.updateMaterialToDatabase()
+
+                var intent = Intent()
+                setResult(AdminUploadCustomMaterialsActivity.custEditResult,intent)
                 finish()
             }
 
@@ -128,29 +180,43 @@ class AdminMaterialEditActivity : AppCompatActivity() {
 
             builder.show()
         }
-        buttonDelete!!.setOnClickListener{
+        buttonDelete!!.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Material löschen")
-            builder.setMessage("Möchten sie folegendes Material löschen?\n"+"Einheit: "+unit+"\n"+"Name: "+name)
+            builder.setMessage("Möchten sie folegendes Material löschen?\n" + "Einheit: " + unit + "\n" + "Name: " + name)
 
 
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
 
+                if (isFromCustMat) {
+                    var matCustList = ArrayList<Material>()
+                    for (mat in Material.adminCustList){
+                        if (mat.material == name && mat.unit == unit){
 
-
-                var materialLagerNew = ArrayList<Material>()
-                for (mat in Material.materials){
-                    if (mat.material == name && mat.unit == unit){
-
+                        }
+                        else{
+                            matCustList.add(mat)
+                        }
                     }
-                    else{
-                        materialLagerNew.add(mat)
+                    Material.adminCustList = matCustList
+                } else {
+                    var materialLagerNew = ArrayList<Material>()
+                    for (mat in Material.materials) {
+                        if (mat.material == name && mat.unit == unit) {
+
+                        } else {
+                            materialLagerNew.add(mat)
+                        }
                     }
+
+                    Material.materials = materialLagerNew
+                    var xmlTool = XmlTool()
+                    xmlTool.saveMaterialsToXml(Material.materials, applicationContext)
+                    xmlTool.saveOwnMaterialsToXml(Material.ownMaterials, applicationContext)
+                    GoogleFirebase.updateMaterialToDatabase()
                 }
-                var xmlTool = XmlTool()
-                xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
-                xmlTool.saveOwnMaterialsToXml(Material.ownMaterials,applicationContext)
-                GoogleFirebase.updateMaterialToDatabase()
+                var intent = Intent()
+                setResult(AdminUploadCustomMaterialsActivity.custEditResult,intent)
                 finish()
 
             }
@@ -163,6 +229,8 @@ class AdminMaterialEditActivity : AppCompatActivity() {
         }
 
         buttonCancel!!.setOnClickListener {
+            var intent = Intent()
+            setResult(AdminUploadCustomMaterialsActivity.custEditResult,intent)
             finish()
         }
 
@@ -176,6 +244,7 @@ class AdminMaterialEditActivity : AppCompatActivity() {
         options.setCaptureActivity(CaptureAct::class.java)
         barLauncher.launch(options)
     }
+
     var barLauncher = registerForActivityResult(
         ScanContract()
     ) { result: ScanIntentResult? ->
@@ -193,12 +262,14 @@ class AdminMaterialEditActivity : AppCompatActivity() {
             }.show()
         }
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
         val intent = Intent()
         setResult(RESULT_OK, intent)
         finish()
     }
+
     private fun setSpinnerContent() {
         var unitList = ArrayList<String>()
         unitList.add("Stck")
@@ -209,10 +280,9 @@ class AdminMaterialEditActivity : AppCompatActivity() {
         dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         spinnerUnitNew!!.adapter = dataAdapter
 
-        if (unit == "Stck"){
+        if (unit == "Stck") {
             spinnerUnitNew!!.setSelection(0)
-        }
-        else{
+        } else {
             spinnerUnitNew!!.setSelection(1)
         }
     }

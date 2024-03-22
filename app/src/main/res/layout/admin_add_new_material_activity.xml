@@ -1,6 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="36dp"
+        android:text="Einheit:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Name:"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Barcode"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Anzahl:"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Bestellnachr.:"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <Spinner
+        android:id="@+id/spinnerUnitAdminNewMatAt"
+        android:layout_width="223dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <EditText
+        android:id="@+id/editTextMatNameAdminAddMatAt"
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/textView14"
+        app:layout_constraintStart_toStartOf="@+id/spinnerUnitAdminNewMatAt"
+        app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textViewBarcodeAdminAddMatAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintStart_toStartOf="@+id/editTextMatNameAdminAddMatAt"
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+    <EditText
+        android:id="@+id/editTextAmountAdminAddMatAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
+        app:layout_constraintStart_toStartOf="@+id/textViewBarcodeAdminAddMatAt"
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+    <CheckBox
+        android:id="@+id/checkBoxAdminAddMatAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nein"
+        app:layout_constraintBottom_toBottomOf="@+id/textView17"
+        app:layout_constraintStart_toStartOf="@+id/editTextAmountAdminAddMatAt"
+        app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+    <Button
+        android:id="@+id/buttonCancelAdminAddMatAt"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Abbrechen"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <Button
+        android:id="@+id/buttonAddMatAdminAddMatAt"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:text="Hinzufügen"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonCancelAdminAddMatAt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonCancelAdminAddMatAt"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonDeleteBarcodeAdminAddMatAt"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="-"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAddBarcodeAdminAddMatAt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAddBarcodeAdminAddMatAt"
+        app:layout_constraintTop_toTopOf="@+id/buttonAddBarcodeAdminAddMatAt"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonAddBarcodeAdminAddMatAt"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewBarcodeAdminAddMatAt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewBarcodeAdminAddMatAt"
+        app:layout_constraintVertical_bias="0.482" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Material hinzufügen:"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Selber erstellte Materialien hinzufügen:\n (nicht durch Admin)"
+        app:layout_constraintStart_toStartOf="@+id/buttonCancelAdminAddMatAt"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCancelAdminAddMatAt" />
+
+    <Button
+        android:id="@+id/buttonAddCustomMatsAdminNewMatAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Hinufügen"
+        app:layout_constraintStart_toStartOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@color/material_dynamic_neutral90"
-        android:text="Arbeitszeit :"
+        android:text="Arbeitszeit:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/spinnerCustomerMain"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCustomerMain" />
@@ -157,7 +157,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="36dp"
         android:background="@color/material_dynamic_neutral90"
-        android:text="Material"
+        android:text="Material:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewWorkTime"
         app:layout_constraintTop_toBottomOf="@+id/textInputWorkDescription" />
@@ -197,7 +197,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:background="@color/material_dynamic_neutral90"
-        android:text="Datum :"
+        android:text="Datum:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
         app:layout_constraintTop_toTopOf="parent" />
@@ -244,7 +244,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@color/material_dynamic_neutral90"
-        android:text="Auftraggeber :"
+        android:text="Auftraggeber:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate" />

@@ -119,10 +119,40 @@ class AddMaterialLagerActivity : AppCompatActivity() {
             if (lastString.length < editTextFilter!!.text.toString().length) {
                 var i = 0
                 var listMaterial = ArrayList<Material>()
+                var seperatedBySpace = false
+                var splitSearch = editTextFilter!!.text.toString().split(" ")
+                if (splitSearch.size >1){
+                    seperatedBySpace = true
+                }
                 for (mat in Material.connectedMaterials) {
+                    if (seperatedBySpace == false) {
+                        if (mat.material.contains(
+                                editTextFilter!!.text.toString(),
+                                ignoreCase = true
+                            )
+                        ) {
+                            listMaterial.add(mat)
+                        }
+                    }
+                    else{
 
-                    if(mat.material.contains(editTextFilter!!.text.toString(),ignoreCase = true)){
-                        listMaterial.add(mat)
+                        if (splitSearch.size == 2){
+                            if (mat.material.contains(splitSearch[0],true) && mat.material.contains(splitSearch[1],true)){
+                                listMaterial.add(mat)
+                            }
+
+                        }
+                        else if (splitSearch.size == 3){
+                            if (mat.material.contains(splitSearch[0],true) && mat.material.contains(splitSearch[1],true)&& mat.material.contains(splitSearch[2],true)){
+                                listMaterial.add(mat)
+                            }
+                        }
+                        else if (splitSearch.size == 4){
+                            if (mat.material.contains(splitSearch[0],true) && mat.material.contains(splitSearch[1],true)&& mat.material.contains(splitSearch[2],true)&& mat.material.contains(splitSearch[3],true)){
+                                listMaterial.add(mat)
+                            }
+                        }
+
                     }
 
 

@@ -11,7 +11,10 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
@@ -27,7 +30,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapter.MaterialAdapterLager
 import com.example.myapplication.Admin.AdminMaterialActivity
 import com.example.myapplication.CustomerClientFragment
 import com.example.myapplication.CustomerFragment
@@ -36,10 +38,12 @@ import com.example.myapplication.MainActivity
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
+import com.example.myapplication.Objects.Material
 import com.example.myapplication.Objects.Workers
 import com.example.myapplication.Pdf.LagerPdfCreator
 import com.example.myapplication.Pdf.PreviewPdfActivity
 import com.example.myapplication.R
+import com.example.myapplication.Static.StaticClass
 import com.example.myapplication.XmlTool
 import com.google.android.material.navigation.NavigationView
 import org.apache.commons.io.FileUtils
@@ -88,6 +92,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
         buttonAddMaterial = findViewById(R.id.buttonAddMaterialLager)
         tableMaterial = findViewById(R.id.tableMaterialLager)
         tableMaterial!!.layoutManager = LinearLayoutManager(this)
+
         editTextDate = findViewById(R.id.textViewDatumLager)
         buttonPreview = findViewById(R.id.buttonPreviewLager)
         buttonClearAll = findViewById(R.id.buttonLagerClearAll)
@@ -137,11 +142,13 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
         navView!!.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.regieBericht -> {
+               StaticClass.isSelectedFromNavView = true
                     val myIntent = Intent(this, MainActivity::class.java)
                     startActivity(myIntent)
                     true
                 }
                 R.id.itemAdminMaterial ->{
+                    StaticClass.isSelectedFromNavView = true
                     val myIntent = Intent(this,AdminMaterialActivity::class.java)
                     startActivity(myIntent)
                     true
@@ -307,10 +314,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
 
                 builder.show()
         }
-        buttonAddMaterial!!.setOnClickListener {
-            val intent = Intent(this,AddMaterialLagerActivity::class.java)
-            startActivityForResult(intent, materialresult)
-        }
+
 
         buttonPreview!!.setOnClickListener {
             if (checkBoxAbgang!!.isChecked){
@@ -436,12 +440,37 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+
         if(requestCode == MainActivity.previewResult){
             for (mat in CustomerMaterial.customerMaterialsLager){
                 mat.materialAmount = Math.abs(mat.materialAmount.toString().toFloat()).toString()
             }
         }
         if(requestCode == materialresult){
+            var newMats = ArrayList<CustomerMaterial>()
+            for (mat in CustomerMaterial.customerMaterialsLager) {
+                var matExists = false
+                var amount: Float = 0f
+                if (!newMats.isEmpty()) {
+                    for (mat2 in newMats) {
+                        if (mat.materialName == mat2.materialName) {
+                            matExists = true
+                            amount = mat2.materialAmount!!.toFloat()
+                            mat2.materialAmount =
+                                (mat.materialAmount!!.toFloat() + mat2.materialAmount!!.toFloat()).toString()
+                        }
+                    }
+                }
+                if (matExists == false) {
+                    newMats.add(mat)
+                }
+
+            }
+            CustomerMaterial.customerMaterialsLager = newMats
+            var sortedList =  CustomerMaterial.customerMaterialsLager.sortedBy { s -> s.materialName }.toCollection(ArrayList<CustomerMaterial>())
+            CustomerMaterial.customerMaterialsLager = sortedList
+
+
         var adapter = MaterialAdapterLager(CustomerMaterial.customerMaterialsLager,this)
             tableMaterial!!.adapter = adapter
         }
@@ -449,14 +478,21 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
             setSpinnerCustomer()
 
         }
+        if (requestCode == materialEditResult){
+            var adapter = MaterialAdapterLager(CustomerMaterial.customerMaterialsLager,this)
+            tableMaterial!!.adapter = adapter
+        }
     }
 
     companion object{
+
+        var isSelectedFromNavView = false
         var materialresult = 103
         var customerResult = 100
         var materialEditResult = 1005
         var materialEditList = 1006
         var adminEditMaterialRequest = 1007
+
     }
 
     override fun onDeletedListener() {
@@ -468,9 +504,145 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
 
     }
 
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        moveTaskToBack(true)
+    }
+
+
+
+
     override fun onNewCustomerListener() {
         var xmlTool = XmlTool()
         xmlTool.saveProfilesToXml(Customer.arrayCustomers, applicationContext)
         setSpinnerCustomer()
+    }
+
+    inner class MaterialAdapterLager(private var dataSet: ArrayList<CustomerMaterial>, onDeletedListener:LagerActivityInterface) :
+        RecyclerView.Adapter<MaterialAdapterLager.ViewHolder>() {
+
+        private var onDeletedClickListener = onDeletedListener
+
+        /**
+         * Provide a reference to the type of views that you are using
+         * (custom ViewHolder)
+         */
+        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val textViewAmount: TextView
+            val textViewUnit: TextView
+            val textViewName : TextView
+            val buttonDelete : Button
+            init {
+                // Define click listener for the ViewHolder's View
+                textViewAmount = view.findViewById(R.id.textViewLagerMatAmountMain)
+                textViewUnit = view.findViewById(R.id.textViewLagerMatUnitMain)
+                textViewName = view.findViewById(R.id.textViewLagerMaterialNameMain)
+                buttonDelete = view.findViewById(R.id.buttonLagerDeleteMatMain)
+            }
+        }
+
+        // Create new views (invoked by the layout manager)
+        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+            // Create a new view, which defines the UI of the list item
+            val view = LayoutInflater.from(viewGroup.context)
+                .inflate(R.layout.material_lager_adapter, viewGroup, false)
+
+            return ViewHolder(view)
+        }
+
+        override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+            val m = dataSet.get(position)
+            // Get element from your dataset at this position and replace the
+            // contents of the view with that element
+            viewHolder.textViewAmount.id = position
+            viewHolder.textViewAmount.text = m.materialAmount
+            viewHolder.textViewAmount.setOnClickListener ( object: View.OnClickListener{
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity, LagerEditMaterialLager::class.java)
+                    intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                    intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                    intent.putExtra("name",viewHolder.textViewName.text.toString())
+                    activity.startActivityForResult(intent,LagerActivity.materialEditResult)
+                }
+
+            })
+            viewHolder.textViewUnit.id = position
+            viewHolder.textViewUnit.text = m.materialUnit
+            viewHolder.textViewUnit.setOnClickListener ( object: View.OnClickListener{
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity, LagerEditMaterialLager::class.java)
+                    intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                    intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                    intent.putExtra("name",viewHolder.textViewName.text.toString())
+                    activity.startActivityForResult(intent,LagerActivity.materialEditResult)
+                }
+
+            })
+            viewHolder.textViewName.id = position
+            viewHolder.textViewName.text = m.materialName
+            viewHolder.textViewName.setOnClickListener ( object: View.OnClickListener{
+                override fun onClick(v: View?) {
+                    val activity = v!!.context as AppCompatActivity
+                    var intent = Intent(activity, LagerEditMaterialLager::class.java)
+                    intent.putExtra("amount",viewHolder.textViewAmount.text.toString())
+                    intent.putExtra("unit",viewHolder.textViewUnit.text.toString())
+                    intent.putExtra("name",viewHolder.textViewName.text.toString())
+                    activity.startActivityForResult(intent,LagerActivity.materialEditResult)
+                }
+
+            })
+            viewHolder.buttonDelete.id = position
+            viewHolder.buttonDelete.setOnClickListener {
+                val builder = android.app.AlertDialog.Builder(this@LagerActivity)
+                builder.setTitle("Material hinzufügen")
+                builder.setMessage("Möchten Sie folgendes Material löschen?\n\n Name: " + viewHolder.textViewName!!.text.toString())
+
+
+                builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                var newMats = ArrayList<CustomerMaterial>()
+                for (mat in CustomerMaterial.customerMaterialsLager){
+                    if (viewHolder.textViewName.text == mat.materialName){
+
+                    }
+                    else {
+                        newMats.add(mat)
+                    }
+                }
+                CustomerMaterial.customerMaterialsLager = newMats
+                onDeletedClickListener.onDeletedListener()
+                }
+
+
+                builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+                }
+
+                builder.show()
+
+
+            }
+        }
+
+        // Replace the contents of a view (invoked by the layout manager)
+
+
+
+
+        // Return the size of your dataset (invoked by the layout manager)
+        override fun getItemCount() = dataSet.size
+
+
+
     }
 }
