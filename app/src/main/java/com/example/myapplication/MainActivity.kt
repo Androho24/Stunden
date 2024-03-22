@@ -413,14 +413,16 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         Workers.workerArray.add("Florin Iftode")
         Workers.workerArray.add("Tägliche Pausenzeit")
 
-        if (Environment.isExternalStorageManager()) {
+        if(android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU ) {
+            if (Environment.isExternalStorageManager()) {
 
-        } else {
-            //request for the permission
-            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-            val uri = Uri.fromParts("package", packageName, null)
-            intent.data = uri
-            startActivity(intent)
+            } else {
+                //request for the permission
+                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                val uri = Uri.fromParts("package", packageName, null)
+                intent.data = uri
+                startActivity(intent)
+            }
         }
         val res = R.drawable.img
         val file = ImageView(applicationContext)
