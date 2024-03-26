@@ -68,6 +68,7 @@ import com.example.myapplication.Static.StaticClass
 import com.example.myapplication.Worktime.WorkTimeFragment
 import com.example.myapplication.Worktime.WorktimeEditFragment
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Timestamp
 import com.itextpdf.layout.Document
@@ -92,6 +93,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var buttonAddMaterial: Button? = null
     var date: TextView? = null
     var buttonClearAll: Button? = null
+
     var buttonEditCustomer: Button? = null
     var buttonAddWorkTime: Button? = null
     var buttonChangeLocation: Button? = null
@@ -113,6 +115,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var pdfCreator: PDFCreator? = null
     var fusedLocationClient: LocationManager? = null
     var isNightModeOn: Boolean = false
+    var inputTest : TextInputEditText? = null
 
 
     var loadingImageView: ImageView? = null
@@ -136,7 +139,18 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         setContentView(R.layout.activity_main)
 
         drawerLayout = findViewById(R.id.drawer_layout)
+        inputTest = findViewById(R.id.test)
 
+        val permarray = arrayOfNulls<String>(5)
+        permarray[0] = "Manifest.permission.ACCESS_FINE_LOCATION"
+        permarray[1] = "Manifest.permission.ACCESS_COARSE_LOCATION"
+        permarray[2] = "Manifest.permission.READ_EXTERNAL_STORAGE"
+        permarray[3] = "Manifest.permission.MANAGE_EXTERNAL_STORAGE"
+        permarray[4] = "Manifest.permission.CAMERA"
+
+
+
+        checkPermission(permarray, 15)
 
         GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
             override fun onCallback() {
@@ -280,7 +294,9 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         }
 
 
-        val requestPermissionLauncher =
+
+
+     /*   val requestPermissionLauncher =
             registerForActivityResult(
                 ActivityResultContracts.RequestPermission()
             ) { isGranted: Boolean ->
@@ -330,56 +346,10 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                     arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 112
                 )
             }
-        }
+        }*/
 
 
-        var locationByGPS = fusedLocationClient!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-        var locationByNetwork =
-            fusedLocationClient!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
 
-        locationByNetwork?.let {
-            locationByNetwork = locationByGPS
-        }
-        var latitude: Double = 0.0
-        var longitude: Double = 0.0
-        var locationCoordinates: Location? = null
-        if (locationByGPS != null && locationByNetwork != null) {
-            if (locationByGPS.accuracy > locationByNetwork!!.accuracy) {
-                locationCoordinates = locationByGPS
-                latitude = locationCoordinates.latitude
-                longitude = locationCoordinates.longitude
-                // use latitude and longitude as per your need
-            } else {
-                locationCoordinates = locationByNetwork
-                latitude = locationCoordinates!!.latitude
-                longitude = locationCoordinates.longitude
-                // use latitude and longitude as per your need
-            }
-        }
-
-
-        var geocoder: Geocoder
-        var locale: Locale = Locale("de", "de", "Moosthenning")
-        var address: Address = Address(locale)
-
-        var addresses: List<Address> = emptyList()
-
-        geocoder = Geocoder(this, Locale.getDefault())
-
-        if (geocoder != null) {
-            try {
-                addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
-                if (!addresses.isEmpty()) {
-                    location = addresses[0].locality
-                } else {
-                    location = "Moosthenning"
-                }
-            } catch (e: IOException) {
-
-            }
-        } else {
-            location = "Moosthenning"
-        }
         System.setProperty(
             "org.apache.poi.javax.xml.stream.XMLInputFactory",
             "com.fasterxml.aalto.stax.InputFactoryImpl"
@@ -438,6 +408,120 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
 
     }
+
+    fun checkPermission(permission: Array<String?>, requestCode: Int) {
+        // Checking if permission is not granted
+        if (ContextCompat.checkSelfPermission(
+                this,
+                permission[0]!!
+            ) == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(
+                this,
+                permission[1]!!
+            ) == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(
+                this,
+                permission[2]!!
+            ) == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(
+                this,
+                permission[3]!!
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
+
+            activityResultLauncher.launch(
+               arrayOf( Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+               )
+            )
+           /* ActivityCompat.requestPermissions(
+                this,
+                arrayOf<String>(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA
+                ),
+                requestCode
+            )*/
+        } else {
+
+
+
+
+        }
+    }
+
+
+    @SuppressLint("MissingPermission")
+    private val activityResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions())
+        { permissions ->
+            // Handle Permission granted/rejected
+            permissions.entries.forEach {
+                val permissionName = it.key
+                val isGranted = it.value
+                if (isGranted) {
+                    if (permissionName == "android.permission.ACCESS_COARSE_LOCATION"){
+                        var locationByGPS = fusedLocationClient!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                        var locationByNetwork =
+                            fusedLocationClient!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+                        locationByNetwork?.let {
+                            locationByNetwork = locationByGPS
+                        }
+                        var latitude: Double = 0.0
+                        var longitude: Double = 0.0
+                        var locationCoordinates: Location? = null
+                        if (locationByGPS != null && locationByNetwork != null) {
+                            if (locationByGPS.accuracy > locationByNetwork!!.accuracy) {
+                                locationCoordinates = locationByGPS
+                                latitude = locationCoordinates.latitude
+                                longitude = locationCoordinates.longitude
+                                // use latitude and longitude as per your need
+                            } else {
+                                locationCoordinates = locationByNetwork
+                                latitude = locationCoordinates!!.latitude
+                                longitude = locationCoordinates.longitude
+                                // use latitude and longitude as per your need
+                            }
+                        }
+
+
+                        var geocoder: Geocoder
+                        var locale: Locale = Locale("de", "de", "Moosthenning")
+                        var address: Address = Address(locale)
+
+                        var addresses: List<Address> = emptyList()
+
+                        geocoder = Geocoder(this, Locale.getDefault())
+
+                        if (geocoder != null) {
+                            try {
+                                addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
+                                if (!addresses.isEmpty()) {
+                                    location = addresses[0].locality
+                                } else {
+                                    location = "Moosthenning"
+                                }
+                            } catch (e: IOException) {
+
+                            }
+                        } else {
+                            location = "Moosthenning"
+                        }
+
+                    }
+                } else {
+                    // Permission is denied
+                }
+            }
+        }
+
+
+
 
     private fun setLoadingImage() {
         loadingImageView = ImageView(applicationContext)
@@ -577,6 +661,36 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         }
 
         buttonPreview!!.setOnClickListener {
+
+            var beschreibung = inputTest!!.text.toString().split("\n")
+            val lines = mutableListOf<String>()
+            for(besch in beschreibung) {
+
+                val words = besch.split("\\s+".toRegex()) // Split the text into words
+
+                var currentLine = StringBuilder()
+
+                for (word in words) {
+                    if (currentLine.isEmpty()) {
+                        currentLine.append(word)
+                    } else if (currentLine.length + word.length + 1 <= 50) {
+                        currentLine.append(" ").append(word) // Add word with space
+                    } else {
+                        lines.add(currentLine.toString())
+                        currentLine = StringBuilder(word)
+                    }
+                }
+
+                if (currentLine.isNotEmpty()) {
+                    lines.add(currentLine.toString())
+                }
+            }
+
+            if (lines.lastIndex > 13){
+                Toast.makeText(this,"Arbeitsbeschreibung zu lang",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             var customExpand = CustomerExpanded("", "", "", "", "", "")
             var selectedCustomer = Customer("", "", "", "", "", "", "", "", customExpand)
             var spinnerStringCustomer = spinnerCustomer!!.selectedItem.toString()
@@ -629,6 +743,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 Toast.makeText(this, "Bitte Arbeitszeit hinzufügen", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
             var pathToSave =
                 "/storage/emulated/0/Documents/ElektroEibauer/" + selectedCustomer.name + "_" + selectedCustomer.preName + "/" + "Arbeitsnachweis_Nr_" + count + "_" + date!!.text.toString() + "_" + selectedCustomer.name + "_" + customerCount + "_" + WorktimeMain.staticWorkTimeArrayList.iterator()
                     .next().workerName + ".pdf"
@@ -636,7 +751,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 myIcon,
                 selectedCustomer,
                 date!!.text.toString(),
-                workDescriptionInput!!.editText!!.text.toString(),
+                inputTest!!.text.toString(),
                 WorktimeMain.staticWorkTimeArrayList,
                 path,
                 count,
@@ -750,6 +865,10 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     @Deprecated("Deprecated in Java")
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 15){
+            Toast.makeText(this,"TEst",Toast.LENGTH_SHORT).show()
+        }
 
         if (requestCode == customerResult) {
             setSpinnerCustomer()

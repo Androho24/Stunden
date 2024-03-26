@@ -698,6 +698,33 @@ class PDFCreator {
         arbeitsbeschreibung: String
     ): Table {
 
+        var beschreibung = arbeitsbeschreibung.split("\n")
+        val lines = mutableListOf<String>()
+        for(besch in beschreibung) {
+
+            val words = besch.split("\\s+".toRegex()) // Split the text into words
+
+            var currentLine = StringBuilder()
+
+            for (word in words) {
+                if (currentLine.isEmpty()) {
+                    currentLine.append(word)
+                } else if (currentLine.length + word.length + 1 <= 50) {
+                    currentLine.append(" ").append(word) // Add word with space
+                } else {
+                    lines.add(currentLine.toString())
+                    currentLine = StringBuilder(word)
+                }
+            }
+
+            if (currentLine.isNotEmpty()) {
+                lines.add(currentLine.toString())
+            }
+        }
+
+
+
+/*
         var list = arbeitsbeschreibung.split("\n")
 
         var workDescription: ArrayList<String> = ArrayList()
@@ -717,17 +744,22 @@ class PDFCreator {
 
         for (item in workDescription) {
             var itemList = item.chunked(50)
-            /* if (itemList.size >0){
+
+            *//* if (itemList.size >0){
                  itemList.get(line).substringBeforeLast(" ")
-             }*/
+             }*//*
             for (chunkedItem in itemList) {
-                readyDescription.add(chunkedItem)
+                var textchunked = chunkedItem
+                if (chunkedItem.length == 50){
+                    textchunked = textchunked+"-"
+                }
+                readyDescription.add(textchunked)
             }
         }
 
         if (readyDescription.size == 0) {
             readyDescription.add("")
-        }
+        }*/
 
 
         val pointColumnWidths1 = floatArrayOf(48f, 35f, 35f, 35f, 30f, 40f, 87f, 190f)
@@ -830,11 +862,11 @@ class PDFCreator {
             cell17.add(worktime.workerName)
             table.addCell(cell17)
 
-            if (positions - 1 <= readyDescription.lastIndex) {
+            if (positions - 1 <= lines.lastIndex) {
                 var cell18 = Cell()
                 cell18.setHeight(10f)
                 cell18.setFontSize(7f)
-                cell18.add(readyDescription[positions - 1])
+                cell18.add(lines[positions - 1])
                 table.addCell(cell18)
             } else {
                 var cell18 = Cell()
@@ -891,8 +923,8 @@ class PDFCreator {
 
 
             var cell18 = Cell()
-            if (i - 1 <= readyDescription.lastIndex) {
-                cell18.add(readyDescription[i - 1])
+            if (i - 1 <= lines.lastIndex) {
+                cell18.add(lines[i - 1])
             } else {
                 cell18.add("")
             }
