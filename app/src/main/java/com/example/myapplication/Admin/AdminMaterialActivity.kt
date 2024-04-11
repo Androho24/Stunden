@@ -83,8 +83,20 @@ class AdminMaterialActivity : AppCompatActivity() {
         var email = alertView!!.findViewById(R.id.usernameLoginDialog) as EditText
         var password = alertView!!.findViewById(R.id.passwordLoginDialog) as EditText
 
+        var buttonReset = alertView!!.findViewById(R.id.buttonLoginDialogPWReset) as Button
+        var buttonLogin = alertView!!.findViewById(R.id.buttonLoginDialogLogin) as Button
 
-        alertDialog.setView(alertView)
+        buttonReset.setOnClickListener{
+            Toast.makeText(this,"Hello",Toast.LENGTH_SHORT).show()
+        }
+
+
+
+       /* alertDialog.setView(alertView)
+        alertDialog.setPositiveButton("Login",null)
+        alertDialog.onsh
+
+
             .setNeutralButton(
                 "Passwort zurücksetzen",
                 DialogInterface.OnClickListener { dialog, which ->
@@ -175,7 +187,7 @@ class AdminMaterialActivity : AppCompatActivity() {
                                                 actionBarDrawerToggle!!.syncState()
 
                                                 navView = findViewById(R.id.nav_view_admin)
-                                                /**/
+                                                *//**//*
                                                 navView!!.bringToFront()
                                                 context = applicationContext
 
@@ -286,7 +298,7 @@ class AdminMaterialActivity : AppCompatActivity() {
                                 actionBarDrawerToggle!!.syncState()
 
                                 navView = findViewById(R.id.nav_view_admin)
-                                /**/
+                                *//**//*
                                 navView!!.bringToFront()
                                 context = applicationContext
 
@@ -443,7 +455,7 @@ class AdminMaterialActivity : AppCompatActivity() {
 
                                                                     navView =
                                                                         findViewById(R.id.nav_view_admin)
-                                                                    /**/
+                                                                    *//**//*
                                                                     navView!!.bringToFront()
                                                                     context = applicationContext
 
@@ -564,7 +576,7 @@ class AdminMaterialActivity : AppCompatActivity() {
                                                         actionBarDrawerToggle!!.syncState()
 
                                                         navView = findViewById(R.id.nav_view_admin)
-                                                        /**/
+                                                        *//**//*
                                                         navView!!.bringToFront()
                                                         context = applicationContext
 
@@ -624,7 +636,7 @@ class AdminMaterialActivity : AppCompatActivity() {
                         }
                 })
 
-        alertDialog.show()
+        alertDialog.show()*/
 
 
         /* GoogleFirebase.auth.createUserWithEmailAndPassword("hoepfler.matthias@gmail.com", "password")

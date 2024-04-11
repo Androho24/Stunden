@@ -7,6 +7,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("C:\\Users\\matth\\ElektroEibauerApp\\keystoreeibauer.jks")
+            keyAlias = "key0"
+            storePassword = "dfgg%&sdOpL"
+            keyPassword = "dfgg%&sdOpL"
+        }
+    }
     namespace = "com.example.myapplication"
     compileSdk = 34
     buildFeatures {
@@ -20,6 +28,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig = signingConfigs.getByName("debug")
     }
     packagingOptions {
         resources {
@@ -46,6 +55,7 @@ android {
                 "proguard-rules.pro"
             )
         }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -84,7 +94,12 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-auth")
     implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
+
+    implementation ("androidx.credentials:credentials:1.2.2")
+    implementation ("androidx.credentials:credentials-play-services-auth:1.2.2")
+    implementation ("com.google.android.libraries.identity.googleid:googleid:1.1.0")
 
 
 

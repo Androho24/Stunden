@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,12 +19,14 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
+import android.net.Credentials
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.print.PrintAttributes
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -44,8 +47,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.GetCredentialResponse
+
+import androidx.credentials.GetPasswordOption
+import androidx.credentials.GetPublicKeyCredentialOption
+import androidx.credentials.exceptions.GetCredentialException
+
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Admin.AdminMaterialActivity
@@ -67,14 +80,38 @@ import com.example.myapplication.Pdf.PreviewPdfActivity
 import com.example.myapplication.Static.StaticClass
 import com.example.myapplication.Worktime.WorkTimeFragment
 import com.example.myapplication.Worktime.WorktimeEditFragment
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.OAuthProvider.CredentialBuilder
+import com.google.firebase.auth.auth
 import com.itextpdf.layout.Document
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.io.IOException
+import java.lang.NullPointerException
 import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -88,6 +125,15 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     MainActivityMatInterface, MainActivityWorktimeInterface {
     // var ourWorkbook: Workbook? = null
     //var sheet: Sheet? = null
+    // Google Login
+    private val RC_SIGN_IN = 2  // Can be any integer unique to the Activity
+    private var showOneTapUI = true
+
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleApiClient: GoogleApiClient
+
+
     var buttonSetDate: Button? = null
     var buttonPreview: Button? = null
     var buttonAddMaterial: Button? = null
@@ -115,7 +161,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     var pdfCreator: PDFCreator? = null
     var fusedLocationClient: LocationManager? = null
     var isNightModeOn: Boolean = false
-    var inputTest : TextInputEditText? = null
+    var inputTest: TextInputEditText? = null
 
 
     var loadingImageView: ImageView? = null
@@ -137,41 +183,12 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        auth = Firebase.auth
+        var currentUser = auth.currentUser
 
         drawerLayout = findViewById(R.id.drawer_layout)
         inputTest = findViewById(R.id.test)
 
-        val permarray = arrayOfNulls<String>(5)
-        permarray[0] = "Manifest.permission.ACCESS_FINE_LOCATION"
-        permarray[1] = "Manifest.permission.ACCESS_COARSE_LOCATION"
-        permarray[2] = "Manifest.permission.READ_EXTERNAL_STORAGE"
-        permarray[3] = "Manifest.permission.MANAGE_EXTERNAL_STORAGE"
-        permarray[4] = "Manifest.permission.CAMERA"
-
-
-
-        checkPermission(permarray, 15)
-
-        GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object : FirestoreTimeCallback {
-            override fun onCallback() {
-                super.onCallback()
-                loadXml()
-            }
-
-            override fun onFailureCallback() {
-                super.onFailureCallback()
-                loadXml()
-            }
-        })
-
-
-        setLoadingImage()
-
-        if (StaticClass.isSelectedFromNavView == false) {
-            CustomerMaterial.customerMaterials = ArrayList<CustomerMaterial>()
-            CustomerMaterial.customerMaterialsLager = ArrayList<CustomerMaterial>()
-            WorktimeMain.staticWorkTimeArrayList = ArrayList<WorktimeMain>()
-        }
 
 
 
@@ -187,227 +204,61 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         tableWorkTimes = findViewById(R.id.tableWorktimes)
         tableWorkTimes!!.layoutManager = LinearLayoutManager(this)
 
-        var adapter =
-            WorktimeAdapterMain(WorktimeMain.staticWorkTimeArrayList, applicationContext, this)
-        tableWorkTimes!!.adapter = adapter
-        tableMaterial = findViewById(R.id.tableMaterialMain)
-        tableMaterial!!.layoutManager = LinearLayoutManager(this)
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
 
-        tableMaterial!!.adapter = MaterialAdapterMain(
-            CustomerMaterial.customerMaterials,
-            applicationContext,
-            this
-        )
-        scrollViewMateriel = findViewById(R.id.scrollView4)
-
-        spinnerCustomer = findViewById(R.id.spinnerCustomerMain)
-        workDescriptionInput = findViewById(R.id.textInputWorkDescription)
-        date!!.text = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
-        fusedLocationClient = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        mGoogleSignInClient.signOut()
 
 
-        actionBarDrawerToggle =
-            ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+        /* googleApiClient = GoogleApiClient.Builder(this)
 
-        // pass the Open and Close toggle for the drawer layout listener
-        // to toggle the button
+             .enableAutoManage(this) { connectionResult ->
+                 Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show()
+             }
+             .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+             .build()*/
 
-        // pass the Open and Close toggle for the drawer layout listener
-        // to toggle the button
-        drawerLayout!!.addDrawerListener(actionBarDrawerToggle!!)
-        actionBarDrawerToggle!!.syncState()
+        var signInClient = mGoogleSignInClient.signInIntent
 
-        // to make the Navigation drawer icon always appear on the action bar
-
-        // to make the Navigation drawer icon always appear on the action bar
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
-
-        val filedir: File = File("/storage/emulated/0/Documents/ElektroEibauer/")
-        if (!filedir.exists()) {
-            var fdir = File("/storage/emulated/0/Documents/", "ElektroEibauer")
-            fdir.mkdir()
-        }
-
-        val filedirMat: File = File("/storage/emulated/0/Documents/ElektroEibauer/Materialschein/")
-        if (!filedirMat.exists()) {
-            var fdir = File("/storage/emulated/0/Documents/ElektroEibauer", "Materialschein")
-            fdir.mkdir()
-        }
-
-        /* for (i in 0..53){
-             var customerMaterial = CustomerMaterial()
-             customerMaterial.materialUnit ="1"
-             customerMaterial.materialName = "test"
-             customerMaterial.materialAmount = "1"
-             customerMaterial.materialZugang = false
-             CustomerMaterial.customerMaterials.add(customerMaterial)
-
-         }*/
+        //val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
 
 
-        navView = findViewById(R.id.nav_view)
-        /**/
-        navView!!.bringToFront()
-
-        navView!!.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.itemLager -> {
-                    StaticClass.isSelectedFromNavView = true
-                    val myIntent = Intent(this, LagerActivity::class.java)
-                    startActivity(myIntent)
-                    true
-                }
-
-                R.id.itemAdminMaterial -> {
-                    StaticClass.isSelectedFromNavView = true
-                    val myIntent = Intent(this, AdminMaterialActivity::class.java)
-                    startActivity(myIntent)
-                    true
-                }
-
-                else -> {
-                    drawerLayout!!.closeDrawers()
-                    true
-                }
-            }
-        }
-
-        when (mode) {
-            Configuration.UI_MODE_NIGHT_NO -> {
-                isNightModeOn = false
-            }
-
-            Configuration.UI_MODE_NIGHT_YES -> {
-                isNightModeOn = true
-            }
-
-            Configuration.UI_MODE_NIGHT_UNDEFINED -> {
-                isNightModeOn = false
-            }
-        }
-        if (isNightModeOn) {
-            tableTextColor = Color.WHITE
-        } else {
-            tableTextColor = Color.BLACK
-        }
-
-
-
-
-     /*   val requestPermissionLauncher =
-            registerForActivityResult(
-                ActivityResultContracts.RequestPermission()
-            ) { isGranted: Boolean ->
-                if (isGranted) {
-                    // Permission is granted. Continue the action or workflow in your
-                    // app.
-                } else {
-                    // Explain to the user that the feature is unavailable because the
-                    // feature requires a permission that the user has denied. At the
-                    // same time, respect the user's decision. Don't link to system
-                    // settings in an effort to convince the user to change their
-                    // decision.
-                }
-            }
-
-        when {
-            ContextCompat.checkSelfPermission(
-                applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                // You can use the API that requires the permission.
-
-            }
-
-            else -> {
-                // You can directly ask for the permission.
-                ActivityCompat.requestPermissions(
-                    this@MainActivity,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 111
-                )
-
-            }
-        }
-
-        when {
-            ContextCompat.checkSelfPermission(
-                applicationContext,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                // You can use the API that requires the permission.
-
-            }
-
-            else -> {
-                // You can directly ask for the permission.
-                requestPermissions(
-                    arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 112
-                )
-            }
-        }*/
-
-
-
-        System.setProperty(
-            "org.apache.poi.javax.xml.stream.XMLInputFactory",
-            "com.fasterxml.aalto.stax.InputFactoryImpl"
-        )
-        System.setProperty(
-            "org.apache.poi.javax.xml.stream.XMLOutputFactory",
-            "com.fasterxml.aalto.stax.OutputFactoryImpl"
-        )
-        System.setProperty(
-            "org.apache.poi.javax.xml.stream.XMLEventFactory",
-            "com.fasterxml.aalto.stax.EventFactoryImpl"
-        )
-
-        editTextChangeLocation!!.setText(location)
-        var asdf: PdfRenderer
-        var xmlTool = XmlTool()
-        var input = File("/storage/emulated/0/documents/ElektroEibauer/Arbeitsnachweis.xlsx")
-        var output = File("/storage/emulated/0/documents/ElektroEibauer/Arbeitsnachweiss.pdf")
-        pdfCreator = PDFCreator()
-        myIcon = resources.getDrawable(R.drawable.img)
-
-        Workers.workerArray = ArrayList<String>()
-        Workers.workerArray.add("Matthias Höpfler")
-
-        Workers.workerArray.add("Heizer Oliver")
-
-
-        Workers.workerArray.add("Franz Eibauer")
-        Workers.workerArray.add("Alexander Geisperger")
-        Workers.workerArray.add("Marcel Radu-Iliuta")
-        Workers.workerArray.add("Florin Iftode")
-        Workers.workerArray.add("Tägliche Pausenzeit")
-
-        if(android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU ) {
-            if (Environment.isExternalStorageManager()) {
-
-            } else {
-                //request for the permission
-                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                val uri = Uri.fromParts("package", packageName, null)
-                intent.data = uri
-                startActivity(intent)
-            }
-        }
-        val res = R.drawable.img
-        val file = ImageView(applicationContext)
-        file.setImageResource(res)
-
-
-
-        setScrollViews()
-
-        setSpinnerCustomer()
-        buttonOnClickListeners()
-        editTextOnClickListeners()
+        startActivityForResult(signInClient, RC_SIGN_IN)
 
 
     }
+
+    fun handleSignIn(result: GetCredentialResponse) {
+        // Handle the successfully returned credential.
+        val credential = result.credential
+
+        when (credential) {
+            is CustomCredential -> {
+                if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+                    try {
+                        // Use googleIdTokenCredential and extract id to validate and
+                        // authenticate on your server.
+                        val googleIdTokenCredential = GoogleIdTokenCredential
+                            .createFrom(credential.data)
+                    } catch (e: GoogleIdTokenParsingException) {
+                        Log.e(TAG, "Received an invalid google id token response", e)
+                    }
+                } else {
+                    // Catch any unrecognized custom credential type here.
+                    Log.e(TAG, "Unexpected type of credential")
+                }
+            }
+
+            else -> {
+                // Catch any unrecognized credential type here.
+                Log.e(TAG, "Unexpected type of credential")
+            }
+        }
+    }
+
 
     fun checkPermission(permission: Array<String?>, requestCode: Int) {
         // Checking if permission is not granted
@@ -427,27 +278,26 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         ) {
 
             activityResultLauncher.launch(
-               arrayOf( Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.MANAGE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA
-               )
-            )
-           /* ActivityCompat.requestPermissions(
-                this,
-                arrayOf<String>(
+                arrayOf(
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.MANAGE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.CAMERA
-                ),
-                requestCode
-            )*/
+                )
+            )
+            /* ActivityCompat.requestPermissions(
+                 this,
+                 arrayOf<String>(
+                     Manifest.permission.ACCESS_COARSE_LOCATION,
+                     Manifest.permission.ACCESS_FINE_LOCATION,
+                     Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                     Manifest.permission.READ_EXTERNAL_STORAGE,
+                     Manifest.permission.CAMERA
+                 ),
+                 requestCode
+             )*/
         } else {
-
-
 
 
         }
@@ -457,70 +307,73 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     @SuppressLint("MissingPermission")
     private val activityResultLauncher =
         registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions())
+            ActivityResultContracts.RequestMultiplePermissions()
+        )
         { permissions ->
             // Handle Permission granted/rejected
             permissions.entries.forEach {
                 val permissionName = it.key
                 val isGranted = it.value
                 if (isGranted) {
-                    if (permissionName == "android.permission.ACCESS_COARSE_LOCATION"){
-                        var locationByGPS = fusedLocationClient!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                        var locationByNetwork =
-                            fusedLocationClient!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                    if (permissionName == "android.permission.ACCESS_COARSE_LOCATION") {
+                        try {
+                            var locationByGPS =
+                                fusedLocationClient!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                            var locationByNetwork =
+                                fusedLocationClient!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
 
-                        locationByNetwork?.let {
-                            locationByNetwork = locationByGPS
-                        }
-                        var latitude: Double = 0.0
-                        var longitude: Double = 0.0
-                        var locationCoordinates: Location? = null
-                        if (locationByGPS != null && locationByNetwork != null) {
-                            if (locationByGPS.accuracy > locationByNetwork!!.accuracy) {
-                                locationCoordinates = locationByGPS
-                                latitude = locationCoordinates.latitude
-                                longitude = locationCoordinates.longitude
-                                // use latitude and longitude as per your need
-                            } else {
-                                locationCoordinates = locationByNetwork
-                                latitude = locationCoordinates!!.latitude
-                                longitude = locationCoordinates.longitude
-                                // use latitude and longitude as per your need
+                            locationByNetwork?.let {
+                                locationByNetwork = locationByGPS
                             }
-                        }
-
-
-                        var geocoder: Geocoder
-                        var locale: Locale = Locale("de", "de", "Moosthenning")
-                        var address: Address = Address(locale)
-
-                        var addresses: List<Address> = emptyList()
-
-                        geocoder = Geocoder(this, Locale.getDefault())
-
-                        if (geocoder != null) {
-                            try {
-                                addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
-                                if (!addresses.isEmpty()) {
-                                    location = addresses[0].locality
+                            var latitude: Double = 0.0
+                            var longitude: Double = 0.0
+                            var locationCoordinates: Location? = null
+                            if (locationByGPS != null && locationByNetwork != null) {
+                                if (locationByGPS.accuracy > locationByNetwork!!.accuracy) {
+                                    locationCoordinates = locationByGPS
+                                    latitude = locationCoordinates.latitude
+                                    longitude = locationCoordinates.longitude
+                                    // use latitude and longitude as per your need
                                 } else {
-                                    location = "Moosthenning"
+                                    locationCoordinates = locationByNetwork
+                                    latitude = locationCoordinates!!.latitude
+                                    longitude = locationCoordinates.longitude
+                                    // use latitude and longitude as per your need
                                 }
-                            } catch (e: IOException) {
-
                             }
-                        } else {
+
+
+                            var geocoder: Geocoder
+                            var locale: Locale = Locale("de", "de", "Moosthenning")
+                            var address: Address = Address(locale)
+
+                            var addresses: List<Address> = emptyList()
+
+                            geocoder = Geocoder(this, Locale.getDefault())
+
+                            if (geocoder != null) {
+                                try {
+                                    addresses = geocoder.getFromLocation(latitude, longitude, 1)!!
+                                    if (!addresses.isEmpty()) {
+                                        location = addresses[0].locality
+                                    } else {
+                                        location = "Moosthenning"
+                                    }
+                                } catch (e: IOException) {
+
+                                }
+                            } else {
+                                location = "Moosthenning"
+                            }
+                        } catch (e: NullPointerException) {
                             location = "Moosthenning"
                         }
-
                     }
                 } else {
                     // Permission is denied
                 }
             }
         }
-
-
 
 
     private fun setLoadingImage() {
@@ -664,7 +517,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
             var beschreibung = inputTest!!.text.toString().split("\n")
             val lines = mutableListOf<String>()
-            for(besch in beschreibung) {
+            for (besch in beschreibung) {
 
                 val words = besch.split("\\s+".toRegex()) // Split the text into words
 
@@ -686,8 +539,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 }
             }
 
-            if (lines.lastIndex > 13){
-                Toast.makeText(this,"Arbeitsbeschreibung zu lang",Toast.LENGTH_SHORT).show()
+            if (lines.lastIndex > 13) {
+                Toast.makeText(this, "Arbeitsbeschreibung zu lang", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -801,6 +654,9 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 
     private fun selectPdfFromStorage() {
         Toast.makeText(this, "selectPDF", Toast.LENGTH_LONG).show()
@@ -866,8 +722,8 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 15){
-            Toast.makeText(this,"TEst",Toast.LENGTH_SHORT).show()
+        if (requestCode == 15) {
+            Toast.makeText(this, "TEst", Toast.LENGTH_SHORT).show()
         }
 
         if (requestCode == customerResult) {
@@ -875,6 +731,61 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
         }
 
+        if (requestCode == RC_SIGN_IN) {
+            var task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            var exception = task.exception
+
+            try {
+                var account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account)
+            } catch (e: ApiException) {
+                System.out.println(e.toString())
+            }
+
+
+            /* val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data!!)
+             if (result!!.isSuccess) {
+                 val account = result!!.signInAccount
+                 firebaseAuthWithGoogle(account!!)
+             } else {
+                 System.out.println(result.toString())
+                 Toast.makeText(this, "Google Sign-In failed.", Toast.LENGTH_SHORT).show()
+             }*/
+        }
+
+        /*if (requestCode == REQ_ONE_TAP) {
+
+            try {
+                val oneTapClient = Identity.getSignInClient(this)
+                val credential = oneTapClient.getSignInCredentialFromIntent(data)
+                val idToken = credential.googleIdToken
+                when {
+                    idToken != null -> {
+                        val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
+                        auth.signInWithCredential(firebaseCredential)
+                            .addOnCompleteListener(this) { task ->
+                                if (task.isSuccessful) {
+                                    // Sign in success, update UI with the signed-in user's information
+
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+
+                                }
+                            }
+                    }
+
+                    else -> {
+                        // Shouldn't happen.
+                        Log.d(TAG, "No ID token!")
+                    }
+                }
+            } catch (e: ApiException) {
+                // ...
+            }
+        }
+
+*/
 
 
         if (requestCode == materialResultCode) {
@@ -1045,6 +956,305 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         tableWorkTimes!!.adapter = adapter
     }
 
+    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+
+
+                    Log.d(TAG, "signInWithCredential:success")
+                    val user = auth.currentUser
+
+                    val permarray = arrayOfNulls<String>(5)
+                    permarray[0] = "Manifest.permission.ACCESS_FINE_LOCATION"
+                    permarray[1] = "Manifest.permission.ACCESS_COARSE_LOCATION"
+                    permarray[2] = "Manifest.permission.READ_EXTERNAL_STORAGE"
+                    permarray[3] = "Manifest.permission.MANAGE_EXTERNAL_STORAGE"
+                    permarray[4] = "Manifest.permission.CAMERA"
+
+
+
+                    checkPermission(permarray, 15)
+
+                    GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object :
+                        FirestoreTimeCallback {
+                        override fun onCallback() {
+                            super.onCallback()
+                            loadXml()
+                        }
+
+                        override fun onFailureCallback() {
+                            super.onFailureCallback()
+                            loadXml()
+                        }
+                    })
+
+
+                    setLoadingImage()
+
+                    if (StaticClass.isSelectedFromNavView == false) {
+                        CustomerMaterial.customerMaterials =
+                            ArrayList<CustomerMaterial>()
+                        CustomerMaterial.customerMaterialsLager =
+                            ArrayList<CustomerMaterial>()
+                        WorktimeMain.staticWorkTimeArrayList =
+                            ArrayList<WorktimeMain>()
+                    }
+
+
+                    var adapter =
+                        WorktimeAdapterMain(
+                            WorktimeMain.staticWorkTimeArrayList,
+                            applicationContext,
+                            this
+                        )
+                    tableWorkTimes!!.adapter = adapter
+                    tableMaterial = findViewById(R.id.tableMaterialMain)
+                    tableMaterial!!.layoutManager = LinearLayoutManager(this)
+
+                    tableMaterial!!.adapter = MaterialAdapterMain(
+                        CustomerMaterial.customerMaterials,
+                        applicationContext,
+                        this
+                    )
+                    scrollViewMateriel = findViewById(R.id.scrollView4)
+
+                    spinnerCustomer = findViewById(R.id.spinnerCustomerMain)
+                    workDescriptionInput =
+                        findViewById(R.id.textInputWorkDescription)
+                    date!!.text = LocalDate.now()
+                        .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                        .toString()
+                    fusedLocationClient =
+                        getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                    val mode =
+                        resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+
+                    actionBarDrawerToggle =
+                        ActionBarDrawerToggle(
+                            this,
+                            drawerLayout,
+                            R.string.nav_open,
+                            R.string.nav_close
+                        )
+
+                    // pass the Open and Close toggle for the drawer layout listener
+                    // to toggle the button
+
+                    // pass the Open and Close toggle for the drawer layout listener
+                    // to toggle the button
+                    drawerLayout!!.addDrawerListener(actionBarDrawerToggle!!)
+                    actionBarDrawerToggle!!.syncState()
+
+                    // to make the Navigation drawer icon always appear on the action bar
+
+                    // to make the Navigation drawer icon always appear on the action bar
+                    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                    supportActionBar!!.setDisplayShowTitleEnabled(false)
+
+                    val filedir: File =
+                        File("/storage/emulated/0/Documents/ElektroEibauer/")
+                    if (!filedir.exists()) {
+                        var fdir =
+                            File("/storage/emulated/0/Documents/", "ElektroEibauer")
+                        fdir.mkdir()
+                    }
+
+                    val filedirMat: File =
+                        File("/storage/emulated/0/Documents/ElektroEibauer/Materialschein/")
+                    if (!filedirMat.exists()) {
+                        var fdir = File(
+                            "/storage/emulated/0/Documents/ElektroEibauer",
+                            "Materialschein"
+                        )
+                        fdir.mkdir()
+                    }
+
+                    /* for (i in 0..53){
+                         var customerMaterial = CustomerMaterial()
+                         customerMaterial.materialUnit ="1"
+                         customerMaterial.materialName = "test"
+                         customerMaterial.materialAmount = "1"
+                         customerMaterial.materialZugang = false
+                         CustomerMaterial.customerMaterials.add(customerMaterial)
+
+                     }*/
+
+
+                    navView = findViewById(R.id.nav_view)
+                    /**/
+                    navView!!.bringToFront()
+
+                    navView!!.setNavigationItemSelectedListener { menuItem ->
+                        when (menuItem.itemId) {
+                            R.id.itemLager -> {
+                                StaticClass.isSelectedFromNavView = true
+                                val myIntent =
+                                    Intent(this, LagerActivity::class.java)
+                                startActivity(myIntent)
+                                true
+                            }
+
+                            R.id.itemAdminMaterial -> {
+                                StaticClass.isSelectedFromNavView = true
+                                val myIntent =
+                                    Intent(this, AdminMaterialActivity::class.java)
+                                startActivity(myIntent)
+                                true
+                            }
+
+                            else -> {
+                                drawerLayout!!.closeDrawers()
+                                true
+                            }
+                        }
+                    }
+
+                    when (mode) {
+                        Configuration.UI_MODE_NIGHT_NO -> {
+                            isNightModeOn = false
+                        }
+
+                        Configuration.UI_MODE_NIGHT_YES -> {
+                            isNightModeOn = true
+                        }
+
+                        Configuration.UI_MODE_NIGHT_UNDEFINED -> {
+                            isNightModeOn = false
+                        }
+                    }
+                    if (isNightModeOn) {
+                        tableTextColor = Color.WHITE
+                    } else {
+                        tableTextColor = Color.BLACK
+                    }
+
+
+                    /*   val requestPermissionLauncher =
+                           registerForActivityResult(
+                               ActivityResultContracts.RequestPermission()
+                           ) { isGranted: Boolean ->
+                               if (isGranted) {
+                                   // Permission is granted. Continue the action or workflow in your
+                                   // app.
+                               } else {
+                                   // Explain to the user that the feature is unavailable because the
+                                   // feature requires a permission that the user has denied. At the
+                                   // same time, respect the user's decision. Don't link to system
+                                   // settings in an effort to convince the user to change their
+                                   // decision.
+                               }
+                           }
+
+                       when {
+                           ContextCompat.checkSelfPermission(
+                               applicationContext,
+                               Manifest.permission.ACCESS_FINE_LOCATION
+                           ) == PackageManager.PERMISSION_GRANTED -> {
+                               // You can use the API that requires the permission.
+
+                           }
+
+                           else -> {
+                               // You can directly ask for the permission.
+                               ActivityCompat.requestPermissions(
+                                   this@MainActivity,
+                                   arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 111
+                               )
+
+                           }
+                       }
+
+                       when {
+                           ContextCompat.checkSelfPermission(
+                               applicationContext,
+                               Manifest.permission.ACCESS_COARSE_LOCATION
+                           ) == PackageManager.PERMISSION_GRANTED -> {
+                               // You can use the API that requires the permission.
+
+                           }
+
+                           else -> {
+                               // You can directly ask for the permission.
+                               requestPermissions(
+                                   arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 112
+                               )
+                           }
+                       }*/
+
+
+
+                    System.setProperty(
+                        "org.apache.poi.javax.xml.stream.XMLInputFactory",
+                        "com.fasterxml.aalto.stax.InputFactoryImpl"
+                    )
+                    System.setProperty(
+                        "org.apache.poi.javax.xml.stream.XMLOutputFactory",
+                        "com.fasterxml.aalto.stax.OutputFactoryImpl"
+                    )
+                    System.setProperty(
+                        "org.apache.poi.javax.xml.stream.XMLEventFactory",
+                        "com.fasterxml.aalto.stax.EventFactoryImpl"
+                    )
+
+                    editTextChangeLocation!!.setText(location)
+                    var asdf: PdfRenderer
+                    var xmlTool = XmlTool()
+                    var input =
+                        File("/storage/emulated/0/documents/ElektroEibauer/Arbeitsnachweis.xlsx")
+                    var output =
+                        File("/storage/emulated/0/documents/ElektroEibauer/Arbeitsnachweiss.pdf")
+                    pdfCreator = PDFCreator()
+                    myIcon = resources.getDrawable(R.drawable.img)
+
+                    Workers.workerArray = ArrayList<String>()
+                    Workers.workerArray.add("Matthias Höpfler")
+
+                    Workers.workerArray.add("Heizer Oliver")
+
+
+                    Workers.workerArray.add("Franz Eibauer")
+                    Workers.workerArray.add("Alexander Geisperger")
+                    Workers.workerArray.add("Marcel Radu-Iliuta")
+                    Workers.workerArray.add("Florin Iftode")
+                    Workers.workerArray.add("Tägliche Pausenzeit")
+
+                    if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
+                        if (Environment.isExternalStorageManager()) {
+
+                        } else {
+                            //request for the permission
+                            val intent =
+                                Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                            val uri = Uri.fromParts("package", packageName, null)
+                            intent.data = uri
+                            startActivity(intent)
+                        }
+                    }
+                    val res = R.drawable.img
+                    val file = ImageView(applicationContext)
+                    file.setImageResource(res)
+
+
+
+                    setScrollViews()
+
+                    setSpinnerCustomer()
+                    buttonOnClickListeners()
+                    editTextOnClickListeners()
+
+                    Toast.makeText(this, "Login erfolgreich.", Toast.LENGTH_SHORT).show()
+                    // Proceed to your main activity or do other tasks
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Toast.makeText(this, "Loginfehler.", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
     suspend fun waitForUpdatedAtLoaded(): Boolean {
         while (!!GoogleFirebase.loadedUpdatedAtFromDB) {
             Thread.sleep(100)
@@ -1109,6 +1319,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
             }
         }
+
 
         // Create new views (invoked by the layout manager)
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {

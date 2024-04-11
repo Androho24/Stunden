@@ -12,7 +12,20 @@
           "package_name": "com.example.lager"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "776731154059-nr32usls9ko9nr8n6d0to1u0p60dmku4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lager",
+            "certificate_hash": "17955f7eb1f8e1e17c68b0aac45503160f658f71"
+          }
+        },
+        {
+          "client_id": "776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBkQrWby1cJXN2jA1psmz37HBHFfO3Or7E"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     },
@@ -31,7 +49,20 @@
           "package_name": "com.example.myapplication"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "776731154059-3901rfmp652opniv59gqnljvhcn5vfad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "17955f7eb1f8e1e17c68b0aac45503160f658f71"
+          }
+        },
+        {
+          "client_id": "776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBkQrWby1cJXN2jA1psmz37HBHFfO3Or7E"
@@ -39,7 +70,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
