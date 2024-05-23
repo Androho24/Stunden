@@ -2,7 +2,9 @@ package com.example.myapplication.Database
 
 import com.example.myapplication.Interfaces.FirestoreMaterialFromDBCallback
 import com.example.myapplication.Interfaces.FirestoreTimeCallback
+import com.example.myapplication.Interfaces.FirestoreWokersFromDbCallback
 import com.example.myapplication.Objects.Material
+import com.example.myapplication.Objects.Workers
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
@@ -67,6 +69,7 @@ class GoogleFirebase {
         }
 
         fun loadMaterialsFromDb(firestoreMaterialFromDBCallback: FirestoreMaterialFromDBCallback) {
+            Material.materials = ArrayList<Material>()
             db.collection("Material").get().addOnSuccessListener { result ->
                 for (document in result) {
                     var doc = document
@@ -84,7 +87,7 @@ class GoogleFirebase {
 
         fun updateMaterialToDatabase() {
             for (mat in Material.materials) {
-                db.collection("Material").document(mat.id.toString()).set(mat, SetOptions.merge())
+                db.collection("Material").document(mat.id.toString()).set(mat)
 
             }
 
@@ -97,6 +100,36 @@ class GoogleFirebase {
 
         }
 
+        fun loadWorkersFromDb(firestoreWokersCallback : FirestoreWokersFromDbCallback) {
+            db.collection("Arbeiter").get().addOnSuccessListener {
+                result ->
+                Workers.workerArray = ArrayList<Workers>()
+                for (document in result){
+                    var doc = document
+                    var worker = doc.toObject<Workers>()
+                    Workers.workerArray.add(worker)
+                }
+            }.addOnCompleteListener {
+                firestoreWokersCallback.onSuccessCallback()
+            }.addOnFailureListener {
+                firestoreWokersCallback.onFailureCallback()
+            }
+        }
+
+        fun updateWorkersToDB(){
+            for (worker in Workers.workerArray){
+                db.collection("Arbeiter").document(worker.worker.toString()).set(worker)
+            }
+            var timeTo = hashMapOf(
+                "time" to Timestamp.now()
+            )
+            db.collection("Admin").document("MaterialLastUpdatedAt").set(timeTo)
+
+        }
+
+        fun deleteWorkerFromDb(workerName : String){
+            GoogleFirebase.db.collection("Arbeiter").document(workerName).delete()
+        }
 
     }
 }

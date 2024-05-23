@@ -62,9 +62,11 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Admin.AdminMaterialActivity
+import com.example.myapplication.Admin.WorkerActivity.AdminWorkerActivity
 import com.example.myapplication.Database.GoogleFirebase
 import com.example.myapplication.Interfaces.FirestoreMaterialFromDBCallback
 import com.example.myapplication.Interfaces.FirestoreTimeCallback
+import com.example.myapplication.Interfaces.FirestoreWokersFromDbCallback
 import com.example.myapplication.Interfaces.MainActivityMatInterface
 import com.example.myapplication.Interfaces.MainActivityWorktimeInterface
 import com.example.myapplication.Lager.LagerActivity
@@ -72,6 +74,7 @@ import com.example.myapplication.Material.MaterialEditMain
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.CustomerExpanded
 import com.example.myapplication.Objects.CustomerMaterial
+import com.example.myapplication.Objects.Material
 import com.example.myapplication.Objects.Times
 import com.example.myapplication.Objects.Workers
 import com.example.myapplication.Objects.WorktimeMain
@@ -186,6 +189,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         auth = Firebase.auth
         var currentUser = auth.currentUser
 
+
         drawerLayout = findViewById(R.id.drawer_layout)
         inputTest = findViewById(R.id.test)
 
@@ -204,29 +208,18 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         tableWorkTimes = findViewById(R.id.tableWorktimes)
         tableWorkTimes!!.layoutManager = LinearLayoutManager(this)
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com")
-            .requestEmail()
-            .build()
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        mGoogleSignInClient.signOut()
-
-
-        /* googleApiClient = GoogleApiClient.Builder(this)
-
-             .enableAutoManage(this) { connectionResult ->
-                 Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show()
-             }
-             .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-             .build()*/
-
-        var signInClient = mGoogleSignInClient.signInIntent
-
-        //val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
+        val permarray = arrayOfNulls<String>(5)
+        permarray[0] = "Manifest.permission.ACCESS_FINE_LOCATION"
+        permarray[1] = "Manifest.permission.ACCESS_COARSE_LOCATION"
+        permarray[2] = "Manifest.permission.READ_EXTERNAL_STORAGE"
+        permarray[3] = "Manifest.permission.MANAGE_EXTERNAL_STORAGE"
+        permarray[4] = "Manifest.permission.CAMERA"
 
 
-        startActivityForResult(signInClient, RC_SIGN_IN)
+
+        checkPermission(permarray, 15)
+
+
 
 
     }
@@ -317,6 +310,30 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 if (isGranted) {
                     if (permissionName == "android.permission.ACCESS_COARSE_LOCATION") {
                         try {
+                            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                .requestIdToken("776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com")
+                                .requestEmail()
+                                .build()
+
+                            mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+                         //   mGoogleSignInClient.signOut()
+
+
+                            /* googleApiClient = GoogleApiClient.Builder(this)
+
+                                 .enableAutoManage(this) { connectionResult ->
+                                     Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show()
+                                 }
+                                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                                 .build()*/
+
+                            var signInClient = mGoogleSignInClient.signInIntent
+
+                            //val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
+
+
+                            startActivityForResult(signInClient, RC_SIGN_IN)
+
                             var locationByGPS =
                                 fusedLocationClient!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                             var locationByNetwork =
@@ -393,16 +410,28 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         xmlTool!!.loadSavedCustomersfromXml(applicationContext)
         xmlTool!!.loadUpdatedMaterialFromXml(applicationContext)
 
-        if (Times.updatedLocal.isEmpty()) {
-            var timarr = ArrayList<Times>()
-            var time = Times(Timestamp.now())
-            timarr.add(time)
-            xmlTool!!.saveUpdatedMaterialToXml(timarr, applicationContext)
-            Times.updatedLocal.iterator().next().time = Timestamp.now()
-        }
+        if (Times.updatedLocal.isEmpty() || GoogleFirebase.materialLastUpdatedDb > Times.updatedLocal.iterator().next().time) {
+            if (Times.updatedLocal.isEmpty()) {
+                var timarr = ArrayList<Times>()
 
+                var time = Times(Timestamp.now())
+                timarr.add(time)
+                Times.updatedLocal = timarr
+                xmlTool!!.saveUpdatedMaterialToXml(timarr, applicationContext)
 
-        if (GoogleFirebase.materialLastUpdatedDb > Times.updatedLocal.iterator().next().time) {
+            }
+
+            GoogleFirebase.loadWorkersFromDb(object :FirestoreWokersFromDbCallback{
+                override fun onSuccessCallback() {
+                    System.out.println("Laoded Workers success")
+                    xmlTool!!.saveWorksersToXml(applicationContext,Workers.workerArray)
+                }
+
+                override fun onFailureCallback() {
+                    System.out.println("Laoded Workers error")
+                }
+
+            })
             GoogleFirebase.loadMaterialsFromDb(object : FirestoreMaterialFromDBCallback {
                 override fun onSuccessCallback() {
                     var timarr = ArrayList<Times>()
@@ -411,6 +440,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                     xmlTool!!.saveUpdatedMaterialToXml(timarr, applicationContext)
                     Times.updatedLocal.iterator().next().time = Timestamp.now()
                     drawerLayout!!.removeView(loadingImageView)
+                    xmlTool!!.saveMaterialsToXml(Material.materials,applicationContext)
                 }
 
                 override fun onFailureCallback() {
@@ -421,6 +451,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             })
         } else {
             xmlTool!!.loadMaterialsFromXml(applicationContext)
+            xmlTool!!.loadWorkersFromXml(applicationContext)
             drawerLayout!!.removeView(loadingImageView)
         }
         xmlTool!!.loadOwnMaterialsFromXml(applicationContext)
@@ -433,9 +464,10 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             customerList.add(customer.name + ", " + customer.preName + ", " + customer.streetName)
         }
         val dataAdapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, customerList)
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, customerList)
         dataAdapter.setDropDownViewResource(R.layout.spinner_style)
         spinnerCustomer!!.adapter = dataAdapter
+
     }
 
     private fun editTextOnClickListeners() {
@@ -600,6 +632,9 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             var pathToSave =
                 "/storage/emulated/0/Documents/ElektroEibauer/" + selectedCustomer.name + "_" + selectedCustomer.preName + "/" + "Arbeitsnachweis_Nr_" + count + "_" + date!!.text.toString() + "_" + selectedCustomer.name + "_" + customerCount + "_" + WorktimeMain.staticWorkTimeArrayList.iterator()
                     .next().workerName + ".pdf"
+
+
+
             var document = pdfCreator!!.returnCreatedDocument(
                 myIcon,
                 selectedCustomer,
@@ -967,16 +1002,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
 
-                    val permarray = arrayOfNulls<String>(5)
-                    permarray[0] = "Manifest.permission.ACCESS_FINE_LOCATION"
-                    permarray[1] = "Manifest.permission.ACCESS_COARSE_LOCATION"
-                    permarray[2] = "Manifest.permission.READ_EXTERNAL_STORAGE"
-                    permarray[3] = "Manifest.permission.MANAGE_EXTERNAL_STORAGE"
-                    permarray[4] = "Manifest.permission.CAMERA"
 
-
-
-                    checkPermission(permarray, 15)
 
                     GoogleFirebase.createDBConnectionAndLoadMaterialUpdatedAt(object :
                         FirestoreTimeCallback {
@@ -1105,6 +1131,21 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                                 startActivity(myIntent)
                                 true
                             }
+                            R.id.itemAdminWorker ->{
+                                StaticClass.isSelectedFromNavView = true
+                                val myIntent = Intent(this,AdminWorkerActivity::class.java)
+                                startActivity(myIntent)
+                                true
+                            }
+                            R.id.logout ->{
+                                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                    .requestIdToken("776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com")
+                                    .requestEmail()
+                                    .build()
+                                mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+                                mGoogleSignInClient.signOut()
+                                true
+                            }
 
                             else -> {
                                 drawerLayout!!.closeDrawers()
@@ -1199,7 +1240,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                         "org.apache.poi.javax.xml.stream.XMLEventFactory",
                         "com.fasterxml.aalto.stax.EventFactoryImpl"
                     )
-
+                    myIcon = resources.getDrawable(R.drawable.img)
                     editTextChangeLocation!!.setText(location)
                     var asdf: PdfRenderer
                     var xmlTool = XmlTool()
@@ -1207,34 +1248,51 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                         File("/storage/emulated/0/documents/ElektroEibauer/Arbeitsnachweis.xlsx")
                     var output =
                         File("/storage/emulated/0/documents/ElektroEibauer/Arbeitsnachweiss.pdf")
+
                     pdfCreator = PDFCreator()
-                    myIcon = resources.getDrawable(R.drawable.img)
-
-                    Workers.workerArray = ArrayList<String>()
-                    Workers.workerArray.add("Matthias Höpfler")
-
-                    Workers.workerArray.add("Heizer Oliver")
 
 
-                    Workers.workerArray.add("Franz Eibauer")
-                    Workers.workerArray.add("Alexander Geisperger")
-                    Workers.workerArray.add("Marcel Radu-Iliuta")
-                    Workers.workerArray.add("Florin Iftode")
-                    Workers.workerArray.add("Tägliche Pausenzeit")
+                 /*   Workers.workerArray = ArrayList<Workers>()
+                    var worker = Workers("")
+                    worker.worker = "Matthias Höpfler"
+                    Workers.workerArray.add(worker)
+                    worker = Workers("")
+                    worker.worker = "Heizer Oliver"
+                    Workers.workerArray.add(worker)
+                    worker = Workers("")
+                    worker.worker = "Franz Eibauer"
+                    Workers.workerArray.add(worker)
+                    worker = Workers("")
+                    worker.worker = "Alexander Geisperger"
+                    Workers.workerArray.add(worker)
+                    worker = Workers("")
+                    worker.worker = "Marcel Radu-Iliuta"
+                    Workers.workerArray.add(worker)
+                    worker = Workers("")
+                    worker.worker = "Florin Iftode"
+                    Workers.workerArray.add(worker)
+                    worker = Workers("")
+                    worker.worker = "Tägliche Pausenzeit"
+                    Workers.workerArray.add(worker)
 
-                    if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
-                        if (Environment.isExternalStorageManager()) {
+                    xmlTool.saveWorksersToXml(applicationContext,Workers.workerArray)
+                    GoogleFirebase.updateWorkersToDB()*/
 
-                        } else {
-                            //request for the permission
-                            val intent =
-                                Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                            val uri = Uri.fromParts("package", packageName, null)
-                            intent.data = uri
-                            startActivity(intent)
+
+
+                        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
+                            if (Environment.isExternalStorageManager()) {
+
+                            } else {
+                                //request for the permission
+                                val intent =
+                                    Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                                val uri = Uri.fromParts("package", packageName, null)
+                                intent.data = uri
+                                startActivity(intent)
+                            }
                         }
-                    }
-                    val res = R.drawable.img
+                        val res = R . drawable . img
                     val file = ImageView(applicationContext)
                     file.setImageResource(res)
 

@@ -40,7 +40,7 @@ class AddMaterialActivity : AppCompatActivity() {
         buttonAddMaterial = findViewById(R.id.buttonAddMaterialMaterial)
         spinnerUnit = findViewById(R.id.spinnerAddMaterialMaterial)
         editMatName = findViewById(R.id.editTextNewMaterialMaterial)
-        mainScrollView = findViewById(R.id.scrollMaterial)
+        mainScrollView = findViewById(R.id.scrollMaterialAddMaterialAct)
         buttonBarcode = findViewById(R.id.buttonAddBarcodeMaterial)
         Material.connectMaterial()
         var adapter = MaterialAdapter(Material.connectedMaterials,applicationContext)
@@ -98,9 +98,13 @@ class AddMaterialActivity : AppCompatActivity() {
                     }
                     var mat = Material(i+1,editMatName!!.text.toString(), spinnerUnit!!.selectedItem!!.toString(),"",0,false)
                     Material.ownMaterials.add(mat)
-                    editTextFilter!!.setText(mat.material)
+
                     var xmlTool = XmlTool()
                     xmlTool.saveOwnMaterialsToXml(Material.ownMaterials, applicationContext)
+                    Material.connectMaterial()
+                    var adapter = MaterialAdapter(Material.connectedMaterials,applicationContext)
+                    tableMaterial!!.adapter = adapter
+                    editTextFilter!!.setText(mat.material)
                     mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
                 }
             }
@@ -151,6 +155,11 @@ class AddMaterialActivity : AppCompatActivity() {
                         }
                         else if (splitSearch.size == 4){
                             if (mat.material.contains(splitSearch[0],true) && mat.material.contains(splitSearch[1],true)&& mat.material.contains(splitSearch[2],true)&& mat.material.contains(splitSearch[3],true)){
+                                listMaterial.add(mat)
+                            }
+                        }else
+                        {
+                            if(mat.material.contains(editTextFilter!!.text.toString())){
                                 listMaterial.add(mat)
                             }
                         }

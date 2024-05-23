@@ -5,6 +5,7 @@ import android.content.res.Resources
 import com.example.myapplication.Objects.Customer
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.Objects.Times
+import com.example.myapplication.Objects.Workers
 import com.thoughtworks.xstream.XStream
 import java.io.File
 import java.io.FileInputStream
@@ -191,16 +192,67 @@ class XmlTool {
             val pixelExistFile = File(context.cacheDir.toString() + "/" + "updatedat.xml")
             //File pixelExistFile = new File(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
             val fos1: InputStream
-
-            fos1 = FileInputStream(context.cacheDir.toString() + "/" + "updatedat.xml")
+            if (pixelExistFile.exists()) {
+                fos1 = FileInputStream(context.cacheDir.toString() + "/" + "updatedat.xml")
                 // fos1 = new FileInputStream(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
 
-            val item = xStream.fromXML(fos1) as ArrayList<Times>
-            Times.updatedLocal= item
+                val item = xStream.fromXML(fos1) as ArrayList<Times>
+                Times.updatedLocal = item
+            }
+
         } catch (e: Resources.NotFoundException) {
             e.printStackTrace()
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
         }
+    }
+
+    @Synchronized
+    fun loadWorkersFromXml(context:Context){
+        try {
+            val xStream = XStream()
+            xStream.allowTypes(arrayOf<Class<*>>(Workers::class.java))
+            xStream.alias("worker",Workers::class.java)
+            var workersExistFile = File(context.cacheDir.toString()+"/"+"savedWorkers.xml")
+            val fos1 : InputStream
+            fos1 = if (workersExistFile.exists()) {
+                FileInputStream(context.cacheDir.toString() + "/" + "savedWorkers.xml")
+                // fos1 = new FileInputStream(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+            } else {
+                context.resources.openRawResource(R.raw.savedworkers)
+            }
+
+            var item = xStream.fromXML(fos1) as ArrayList<Workers>
+            Workers.workerArray = item
+        }catch (e: Resources.NotFoundException) {
+            e.printStackTrace()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun saveWorksersToXml(context: Context,arrayListWorkers: ArrayList<Workers>){
+
+        try {
+            val xStream = XStream()
+            xStream.allowTypes(arrayOf<Class<*>>(Workers::class.java))
+            xStream.alias("worker", Workers::class.java)
+            val asdfd = xStream.toXML(arrayListWorkers)
+            val fos = FileOutputStream(context.cacheDir.toString() + "/" + "savedWorkers.xml")
+            //FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+Environment.DIRECTORY_DOCUMENTS+"/"+"ownpixels"+".xml");
+            fos.write("<?xml version=\"1.0\"?>".toByteArray(charset("UTF-8")))
+            val bytes = asdfd.toByteArray(charset("UTF-8"))
+            fos.write(bytes)
+            fos.close()
+        } catch (e: Resources.NotFoundException) {
+            e.printStackTrace()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: UnsupportedEncodingException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
     }
 }

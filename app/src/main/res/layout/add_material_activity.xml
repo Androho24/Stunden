@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scrollMaterial"
+    android:id="@+id/scrollMaterialAddMaterialAct"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".AddMaterialActivity">
 <androidx.constraintlayout.widget.ConstraintLayout

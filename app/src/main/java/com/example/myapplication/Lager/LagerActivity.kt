@@ -31,6 +31,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Admin.AdminMaterialActivity
+import com.example.myapplication.Admin.WorkerActivity.AdminWorkerActivity
 import com.example.myapplication.CustomerClientFragment
 import com.example.myapplication.CustomerFragment
 import com.example.myapplication.Interfaces.LagerActivityInterface
@@ -45,6 +46,9 @@ import com.example.myapplication.Pdf.PreviewPdfActivity
 import com.example.myapplication.R
 import com.example.myapplication.Static.StaticClass
 import com.example.myapplication.XmlTool
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
 import org.apache.commons.io.FileUtils
 import java.io.File
@@ -56,7 +60,7 @@ import java.util.Locale
 
 class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientFragment.onClientEventListener,CustomerFragment.onNewCustomerEventListener {
 
-
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
     var location : String = "Moosthenning"
     var drawerLayout : DrawerLayout? = null
     var navView : NavigationView? = null
@@ -150,6 +154,23 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
                 R.id.itemAdminMaterial ->{
                     StaticClass.isSelectedFromNavView = true
                     val myIntent = Intent(this,AdminMaterialActivity::class.java)
+                    startActivity(myIntent)
+                    true
+                }
+                R.id.itemAdminWorker ->{
+                    StaticClass.isSelectedFromNavView = true
+                    val myIntent = Intent(this, AdminWorkerActivity::class.java)
+                    startActivity(myIntent)
+                    true
+                }
+                R.id.logout ->{
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken("776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com")
+                        .requestEmail()
+                        .build()
+                    mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+                    mGoogleSignInClient.signOut()
+                    val myIntent = Intent(this, MainActivity::class.java)
                     startActivity(myIntent)
                     true
                 }
@@ -424,7 +445,7 @@ class LagerActivity : AppCompatActivity(),LagerActivityInterface,CustomerClientF
 
         var workerList = ArrayList<String>()
         for (worker in Workers.workerArray){
-            workerList.add(worker.toString())
+            workerList.add(worker.worker.toString())
         }
         var dataAdapterWorker = ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,workerList)
         dataAdapterWorker.setDropDownViewResource(R.layout.spinner_style)

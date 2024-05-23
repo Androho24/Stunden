@@ -63,22 +63,47 @@ class AdminUploadCustomMaterialsActivity : AppCompatActivity() {
                     }
                 }
 
-                if (exits == false){
+                if (exits == false) {
                     var id = 0;
-                    for (mat in Material.materials){
-                        if (id <mat.id){
+                    for (mat in Material.materials) {
+                        if (id < mat.id) {
                             id = mat.id
                         }
                     }
-                    matCust.id = id+1
-                    Material.materials.add(matCust)
+                    matCust.id = id + 1
 
+                    var newOwnMat = ArrayList<Material>()
+                    for (ownMat in Material.ownMaterials) {
+                        if (ownMat.material == matCust.material) {
+
+                        } else {
+                            newOwnMat.add(ownMat)
+                        }
+                    }
+                    Material.ownMaterials = newOwnMat
+                    Material.adminCustList = newOwnMat
+                    Material.materials.add(matCust)
+                }else{
 
                 }
 
+
+
             }
             var xmlTool = XmlTool()
+            xmlTool.saveOwnMaterialsToXml(Material.ownMaterials,applicationContext)
             xmlTool.saveMaterialsToXml(Material.materials,applicationContext)
+            tableCustomMat!!.removeAllViews()
+            tableCustomMat!!.layoutManager = LinearLayoutManager(this)
+            if (!Material.ownMaterials.isEmpty()) {
+                Material.adminCustList = ArrayList<Material>()
+                Material.adminCustList.addAll(Material.ownMaterials)
+            }
+            var adapter = MaterialAdapterCustAdaper(
+                Material.adminCustList,
+                applicationContext
+            )
+            tableCustomMat!!.adapter = adapter
             GoogleFirebase.updateMaterialToDatabase()
         }
     }

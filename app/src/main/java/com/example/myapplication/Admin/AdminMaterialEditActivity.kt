@@ -60,12 +60,11 @@ class AdminMaterialEditActivity : AppCompatActivity() {
         buttonDelete = findViewById(R.id.buttonDeleteEditMatListAdmin)
         buttonSave = findViewById(R.id.buttonSaveEditMatListAdmin)
         buttonDeleteBarcode = findViewById(R.id.buttonDeleteBarcodeMatEditAdmin)
-Material.connectMaterial()
 
         unit = intent.extras!!.getString("unit")
         name = intent.extras!!.getString("name")
         isFromCustMat = intent.extras!!.getBoolean("ownMat")
-
+        Material.connectMaterial()
 
         textViewMaterialNameToEdit!!.text = name
         textViewMaterialUnitToEdit!!.text = unit
@@ -86,7 +85,7 @@ Material.connectMaterial()
                 }
             }
         } else {
-            for (mat in Material.connectedMaterials) {
+            for (mat in Material.materials) {
                 if (mat.material == name && mat.unit == unit) {
                     textViewBarcodeToEdit!!.text = mat.barcode
                     textViewNewBarcode!!.text = mat.barcode
@@ -127,11 +126,10 @@ Material.connectMaterial()
                 if (isFromCustMat) {
                     for (mat in Material.adminCustList) {
                         var barcodeForMat = ""
-                        if (mat.barcode == null){
+                        if (mat.barcode == null) {
                             barcodeForMat = ""
-                        }
-                        else{
-                            barcodeForMat = mat.barcode
+                        } else {
+                            barcodeForMat = mat.barcode!!
                         }
 
                         if (mat.material == name && mat.unit == unit && barcodeForMat == textViewBarcodeToEdit!!.text.toString()) {
@@ -147,12 +145,16 @@ Material.connectMaterial()
                 } else {
                     for (mat in Material.materials) {
                         var barcodeForMat = ""
-                        if (mat.barcode == null){
+                        if (mat.barcode == null) {
                             barcodeForMat = ""
+                        } else {
+                            barcodeForMat = mat.barcode!!
                         }
-                        else{
-                            barcodeForMat = mat.barcode
-                        }
+                        var tsesaf = textViewBarcodeToEdit!!.text.toString()
+                        var sf = name
+                        var asdf = mat.material
+                        var asdfasdf = mat.unit
+                        var sadfasdfsdaf = unit
                         if (mat.material == name && mat.unit == unit && barcodeForMat == textViewBarcodeToEdit!!.text.toString()) {
                             mat.material = editTextNewMaterialName!!.text.toString()
                             mat.unit = spinnerUnitNew!!.selectedItem!!.toString()
@@ -166,11 +168,11 @@ Material.connectMaterial()
                     var xmlTool = XmlTool()
                     xmlTool.saveOwnMaterialsToXml(Material.ownMaterials, applicationContext)
                     xmlTool.saveMaterialsToXml(Material.materials, applicationContext)
-                    GoogleFirebase.updateMaterialToDatabase()
+                   // GoogleFirebase.updateMaterialToDatabase()
                 }
 
                 var intent = Intent()
-                setResult(AdminUploadCustomMaterialsActivity.custEditResult,intent)
+                setResult(AdminUploadCustomMaterialsActivity.custEditResult, intent)
                 finish()
             }
 
@@ -190,11 +192,10 @@ Material.connectMaterial()
 
                 if (isFromCustMat) {
                     var matCustList = ArrayList<Material>()
-                    for (mat in Material.adminCustList){
-                        if (mat.material == name && mat.unit == unit){
+                    for (mat in Material.adminCustList) {
+                        if (mat.material == name && mat.unit == unit) {
 
-                        }
-                        else{
+                        } else {
                             matCustList.add(mat)
                         }
                     }
@@ -216,7 +217,7 @@ Material.connectMaterial()
                     GoogleFirebase.updateMaterialToDatabase()
                 }
                 var intent = Intent()
-                setResult(AdminUploadCustomMaterialsActivity.custEditResult,intent)
+                setResult(AdminUploadCustomMaterialsActivity.custEditResult, intent)
                 finish()
 
             }
@@ -230,7 +231,7 @@ Material.connectMaterial()
 
         buttonCancel!!.setOnClickListener {
             var intent = Intent()
-            setResult(AdminUploadCustomMaterialsActivity.custEditResult,intent)
+            setResult(AdminUploadCustomMaterialsActivity.custEditResult, intent)
             finish()
         }
 

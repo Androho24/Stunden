@@ -181,7 +181,8 @@ class WorkTimeFragment : DialogFragment() {
         textEndWorktime = view.findViewById(R.id.textViewEndWorktime)
         textWegeRuest = view.findViewById(R.id.editTextWegeRuestWorktime)
         tableWorkers = view.findViewById(R.id.tableLayoutWorktime)
-
+        var heigt = tableWorkers!!.height
+        var sadf = heigt
         setOnButtonClickListerns()
 
         setUpTableWorker()
@@ -197,15 +198,18 @@ class WorkTimeFragment : DialogFragment() {
     private fun setUpTableWorker() {
 
         tableWorkers!!.removeAllViews()
+
         for (workers in Workers.workerArray) {
             var row = TableRow(activity)
             val checkBox = CheckBox(activity)
-            checkBox.text = workers.toString()
+            checkBox.text = workers.worker.toString()
             row.addView(checkBox)
 
             tableWorkers!!.addView(row)
         }
 
+        var heigt = tableWorkers!!.height
+        var sadf = heigt
 
     }
 

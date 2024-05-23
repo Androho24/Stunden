@@ -239,7 +239,7 @@ class WorktimeEditFragment : DialogFragment() {
         for (workers in Workers.workerArray) {
             var row = TableRow(activity)
             val checkBox = CheckBox(activity)
-            checkBox.text = workers.toString()
+            checkBox.text = workers.worker.toString()
             if (workers.toString() == name){
                 checkBox.isChecked = true
             }

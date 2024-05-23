@@ -8,6 +8,7 @@ open class Times(var time: Timestamp) {
 
     companion object {
          var updatedLocal = ArrayList<Times>()
+
     }
 
 }

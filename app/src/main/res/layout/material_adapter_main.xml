@@ -6,25 +6,25 @@
 
     <TextView
         android:id="@+id/textViewMaterialNameMain"
-        android:layout_width="230dp"
+        android:layout_width="210dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="110dp" />
+        android:layout_marginLeft="105dp" />
 
     <TextView
         android:id="@+id/textViewMatAmountMain"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="5dp" />
 
     <TextView
         android:id="@+id/textViewMatUnitMain"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="60dp" />
+        android:layout_marginLeft="55dp" />
 
     <Button
         android:id="@+id/buttonDeleteMatMain"
-        android:layout_marginLeft="340dp"
+        android:layout_marginLeft="310dp"
         android:layout_width="70dp"
         android:layout_height="50dp"
         app:icon="@drawable/garbage" />

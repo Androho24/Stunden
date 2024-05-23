@@ -102,8 +102,8 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="0dp"
         android:layout_height="150dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -178,9 +178,9 @@
         android:id="@+id/scrollView4"
         android:layout_width="match_parent"
         android:layout_height="205dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="56dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textViewMaterial"
         app:layout_constraintTop_toBottomOf="@+id/textViewMaterial">

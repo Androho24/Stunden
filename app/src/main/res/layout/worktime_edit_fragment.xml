@@ -1,11 +1,12 @@
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/worktimeEditFragment"
-    android:layout_width="match_parent" android:layout_height="700dp"
-    android:layout_gravity="center" android:orientation="vertical"  >
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/textViewArbeitszeitEditHEaderWorktime"
         android:layout_width="wrap_content"
@@ -76,8 +77,8 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Speichern"
-        app:layout_constraintStart_toStartOf="@+id/buttonEditEegeRuestEditWorktime"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayoutEditWorktime" />
+        app:layout_constraintEnd_toEndOf="@+id/buttonEditEegeRuestEditWorktime"
+        app:layout_constraintTop_toTopOf="@+id/buttonCancelEditWorktime" />
 
     <EditText
         android:id="@+id/editTextWegeRuestEditWorktime"
@@ -89,29 +90,37 @@
         app:layout_constraintStart_toStartOf="@+id/textViewEndEditWorktime"
         app:layout_constraintTop_toBottomOf="@+id/textViewEndEditWorktime" />
 
-    <TableLayout
-        android:id="@+id/tableLayoutEditWorktime"
-        android:layout_width="408dp"
-        android:layout_height="265dp"
-        android:layout_marginStart="30dp"
-        android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView5"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         app:layout_constraintTop_toBottomOf="@+id/editTextWegeRuestEditWorktime">
 
 
-    </TableLayout>
+
+            <TableLayout
+                android:id="@+id/tableLayoutEditWorktime"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.333"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TableLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/buttonCancelEditWorktime"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
+
         android:text="Abbrechen"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonSaveEditWorktime"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextWegeRuestEditWorktime"
-        app:layout_constraintTop_toTopOf="@+id/buttonSaveEditWorktime" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView5" />
 
     <TextView
         android:id="@+id/textViewWREditWorktime"

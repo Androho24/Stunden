@@ -13,10 +13,10 @@
     <!-- include the menu created in the menu folder -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view_admin"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/nav_menu"/>
+        app:menu="@menu/nav_menu" />
 
 
     <ScrollView
@@ -70,7 +70,7 @@
 
             <Button
                 android:id="@+id/buttonAddAdminMaterialMain"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
                 android:text="Hinzufügen"
@@ -86,6 +86,16 @@
                 app:layout_constraintBottom_toBottomOf="@+id/buttonAddAdminMaterialMain"
                 app:layout_constraintStart_toStartOf="@+id/plainTextSearchAdminMaterialMain"
                 app:layout_constraintTop_toTopOf="@+id/buttonAddAdminMaterialMain" />
+
+            <Button
+                android:id="@+id/buttonUpdateDatabaseAdminMaterialAct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="20dp"
+                android:text="Datenbank aktualisieren"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonAddAdminMaterialMain" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

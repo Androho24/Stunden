@@ -152,6 +152,12 @@ class AddMaterialLagerActivity : AppCompatActivity() {
                                 listMaterial.add(mat)
                             }
                         }
+                        else
+                        {
+                            if(mat.material.contains(editTextFilter!!.text.toString())){
+                                listMaterial.add(mat)
+                            }
+                        }
 
                     }
 
