@@ -71,11 +71,13 @@ class MaterialAdapter(private var dataSet: ArrayList<Material>,private var conte
                 newMaterial.materialName = viewHolder.textView2.text.toString()
                 newMaterial.materialUnit = viewHolder.textView1.text.toString()
                 if (viewHolder.checkBox.isChecked){
-                    newMaterial.materialAmount = viewHolder.editText.text.toString().toFloat().toString()
+                    newMaterial.materialAmount = "+"+(Math.abs(viewHolder.editText.text.toString().toFloat())).toString()
+
                     newMaterial.materialZugang = true
                 }
                 else{
-                    var amou = (Math.abs(viewHolder.editText.text.toString().toFloat())*-1).toString()
+                    var amou = viewHolder.editText.text.toString().toFloat().toString()
+                    newMaterial.materialZugang = false
                     newMaterial.materialAmount = amou
                 }
                 CustomerMaterial.customerMaterials.add(newMaterial)

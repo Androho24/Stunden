@@ -44,6 +44,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
@@ -185,6 +186,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main)
         auth = Firebase.auth
         var currentUser = auth.currentUser
@@ -827,21 +829,76 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             var newMats = ArrayList<CustomerMaterial>()
             for (mat in CustomerMaterial.customerMaterials) {
                 var matExists = false
-                var amount: Float = 0f
-                for (mat2 in CustomerMaterial.customerMaterials) {
-                    if (mat.materialName == mat2.materialName) {
-                        matExists = true
-                        amount = mat2.materialAmount!!.toFloat()
+                var amountMat1: Float = 0f
+                var amountMat2:Float = 0f
+                var newAmount = 0f
+                var stringAmount = ""
+                if (!newMats.isEmpty()) {
+                    for (mat2 in newMats) {
+                        if (mat.materialName == mat2.materialName) {
+                            matExists = true
+                            if (mat.materialZugang!= null && mat.materialZugang!!){
+                                var splitted = mat.materialAmount!!.split("+")
+                                amountMat1 = splitted[1].toFloat()
+                            }
+                            else{amountMat1 = mat.materialAmount!!.toFloat()}
+
+                            if (mat2.materialZugang!= null && mat2.materialZugang!!){
+                                var splitted = mat2.materialAmount!!.split("+")
+                                amountMat2 = splitted[1].toFloat()
+                            }
+                            else{amountMat2 = mat2.materialAmount!!.toFloat()}
+                            //mat ist neu
+                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!){
+                                newAmount = amountMat2-amountMat1
+
+                                if (newAmount<0){
+                                    mat2.materialAmount = "+"+Math.abs(newAmount)
+                                    mat2.materialZugang = true
+                                }
+                                else{
+                                    mat2.materialAmount = newAmount.toString()
+                                    mat2.materialZugang = false
+                                }
+                                break
+                            }
+
+                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!){
+                                newAmount = amountMat1 - amountMat2
+
+                                if (newAmount<0){
+                                    mat2.materialAmount = "+"+Math.abs(newAmount)
+                                    mat2.materialZugang = true
+                                }
+                                else{
+                                    mat2.materialAmount = newAmount.toString()
+                                    mat2.materialZugang = false
+                                }
+                                break
+                            }
+
+                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!){
+                                newAmount = amountMat2+amountMat1
+                                mat2.materialAmount = "+"+Math.abs(newAmount).toString()
+                                mat2.materialZugang = true
+                                break
+                            }
+
+                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!){
+                                newAmount = amountMat2+amountMat1
+                                mat2.materialAmount = newAmount.toString()
+                                mat2.materialZugang = false
+                                break
+                            }
+
+
+                        }
                     }
                 }
                 if (matExists == false) {
                     newMats.add(mat)
-                } else {
-                    mat.materialAmount == (mat.materialAmount!!.toFloat() + amount).toString()
                 }
 
-
-                newMats.add(mat)
             }
             CustomerMaterial.customerMaterials = newMats
             var sortedList = CustomerMaterial.customerMaterials.sortedBy { s -> s.materialName }
@@ -862,14 +919,69 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             var newMats = ArrayList<CustomerMaterial>()
             for (mat in CustomerMaterial.customerMaterials) {
                 var matExists = false
-                var amount: Float = 0f
+                var amountMat1: Float = 0f
+                var amountMat2:Float = 0f
+                var newAmount = 0f
+                var stringAmount = ""
                 if (!newMats.isEmpty()) {
                     for (mat2 in newMats) {
                         if (mat.materialName == mat2.materialName) {
                             matExists = true
-                            amount = mat2.materialAmount!!.toFloat()
-                            mat2.materialAmount =
-                                (mat.materialAmount!!.toFloat() + mat2.materialAmount!!.toFloat()).toString()
+                            if (mat.materialZugang!= null && mat.materialZugang!!){
+                                var splitted = mat.materialAmount!!.split("+")
+                                amountMat1 = splitted[1].toFloat()
+                            }
+                            else{amountMat1 = mat.materialAmount!!.toFloat()}
+
+                            if (mat2.materialZugang!= null && mat2.materialZugang!!){
+                                var splitted = mat2.materialAmount!!.split("+")
+                                amountMat2 = splitted[1].toFloat()
+                            }
+                            else{
+                                amountMat2 = mat2.materialAmount!!.toFloat()
+                            }
+                            //mat ist neu
+                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!){
+                                newAmount = amountMat2-amountMat1
+
+                                if (newAmount<0){
+                                    mat2.materialAmount = "+"+Math.abs(newAmount)
+                                    mat2.materialZugang = true
+                                }
+                                else{
+                                    mat2.materialAmount = newAmount.toString()
+                                    mat2.materialZugang = false
+                                }
+                                break
+                            }
+
+                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!){
+                                newAmount = amountMat1 - amountMat2
+
+                                if (newAmount<0){
+                                    mat2.materialAmount = "+"+Math.abs(newAmount)
+                                    mat2.materialZugang = true
+                                }
+                                else{
+                                    mat2.materialAmount = newAmount.toString()
+                                    mat2.materialZugang =false
+                                }
+                                break
+                            }
+
+                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!){
+                                newAmount = amountMat2+amountMat1
+                                mat2.materialAmount = "+"+newAmount.toString()
+                                break
+                            }
+
+                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!){
+                                newAmount = amountMat2+amountMat1
+                                mat2.materialAmount = newAmount.toString()
+                                break
+                            }
+
+
                         }
                     }
                 }
