@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapter
 
 
+import android.app.ActionBar
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +21,7 @@ import com.example.myapplication.Material.EditMaterialList
 import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.R
+import com.example.myapplication.Static.StaticClass
 
 
 class MaterialAdapter(private var dataSet: ArrayList<Material>,private var context: Context) :
@@ -35,12 +38,38 @@ class MaterialAdapter(private var dataSet: ArrayList<Material>,private var conte
         val button : Button
         var checkBox:CheckBox
         init {
+            var editTextWidth =Math.round(((StaticClass.displayWidth-270)*0.18).toFloat())
             // Define click listener for the ViewHolder's View
+            var widthTextView2 = Math.round(((StaticClass.displayWidth-270)*0.64).toFloat())-30-20
+
+
             textView1 = view.findViewById(R.id.textView1)
+            var widthTextView1 = Math.round(((StaticClass.displayWidth-270)*0.18).toFloat())
+            var params = FrameLayout.LayoutParams(widthTextView1, FrameLayout.LayoutParams.MATCH_PARENT)
+            params.marginStart = widthTextView2+120+editTextWidth
+            textView1.layoutParams = params
+
+
+
+            var textView2Params =  FrameLayout.LayoutParams(widthTextView2, FrameLayout.LayoutParams.MATCH_PARENT)
             textView2 = view.findViewById(R.id.textView2)
+            textView2Params.marginStart = 30
+            textView2.layoutParams = textView2Params
+
             editText = view.findViewById(R.id.editTextHolder)
+            var editTextParams = FrameLayout.LayoutParams(editTextWidth,FrameLayout.LayoutParams.MATCH_PARENT)
+            editTextParams.marginStart = widthTextView2 + 120
+            editText.layoutParams = editTextParams
+
             button = view.findViewById(R.id.buttonHolder)
+            var buttonParams = FrameLayout.LayoutParams(150,FrameLayout.LayoutParams.MATCH_PARENT)
+            buttonParams.marginStart = widthTextView2+widthTextView1+editTextWidth+120
+            button.layoutParams = buttonParams
+
             checkBox = view.findViewById(R.id.checkBoxMaterialAdapterZugang)
+            var checkBoxParams = FrameLayout.LayoutParams(120, FrameLayout.LayoutParams.MATCH_PARENT)
+            checkBoxParams.marginStart = widthTextView2+20
+            checkBox.layoutParams = checkBoxParams
         }
     }
 

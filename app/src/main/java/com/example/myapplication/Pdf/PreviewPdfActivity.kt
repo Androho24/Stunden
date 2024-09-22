@@ -167,7 +167,7 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
 
                 var uri = File(pathToSave)
 
-                var adress = arrayOf<String>("matthias.hoepfler@gmail.com")
+                var adress = arrayOf<String>("service@elektro-eibauer.de")
 
                 var photoURI = FileProvider.getUriForFile(
                     Objects.requireNonNull(applicationContext),
@@ -192,7 +192,7 @@ class PreviewPdfActivity : AppCompatActivity() , SigningFragment.onSignedComplet
             else{
                 var uri = File(pathToSave)
 
-                var adress = arrayOf<String>("matthias.hoepfler@gmail.com")
+                var adress = arrayOf<String>("service@elektro-eibauer.de")
 
                 var photoURI = FileProvider.getUriForFile(
                     Objects.requireNonNull(applicationContext),

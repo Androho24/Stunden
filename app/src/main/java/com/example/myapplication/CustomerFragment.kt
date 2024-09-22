@@ -44,6 +44,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
     var buttonClearText: Button? = null
     var buttonAddClient : Button? = null
     var buttonCancel : Button? = null
+    var buttonCreateNewCustomer : Button? = null
 
 
     interface onNewCustomerEventListener {
@@ -97,6 +98,7 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
         buttonAddClient = view.findViewById(R.id.buttonAddExpandedCustomerCustomer)
         buttonDelete = view.findViewById(R.id.buttonDeleteCustomerFrag)
         buttonCancel = view.findViewById(R.id.buttonCancelClientFragment)
+        buttonCreateNewCustomer = view.findViewById(R.id.buttonCreateNewCustomer)
 
         val title = requireArguments().getString("title", "Enter Name")
         dialog!!.setTitle(title)
@@ -349,8 +351,46 @@ class CustomerFragment : DialogFragment(), CustomerClientFragment.onClientEventL
                 Toast.makeText(requireContext(), "Bitte Nachname oder Vorname hinzufügen", Toast.LENGTH_SHORT).show()
             }
 
-            buttonCancel!!.setOnClickListener {
-                this.dismiss()
+
+
+
+        }
+        buttonCancel!!.setOnClickListener {
+            this.dismiss()
+        }
+        buttonCreateNewCustomer!!.setOnClickListener {
+
+            for (customer in Customer.arrayCustomers){
+                if (customer.name == editName!!.text.toString() && customer.preName == editPrename!!.text.toString() && customer.streetName == editStreetName!!.text.toString() && customer.streetNumber == editStreetNumber!!.text.toString()){
+                    Toast.makeText(requireContext(), "Kunde existiert bereits", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+            }
+            if (!editName!!.text.toString().isEmpty() && !editPrename!!.text.toString().isEmpty()) {
+
+                var uudi = UUID.randomUUID()
+                var customerExpanded = CustomerExpanded("", "", "", "", "", "")
+                var newCustomer = Customer(
+                    uudi.toString(),
+                    editName!!.text.toString(),
+                    editPrename!!.text.toString(),
+                    editStreetName!!.text.toString(),
+                    editStreetNumber!!.text.toString(),
+                    editPlz!!.text.toString(),
+                    editLocation!!.text.toString(),
+                    editProjectNumber!!.text.toString(),
+                    customerExpanded
+                )
+                Customer.arrayCustomers.add(newCustomer)
+                Customer.arrayCustomers.sortBy { list -> list.name }
+                newCustomerListener!!.onNewCustomerListener()
+
+                Toast.makeText(requireContext(), "Kunde hinzugefügt", Toast.LENGTH_SHORT).show()
+                setSpinnerCustomerContent()
+
+            } else {
+                Toast.makeText(requireContext(), "Bitte Nachname oder Vorname hinzufügen", Toast.LENGTH_SHORT).show()
             }
         }
     }

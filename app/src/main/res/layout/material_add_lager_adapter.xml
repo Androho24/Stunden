@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/textViewNameAddLagerAdapter"
-        android:layout_width="230dp"
+        android:layout_width="550px"
         android:layout_height="match_parent"
         android:layout_marginLeft="0dp"
         >
@@ -18,7 +18,7 @@
 
     <EditText
         android:id="@+id/editTextAmountAddLagerAdapter"
-        android:layout_width="50dp"
+        android:layout_width="100px"
         android:layout_height="wrap_content"
         android:layout_marginLeft="230dp"
         android:inputType="number|numberDecimal"
@@ -26,13 +26,13 @@
 
     <TextView
         android:id="@+id/textViewUnitAddLagerAdapter"
-        android:layout_width="50dp"
+        android:layout_width="100px"
         android:layout_height="match_parent"
         android:layout_marginLeft="280dp"/>
 
     <Button
         android:id="@+id/buttonAddAddLagerAdapter"
-        android:layout_width="wrap_content"
+        android:layout_width="150px"
         android:layout_height="wrap_content"
         android:layout_marginLeft="330dp"
         android:text=""

@@ -84,21 +84,20 @@
         android:id="@+id/buttonNewCustomerCustomer"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="Speichern"
-        app:layout_constraintEnd_toEndOf="@+id/editTextProjectNumber"
-        app:layout_constraintHorizontal_bias="0.983"
-        app:layout_constraintStart_toEndOf="@+id/buttonNewClearCustomer"
-        app:layout_constraintTop_toBottomOf="@+id/buttonDeleteCustomerFrag" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAddExpandedCustomerCustomer"
+        app:layout_constraintEnd_toEndOf="@+id/buttonNewClearCustomer"
+        app:layout_constraintStart_toStartOf="@+id/buttonNewClearCustomer"
+        app:layout_constraintTop_toTopOf="@+id/buttonAddExpandedCustomerCustomer" />
 
     <Button
         android:id="@+id/buttonNewClearCustomer"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:text="Leeren"
-        app:layout_constraintStart_toStartOf="@+id/textViewProjrctNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonDeleteCustomerFrag"
         app:layout_constraintTop_toBottomOf="@+id/editTextProjectNumber" />
 
     <Spinner
@@ -179,28 +178,41 @@
         android:id="@+id/buttonAddExpandedCustomerCustomer"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:text="Auftraggeber"
-        app:layout_constraintEnd_toEndOf="@+id/buttonNewCustomerCustomer"
-        app:layout_constraintTop_toBottomOf="@+id/buttonNewCustomerCustomer" />
+        app:layout_constraintStart_toStartOf="@+id/buttonCancelClientFragment"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCancelClientFragment" />
 
     <Button
         android:id="@+id/buttonDeleteCustomerFrag"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="172dp"
         android:text="Löschen"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonNewClearCustomer"
         app:layout_constraintEnd_toEndOf="@+id/editTextProjectNumber"
-        app:layout_constraintTop_toTopOf="@+id/buttonNewClearCustomer"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="@+id/textViewProjrctNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProjectNumber" />
 
     <Button
         android:id="@+id/buttonCancelClientFragment"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Abbrechen"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonNewCustomerCustomer"
+        app:layout_constraintStart_toStartOf="@+id/buttonDeleteCustomerFrag"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDeleteCustomerFrag" />
+
+    <Button
+
+        android:id="@+id/buttonCreateNewCustomer"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="Neu"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonCancelClientFragment"
+        app:layout_constraintEnd_toEndOf="@+id/buttonNewClearCustomer"
         app:layout_constraintStart_toStartOf="@+id/buttonNewClearCustomer"
-        app:layout_constraintTop_toTopOf="@+id/buttonNewCustomerCustomer" />
+        app:layout_constraintTop_toTopOf="@+id/buttonCancelClientFragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

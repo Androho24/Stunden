@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="175dp"
+        android:layout_width="450px"
         android:layout_height="match_parent"
         android:layout_marginLeft="0dp"
 
@@ -19,7 +19,7 @@
 
     <EditText
         android:id="@+id/editTextHolder"
-        android:layout_width="50dp"
+        android:layout_width="100px"
         android:layout_height="wrap_content"
         android:layout_marginLeft="230dp"
         android:inputType="number|numberDecimal"
@@ -29,11 +29,12 @@
         android:id="@+id/textView1"
         android:layout_width="50dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="280dp"/>
+        android:layout_marginLeft="280dp"
+        android:gravity="center" />
 
     <Button
         android:id="@+id/buttonHolder"
-        android:layout_width="wrap_content"
+        android:layout_width="150px"
         android:layout_height="wrap_content"
         android:layout_marginLeft="330dp"
         android:text=""
@@ -41,8 +42,8 @@
 
     <CheckBox
         android:id="@+id/checkBoxMaterialAdapterZugang"
-        android:layout_marginLeft="175dp"
-        android:layout_width="45dp"
+        android:layout_width="120px"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="175dp"
         android:text="Zu" />
 </FrameLayout>

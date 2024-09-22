@@ -3,11 +3,14 @@ package com.example.myapplication.Adapter
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.FrameLayout.LayoutParams
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +20,7 @@ import com.example.myapplication.Material.EditMaterialList
 import com.example.myapplication.Objects.CustomerMaterial
 import com.example.myapplication.Objects.Material
 import com.example.myapplication.R
+import com.example.myapplication.Static.StaticClass
 
 class MaterialAdapterAddLager (private var dataSet: ArrayList<Material>,private var context: Context) :
 RecyclerView.Adapter<MaterialAdapterAddLager.ViewHolder>() {
@@ -31,11 +35,30 @@ RecyclerView.Adapter<MaterialAdapterAddLager.ViewHolder>() {
         val editText : EditText
         val button : Button
         init {
+            var textView2Width = Math.round(((StaticClass.displayWidth-150)*0.71).toFloat())-30-20
+            var editTextWidth = Math.round(((StaticClass.displayWidth-150)*0.15).toFloat())
+            var textView1Width = Math.round(((StaticClass.displayWidth-150)*0.15).toFloat())
             // Define click listener for the ViewHolder's View
             textView1 = view.findViewById(R.id.textViewUnitAddLagerAdapter)
+            var textView1Params = FrameLayout.LayoutParams(textView1Width,FrameLayout.LayoutParams.MATCH_PARENT)
+            textView1Params.marginStart= textView2Width+editTextWidth
+
             textView2 = view.findViewById(R.id.textViewNameAddLagerAdapter)
+            var textView2Params = FrameLayout.LayoutParams(textView2Width,LayoutParams.MATCH_PARENT)
+            textView2Params.marginStart= 30
+            textView2.layoutParams = textView2Params
+
+
             editText = view.findViewById(R.id.editTextAmountAddLagerAdapter)
+            var editTextParams = FrameLayout.LayoutParams(editTextWidth,LayoutParams.MATCH_PARENT)
+            editTextParams.marginStart = textView2Width
+            editText.layoutParams = editTextParams
+
             button = view.findViewById(R.id.buttonAddAddLagerAdapter)
+            var buttonParams = FrameLayout.LayoutParams(150,LayoutParams.MATCH_PARENT)
+            buttonParams.marginStart = textView2Width+textView1Width+editTextWidth
+            button.layoutParams = buttonParams
+
         }
     }
 

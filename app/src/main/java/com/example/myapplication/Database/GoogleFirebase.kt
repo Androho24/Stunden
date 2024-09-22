@@ -116,6 +116,14 @@ class GoogleFirebase {
             }
         }
 
+        fun deleteWorkerFromDB(workerName: String){
+            db.collection("Arbeiter").document(workerName).delete()
+            var timeTo = hashMapOf(
+                "time" to Timestamp.now()
+            )
+            db.collection("Admin").document("MaterialLastUpdatedAt").set(timeTo)
+        }
+
         fun updateWorkersToDB(){
             for (worker in Workers.workerArray){
                 db.collection("Arbeiter").document(worker.worker.toString()).set(worker)

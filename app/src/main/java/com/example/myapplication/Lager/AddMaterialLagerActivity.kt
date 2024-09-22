@@ -95,9 +95,13 @@ class AddMaterialLagerActivity : AppCompatActivity() {
                     }
                     var mat = Material(i+1,editMatName!!.text.toString(), editUnit!!.selectedItem!!.toString(),"",0,false)
                     Material.ownMaterials.add(mat)
-                    editTextFilter!!.setText(mat.material)
+
                     var xmlTool = XmlTool()
                     xmlTool.saveOwnMaterialsToXml(Material.ownMaterials, applicationContext)
+                    Material.connectMaterial()
+                    var adapter = MaterialAdapterAddLager(Material.connectedMaterials,applicationContext)
+                    tableMaterial!!.adapter = adapter
+                    editTextFilter!!.setText(mat.material)
                     mainScrollView!!.fullScroll(ScrollView.FOCUS_UP)
                 }
             }

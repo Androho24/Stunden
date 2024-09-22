@@ -12,6 +12,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.Point
 import android.graphics.drawable.Drawable
 import android.graphics.pdf.PdfRenderer
 import android.icu.util.Calendar
@@ -186,6 +187,11 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        StaticClass.display = windowManager.defaultDisplay
+        var size = Point()
+        StaticClass.display!!.getRealSize(size)
+        StaticClass.displayWidth = size.x
+        StaticClass.displayHeight = size.y
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main)
         auth = Firebase.auth
@@ -220,8 +226,6 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
 
         checkPermission(permarray, 15)
-
-
 
 
     }
@@ -312,13 +316,14 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                 if (isGranted) {
                     if (permissionName == "android.permission.ACCESS_COARSE_LOCATION") {
                         try {
-                            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                                .requestIdToken("776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com")
-                                .requestEmail()
-                                .build()
+                            val gso =
+                                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                    .requestIdToken("776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com")
+                                    .requestEmail()
+                                    .build()
 
                             mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-                         //   mGoogleSignInClient.signOut()
+                            //   mGoogleSignInClient.signOut()
 
 
                             /* googleApiClient = GoogleApiClient.Builder(this)
@@ -411,8 +416,21 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
         xmlTool = XmlTool()
         xmlTool!!.loadSavedCustomersfromXml(applicationContext)
         xmlTool!!.loadUpdatedMaterialFromXml(applicationContext)
+        GoogleFirebase.loadWorkersFromDb(object : FirestoreWokersFromDbCallback {
+            override fun onSuccessCallback() {
+                System.out.println("Laoded Workers success")
+                xmlTool!!.saveWorksersToXml(applicationContext, Workers.workerArray)
+            }
 
-        if (Times.updatedLocal.isEmpty() || GoogleFirebase.materialLastUpdatedDb > Times.updatedLocal.iterator().next().time) {
+            override fun onFailureCallback() {
+                System.out.println("Laoded Workers error")
+            }
+
+        })
+
+        if (Times.updatedLocal.isEmpty() || GoogleFirebase.materialLastUpdatedDb > Times.updatedLocal.iterator()
+                .next().time
+        ) {
             if (Times.updatedLocal.isEmpty()) {
                 var timarr = ArrayList<Times>()
 
@@ -423,17 +441,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
 
             }
 
-            GoogleFirebase.loadWorkersFromDb(object :FirestoreWokersFromDbCallback{
-                override fun onSuccessCallback() {
-                    System.out.println("Laoded Workers success")
-                    xmlTool!!.saveWorksersToXml(applicationContext,Workers.workerArray)
-                }
 
-                override fun onFailureCallback() {
-                    System.out.println("Laoded Workers error")
-                }
-
-            })
             GoogleFirebase.loadMaterialsFromDb(object : FirestoreMaterialFromDBCallback {
                 override fun onSuccessCallback() {
                     var timarr = ArrayList<Times>()
@@ -442,7 +450,7 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                     xmlTool!!.saveUpdatedMaterialToXml(timarr, applicationContext)
                     Times.updatedLocal.iterator().next().time = Timestamp.now()
                     drawerLayout!!.removeView(loadingImageView)
-                    xmlTool!!.saveMaterialsToXml(Material.materials,applicationContext)
+                    xmlTool!!.saveMaterialsToXml(Material.materials, applicationContext)
                 }
 
                 override fun onFailureCallback() {
@@ -634,7 +642,6 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             var pathToSave =
                 "/storage/emulated/0/Documents/ElektroEibauer/" + selectedCustomer.name + "_" + selectedCustomer.preName + "/" + "Arbeitsnachweis_Nr_" + count + "_" + date!!.text.toString() + "_" + selectedCustomer.name + "_" + customerCount + "_" + WorktimeMain.staticWorkTimeArrayList.iterator()
                     .next().workerName + ".pdf"
-
 
 
             var document = pdfCreator!!.returnCreatedDocument(
@@ -830,62 +837,62 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             for (mat in CustomerMaterial.customerMaterials) {
                 var matExists = false
                 var amountMat1: Float = 0f
-                var amountMat2:Float = 0f
+                var amountMat2: Float = 0f
                 var newAmount = 0f
                 var stringAmount = ""
                 if (!newMats.isEmpty()) {
                     for (mat2 in newMats) {
                         if (mat.materialName == mat2.materialName) {
                             matExists = true
-                            if (mat.materialZugang!= null && mat.materialZugang!!){
+                            if (mat.materialZugang != null && mat.materialZugang!!) {
                                 var splitted = mat.materialAmount!!.split("+")
                                 amountMat1 = splitted[1].toFloat()
+                            } else {
+                                amountMat1 = mat.materialAmount!!.toFloat()
                             }
-                            else{amountMat1 = mat.materialAmount!!.toFloat()}
 
-                            if (mat2.materialZugang!= null && mat2.materialZugang!!){
+                            if (mat2.materialZugang != null && mat2.materialZugang!!) {
                                 var splitted = mat2.materialAmount!!.split("+")
                                 amountMat2 = splitted[1].toFloat()
+                            } else {
+                                amountMat2 = mat2.materialAmount!!.toFloat()
                             }
-                            else{amountMat2 = mat2.materialAmount!!.toFloat()}
                             //mat ist neu
-                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!){
-                                newAmount = amountMat2-amountMat1
+                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!) {
+                                newAmount = amountMat2 - amountMat1
 
-                                if (newAmount<0){
-                                    mat2.materialAmount = "+"+Math.abs(newAmount)
+                                if (newAmount < 0) {
+                                    mat2.materialAmount = "+" + Math.abs(newAmount)
                                     mat2.materialZugang = true
-                                }
-                                else{
+                                } else {
                                     mat2.materialAmount = newAmount.toString()
                                     mat2.materialZugang = false
                                 }
                                 break
                             }
 
-                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!){
+                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!) {
                                 newAmount = amountMat1 - amountMat2
 
-                                if (newAmount<0){
-                                    mat2.materialAmount = "+"+Math.abs(newAmount)
+                                if (newAmount < 0) {
+                                    mat2.materialAmount = "+" + Math.abs(newAmount)
                                     mat2.materialZugang = true
-                                }
-                                else{
+                                } else {
                                     mat2.materialAmount = newAmount.toString()
                                     mat2.materialZugang = false
                                 }
                                 break
                             }
 
-                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!){
-                                newAmount = amountMat2+amountMat1
-                                mat2.materialAmount = "+"+Math.abs(newAmount).toString()
+                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!) {
+                                newAmount = amountMat2 + amountMat1
+                                mat2.materialAmount = "+" + Math.abs(newAmount).toString()
                                 mat2.materialZugang = true
                                 break
                             }
 
-                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!){
-                                newAmount = amountMat2+amountMat1
+                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!) {
+                                newAmount = amountMat2 + amountMat1
                                 mat2.materialAmount = newAmount.toString()
                                 mat2.materialZugang = false
                                 break
@@ -920,63 +927,61 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
             for (mat in CustomerMaterial.customerMaterials) {
                 var matExists = false
                 var amountMat1: Float = 0f
-                var amountMat2:Float = 0f
+                var amountMat2: Float = 0f
                 var newAmount = 0f
                 var stringAmount = ""
                 if (!newMats.isEmpty()) {
                     for (mat2 in newMats) {
                         if (mat.materialName == mat2.materialName) {
                             matExists = true
-                            if (mat.materialZugang!= null && mat.materialZugang!!){
+                            if (mat.materialZugang != null && mat.materialZugang!!) {
                                 var splitted = mat.materialAmount!!.split("+")
                                 amountMat1 = splitted[1].toFloat()
+                            } else {
+                                amountMat1 = mat.materialAmount!!.toFloat()
                             }
-                            else{amountMat1 = mat.materialAmount!!.toFloat()}
 
-                            if (mat2.materialZugang!= null && mat2.materialZugang!!){
+                            if (mat2.materialZugang != null && mat2.materialZugang!!) {
                                 var splitted = mat2.materialAmount!!.split("+")
                                 amountMat2 = splitted[1].toFloat()
-                            }
-                            else{
+                            } else {
                                 amountMat2 = mat2.materialAmount!!.toFloat()
                             }
                             //mat ist neu
-                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!){
-                                newAmount = amountMat2-amountMat1
+                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!) {
+                                newAmount = amountMat2 - amountMat1
 
-                                if (newAmount<0){
-                                    mat2.materialAmount = "+"+Math.abs(newAmount)
+                                if (newAmount < 0) {
+                                    mat2.materialAmount = "+" + Math.abs(newAmount)
                                     mat2.materialZugang = true
-                                }
-                                else{
+                                } else {
                                     mat2.materialAmount = newAmount.toString()
                                     mat2.materialZugang = false
                                 }
                                 break
                             }
 
-                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!){
+                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!) {
                                 newAmount = amountMat1 - amountMat2
 
-                                if (newAmount<0){
-                                    mat2.materialAmount = "+"+Math.abs(newAmount)
+                                if (newAmount < 0) {
+                                    mat2.materialAmount = "+" + Math.abs(newAmount)
                                     mat2.materialZugang = true
-                                }
-                                else{
+                                } else {
                                     mat2.materialAmount = newAmount.toString()
-                                    mat2.materialZugang =false
+                                    mat2.materialZugang = false
                                 }
                                 break
                             }
 
-                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!){
-                                newAmount = amountMat2+amountMat1
-                                mat2.materialAmount = "+"+newAmount.toString()
+                            if (mat.materialZugang != null && mat.materialZugang!! && mat2.materialZugang != null && mat2.materialZugang!!) {
+                                newAmount = amountMat2 + amountMat1
+                                mat2.materialAmount = "+" + newAmount.toString()
                                 break
                             }
 
-                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!){
-                                newAmount = amountMat2+amountMat1
+                            if (mat.materialZugang != null && !mat.materialZugang!! && mat2.materialZugang != null && !mat2.materialZugang!!) {
+                                newAmount = amountMat2 + amountMat1
                                 mat2.materialAmount = newAmount.toString()
                                 break
                             }
@@ -1243,17 +1248,20 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                                 startActivity(myIntent)
                                 true
                             }
-                            R.id.itemAdminWorker ->{
+
+                            R.id.itemAdminWorker -> {
                                 StaticClass.isSelectedFromNavView = true
-                                val myIntent = Intent(this,AdminWorkerActivity::class.java)
+                                val myIntent = Intent(this, AdminWorkerActivity::class.java)
                                 startActivity(myIntent)
                                 true
                             }
-                            R.id.logout ->{
-                                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                                    .requestIdToken("776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com")
-                                    .requestEmail()
-                                    .build()
+
+                            R.id.logout -> {
+                                val gso =
+                                    GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                        .requestIdToken("776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com")
+                                        .requestEmail()
+                                        .build()
                                 mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
                                 mGoogleSignInClient.signOut()
                                 true
@@ -1364,47 +1372,47 @@ class MainActivity : AppCompatActivity(), WorkTimeFragment.onWorktimeEventLisnte
                     pdfCreator = PDFCreator()
 
 
-                 /*   Workers.workerArray = ArrayList<Workers>()
-                    var worker = Workers("")
-                    worker.worker = "Matthias Höpfler"
-                    Workers.workerArray.add(worker)
-                    worker = Workers("")
-                    worker.worker = "Heizer Oliver"
-                    Workers.workerArray.add(worker)
-                    worker = Workers("")
-                    worker.worker = "Franz Eibauer"
-                    Workers.workerArray.add(worker)
-                    worker = Workers("")
-                    worker.worker = "Alexander Geisperger"
-                    Workers.workerArray.add(worker)
-                    worker = Workers("")
-                    worker.worker = "Marcel Radu-Iliuta"
-                    Workers.workerArray.add(worker)
-                    worker = Workers("")
-                    worker.worker = "Florin Iftode"
-                    Workers.workerArray.add(worker)
-                    worker = Workers("")
-                    worker.worker = "Tägliche Pausenzeit"
-                    Workers.workerArray.add(worker)
+                    /*   Workers.workerArray = ArrayList<Workers>()
+                       var worker = Workers("")
+                       worker.worker = "Matthias Höpfler"
+                       Workers.workerArray.add(worker)
+                       worker = Workers("")
+                       worker.worker = "Heizer Oliver"
+                       Workers.workerArray.add(worker)
+                       worker = Workers("")
+                       worker.worker = "Franz Eibauer"
+                       Workers.workerArray.add(worker)
+                       worker = Workers("")
+                       worker.worker = "Alexander Geisperger"
+                       Workers.workerArray.add(worker)
+                       worker = Workers("")
+                       worker.worker = "Marcel Radu-Iliuta"
+                       Workers.workerArray.add(worker)
+                       worker = Workers("")
+                       worker.worker = "Florin Iftode"
+                       Workers.workerArray.add(worker)
+                       worker = Workers("")
+                       worker.worker = "Tägliche Pausenzeit"
+                       Workers.workerArray.add(worker)
 
-                    xmlTool.saveWorksersToXml(applicationContext,Workers.workerArray)
-                    GoogleFirebase.updateWorkersToDB()*/
+                       xmlTool.saveWorksersToXml(applicationContext,Workers.workerArray)
+                       GoogleFirebase.updateWorkersToDB()*/
 
 
 
-                        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
-                            if (Environment.isExternalStorageManager()) {
+                    if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
+                        if (Environment.isExternalStorageManager()) {
 
-                            } else {
-                                //request for the permission
-                                val intent =
-                                    Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                                val uri = Uri.fromParts("package", packageName, null)
-                                intent.data = uri
-                                startActivity(intent)
-                            }
+                        } else {
+                            //request for the permission
+                            val intent =
+                                Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                            val uri = Uri.fromParts("package", packageName, null)
+                            intent.data = uri
+                            startActivity(intent)
                         }
-                        val res = R . drawable . img
+                    }
+                    val res = R.drawable.img
                     val file = ImageView(applicationContext)
                     file.setImageResource(res)
 
