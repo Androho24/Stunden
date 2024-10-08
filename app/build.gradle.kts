@@ -15,13 +15,13 @@ android {
             keyPassword = "dfgg%&sdOpL"
         }
     }
-    namespace = "com.example.myapplication"
+    namespace = "com.androho.elektroeibauer"
     compileSdk = 34
     buildFeatures {
         buildConfig = true
     }
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "com.androho.elektroeibauer"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -95,7 +95,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("androidx.core:core-splashscreen:1.0.0")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
-    implementation("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
+    implementation("com.github.mhiew:android-pdf-viewer:3.2.0-beta.1")
 
 
     implementation ("androidx.credentials:credentials:1.2.2")

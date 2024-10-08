@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:776731154059:android:a62d5ff93fcbe4273aa68e",
+        "android_client_info": {
+          "package_name": "com.androho.elektroeibauer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkQrWby1cJXN2jA1psmz37HBHFfO3Or7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776731154059-67mhfidrlet3uvohblnb51ee2qhgq0at.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:776731154059:android:8416928659225c5a3aa68e",
         "android_client_info": {
           "package_name": "com.example.lager"
